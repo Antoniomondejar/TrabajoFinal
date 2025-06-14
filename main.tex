@@ -1,0 +1,81 @@
+\documentclass[a4paper,10pt]{article}
+\pagestyle{plain}
+
+% this is for dealing with the Too many math alphabets used in version normal" compiling error
+\newcommand\hmmax{0} 
+\newcommand\bmmax{0}
+%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[x11names,dvipsnames]{xcolor}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xspace}
+\usepackage{underscore}
+\usepackage{upgreek}
+\usepackage[textsize=scriptsize]{todonotes}
+\usepackage{lineno}
+\usepackage{pxfonts}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage[normalem]{ulem}
+\usepackage[draft]{fixme}
+\usepackage{comment}
+\usepackage{url}
+
+\usepackage[font=small,skip=0pt]{caption}
+
+%------------------------------------------------------------------------------------------------
+
+
+\usepackage{hyperref}
+
+\hypersetup{
+  %pdftitle          = {\titulo},
+  pdfstartview      = {FitH},
+  pdfpagelayout     = {OneColumn},
+  plainpages        = false,            % page anchors with formatted form of the page number (i.e., different anchors for pages 'ii' and '2')
+  bookmarksnumbered = {true},
+  naturalnames      = {true},
+  colorlinks        = {true},           % ligas con color; si es falso pone un recuadro que no aparece en la impresion
+  linkcolor         = blue,             % color de las ligas dentro del documento (tabla de contenido, secciones, etc.)
+  anchorcolor       = red,              % ?
+  urlcolor          = NavyBlue,         % color de las ligas externas
+  citecolor         = BrickRed          % color de las referencias
+}
+
+%------------------------------------------------------------------------------------------------
+
+\usepackage[spanish]{babel}
+
+\usepackage{macros}
+
+%Overfull
+\overfullrule=5pt
+\begin{document}
+
+\title{Trabajo Final de Licenciatura en Ciencias de la Computación}
+
+\author{Antonio Mondejar}
+
+\maketitle
+
+\section{Marco Teórico: Lógica `Knowing How' multi-agente}
+    \input{marco_teorico}
+
+\section{Contracción por Bisimulación para Lógica `Knowing How'}
+    \input{contraccion_bisimulacion}
+
+\section{\KHilogic-Bisimulación entre dos modelos}
+    \input{bisimulacion_complejidad}
+
+\section{Ideas sueltas}
+    \input{ideas_sueltas}
+
+\end{document}
+

@@ -1,0 +1,23 @@
+Durante toda la sección, consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable y a $\AGT$ como un conjunto no vacío de agentes con cardinalidad contable. 
+
+\begin{definicion}
+    El lenguaje \KHilogic está compuesto por las fórmulas dadas por la gramática:
+    \begin{center}
+        $\varphi ::= p \mid \neg \varphi \mid \varphi \vee \varphi \mid \varphi \wedge \varphi \mid \KHilogic(\varphi,\varphi)$,
+    \end{center}
+    donde $p \in \PROP$ e $i \in \AGT$. Las constantes booleanas son definidas de la forma usual. Las fórmulas de la pinta $\KHilogic(\psi, \varphi)$ deben ser leídas como "cuando vale $\psi$, el agente $i$ sabe cómo hacer que $\varphi$ valga".
+\end{definicion}
+
+A las fórmulas de $\KHilogic$ las interpretaremos sobre grafos dirigidos etiquetados (o digo sistemas de transiciones etiquetados?), en donde las aristas representarán las acciones disponibles para los agentes.
+
+\begin{definicion}[Acciones y planes]
+    Sea $\ACT$ un conjunto enumerable de nombres de acciones, y sea $\ACT^*$ el conjunto de secuencias finitas de elementos de $\ACT$. A los elementos de $\ACT^*$ los llamaremos planes, siendo $\epsilon$ el plan vacío. Sea $\sigma \in \ACT^*$, denotaremos $|\sigma|$ al largo de $\sigma$ (notar $|\epsilon| = 0$). Para un plan $\sigma$ y $0 \leq k \leq |\sigma|$, el plan $\sigma_k$ es el prefijo de $\sigma$ hasta la $k-$ésima posición inclusive. Para $0 < k \leq |\sigma|$, la acción $\sigma[k]$ es la que se encuentra en la $k-$ésima posición de $\sigma$.  
+\end{definicion}
+
+Esta definición revisar que entra en conflicto con la demo de contracción por bisimulación, porque uso $\sigma_1,...,\sigma_k$ para enumerar un conjunto de planes.
+
+Todavía no defino bien bien lo que son los modelos.
+
+\begin{definicion}
+    Sea $\{\R_a \subseteq \W \times \W \mid a \in A,$ para algún $A \subseteq \ACT \}$ una colección de relaciones binarias sobre $\W$. Definimos $\R_\epsilon := \{(w,w) \mid w \in \W\}$ y, para $\sigma \in \ACT^*$ y $a \in \ACT$, $\R_{\sigma a} := \{(w,v) \in \W \times \W \mid$ existe $u \in \W$ tal que $(w,u) \in \R_\sigma$ y $(u,v) \in \R_a \}$. Luego sea $u \in \W$ y $\sigma \in \ACT^*$, definimos $\R_\sigma(u) := \{v\in\W \mid (u,v) \in \R_\sigma\}$, y para $U\subseteq\W$ definimos $\R_\sigma(U) := \bigcup\limits_{u \in U} \R_\sigma(u)$
+\end{definicion}

@@ -1,0 +1,23 @@
+\begin{teorema}
+    Sea $\model_=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, y sea $Z \subseteq \W \times \W$ una relación binaria que satisface (atom) y $Id := \{(w,w)\in \W\} \subseteq Z$, entonces $Z$ es una autobisimulación.
+\end{teorema}
+
+No se si dice mucho este teorema, pero al menos caracteriza un poco las autobisimulaciones.
+
+Resumen de lo trabajado:
+
+Conclusiones positivas acerca de las contracciones, nos dicen cosas sobre la expresividad de la lógica, en el sentido de que demostramos que dado un modelo siempre existe otro en el que la función de valuación es inyectiva (no hay dos nodos que satisfagan exactamente el mismo conjunto de variables proposicionales), usa planes de solo un paso y las clases de equivalencia de planes que conoce cada agente son simplemente singletons y aún así la lógica no sabe cómo diferenciarlos (son lógicamente equivalentes).
+
+También, logramos contraer un modelo a otro donde chequear strong executability se logra en un solo paso, por lo que potencialmente se ahorra cómputo al no necesitar cada paso intermedio de un plan.
+
+Ambas contracciones son computables en tiempo polinomial en el tamaño del modelo lo cuál es muy bueno.
+
+
+Conclusiones negativas, no logramos encontrar una contracción que de verdad minimice el \rm\textbf{tamaño} del modelo en cuestión. Si bien, seguro encontramos un modelo lógicamente equivalente que minimiza la cantidad de nodos, puede darse el caso que la contracción aumente considerablemente la cantidad de aristas (sin embargo, hay que considerar el trade-off del ahorro en el chequeo de strong executability).
+
+Cosas a analizar: 
+\begin{itemize}
+    \item Hay una contracción mejor?
+    \item Puede tener que ver la definición de bisimulación con el hecho de que no encontramos una contracción totalmente convincente (ver teorema de esta sección capaz)? 
+    \item Como dijo Carlos, puede tener que ver con la naturaleza de los modelos donde se interpreta la lógica? En ese caso considerar hacer un análisis desde teoría de modelos.
+\end{itemize}

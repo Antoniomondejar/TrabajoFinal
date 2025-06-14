@@ -1,0 +1,124 @@
+%!TEX root = main.tex
+%------------------------------------------------------------------------------------------------
+% adjusting vertical space in the multicols environment
+% default: \multicolsep = 12pt plus 4pt minus 3pt
+
+\setlength{\multicolsep}{6pt plus 2pt minus 1.5pt}
+
+%------------------------------------------------------------------------------------------------
+
+
+% defining the format for theorems, propositions, corollaries and lemmas. The main point is the symbol at the end of them
+\usepackage[hyperref,thmmarks]{ntheorem}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+
+% \theoremstyle{plain}
+\theoremsymbol{\ensuremath{\triangleleft}}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposicion}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{lema}{Lema}
+\newtheorem{hecho}{Hecho}
+
+%------------------------------------------------
+
+% defining the format for definitions, examples, fact and others. Same symbol at the end, but header and font different
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\dashv}}
+
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}
+\newtheorem{nota}{Nota}
+
+%------------------------------------------------
+
+% defining the format for proofs
+% \theoremstyle{nonumberplain}
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\blacksquare}}
+
+\newtheorem{demostracion}{Demostración.}
+
+%-----------------------------------------------------------------------------
+
+%------------------------------------------------
+\usepackage{amssymb}
+
+
+%------------------------------------------------
+
+
+
+
+\newcommand{\modlts}{\mathcal{S}}
+\newcommand{\modults}{\mathcal{M}}
+\newcommand{\model}{\modults}
+
+
+\newcommand{\tup}[1]{\langle #1 \rangle}
+
+\newcommand{\W}{\mathrm{W}}
+\newcommand{\R}{\mathrm{R}}
+\renewcommand{\S}{\mathrm{S}}
+\newcommand{\V}{\mathrm{V}}
+
+\newcommand{\PROP}{{\rm \sf Prop}}
+\newcommand{\ACT}{{\rm \sf Act}}
+\newcommand{\AGT}{{\rm \sf Agt}}
+\newcommand{\ACTP}{{\rm \sf A}}
+
+\newcommand{\cset}[1]{\{ #1 \}}
+% Sets with condition \csetsc{y}{xRy} = {y | xRy}
+\newcommand{\csetsc}[2]{\{ #1  \mid #2 \}}
+% Sets with domain and condition \csetc{y}{A}{xRy} = {y \in A | xRy}
+\newcommand{\csetc}[3]{\{ #1 \in #2 \mid #3 \}}
+
+\newcommand{\formatmodality}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\kh}{\formatmodality{Kh}}
+\newcommand{\khi}{\formatmodality{Kh}_i}
+% languages
+\newcommand{\KHlogic}{\ensuremath{\mathsf{L}_{\kh}}}
+\newcommand{\KHilogic}{\ensuremath{\mathsf{L}_{\khi}}}
+
+\newcommand{\mycomment}[1]{}
+
+\newcommand{\bigO}[0]{\mathcal{O}}
+
+% complejidad 
+\newcommand{\NP}{\rm\textsf{NP}}
+\newcommand{\Poly}{\rm\textsf{P}}
+\newcommand{\coNP}{\rm\textsf{coNP}}
+
+\newcommand{\DNFTAUT}{\rm\textsf{DNF-TAUT}}
+
+\newcommand{\KHBisim}{\rm\textsf{KhBisim}}
+
+% estrategias
+\newcommand{\mystackrel}[2]{%
+  \mathrel{\vbox{\offinterlineskip\ialign{%
+  \hfil##\hfil\cr
+  \ensuremath{\scriptstyle#1}\cr
+  \noalign{\kern.25ex}
+  \ensuremath{#2}\cr
+  }}}
+}
+\newcommand{\ultsExec}{\Rightarrow}
+
+%\newcommand{\ultsExecStrat}[1]{\stackrel{#1}{\ultsExec}}
+%\newcommand{\ultsExecStrat}[1]{\mystackrel{#1}{\ultsExec}}
+\newcommand{\ultsExecStrat}[1]{\mathrel{\raisebox{-.2ex}{\ensuremath{\mystackrel{#1}{\ultsExec}}}}}
+
+%\newcommand{\ultsExecAgi}{\stackrel{i}{\ultsExec}}
+%\newcommand{\ultsExecAgi}{\mystackrel{i}{\ultsExec}}
+\newcommand{\ultsExecAgi}{\mathrel{\raisebox{-.2ex}{\ensuremath{\mystackrel{i}{\ultsExec}}}}}
+
+% no se que es esto
+\usepackage{enumitem}
+\newlist{cond-bisim}{enumerate}{1}
+\setlist[cond-bisim]{label=\itmbisimformat{\arabic*}, leftmargin=3em, itemindent=1em}
+
