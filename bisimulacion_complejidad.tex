@@ -54,14 +54,12 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
 \end{demostracion}
 
 
-\begin{teorema}
-    El problema de decidir si existe una \KHilogic-bisimulación entre dos modelos $\modults_1$ y $\modults_2$ ($\KHilogic-bisimilitud$)  es $co-\NP$ completo.
-\end{teorema}
+\begin{lema}
+    $\KHiBisim \in \coNP$ 
+\end{lema}
 
 \begin{demostracion}
-    Debemos demostrar que $\KHilogic-bisimilitud$ $\in co-\NP$ y que es $co-\NP$ hard.
-
-    Para demostrar que está en $co-\NP$ debemos dar un algoritmo $A$ y un polinomio $p$ tal que dos modelos $\modults_1$ y $\modults_2$ son \KHilogic-bisimilares si y sólo si para todo $x \in \{0,1\}^*$ con $|x| \le p(|\modults_1|+|\modults_2|)$,  $A(\modults_1,\modults_2,x) = 1$. Esencialmente, a los $x$ los llamaremos ``contraejemplos'' y sólo nos interesarán los que representen un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$.
+    Para demostrar que $\KHiBisim \in \coNP$ debemos dar un algoritmo $A$ y un polinomio $p$ tal que dos modelos $\modults_1$ y $\modults_2$ son \KHilogic-bisimilares si y sólo si para todo $x \in \{0,1\}^*$ con $|x| \le p(|\modults_1|+|\modults_2|)$,  $A(\modults_1,\modults_2,x) = 1$. Esencialmente, a los $x$ los llamaremos ``contraejemplos'' y sólo nos interesarán los que representen un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$.
 
 \medskip\medskip
 
@@ -80,17 +78,23 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
 
 \medskip\medskip
 
-    Luego $\KHilogic-bisimilitud \in co-\NP$.
-    
-\medskip\medskip
+    Finalmente $\KHiBisim \in \coNP$.
 
-    Ahora demostremos que $\KHilogic-bisimilitud$ es $co-\NP$ hard.
+\end{demostracion}
 
-    Para demostrarlo, reduciremos el problema $DNF-TAUT$ a $\KHilogic-bisimilitud$. El problema $DNF-TAUT$ está compuesto por las fórmulas $\varphi$ proposicionales en forma disyuntiva normal que son tautologías. $DNF-TAUT$ es $co-\NP$ completo, por lo que si encontramos una reducción en tiempo polinomial de $DNF-TAUT$ a $\KHilogic-bisimilitud$ habremos demostrado que $\KHilogic-bisimilitud$ es $co-\NP$ hard.
+\begin{lema}
+    $\KHiBisim$ es $\coNP$-hard.
+\end{lema}
 
-    Es decir, queremos encontrar una reducción $f$ que transforme una $\varphi$ proposicional en forma disyuntiva normal a un par de modelos $(\modults_1,\modults_2)$ en tiempo polinomial en el tamaño de $\varphi$ tal que $\varphi \in DNF-TAUT$ si y sólo si $(\modults_1,\modults_2) \in \KHilogic-bisimilitud$.
+\begin{demostracion}
 
-    Describamos entonces a $f$.
+    Demostremos que $\KHiBisim$ es $\coNP$-hard.
+
+    Para demostrarlo, reduciremos el problema $\DNFTAUT$ a $\KHiBisim$. El problema $\DNFTAUT$ está compuesto por las fórmulas $\varphi$ proposicionales en forma disyuntiva normal que son tautologías. $\DNFTAUT$ es $\coNP$ completo, por lo que si encontramos una reducción computable en tiempo polinomial de $\DNFTAUT$ a $\KHiBisim$ habremos demostrado que $\KHiBisim$ es $\coNP$-hard.
+
+    Entonces queremos encontrar una reducción $f$ computable en tiempo polinomial que transforme una $\varphi$ proposicional en forma disyuntiva normal a un par de modelos $\tup{\modults_1,\modults_2}$ tal que $\varphi \in \DNFTAUT$ si y sólo si $\tup{\modults_1,\modults_2} \in \KHiBisim$.
+
+    Describamos a $f$.
 
     Sea $\varphi$ una fórmula proposicional en forma disyuntiva normal, entonces es de la forma $\varphi = \varphi_1 \vee ... \vee \varphi_m$. Sean a su vez $p_1,...,p_n$ las variables proposicionales que aparecen en $\varphi$, definimos los siguientes conjuntos:
 
@@ -99,11 +103,12 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
         \item $\ACT := \{in_{\varphi_i} \mid i \in \{1,...,m\}\} \cup \{out_{\varphi_i} \mid i \in \{1,...,m\}\}$
         \item $\S := \{\{in_{\varphi_i}out_{\varphi_i}\} \mid i \in \{1,...,m\}\}$
         \item $\R := \{(p_i,\varphi_j,in_{\varphi_j}) \mid p_i$ no aparece en forma negativa en $\varphi_j\} \cup \{(\varphi_j,p_i,out_{\varphi_j})\mid p_i$ aparece en forma positiva en $\varphi_j\} \cup \{(\varphi_j,e,out_{\varphi_j}) \mid \varphi_j$ no tiene variables positivas$\}$
+        \item $\V := \{(p_i,\{q_i\}) \mid i \in \{1,...,n\}\} \cup \{(\varphi_i,\{q_{i+n}\}) \mid i \in \{1,...,m\}\} \cup \{(e,\{q_{n+m+1}\})\}$ donde $q_1,...,q_{n+m+1} \in \PROP$ son $n+m+1$ variables proposicionales distintas.
     \end{itemize}
 
     Notar que decimos que $p_i$ aparece en forma `positiva' en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$ . A su vez, decimos que $p_i$ aparece en forma `negativa' en $\varphi_j$ si $\varphi_j = ...\wedge \neg p_i \wedge...$ .
 
-    Ahora, $f$ mapeará a $\varphi$ a $(\modults_1,\modults_2)$, los cuáles son definidos de la siguiente manera:
+    Ahora, $f$ mapeará $\varphi$ a $\tup{\modults_1,\modults_2}$, con $\tup{\modults_1,\modults_2}$ definidos de la siguiente manera:
 
     \begin{itemize}
         \item En el caso de que $\varphi$ evalúe a $false$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
@@ -113,7 +118,7 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
             \item $\model_2=\tup{\{1\},\{\},\{\},\{(1,q)\},\{a\}}$
         \end{itemize}
 
-        Notar que estos dos modelos son claramente no \KHilogic-bisimilares, dado que no existe relación binaria no vacía que satisfaga (atom). Pero es correcto porque sólo utilizaremos esta definición en uno de los casos donde $\varphi \not \in DNF-TAUT$. 
+        Notar que estos dos modelos son claramente no \KHilogic-bisimilares, dado que no existe relación binaria no vacía que satisfaga (atom). Pero es correcto porque sólo utilizaremos esta definición en uno de los casos donde $\varphi \not \in \DNFTAUT$. 
         
         \item En el caso de que $\varphi$ evalúe a $true$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
         
@@ -124,38 +129,44 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
     \end{itemize}
 
     
-
-    $\V$ no sé cómo definirlo pero básicamente me gustaría que le asignara a cada nodo una variable proposicional distinta ($\V$ inyectiva), así la única bisimulación posible sería $\{(w,w) \mid w \in \W\}$.
-
-    Un detalle importante es que los modelos tienen un único conjunto de clases de planes (se considera un solo agente), en el que cada clase de equivalencia está formada por un único plan (singletons). 
+    Notar que $\V$ está definida de forma tal que cada $w\in\W$ satisface una única variable proposicional distinta, es decir, es inyectiva.
 
 
 \medskip\medskip
+    Estos dos párrafos que siguen eran explicativos, pensaba sacarlos pero quizás está bueno dar una explicación más humana antes de la demo más técnica.
 
-    Un poco la intuición de esto es que quiero usar los conjuntos proposicionalmente definibles de este modelo para considerar cada posible asignación de valores a las variables $p_1,...,p_n$. Dado un conjunto $U$ proposicionalmente definible, es como que considero que a las variables dentro de $U$ se les asignó $true$ y a las de fuera de $U$ se les asignó $false$. 
-
-    El plan $test$ que sólo aparece en $\modults_1$ es la clave de la reducción. Lo que provoca es que dada una asignación (un conjunto proposicionalmente definible $U$), a $\modults_2$ le hago buscar algún término $\varphi_i$ al cuál pueda moverse (ninguna variable de $U$ aparezca negada en $\varphi_i$) y a su vez todo variable que aparecía positiva en $\varphi_i$ estaba en $U$. (Porque el plan $test$ es como que simplemente va de $U$ a $U \cup \{e\}$), el $e$ es como que considera los términos que no tienen ninguna variable positiva ($e$ de empty set).
-
-    Si $\modults_2$ no encuentra ningún término al cuál moverse es que dicho $U$ sirve como contraejemplo para afirmar que $\varphi$ no es una tautología.
+    La intuición de esta reducción es que queremos usar los conjuntos proposicionalmente definibles de este modelo para considerar cada posible asignación de valores a las variables $p_1,...,p_n$. Dado un conjunto $U \subseteq \{p_1,...,p_n\}$ , estamos considerando la asignación que asigna $true$ a las variables dentro de $U$ y asigna $false$ a las de $\{p_1,...,p_n\}/U$. Además, notemos que como la función $\V$ es inyectiva, entonces $U$ es proposicionalmente definible.
+ 
+    El plan $test$ que sólo aparece en $\modults_1$ es la clave de la reducción. Lo que provoca es que dada una asignación (un conjunto proposicionalmente definible $U$), a $\modults_2$ le hago buscar algún término $\varphi_i$ al cuál pueda moverse (ninguna variable de $U$ aparezca negada en $\varphi_i$) y a su vez todo variable que aparecía positiva en $\varphi_i$ estaba en $U$. (Porque el plan $test$ es como que simplemente va de $U$ a $U \cup \{e\}$), el $e$ es como que considera los términos que no tienen ninguna variable positiva ($e$ de empty set). Si $\modults_2$ no encuentra ningún término al cuál moverse es que dicho $U$ sirve como contraejemplo para afirmar que $\varphi$ no es una tautología.
 
 \medskip\medskip
         
     Notemos que ambos modelos son polinomiales en el tamaño de $\varphi$.
 
-    Ahora queremos demostrar que $\varphi \in DNF-TAUT$ si y sólo si $(\modults_1,\modults_2) \in \KHilogic-bisimilitud$.
+    A su vez, la construcción de los modelos, solo tiene el costo extra computacional de analizar si $\varphi$ evalúa a $true$ en la asignación que asigna $false$ a $p_1,...,p_n$, lo cuál es claramente computable en tiempo polinomial.
+
+    Por lo que es fácil notar que $f$ es computable en tiempo polinomial en el tamaño de $\varphi$.
+
+    Ahora queremos demostrar que $\varphi \in \DNFTAUT$ si y sólo si $\tup{\modults_1,\modults_2} \in \KHiBisim$.
     \begin{itemize}
 
-    \item $(\rightarrow)$ Sea $\varphi \in DNF-TAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, veamos que $(\modults_1,\modults_2) \in \KHilogic-bisimilitud$.
+    \item $(\rightarrow)$ Sea $\varphi \in \DNFTAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, veamos que $\tup{\modults_1,\modults_2} \in \KHiBisim$.
 
-    Algo que debemos notar es que hay una única posible bisimulación $Z$ entre $\modults_1$ y $\modults_2$, dado que toda bisimulación debe satisfacer (A-zig), (A-zag) y (atom), y cada nodo tiene un único nodo en el modelo contrario con la misma imagen de $\V$.
+    Notar que como $\varphi$ es una tautología, entonces $\varphi$ evalúa a $true$ en la asignación que asigna $false$ a $p_1,...,p_n$, por lo que consideramos el segundo caso del mapeo $f$. 
 
-    Esta bisimulación es $Z := \{(w,w) \mid w \in \W \}$. Es claro que $Z$ cumple (atom), (A-zig) y (A-zag).
+    Veamos que $Z := \{(w,w) \mid w \in \W \}$ es una bisimulación entre $\modults_1$ y $\modults_2$. Es fácil ver que $Z$ satisface (atom), pues ambos modelos utilizan la misma función de valuación $\V$.
 
-    Veamos que que toda arista y todo plan que está en $\modults_2$ también está en $\modults_1$, motivo por el cuál podemos afirmar que $Z$ satisface (\KHilogic-zag). 
+    A su vez, tanto (A-zig) como (A-zag) son claramente satisfechos por $Z$.
 
-    Luego solo queda ver que $Z$ cumple (\KHilogic-zig).
+    Analicemos entonces (\KHilogic-zig) y (\KHilogic-zag).
 
-    Sea $U, T \subseteq \W$ tal que $U$ proposicionalmente definible y $U \ultsExecAgi T$, queremos ver que existe $T' \subseteq \W$ tal que:
+    Primero, cabe resaltar que, por la definición de $Z$, para cada $X \subseteq \W$ se cumple que $X = Z(X)$.
+
+    Ahora bien, notemos que cada plan de $\modults_2$ está también en $\modults_1$, y más aún, las aristas con las etiquetas que aparecen en dichos planes son exactamente las mismas en ambos modelos. Juntando lo recién mencionado y el hecho de que $U = Z(U)$, es fácil notar que Z satisface (\KHilogic-zag).
+
+    Luego solo queda ver que $Z$ satisface (\KHilogic-zig).
+
+    Sea $U, T \subseteq \W$ tal que $U$ es proposicionalmente definible y $U \ultsExecAgi T$, queremos ver que existe $T' \subseteq \W$ tal que:
 
     \begin{multicols}{2}
         \begin{itemize}
@@ -164,37 +175,35 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
         \end{itemize}
     \end{multicols}
 
-    Un detalle a tener en cuenta es que al ser $Z = \{(w,w)\}$, entonces siempre $Z(X) = X$ para todo $X \subseteq \W$.
+    Notemos primero que si el plan que atestigua $U \ultsExecAgi T$ es de la forma $in_{\varphi_j}out_{\varphi_j}$, entonces $T$ sirve como $T'$ dado que ese mismo plan y las mismas aristas con dichas etiquetas están en $\modults_2$, similar al análisis realizado para el caso (\KHilogic-zag).
 
-    Notemos primero que si el plan que utiliza el agente es de la forma $in_{\varphi_i}out_{\varphi_i}$, entonces $T$ sirve como $T'$ dado que ese mismo plan y las mismas aristas con dichas etiquetas están en $\modults_2$.
+    Entonces consideremos el caso en el que el plan que atestigua $U \ultsExecAgi T$ es $test$. En dicho caso, si analizamos la definición de $\R$, ese plan puede ser fuertemente ejecutable sólo si $U \subseteq \{p_1,...,p_n\}$ dado que son los únicos nodos que tienen aristas con etiqueta $test$. Así que solo necesitamos considerar los casos donde $U \subseteq \{p_1,...,p_n\}$.
 
-    Entonces consideremos el caso en el que el plan utilizado fue $test$. En dicho caso, si analizamos la definición de $\R$, ese plan puede ser fuertemente ejecutable sólo si $U \subseteq \{p_1,...,p_n\}$ dado que son los únicos nodos que tienen aristas con etiqueta $test$. Así que solo necesitamos considerar los casos donde $U \subseteq \{p_1,...,p_n\}$.
+    Notemos que $\R_{test}(U) = U \cup \{e\}$, entonces necesariamente $U \cup \{e\} \subseteq T$.
 
-    Notemos que $\R_{test}(U) = U \cup \{e\}$, entonces necesariamente $U \cup \{e\} \subseteq T$.  Luego, basta encontrar algún plan en $\modults_2$ que lleve de $Z(U) = U$ a algún $T' \subseteq Z(T)$.  
+    Consideremos ahora la asignación $\overrightarrow{a}$ que asigna $true$ a las variables en $U$ y $false$ a las variables en $\{p_1,...,p_n\} / U$. Como $\varphi$ es una tautología, entonces existe $\varphi_j$ que se vuelve verdadero a partir de $\overrightarrow{a}$, es decir, en $\varphi_j$ las variables que aparecen en forma positiva son algún subconjunto de $U$ y las variables que aparecen en forma negativa son algún subconjunto de $\{p_1,...,p_n\}/U$.
 
-    Consideremos ahora la asignación $\overrightarrow{a}$ que asigna $true$ a las variables en $U$ y $false$ a las variables en $\{p_1,...,p_n\} / U$. Como $\varphi$ es una tautología, entonces existe $\varphi_j$ que se vuelve verdadero a partir de $\overrightarrow{a}$, es decir, en $\varphi_j$ las variables que aparecen en forma positiva son algún subconjunto de $U$ y las variables que aparecen en forma negativa son algún subconjunto de las variables de $\{p_1,...,p_n\}/U$.
-
-    Como las variables que aparecen de forma negativa no están en $U$, entonces podemos ver, analizando la definición de $\R$, que el plan $in_{\varphi_j}out{\varphi_j}$ es fuertemente ejecutable en $U$. 
+    Como las variables que aparecen en $\varphi_j$ en forma negativa no están en $U$, entonces, analizando la definición de $\R$, podemos ver que el plan $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $Z(U) = U$. 
     
-    En particular, la aristas con etiqueta $in_{\varphi_j}$ llevarían de cada nodo de $U$ al nodo $\varphi_j$.
+    En particular, las aristas con etiqueta $in_{\varphi_j}$ llevarían de cada nodo de $U$ al nodo $\varphi_j$.
     
-    Ahora bien, notemos que la arista $out_{\varphi_j}$ lleva del nodo $\varphi_j$ a las variables que aparecen en forma positiva o al nodo $e$ en caso de no tener variables positivas. Pero, como dijimos, las variables positivas que aparecen en $\varphi_j$ son un subconjunto de $U$. Entonces necesariamente de $\varphi_j$ iremos a un conjunto $X \subseteq U \cup \{e\}$, es decir, $\R_{in_{\varphi_j}out_{\varphi_j}}(U) = X \subseteq U \cup \{e\} \subseteq T$. Finalmente, $T' := X$ nos sirve para demostrar que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq Z(T)$.
+    Ahora bien, notemos que las aristas con etiqueta $out_{\varphi_j}$ llevan del nodo $\varphi_j$ a las variables que aparecen en forma positiva en $\varphi_j$ o al nodo $e$ en caso de no tener variables positivas. Pero, como dijimos, las variables positivas que aparecen en $\varphi_j$ son un subconjunto, posiblemente vacío, de $U$. Entonces necesariamente de $\varphi_j$ las aristas con etiqueta $out_{\varphi_j}$ van a un conjunto $X \subseteq U \cup \{e\}$, es decir, $\R_{in_{\varphi_j}out_{\varphi_j}}(U) = X \subseteq U \cup \{e\} \subseteq T$. Finalmente, $T' := X$ nos sirve para demostrar que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq X \subseteq U \cup \{e\} \subseteq T = Z(T)$.
 
     Lo cual demuestra que $Z$ satisface (\KHilogic-zig). 
 
-    Juntando los puntos mencionados, demostramos que $Z$ es una \KHilogic-bisimulación entre $\modults_1$ y $\modults_2$, por lo que $(\modults_1,\modults_2) \in \KHilogic-bisimilitud$. 
+    Juntando los puntos mencionados, demostramos que $Z$ es una bisimulación entre $\modults_1$ y $\modults_2$, por lo que $\tup{\modults_1,\modults_2} \in \KHiBisim$. 
 
-    \item ($\leftarrow$) Para demostrar este caso, veremos que siendo $\varphi \notin DNF-TAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, entonces $(\modults_1,\modults_2) \notin \KHilogic-bisimilitud$.
+    \item ($\leftarrow$) Para demostrar este caso, veremos que siendo $\varphi \notin \DNFTAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, entonces $\tup{\modults_1,\modults_2} \notin \KHiBisim$.
 
-    Como $\varphi \notin DNF-TAUT$, existe una asignación $\overrightarrow{a}$ sobre las variables $p_1,...,p_n$ que hace fallar cada $\varphi_j$. Sea $U$ el conjunto de variables a las que se le asigna $true$ en $\overrightarrow{a}$.
+    Como $\varphi \notin \DNFTAUT$, existe una asignación $\overrightarrow{a}$ sobre las variables $p_1,...,p_n$ que hace fallar cada $\varphi_j$. Denotemos a $U$ como el conjunto de variables a las que se le asigna $true$ en $\overrightarrow{a}$.
 
-    Si $U = \emptyset$, es claro que ($\modults_1,\modults_2) \notin \KHilogic-bisimilitud$, dado que en este caso se construyen dos modelos concretos que no son \KHilogic-bisimilares.
+    Si $U = \emptyset$, es claro que $\tup{\modults_1,\modults_2} \notin \KHiBisim$, dado que en este caso se construyen dos modelos concretos que no son \KHilogic-bisimilares.
 
-    Así que consideremos el caso donde $U \neq \emptyset$. Notemos que como mencionamos anteriormente, la única bisimulación posible entre $\modults_1$ y $\modults_2$ es $Z := \{(w,w) \mid w \in \W\}$. Veamos que $Z$ no es una \KHilogic-bisimulación.
+    Así que consideremos el caso donde $U \neq \emptyset$.
+    
+    Primero notemos que la fórmula $\psi := \bigvee\limits_{p_i \in U} q_i$ define a $U$. Pues, recordemos que por la definición de $\V$, $\V(p_i) = \{q_i\}$ para cada $i \in \{1,...,n\}$. A su vez, como $\V$ es inyectiva, solo los elementos de $U$ satisfacerán $\psi$. Luego, como $\psi$ es proposicional, $U$ es proposicionalmente definible.
 
-    Notemos que el conjunto $U$ es proposicionalmente definible, dado que la función $\V$ está definida de forma inyectiva, podemos ver que $U$ cumple que es unión de clases de equivalencias de $\rho_\modults$, luego por Lema es proposicionalmente definible.
-
-    A su vez, como $U \subseteq \{p_1,...,p_n\}$ entonces el plan $test$ es fuertemente ejecutable en $U$ y $\R_{test}(U) = U \cup \{e\}$, por lo que $U \ultsExecAgi U \cup \{e\}$.
+    Ahora bien, como $U \subseteq \{p_1,...,p_n\}$ entonces el plan $test$ es fuertemente ejecutable en $U$ y $\R_{test}(U) = U \cup \{e\}$, por lo que $U \ultsExecAgi U \cup \{e\}$.
     
     Veamos que no existe $T'$ tal que:
 
@@ -205,23 +214,33 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
         \end{itemize}
     \end{multicols}
 
-    Notemos que los planes que tiene a su disposición $Z(U)$ son de la forma $in_{\varphi_j}out_{\varphi_j}$.
+    Notemos que los planes que tiene a su disposición $Z(U) = U$ son de la forma $in_{\varphi_j}out_{\varphi_j}$.
 
-    Sea entonces $\varphi_j$, analicemos qué sucede en relación al plan $in_{\varphi_j}out_{\varphi_j}$. Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace fallar a $\varphi_j$, entonces ocurre que existe una variable en $U$ que aparece en forma negativa en $\varphi_j$, o existe una variable en $\{p_1,...,p_n\}/U$ que aparece en forma positiva en $\varphi_j$.
+    Sea entonces $\varphi_j$, analicemos qué sucede en relación al plan $in_{\varphi_j}out_{\varphi_j}$. Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace fallar a $\varphi_j$, entonces, o bien ocurre que existe una variable en $U$ que aparece en forma negativa en $\varphi_j$, o existe una variable en $\{p_1,...,p_n\}/U$ que aparece en forma positiva en $\varphi_j$.
 
     Si ocurre que una variable de $U$ aparece en forma negativa en $\varphi_j$ entonces el plan $in_{\varphi_j}out_{\varphi_j}$ no será fuertemente ejecutable en dicha variable y, por lo tanto, no será fuertemente ejecutable en $U$. Así que este plan no permitiría encontrar un $T'$ adecuado.
 
-    Por otro lado, si ninguna variable de $U$ aparece en forma negativa en $\varphi_j$ entonces $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. Sin embargo, notemos que entonces existe una variable $p_k$ en $\{p_1,...,p_n\}/U$ que aparece en forma positiva en $\varphi_j$. Ahora bien, como $p_k$ aparece en forma positiva en $\varphi_j$ entonces $p_k \in \R_{in_{\varphi_j}out_{\varphi_j}}(U)$. Luego $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\}$, por lo que dicho plan no nos permite encontrar un $T'$ adecuado.
+    Por otro lado, si ninguna variable de $U$ aparece en forma negativa en $\varphi_j$ entonces $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. Sin embargo, notemos que entonces existe una variable $p_k$ en $\{p_1,...,p_n\}/U$ que aparece en forma positiva en $\varphi_j$. Ahora bien, como $p_k$ aparece en forma positiva en $\varphi_j$ entonces $p_k \in \R_{in_{\varphi_j}out_{\varphi_j}}(U)$. Luego $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan no nos permite encontrar un $T'$ adecuado.
     
-    Hemos analizado entonces todos los planes posibles y ninguno encuentra un $T'$ que cumpla con lo requerido, luego $Z$ no satisface (\KHilogic-zig).
+    Hemos analizado entonces todos los planes y ninguno permite encontrar un $T'$ que cumpla con lo requerido, luego $Z$ no satisface (\KHilogic-zig).
 
     Hemos demostrado entonces que $Z$ no es una \KHilogic-bisimulación.
 
-    Lo cual demuestra que $(\modults_1,\modults_2) \not \in \KHilogic-bisimilitud$.
+    Lo cual demuestra que $\tup{\modults_1,\modults_2} \not \in \KHiBisim$.
     \end{itemize}
 
-     Hemos demostrado que $f$ es una reducción de $DNF-TAUT$ a $\KHilogic-bisimilitud$, la cuál puede ser computada en tiempo polinomial. Lo cuál demuestra que $\KHilogic-bisimilitud$ es $co-\NP$ hard.
+     Finalmente, demostramos que $f$ es una reducción de $\DNFTAUT$ a $\KHiBisim$, la cuál puede ser computada en tiempo polinomial. Lo cuál demuestra que $\KHiBisim$ es $\coNP$-hard.
 
-    Finalmente, como $\KHilogic-bisimilitud \in co-\NP$ y $\KHilogic-bisimilitud$ es $co-\NP$ hard, podemos concluir que $\KHilogic-bisimilitud$ es $co-\NP$ completo.
+\end{demostracion}
+
+
+\begin{teorema}
+    $\KHiBisim$ es $\coNP$-completo.
+\end{teorema}
+
+
+\begin{demostracion}
+
+    A partir de los lemas 5 y 6, podemos afirmar que $\KHiBisim$ es $\coNP$-completo.
     
 \end{demostracion}
