@@ -1,3 +1,9 @@
+\begin{definicion}
+    Definimos el problema de decidir si existe una \KHilogic-bisimulación entre dos modelos como:
+    \begin{center}
+    $\KHiBisim := \{\tup{\modults_1,\modults_2} \mid$ existe una \KHilogic-bisimulación entre $\modults_1$ y $\modults_2\}$
+    \end{center}
+\end{definicion}
 
 \begin{lema}
     Sean $\model_1=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $\model_2=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$ dos modelos tales que existe $Z \subseteq \W \times \W'$ \KHilogic-bisimulación entre ellos, entonces
@@ -59,24 +65,143 @@ Notemos que este teorema nos dice que para decidir si existe una \KHilogic-bisim
 \end{lema}
 
 \begin{demostracion}
-    Para demostrar que $\KHiBisim \in \coNP$ debemos dar un algoritmo $A$ y un polinomio $p$ tal que dos modelos $\modults_1$ y $\modults_2$ son \KHilogic-bisimilares si y sólo si para todo $x \in \{0,1\}^*$ con $|x| \le p(|\modults_1|+|\modults_2|)$,  $A(\modults_1,\modults_2,x) = 1$. Esencialmente, a los $x$ los llamaremos ``contraejemplos'' y sólo nos interesarán los que representen un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$.
-
-\medskip\medskip
+    Para demostrar que $\KHiBisim \in \coNP$ debemos dar un algoritmo $A$ y un polinomio $p$ tal que dos modelos $\modults_1$ y $\modults_2$ son \KHilogic-bisimilares si y sólo si para todo $x \in \{0,1\}^*$ con $|x| \le p(|\modults_1|+|\modults_2|)$,  $A(\modults_1,\modults_2,x) = 1$. Esencialmente, a los $x$ los llamaremos ``contraejemplos'' y sólo nos interesarán los que sean de la forma $\tup{U,b}$ con $U$ un subconjunto del dominio de alguno de los modelos y $b$ un bit que nos indica de qué dominio es subconjunto $U$. 
 
     Dados que los contraejemplos que nos interesan son subconjuntos de los dominios de ambos modelos, un polinomio que nos sirve para acotar los largos de los contraejemplos es $p(x) = x$. 
 
-\medskip\medskip
-    El algoritmo $A$ que propondremos hará lo siguiente:
+    Proponemos entonces el siguiente algoritmo (se escribió en la página que sigue, es modularizable porque las dos guardas del if hacen lo mismo pero en distintos modelos):
+
+    \begin{algorithm}
+        \begin{algorithmic}
+            \small
+            \State{{\bf Procedure} CheckBisimilarity($\modults_1,\modults_2,\tup{U,b})$} 
+            \State Compute $Z'$
+            \State Check (A-zig), if not \Return 0
+            \State Check (A-zag), if not \Return 0
+            \If{$b$}
+            \State Check if $U$ is propositionally definable in $\modults_1$, if not \Return 1
+                \ForAll{$S_i$}
+                    \ForAll{$\pi \in \S_i$}
+                        \If{$U \subseteq SE(\pi)$}
+                        \State $foundStrat \gets False$
+                            \ForAll{$\pi' \in \S_i'$}
+                                \If{$Z'(U) \subseteq SE(\pi') \wedge \R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$}
+                                    \State $foundStrat \gets True$
+                                \EndIf         
+                            \EndFor
+                            \If{$\neg foundStrat$}
+                                \Return 0
+                            \EndIf
+                        \EndIf
+                    \EndFor
+                \EndFor
+            \Else
+                \State Check if $U$ is propositionally definable in $\modults_2$, if not \Return 1
+                \ForAll{$S_i'$}
+                    \ForAll{$\pi' \in \S_i'$}
+                        \If{$U \subseteq SE(\pi')$}
+                        \State $foundStrat \gets false$
+                            \ForAll{$\pi \in \S_i$}
+                                \If{$Z'^{-1}(U) \subseteq SE(\pi) \wedge \R_{\pi}(Z'^{-1}(u)) \subseteq Z'^{-1}(\R'_{\pi'}(U))$}
+                                    \State $foundStrat \gets true$
+                                \EndIf         
+                            \EndFor
+                            \If{$\neg foundStrat$}
+                                \Return 0
+                            \EndIf
+                        \EndIf
+                    \EndFor
+                \EndFor
+            \EndIf
+            \State \Return 1
+            \end{algorithmic}
+    \end{algorithm}
+
+    Primero notemos que el algoritmo propuesto corre en tiempo polinomial en el tamaño de $\tup{\modults_1,\modults_2}$.
+    (Esto va a haber que explicarlo un poco más en detalle después porque se ponen instrucciones atómicas que esconden mucho cómputo, pero bueno creo que sirve tener un primer intento y demostrar el si y sólo si que es lo más importante, la complejidad si ves cada instrucción es medio claro que se puede lograr en tiempo polinomial).
+
+    Veamos ahora que $\tup{\modults_1,\modults_2} \in \KHiBisim$ si y sólo si
+    CheckBisimilarity($\modults_1,\modults_2,\tup{U,b}$) = 1 para cada $\tup{U,b}$ donde $U$ es subconjunto del dominio de alguno de ambos modelos y $b$ es un bit que nos indica de qué dominio es subconjunto $U$
+
+    \begin{itemize}
+        \item ($\rightarrow$)
+        Sea $\tup{\modults_1,\modults_2} \in \KHiBisim$ y $\tup{U,b}$, veamos que CheckBisimilarity($\modults_1,\modults_2,\tup{U,b}$) = 1
+
+        Primero notemos que como $\tup{\modults_1,\modults_2} \in \KHiBisim$, entonces $Z'$ es una bisimulación entre $\modults_1$ y $\modults_2$.
+
+        Luego viendo la ejecución de CheckBisimilarity, los chequeos de (A-zig) y (A-zag) darán $true$ como resultado.
+        
+        Analicemos ahora los dos casos posibles
+
+        \begin{itemize}
+            \item $b = 1$
+                Primero notemos que si $U$ no es proposicionalmente definible en $\modults_1$, entonces el algoritmo devuelve 1.
+
+                Supongamos entonces $U$ proposicionalmente definible. Sea $\pi \in \S_i$ tal que $U \subseteq SE(\pi)$, entonces el algoritmo ingresa al $if$ de la línea 8 e inicializa $foundStrat$ en $false$.
+                
+                Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $U$ es proposicionalmente definible y $Z'$ cumple (\KHilogic-zig), existe $T \subseteq \W'$ tal que $Z'(U) \ultsExecAgi T$ y,
+                a su vez, $T \subseteq Z'(\R_\pi(U))$.
+                
+                Ahora bien, como $Z'(U) \ultsExecAgi T$, entonces existe $\pi' \in \S_i'$ tal que $Z'(U) \subseteq SE(\pi')$ y $\R'_{\pi'}(Z'(U)) \subseteq T$.
+                
+                Pero como $T \subseteq Z'(\R_\pi(U))$, entonces $\R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$, por lo que el algoritmo al recorrer $\pi'$, actualiza el valor de $foundStrat$ a $true$.
+                
+                Finalmente, esto demuestra que el algoritmo finaliza su ejecución en la última línea donde devuelve 1.
+            \item $b = 0$
+                Este caso es análogo al caso $b = 1$, con la diferencia de que hay que considerar el hecho de que $Z'$ satisface (\KHilogic-zag).
+        \end{itemize}
+
+        \item ($\leftarrow$) Para demostrar esta dirección, lo que haremos será ver que siendo $\tup{\modults_1,\modults_2} \not \in \KHiBisim$ entonces
+        existe $\tup{U,b}$ tal que CheckBisimilarity($\modults_1,\modults_2,\tup{U,b}$) = 0.  
+        
+        Como $\tup{\modults_1,\modults_2} \not \in \KHiBisim$, entonces sabemos que $Z'$ no es una bisimulación.
+
+        Notemos que por su definición, $Z'$ cumple (atom). Analicemos los posibles casos donde podría fallar $Z$.
+
+        \begin{itemize}
+            \item (A-zig) Si $Z'$ no satisface (A-zig) entonces el algoritmo lo identifica en la segunda línea y devuelve 0, por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
+            \item (A-zag) Similarmente, si $Z'$ no satisface (A-zag) el algoritmo lo identifica en la tercer línea y nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
+            \item (\KHilogic-zig) Supongamos entonces que $Z'$ no satisface (\KHilogic-zig), luego existen $U, T$ tal que
+            $U \ultsExecAgi T$ con $U$ proposicionalmente definible, y a su vez, no existe $T'$ tal que $Z'(U) \ultsExecAgi T'$ y $T' \subseteq Z'(T)$.
+
+            Analicemos entonces la ejecución de CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$).
+
+            Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq SE(\pi)$ y, a su vez, $\R_\pi(U) \subseteq T$. 
+
+            Esto nos dice que al considerar el plan $\pi$, el algoritmo ingresa al $if$ de la línea 8 e inicializa la variable $foundStrat$ en $false$.
+
+            Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z'(U) \not \subseteq SE(\pi')$ o que $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'$ entonces el valor de $foundStrat$ permanece en $false$ y el algoritmo devuelve 0 en la línea 15.
+
+            Sea $\pi' \in \S_i'$, supongamos entonces que $Z'(U) \subseteq SE(\pi')$ y veamos que $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$.
+
+            Notemos que como $Z'(U) \subseteq SE(\pi')$, entonces $Z'(U) \ultsExecAgi \R'_{\pi'}(Z'(U))$. Ahora bien, como mencionamos que (\KHilogic-zig) falla para este caso, entonces ocurre que $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(T)$, pues en caso contrario $T' := \R'_{\pi'}(Z'(U))$ serviría como testigo de (\KHilogic-zig).
+
+            Pero como $\R_\pi(U) \subseteq T$, entonces es claro que $Z'(\R_\pi(U)) \subseteq Z'(T)$. Luego como $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(T)$ entonces también ocurre que $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$, que era lo que queríamos ver.
+
+            Por lo que el algoritmo abandona el $for$ con la variable $foundStrat$ valiendo $false$, luego devuelve 0 en la línea 15.
+
+            Finalmente, CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$) = 0.
+
+            \item (\KHilogic-zag) Análogo al caso recién analizado.
+        \end{itemize}
     
-    Dados $\modults_1, \modults_2$ y $x$, verificar que el conjunto $Z'$ mencionado en el lema 4 sea una \KHilogic-bisimulación entre los dos modelos recibidos. Notar que podemos verificar polinomialmente que $Z'$ cumple (A-zig) y (A-zag).
+    \end{itemize}
 
-    Luego el algoritmo verificará que $Z'$ cumpla con (\KHilogic-zig) o (\KHilogic-zag) con respecto al subconjunto $x$,  dependiendo de si $x$ es un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$. Notar que sólo nos interesarán los $x$ que sean proposicionalmente definibles, así que el algoritmo deberá encargarse de chequear que $x$ efectivamente sea un conjunto proposicionalmente definible. 
 
-    En caso de serlo, simplemente analizará a qué conjunto se puede llegar desde $x$ utilizando cada plan del modelo y para cada uno de ellos, verificar que $Z'(x)$ tenga algún plan con el que cumpla la condición deseada. 
+
+
+
+%     El algoritmo $A$ que propondremos hará lo siguiente:
     
-    (Queda escribir este algoritmo y demostrar más en profundidad el si y sólo si mencionado). 
+%     Dados $\modults_1, \modults_2$ y $x$, verificar que el conjunto $Z'$ mencionado en el lema 4 sea una \KHilogic-bisimulación entre los dos modelos recibidos. Notar que podemos verificar polinomialmente que $Z'$ cumple (A-zig) y (A-zag).
 
-\medskip\medskip
+%     Luego el algoritmo verificará que $Z'$ cumpla con (\KHilogic-zig) o (\KHilogic-zag) con respecto al subconjunto $x$,  dependiendo de si $x$ es un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$. Notar que sólo nos interesarán los $x$ que sean proposicionalmente definibles, así que el algoritmo deberá encargarse de chequear que $x$ efectivamente sea un conjunto proposicionalmente definible. 
+
+%     En caso de serlo, simplemente analizará a qué conjunto se puede llegar desde $x$ utilizando cada plan del modelo y para cada uno de ellos, verificar que $Z'(x)$ tenga algún plan con el que cumpla la condición deseada. 
+    
+%     (Queda escribir este algoritmo y demostrar más en profundidad el si y sólo si mencionado). 
+
+% \medskip\medskip
 
     Finalmente $\KHiBisim \in \coNP$.
 
