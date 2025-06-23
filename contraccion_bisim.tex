@@ -1,46 +1,4 @@
 
-
-\begin{lema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, y sean $w$, $v \in \W$ tales que $\V(w)$ = $\V(v)$ entonces para toda $\varphi$ proposicional se cumple que, 
-    \begin{center}
-    $\modults, w \models \varphi$ \quad si y sólo si \quad $ 
-    \modults, v \models \varphi$
-    \end{center}
-\end{lema}
-
-\begin{demostracion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $w$, $v \in \W$ tales que $\V(w)$ = $\V(v)$. La demostración es por inducción estructural sobre $\varphi$. Recordar que $\varphi$ es una fórmula \textbf{proposicional}.
-
-    \begin{itemize}
-        \item Caso base: $\varphi = p$ donde $p \in \PROP$.
-
-        Notar que  $\modults, w \models \varphi$ si y sólo si $p \in \V(w)$.
-
-        Ahora bien, como $\V(w)$ = $\V(v)$, $p \in \V(w)$ si y sólo si $p \in \V(v)$.
-
-        Finalmente, por la definición de $\models$, $p \in \V(v)$ si y sólo si $\modults, v \models \varphi$.  
-    
-        \item Caso inductivo: La hipótesis inductiva establece que, para $\psi$ una subfórmula de $\varphi$, se cumple que $\modults, w \models \psi$ si y sólo si $\modults, v \models \psi$.
-
-        \begin{itemize}
-            \item Caso $\varphi = \psi_1 \lor \psi_2$. 
-    
-            Por definición de $\models$, $\modults, w \models \psi_1 \lor \psi_2$ si y sólo si $\modults, w \models \psi_1$ o $\modults, w \models \psi_2$.
-            
-            Por hipótesis inductiva, $\modults, w \models \psi_1$ o $\modults, w \models \psi_2 $ si y sólo si $\modults, v \models \psi_1$ o $\modults, v \models \psi_2$. 
-            
-            Pero notar que, nuevamente por definición de $\models$, $\modults, v \models \psi_1$ o $\modults, v \models \psi_2$ si y sólo si $\modults,v \models \psi_1 \lor \psi_2$.  
-
-            \item Caso $\varphi = \neg \psi$.
-        
-            La demostración es similar a la del caso analizado anteriormente.
-        \end{itemize}
-    
-    \end{itemize}
-    
-\end{demostracion}
-
-
 \begin{definicion}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo entonces se define, 
     \begin{center}
@@ -62,6 +20,11 @@
 \end{lema}
 
 Intuitivamente, lo que nos dice este lema es que todo conjunto proposicionalmente definible viene de tomar una cierta cantidad de clases de equivalencia de $\rho_\modults$ y unirlas. Y, a su vez, cualquier unión de una cierta cantidad de clases de equivalencia es un conjunto proposicionalmente definible. 
+
+Me gustaría cambiar este lema por para cada $s_i \in \rho_\modults$ se cumple que $s_i \subseteq U \vee s_i \cap U = \emptyset$ si y sólo si $U$ es proposicionalmente definible.
+
+Porque es una condición mucho más algorítmica, deja servido el corolario de \KHilogic-definability.
+
 
 
 \begin{demostracion}
@@ -116,26 +79,25 @@ Intuitivamente, lo que nos dice este lema es que todo conjunto proposicionalment
 
 % IDEA PARA PROBAR LO DE QUE CADA CLASE DE EQUIVALENCIA O ESTÁ POR COMPLETO O NO ESTÁ, HABRÍA QUE PROBAR EL SII, ACÁ SOLO PRUEBO EL ->
 
-\mycomment{
-\begin{corolario}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ un conjunto proposicionalmente definible, entonces
-    \begin{center}
-        $\forall s_i \in \rho_\modults.$ $(s_i \subseteq U \vee s_i \cap U = \emptyset)$
-    \end{center}
-\end{corolario}
+% \begin{corolario}
+%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ un conjunto proposicionalmente definible, entonces
+%     \begin{center}
+%         $\forall s_i \in \rho_\modults.$ $(s_i \subseteq U \vee s_i \cap U = \emptyset)$
+%     \end{center}
+% \end{corolario}
 
-\begin{demostracion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ proposicionalmente definible.
+% \begin{demostracion}
+%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ proposicionalmente definible.
     
-    Supongamos que la propiedad es falsa, luego existe $s' \in \rho_\modults$ tal que $s' \nsubseteq U \wedge s_i \cap U \neq \emptyset$. Notemos que esto dice que existen $w,v \in s'$ tal que $w \in U$ y $v \notin U$.
+%     Supongamos que la propiedad es falsa, luego existe $s' \in \rho_\modults$ tal que $s' \nsubseteq U \wedge s_i \cap U \neq \emptyset$. Notemos que esto dice que existen $w,v \in s'$ tal que $w \in U$ y $v \notin U$.
 
-    A su vez, por Lema 2, como $U$ es proposicionalmente definible existe $S \subseteq \mathcal{P}(\rho_\modults)$ tal que $U = \bigcup\limits_{s_i \in S} s_{i}$. 
+%     A su vez, por Lema 2, como $U$ es proposicionalmente definible existe $S \subseteq \mathcal{P}(\rho_\modults)$ tal que $U = \bigcup\limits_{s_i \in S} s_{i}$. 
     
-    Como $w \in U$ y $w \in s'$, entonces ocurre que $s' \in S$, pues recordemos que los elementos de $\rho_\modults$ son clases de equivalencia, es decir, $s'$ es la única clase que contiene a $w$. Ahora bien, pero como $v \in s'$ entonces $v\in U$, lo cuál es absurdo, pues dijimos que $v \notin U$. 
+%     Como $w \in U$ y $w \in s'$, entonces ocurre que $s' \in S$, pues recordemos que los elementos de $\rho_\modults$ son clases de equivalencia, es decir, $s'$ es la única clase que contiene a $w$. Ahora bien, pero como $v \in s'$ entonces $v\in U$, lo cuál es absurdo, pues dijimos que $v \notin U$. 
 
-    El absurdo vino de suponer que existía $s' \in \rho_\modults$ tal que  $s' \nsubseteq U \wedge s_i \cap U \neq \emptyset$, luego la propiedad queda demostrada.
-\end{demostracion}
-}
+%     El absurdo vino de suponer que existía $s' \in \rho_\modults$ tal que  $s' \nsubseteq U \wedge s_i \cap U \neq \emptyset$, luego la propiedad queda demostrada.
+% \end{demostracion}
+
 
 
 \begin{corolario}

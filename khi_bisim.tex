@@ -1,0 +1,563 @@
+Como mencionamos en la anterior sección (todavía no hay nada escrito pero esta idea la saco de lo que dijo Carlos),
+a la hora de definir una noción de bisimulación para una lógica modal, es deseable que la misma
+tenga una naturaleza procedural, es decir, que naturalmente exista un procedimiento que dados dos
+modelos y una relación binaria entre ellos pueda decidir si dicha relación es una bisimulación.
+
+Ahora bien, esta naturaleza procedural para verificar si una relación entre dos modelos es una bisimulación,
+también nos permite encontrar un procedimiento que decida dados modelos si existe una bisimulación entre ellos.
+
+De esta discusión surge la pregunta que se encara a lo largo de esta sección. ¿Cuál es la complejidad
+intrínseca de los problemas mencionados?.
+
+\begin{definicion}
+    Definimos el problema de decidir si existe una \KHilogic-bisimulación entre dos modelos como:
+    \begin{center}
+        $\KHiBisim := \{\tup{\modults_1,\modults_2} \mid$ existe una \KHilogic-bisimulación
+        entre $\modults_1$ y $\modults_2\}$
+    \end{center}
+\end{definicion}
+
+Una vez definido matemáticamente el problema, un primer análisis intuitivo que surge acerca
+del mismo es que tiene una naturaleza, a priori, de `búsqueda+verificación', pues
+para decidir si existe una bisimulación entre dos modelos, no parece haber una mejor
+opción que buscar una relación binaria candidata y verificar si efectivamente es una bisimulación. 
+
+A su vez, esta `búsqueda+verificación' parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
+entre dos modelos, y verificar las condiciones (\KHilogic-zig) y (\KHilogic-zag) llevan consigo una cantidad exponencial
+de conjuntos proposicionalmente definibles a considerar.
+
+(Texto introduciendo caracterización de existencia de bisimulación)
+
+\begin{lema}
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, y sean $w$, $v \in \W$
+    tales que $\V(w)$ = $\V(v)$ entonces para toda $\varphi$ proposicional se cumple que, 
+    \begin{center}
+    $\modults, w \models \varphi$ \quad si y sólo si \quad $ 
+    \modults, v \models \varphi$
+    \end{center}
+\end{lema}
+
+\begin{demostracion}
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $w$, $v \in \W$
+    tales que $\V(w)$ = $\V(v)$. La demostración es por inducción estructural sobre $\varphi$. 
+    Recordar que $\varphi$ es una fórmula \textbf{proposicional}.
+
+    \begin{itemize}
+        \item Caso base: $\varphi = p$ donde $p \in \PROP$.
+
+        Notar que  $\modults, w \models \varphi$ si y sólo si $p \in \V(w)$.
+
+        Ahora bien, como $\V(w)$ = $\V(v)$, $p \in \V(w)$ si y sólo si $p \in \V(v)$.
+
+        Finalmente, por la definición de $\models$, $p \in \V(v)$ si y sólo si $\modults, v \models \varphi$.  
+    
+        \item Caso inductivo: La hipótesis inductiva establece que, para $\psi$ una subfórmula de $\varphi$, 
+        se cumple que $\modults, w \models \psi$ si y sólo si $\modults, v \models \psi$.
+
+        \begin{itemize}
+            \item Caso $\varphi = \psi_1 \lor \psi_2$. 
+    
+            Por definición de $\models$, $\modults, w \models \psi_1 \lor \psi_2$ si y sólo si $\modults,
+            w \models \psi_1$ o $\modults, w \models \psi_2$.
+            
+            Por hipótesis inductiva, $\modults, w \models \psi_1$ o $\modults, w \models \psi_2 $ si y sólo
+            si $\modults, v \models \psi_1$ o $\modults, v \models \psi_2$. 
+            
+            Pero notar que, nuevamente por definición de $\models$, $\modults, v \models \psi_1$ o $\modults,
+            v \models \psi_2$ si y sólo si $\modults,v \models \psi_1 \lor \psi_2$.  
+
+            \item Caso $\varphi = \neg \psi$.
+        
+            La demostración es similar a la del caso analizado anteriormente.
+        \end{itemize}
+    
+    \end{itemize}
+    
+\end{demostracion}
+
+\begin{lema}
+    Sean $\model_1=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y 
+    $\model_2=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$ dos modelos 
+    tales que existe $Z \subseteq \W \times \W'$ \KHilogic-bisimulación entre ellos, entonces
+
+    \begin{center}
+        $Z' = \{(w,w') \in \W \times \W' \mid \V(w) = \V'(w')\}$
+    \end{center}
+    es una \KHilogic-bisimulación entre $\modults_1$ y $\modults_2$.
+\end{lema}
+
+Notemos que este lema nos dice que para decidir si existe una \KHilogic-bisimulación
+entre dos modelos $\modults_1$ y $\modults_2$ basta con verificar que $Z'$ es una \KHilogic-bisimulación.
+
+\begin{demostracion}
+    Queremos ver que $Z'$ es una \KHilogic-bisimulación entre $\modults_1$ y $\modults_2$,
+    dado que existe $Z \subseteq \W \times \W'$, \KHilogic-bisimulación entre ellos.
+
+    Notemos que como $Z$ es una bisimulación, entonces cumple (atom). Luego, notemos que
+    por la definición de $Z'$, $Z \subseteq Z'$, pues $Z'$ contiene todos los pares de
+    $\W \times \W'$ que satisfacen (atom). Esto nos dice que $Z'$ satisface (A-zig) y (A-zag).
+    A su vez, cómo mencionamos, $Z'$ contiene todos los pares que satisfacen (atom).
+
+    Demostremos entonces que $Z'$ cumple (\KHilogic-zig) y (\KHilogic-zag).
+
+    \begin{itemize}
+        \item (\KHilogic-zig) Sean $U,T \subseteq \W$ tales que $U$ es proposicionalmente definible 
+        y $U \ultsExecAgi T$ queremos ver que existe $T' \subseteq \W'$ tal que:
+    
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item $Z'(U) \ultsExecAgi T'$, 
+                \item $T' \subseteq Z'(T)$.
+            \end{itemize}
+        \end{multicols}
+    
+        Notemos que como $Z$ es una bisimulación, entonces existe $T'' \subseteq \W'$ tal que:
+    
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item $Z(U) \ultsExecAgi T''$, 
+                \item $T'' \subseteq Z(T)$.
+            \end{itemize}
+        \end{multicols}
+    
+        Demostremos que $T' := T''$ cumple con lo mencionado. Es claro que como $Z \subseteq Z'$ y 
+        $T'' \subseteq Z(T)$ entonces $T'' \subseteq Z'(T)$. Entonces, nos queda demostrar que $Z'(U) \ultsExecAgi T''$.
+    
+        Esto lo demostraremos analizando que $Z(U) = Z'(U)$. Nuevamente, como $Z \subseteq Z'$
+        entonces $Z(U) \subseteq Z'(U)$. Luego, solo queda demostrar que $Z'(U) \subseteq Z(U)$.
+    
+        Sea $w' \in Z'(U)$, entonces existe $w \in U$ tal que $(w,w') \in Z'$, por lo que $\V(w) = \V'(w')$. 
+        Ahora bien, como $Z$ cumple (A-zag), existe $v \in \W$ tal que $(v,w') \in Z$, y cómo $Z$ cumple 
+        (atom) entonces $\V(v) = \V'(w')$. Luego $\V(w) = \V(v)$.
+    
+        Notemos que como $U$ es proposicionalmente definible entonces existe una fórmula $\varphi$ 
+        proposicional que lo define. Como $w \in U$, esto nos dice que $\modults, w \models \varphi$. 
+        Luego por Lema 1, $\modults, v \models \varphi$, por lo que $v \in U$. Como $v \in U$ y $(v,w') \in Z$ 
+        entonces $w' \in Z(U)$.
+    
+        Lo cuál demuestra que $Z(U) = Z'(U)$. Por lo que $Z'(U) \ultsExecAgi T''$. Finalmente, concluimos 
+        que $Z'$ cumple (\KHilogic-zig).
+    
+    
+        \item (\KHilogic-zag) Análogo a (\KHilogic-zig).
+    \end{itemize}
+    
+    Queda demostrado que $Z'$ es una \KHilogic-bisimulación.
+\end{demostracion}
+
+Ahora bien, notemos como esta caracterización de la existencia de bisimulaciones entre modelos
+nos permite profundizar nuestro primer análisis. Tenemos ahora un problema de `verificación'
+únicamente, pues para decidir existencia solo basta con verificar que la relación $Z'$ es una bisimulación.
+
+Es así como este lema motiva el siguiente resultado. 
+
+Antes de este resultado debería ir el lema de que \KHilogic-definability es polinomial porque lo uso en el algoritmo. 
+
+
+\begin{lema}
+    $\KHiBisim \in \coNP$ 
+\end{lema}
+
+\begin{demostracion}
+    Para demostrar que $\KHiBisim \in \coNP$ debemos dar un algoritmo $A$ y un polinomio $p$ tal que dos modelos 
+    $\modults_1$ y $\modults_2$ son \KHilogic-bisimilares si y sólo si para todo $x \in \{0,1\}^*$ con 
+    $|x| \le p(|\modults_1|+|\modults_2|)$,  $A(\modults_1,\modults_2,x) = 1$. Esencialmente, a los $x$ los 
+    llamaremos ``contraejemplos'' y sólo nos interesarán los que sean de la forma $\tup{U,b}$ con $U$ un 
+    subconjunto del dominio de alguno de los modelos y $b$ un bit que nos indica de qué dominio es subconjunto $U$. 
+
+    Dados que los contraejemplos que nos interesan son subconjuntos de los dominios de ambos modelos, un polinomio 
+    que nos sirve para acotar los largos de los contraejemplos es $p(x) = x$. 
+
+    Proponemos entonces el siguiente algoritmo (se escribió en la página que sigue, es modularizable porque las dos 
+    guardas del if hacen lo mismo pero en distintos modelos):
+
+    \begin{algorithm}
+        \begin{algorithmic}
+            \small
+            \State{{\bf Procedure} CheckBisimilarity($\modults_1,\modults_2,\tup{U,b})$} 
+            \State Compute $Z'$
+            \State Check (A-zig), if not \Return 0
+            \State Check (A-zag), if not \Return 0
+            \If{$b$}
+            \State Check if $U$ is propositionally definable in $\modults_1$, if not \Return 1
+                \ForAll{$S_i$}
+                    \ForAll{$\pi \in \S_i$}
+                        \If{$U \subseteq SE(\pi)$}
+                        \State $foundStrat \gets False$
+                            \ForAll{$\pi' \in \S_i'$}
+                                \If{$Z'(U) \subseteq SE(\pi') \wedge \R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$}
+                                    \State $foundStrat \gets True$
+                                \EndIf         
+                            \EndFor
+                            \If{$\neg foundStrat$}
+                                \Return 0
+                            \EndIf
+                        \EndIf
+                    \EndFor
+                \EndFor
+            \Else
+                \State Check if $U$ is propositionally definable in $\modults_2$, if not \Return 1
+                \ForAll{$S_i'$}
+                    \ForAll{$\pi' \in \S_i'$}
+                        \If{$U \subseteq SE(\pi')$}
+                        \State $foundStrat \gets false$
+                            \ForAll{$\pi \in \S_i$}
+                                \If{$Z'^{-1}(U) \subseteq SE(\pi) \wedge \R_{\pi}(Z'^{-1}(u)) \subseteq Z'^{-1}(\R'_{\pi'}(U))$}
+                                    \State $foundStrat \gets true$
+                                \EndIf         
+                            \EndFor
+                            \If{$\neg foundStrat$}
+                                \Return 0
+                            \EndIf
+                        \EndIf
+                    \EndFor
+                \EndFor
+            \EndIf
+            \State \Return 1
+            \end{algorithmic}
+    \end{algorithm}
+
+    Primero notemos que el algoritmo propuesto corre en tiempo polinomial en el tamaño de $\tup{\modults_1,\modults_2}$.
+    (Esto va a haber que explicarlo un poco más en detalle después porque se ponen instrucciones atómicas que esconden 
+    mucho cómputo, pero bueno creo que sirve tener un primer intento y demostrar el si y sólo si 
+    que es lo más importante, la complejidad si ves cada instrucción es medio claro que se puede lograr en tiempo polinomial).
+
+    Veamos ahora que $\tup{\modults_1,\modults_2} \in \KHiBisim$ si y sólo si
+    CheckBisimilarity($\modults_1,\modults_2,\tup{U,b}$) = 1 para cada $\tup{U,b}$ donde $U$ es subconjunto 
+    del dominio de alguno de ambos modelos y $b$ es un bit que nos indica de qué dominio es subconjunto $U$
+
+    \begin{itemize}
+        \item ($\rightarrow$)
+        Sea $\tup{\modults_1,\modults_2} \in \KHiBisim$ y $\tup{U,b}$, 
+        veamos que CheckBisimilarity($\modults_1,\modults_2,\tup{U,b}$) = 1
+
+        Primero notemos que como $\tup{\modults_1,\modults_2} \in \KHiBisim$, entonces $Z'$ es una bisimulación 
+        entre $\modults_1$ y $\modults_2$.
+
+        Luego viendo la ejecución de CheckBisimilarity, los chequeos de (A-zig) y (A-zag) darán $true$ como resultado.
+        
+        Analicemos ahora los dos casos posibles
+
+        \begin{itemize}
+            \item $b = 1$
+                Primero notemos que si $U$ no es proposicionalmente definible en $\modults_1$, entonces el algoritmo devuelve 1.
+
+                Supongamos entonces $U$ proposicionalmente definible. Sea $\pi \in \S_i$ tal que $U \subseteq SE(\pi)$, 
+                entonces el algoritmo ingresa al $if$ de la línea 8 e inicializa $foundStrat$ en $false$.
+                
+                Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $U$ es proposicionalmente definible y 
+                $Z'$ cumple (\KHilogic-zig), existe $T \subseteq \W'$ tal que $Z'(U) \ultsExecAgi T$ y,
+                a su vez, $T \subseteq Z'(\R_\pi(U))$.
+                
+                Ahora bien, como $Z'(U) \ultsExecAgi T$, entonces existe $\pi' \in \S_i'$ tal que $Z'(U) \subseteq SE(\pi')$ y 
+                $\R'_{\pi'}(Z'(U)) \subseteq T$.
+                
+                Pero como $T \subseteq Z'(\R_\pi(U))$, entonces $\R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$, por lo que 
+                el algoritmo al recorrer $\pi'$, actualiza el valor de $foundStrat$ a $true$.
+                
+                Finalmente, esto demuestra que el algoritmo finaliza su ejecución en la última línea donde devuelve 1.
+            \item $b = 0$
+                Este caso es análogo al caso $b = 1$, con la diferencia de que hay que considerar el hecho de que 
+                $Z'$ satisface (\KHilogic-zag).
+        \end{itemize}
+
+        \item ($\leftarrow$) Para demostrar esta dirección, lo que haremos será ver que siendo 
+        $\tup{\modults_1,\modults_2} \not \in \KHiBisim$ entonces
+        existe $\tup{U,b}$ tal que CheckBisimilarity($\modults_1,\modults_2,\tup{U,b}$) = 0.  
+        
+        Como $\tup{\modults_1,\modults_2} \not \in \KHiBisim$, entonces sabemos que $Z'$ no es una bisimulación.
+
+        Notemos que por su definición, $Z'$ cumple (atom). Analicemos los posibles casos donde podría fallar $Z$.
+
+        \begin{itemize}
+            \item (A-zig) Si $Z'$ no satisface (A-zig) entonces el algoritmo lo identifica en la segunda línea y devuelve 0, 
+            por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
+            \item (A-zag) Similarmente, si $Z'$ no satisface (A-zag) el algoritmo lo identifica en la tercer línea y 
+            nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
+            \item (\KHilogic-zig) Supongamos entonces que $Z'$ no satisface (\KHilogic-zig), luego existen $U, T$ tal que
+            $U \ultsExecAgi T$ con $U$ proposicionalmente definible, y a su vez, no existe $T'$ tal que $Z'(U) \ultsExecAgi T'$ y 
+            $T' \subseteq Z'(T)$.
+
+            Analicemos entonces la ejecución de CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$).
+
+            Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq SE(\pi)$ y, 
+            a su vez, $\R_\pi(U) \subseteq T$. 
+
+            Esto nos dice que al considerar el plan $\pi$, el algoritmo ingresa al $if$ de la línea 8 e inicializa 
+            la variable $foundStrat$ en $false$.
+
+            Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z'(U) \not \subseteq SE(\pi')$ o que 
+            $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'$ entonces 
+            el valor de $foundStrat$ permanece en $false$ y el algoritmo devuelve 0 en la línea 15.
+
+            Sea $\pi' \in \S_i'$, supongamos entonces que $Z'(U) \subseteq SE(\pi')$ y veamos que 
+            $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$.
+
+            Notemos que como $Z'(U) \subseteq SE(\pi')$, entonces $Z'(U) \ultsExecAgi \R'_{\pi'}(Z'(U))$. Ahora bien, 
+            como mencionamos que (\KHilogic-zig) falla para este caso, entonces ocurre que 
+            $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(T)$, pues en caso contrario $T' := \R'_{\pi'}(Z'(U))$ serviría como 
+            testigo de (\KHilogic-zig).
+
+            Pero como $\R_\pi(U) \subseteq T$, entonces es claro que $Z'(\R_\pi(U)) \subseteq Z'(T)$. Luego como 
+            $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(T)$ entonces también ocurre que $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$, 
+            que era lo que queríamos ver.
+
+            Por lo que el algoritmo abandona el $for$ con la variable $foundStrat$ valiendo $false$, luego devuelve 0 en la línea 15.
+
+            Finalmente, CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$) = 0.
+
+            \item (\KHilogic-zag) Análogo al caso recién analizado.
+        \end{itemize}
+    
+    \end{itemize}
+
+
+
+
+
+%     El algoritmo $A$ que propondremos hará lo siguiente:
+    
+%     Dados $\modults_1, \modults_2$ y $x$, verificar que el conjunto $Z'$ mencionado en el lema 4 sea una \KHilogic-bisimulación entre los dos modelos recibidos. Notar que podemos verificar polinomialmente que $Z'$ cumple (A-zig) y (A-zag).
+
+%     Luego el algoritmo verificará que $Z'$ cumpla con (\KHilogic-zig) o (\KHilogic-zag) con respecto al subconjunto $x$,  dependiendo de si $x$ es un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$. Notar que sólo nos interesarán los $x$ que sean proposicionalmente definibles, así que el algoritmo deberá encargarse de chequear que $x$ efectivamente sea un conjunto proposicionalmente definible. 
+
+%     En caso de serlo, simplemente analizará a qué conjunto se puede llegar desde $x$ utilizando cada plan del modelo y para cada uno de ellos, verificar que $Z'(x)$ tenga algún plan con el que cumpla la condición deseada. 
+    
+%     (Queda escribir este algoritmo y demostrar más en profundidad el si y sólo si mencionado). 
+
+% \medskip\medskip
+
+    Finalmente $\KHiBisim \in \coNP$.
+
+\end{demostracion}
+
+\begin{lema}
+    $\KHiBisim$ es $\coNP$-hard.
+\end{lema}
+
+\begin{demostracion}
+
+    Demostremos que $\KHiBisim$ es $\coNP$-hard.
+
+    Para demostrarlo, reduciremos el problema $\DNFTAUT$ a $\KHiBisim$. El problema $\DNFTAUT$ está compuesto 
+    por las fórmulas $\varphi$ proposicionales en forma disyuntiva normal que son tautologías. 
+    $\DNFTAUT$ es $\coNP$ completo, por lo que si encontramos una reducción computable en tiempo polinomial de 
+    $\DNFTAUT$ a $\KHiBisim$ habremos demostrado que $\KHiBisim$ es $\coNP$-hard.
+
+    Entonces queremos encontrar una reducción $f$ computable en tiempo polinomial que transforme una $\varphi$ proposicional 
+    en forma disyuntiva normal a un par de modelos $\tup{\modults_1,\modults_2}$ tal que $\varphi \in \DNFTAUT$ si y sólo si 
+    $\tup{\modults_1,\modults_2} \in \KHiBisim$.
+
+    Describamos a $f$.
+
+    Sea $\varphi$ una fórmula proposicional en forma disyuntiva normal, entonces es de la forma 
+    $\varphi = \varphi_1 \vee ... \vee \varphi_m$. Sean a su vez $p_1,...,p_n$ las variables proposicionales que aparecen en $\varphi$, 
+    definimos los siguientes conjuntos:
+
+    \begin{itemize}
+        \item $\W := \{p_i\mid i\in\{1,...,n\}\} \cup \{\varphi_i \mid i \in \{1,...,m\}\} \cup \{e\}$
+        \item $\ACT := \{in_{\varphi_i} \mid i \in \{1,...,m\}\} \cup \{out_{\varphi_i} \mid i \in \{1,...,m\}\}$
+        \item $\S := \{\{in_{\varphi_i}out_{\varphi_i}\} \mid i \in \{1,...,m\}\}$
+        \item $\R := \{(p_i,\varphi_j,in_{\varphi_j}) \mid p_i$ no aparece en forma negativa en $\varphi_j\} \cup 
+                     \{(\varphi_j,p_i,out_{\varphi_j})\mid p_i$ aparece en forma positiva en $\varphi_j\} \cup 
+                     \{(\varphi_j,e,out_{\varphi_j}) \mid \varphi_j$ no tiene variables positivas$\}$
+        \item $\V := \{(p_i,\{q_i\}) \mid i \in \{1,...,n\}\} \cup 
+                     \{(\varphi_i,\{q_{i+n}\}) \mid i \in \{1,...,m\}\} \cup 
+                     \{(e,\{q_{n+m+1}\})\}$ donde $q_1,...,q_{n+m+1} \in \PROP$ son $n+m+1$ variables proposicionales distintas.
+    \end{itemize}
+
+    Notar que decimos que $p_i$ aparece en forma `positiva' en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$ . 
+    A su vez, decimos que $p_i$ aparece en forma `negativa' en $\varphi_j$ si $\varphi_j = ...\wedge \neg p_i \wedge...$ .
+
+    Ahora, $f$ mapeará $\varphi$ a $\tup{\modults_1,\modults_2}$, con $\tup{\modults_1,\modults_2}$ definidos de la siguiente manera:
+
+    \begin{itemize}
+        \item En el caso de que $\varphi$ evalúe a $false$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
+
+        \begin{itemize}
+            \item $\model_1=\tup{\{1\},\{\},\{\},\{(1,p)\},\{a\}}$
+            \item $\model_2=\tup{\{1\},\{\},\{\},\{(1,q)\},\{a\}}$
+        \end{itemize}
+
+        Notar que estos dos modelos son claramente no \KHilogic-bisimilares, dado que no existe relación binaria no vacía 
+        que satisfaga (atom). Pero es correcto porque sólo utilizaremos esta definición en uno de los casos donde 
+        $\varphi \not \in \DNFTAUT$. 
+        
+        \item En el caso de que $\varphi$ evalúe a $true$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
+        
+        \begin{itemize}
+            \item $\model_1=\tup{\W,\R \cup \{(p_i,p_i,test) \mid i \in \{1,...n\}\} \cup 
+                            \{(p_i,e,test)\mid i \in \{1,...,n\}\},\{\S \cup \{\{test\}\} \},\V,\ACT \cup \{test\}}$
+            \item $\model_2=\tup{\W,\R,\cset{\S},\V,\ACT}$
+        \end{itemize}
+    \end{itemize}
+
+    
+    Notar que $\V$ está definida de forma tal que cada $w\in\W$ satisface una única variable proposicional distinta, es decir, 
+    es inyectiva.
+
+
+\medskip\medskip
+    Estos dos párrafos que siguen eran explicativos, pensaba sacarlos pero quizás está bueno dar una explicación más humana 
+    antes de la demo más técnica.
+
+    La intuición de esta reducción es que queremos usar los conjuntos proposicionalmente definibles de este modelo para considerar 
+    cada posible asignación de valores a las variables $p_1,...,p_n$. Dado un conjunto $U \subseteq \{p_1,...,p_n\}$, 
+    estamos considerando la asignación que asigna $true$ a las variables dentro de $U$ y asigna $false$ a las de $\{p_1,...,p_n\}/U$. 
+    Además, notemos que como la función $\V$ es inyectiva, entonces $U$ es proposicionalmente definible.
+ 
+    El plan $test$ que sólo aparece en $\modults_1$ es la clave de la reducción. Lo que provoca es que dada una asignación 
+    (un conjunto proposicionalmente definible $U$), a $\modults_2$ le hago buscar algún término $\varphi_i$ al cuál pueda moverse 
+    (ninguna variable de $U$ aparezca negada en $\varphi_i$) y a su vez todo variable que aparecía positiva en 
+    $\varphi_i$ estaba en $U$. (Porque el plan $test$ es como que simplemente va de $U$ a $U \cup \{e\}$), el $e$ es como que 
+    considera los términos que no tienen ninguna variable positiva ($e$ de empty set). Si $\modults_2$ no encuentra ningún término 
+    al cuál moverse es que dicho $U$ sirve como contraejemplo para afirmar que $\varphi$ no es una tautología.
+
+\medskip\medskip
+        
+    Notemos que ambos modelos son polinomiales en el tamaño de $\varphi$.
+
+    A su vez, la construcción de los modelos, solo tiene el costo extra computacional de analizar si $\varphi$ evalúa a $true$ 
+    en la asignación que asigna $false$ a $p_1,...,p_n$, lo cuál es claramente computable en tiempo polinomial.
+
+    Por lo que es fácil notar que $f$ es computable en tiempo polinomial en el tamaño de $\varphi$.
+
+    Ahora queremos demostrar que $\varphi \in \DNFTAUT$ si y sólo si $\tup{\modults_1,\modults_2} \in \KHiBisim$.
+    \begin{itemize}
+
+    \item $(\rightarrow)$ Sea $\varphi \in \DNFTAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ 
+    son las variables proposicionales que aparecen en $\varphi$, veamos que $\tup{\modults_1,\modults_2} \in \KHiBisim$.
+
+    Notar que como $\varphi$ es una tautología, entonces $\varphi$ evalúa a $true$ en la asignación que asigna $false$ a 
+    $p_1,...,p_n$, por lo que consideramos el segundo caso del mapeo $f$. 
+
+    Veamos que $Z := \{(w,w) \mid w \in \W \}$ es una bisimulación entre $\modults_1$ y $\modults_2$. Es fácil ver que 
+    $Z$ satisface (atom), pues ambos modelos utilizan la misma función de valuación $\V$.
+
+    A su vez, tanto (A-zig) como (A-zag) son claramente satisfechos por $Z$.
+
+    Analicemos entonces (\KHilogic-zig) y (\KHilogic-zag).
+
+    Primero, cabe resaltar que, por la definición de $Z$, para cada $X \subseteq \W$ se cumple que $X = Z(X)$.
+
+    Ahora bien, notemos que cada plan de $\modults_2$ está también en $\modults_1$, y más aún, las aristas con las etiquetas 
+    que aparecen en dichos planes son exactamente las mismas en ambos modelos. Juntando lo recién mencionado y el hecho de que 
+    $U = Z(U)$, es fácil notar que Z satisface (\KHilogic-zag).
+
+    Luego solo queda ver que $Z$ satisface (\KHilogic-zig).
+
+    Sea $U, T \subseteq \W$ tal que $U$ es proposicionalmente definible y $U \ultsExecAgi T$, queremos ver que existe 
+    $T' \subseteq \W$ tal que:
+
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item $Z(U) \ultsExecAgi T'$, 
+            \item $T' \subseteq Z(T)$.
+        \end{itemize}
+    \end{multicols}
+
+    Notemos primero que si el plan que atestigua $U \ultsExecAgi T$ es de la forma $in_{\varphi_j}out_{\varphi_j}$, 
+    entonces $T$ sirve como $T'$ dado que ese mismo plan y las mismas aristas con dichas etiquetas están en $\modults_2$, 
+    similar al análisis realizado para el caso (\KHilogic-zag).
+
+    Entonces consideremos el caso en el que el plan que atestigua $U \ultsExecAgi T$ es $test$. En dicho caso, 
+    si analizamos la definición de $\R$, ese plan puede ser fuertemente ejecutable sólo si $U \subseteq \{p_1,...,p_n\}$ 
+    dado que son los únicos nodos que tienen aristas con etiqueta $test$. Así que solo necesitamos considerar los casos 
+    donde $U \subseteq \{p_1,...,p_n\}$.
+
+    Notemos que $\R_{test}(U) = U \cup \{e\}$, entonces necesariamente $U \cup \{e\} \subseteq T$.
+
+    Consideremos ahora la asignación $\overrightarrow{a}$ que asigna $true$ a las variables en $U$ y $false$ a las variables 
+    en $\{p_1,...,p_n\} / U$. Como $\varphi$ es una tautología, entonces existe $\varphi_j$ que se vuelve verdadero a partir 
+    de $\overrightarrow{a}$, es decir, en $\varphi_j$ las variables que aparecen en forma positiva son algún subconjunto de 
+    $U$ y las variables que aparecen en forma negativa son algún subconjunto de $\{p_1,...,p_n\}/U$.
+
+    Como las variables que aparecen en $\varphi_j$ en forma negativa no están en $U$, entonces, analizando la definición de $\R$, 
+    podemos ver que el plan $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $Z(U) = U$. 
+    
+    En particular, las aristas con etiqueta $in_{\varphi_j}$ llevarían de cada nodo de $U$ al nodo $\varphi_j$.
+    
+    Ahora bien, notemos que las aristas con etiqueta $out_{\varphi_j}$ llevan del nodo $\varphi_j$ a las variables 
+    que aparecen en forma positiva en $\varphi_j$ o al nodo $e$ en caso de no tener variables positivas. Pero, como dijimos, 
+    las variables positivas que aparecen en $\varphi_j$ son un subconjunto, posiblemente vacío, de $U$. 
+    Entonces necesariamente de $\varphi_j$ las aristas con etiqueta $out_{\varphi_j}$ van a un conjunto $X \subseteq U \cup \{e\}$, 
+    es decir, $\R_{in_{\varphi_j}out_{\varphi_j}}(U) = X \subseteq U \cup \{e\} \subseteq T$. 
+    Finalmente, $T' := X$ nos sirve para demostrar que $Z(U) \ultsExecAgi T'$ y, a su vez, 
+    $T' \subseteq X \subseteq U \cup \{e\} \subseteq T = Z(T)$.
+
+    Lo cual demuestra que $Z$ satisface (\KHilogic-zig). 
+
+    Juntando los puntos mencionados, demostramos que $Z$ es una bisimulación entre $\modults_1$ y $\modults_2$, 
+    por lo que $\tup{\modults_1,\modults_2} \in \KHiBisim$. 
+
+    \item ($\leftarrow$) Para demostrar este caso, veremos que siendo $\varphi \notin \DNFTAUT$, 
+    donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, 
+    entonces $\tup{\modults_1,\modults_2} \notin \KHiBisim$.
+
+    Como $\varphi \notin \DNFTAUT$, existe una asignación $\overrightarrow{a}$ sobre las variables $p_1,...,p_n$ que hace fallar 
+    cada $\varphi_j$. Denotemos a $U$ como el conjunto de variables a las que se le asigna $true$ en $\overrightarrow{a}$.
+
+    Si $U = \emptyset$, es claro que $\tup{\modults_1,\modults_2} \notin \KHiBisim$, dado que en este caso se construyen 
+    dos modelos concretos que no son \KHilogic-bisimilares.
+
+    Así que consideremos el caso donde $U \neq \emptyset$.
+    
+    Primero notemos que la fórmula $\psi := \bigvee\limits_{p_i \in U} q_i$ define a $U$. 
+    Pues, recordemos que por la definición de $\V$, $\V(p_i) = \{q_i\}$ para cada $i \in \{1,...,n\}$. 
+    A su vez, como $\V$ es inyectiva, solo los elementos de $U$ satisfacerán $\psi$. Luego, como $\psi$ es proposicional, 
+    $U$ es proposicionalmente definible.
+
+    Ahora bien, como $U \subseteq \{p_1,...,p_n\}$ entonces el plan $test$ es fuertemente ejecutable en $U$ y 
+    $\R_{test}(U) = U \cup \{e\}$, por lo que $U \ultsExecAgi U \cup \{e\}$.
+    
+    Veamos que no existe $T'$ tal que:
+
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item $Z(U) \ultsExecAgi T'$, 
+            \item $T' \subseteq Z(U \cup \{e\})$.
+        \end{itemize}
+    \end{multicols}
+
+    Notemos que los planes que tiene a su disposición $Z(U) = U$ son de la forma $in_{\varphi_j}out_{\varphi_j}$.
+
+    Sea entonces $\varphi_j$, analicemos qué sucede en relación al plan $in_{\varphi_j}out_{\varphi_j}$. 
+    Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace fallar a $\varphi_j$, entonces, 
+    o bien ocurre que existe una variable en $U$ que aparece en forma negativa en $\varphi_j$, 
+    o existe una variable en $\{p_1,...,p_n\}/U$ que aparece en forma positiva en $\varphi_j$.
+
+    Si ocurre que una variable de $U$ aparece en forma negativa en $\varphi_j$ entonces el plan 
+    $in_{\varphi_j}out_{\varphi_j}$ no será fuertemente ejecutable en dicha variable y, por lo tanto, 
+    no será fuertemente ejecutable en $U$. Así que este plan no permitiría encontrar un $T'$ adecuado.
+
+    Por otro lado, si ninguna variable de $U$ aparece en forma negativa en $\varphi_j$ entonces 
+    $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. Sin embargo, notemos que 
+    entonces existe una variable $p_k$ en $\{p_1,...,p_n\}/U$ que aparece en forma positiva en $\varphi_j$. 
+    Ahora bien, como $p_k$ aparece en forma positiva en $\varphi_j$ entonces $p_k \in \R_{in_{\varphi_j}out_{\varphi_j}}(U)$. 
+    Luego $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan no nos 
+    permite encontrar un $T'$ adecuado.
+    
+    Hemos analizado entonces todos los planes y ninguno permite encontrar un $T'$ que cumpla con lo requerido, 
+    luego $Z$ no satisface (\KHilogic-zig).
+
+    Hemos demostrado entonces que $Z$ no es una \KHilogic-bisimulación.
+
+    Lo cual demuestra que $\tup{\modults_1,\modults_2} \not \in \KHiBisim$.
+    \end{itemize}
+
+    Finalmente, demostramos que $f$ es una reducción de $\DNFTAUT$ a $\KHiBisim$, la cuál puede ser computada en tiempo polinomial. 
+    Lo cuál demuestra que $\KHiBisim$ es $\coNP$-hard.
+
+\end{demostracion}
+
+
+\begin{teorema}
+    $\KHiBisim$ es $\coNP$-completo.
+\end{teorema}
+
+
+\begin{demostracion}
+
+    A partir de los lemas 5 y 6, queda demostrado que $\KHiBisim$ es $\coNP$-completo.
+
+\end{demostracion}
