@@ -15,7 +15,6 @@ y a $\AGT$ como un conjunto no vacío de agentes con cardinalidad contable.
 
 Antes de definir la semántica de la lógica, se definirán algunos conceptos que serán útiles.
 
-
 \begin{definicion}[Acciones y planes]
     Sea $\ACT$ un conjunto enumerable de nombres de acciones, y sea $\ACT^*$ el conjunto de secuencias finitas de elementos de $\ACT$. 
     A los elementos de $\ACT^*$ los llamaremos planes, siendo $\epsilon$ el plan vacío. Sea $\sigma \in \ACT^*$, denotaremos $|\sigma|$ 
@@ -189,4 +188,45 @@ Ahora si, presentamos la noción de bisimulación.
         \item \textbf{A-Zag}: para cada $u' \in \W'$ existe $u \in \W$ tal que $(u,u') \in Z$.
     \end{itemize} 
 
+    Escribiremos $\modults,w \bisim \modults',w'$ cuando exista una \KHilogic-bisimulación $Z$ entre
+    $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
+
 \end{definicion}
+
+Para poder formalizar las propiedades cruciales de una bisimulación, definiremos primero la noción de 
+equivalencia entre modelos con respecto a \KHilogic.
+
+\begin{definicion}[\KHilogic-equivalencia]
+    Dos STEUs punteados $\modults,w$ y $\modults',w'$ son \KHilogic-equivalentes ($\model, w \modequiv \model', w'$)
+    si y sólo si, para cada $\varphi \in \KHilogic$,
+    \begin{center}
+        $\model, w \models \varphi$ \quad si y sólo \quad $\model', w' \models \varphi$.
+    \end{center} 
+\end{definicion}
+
+Ahora podemos presentar la correspondencia esperada entre $\bisim$ y $\modequiv$, demostrada en \cite{ArecesFSV25}.
+Usualmente nos referimos a este resultado como el Teorema de Invarianza para Bisimulación.
+
+\begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]
+    Sean $\modults,w$ y $\modults',w'$ dos STEUs, entonces
+    \begin{center}
+        $\modults,w \bisim \modults',w'$ implica $\modults,w \modequiv \modults',w'$.
+    \end{center}
+\end{teorema}
+
+Este teorema caracteriza a la bisimulación como una noción que permite relacionar modelos \KHilogic-equivalentes, es decir, que la lógica no tiene una fórmula con la cuál distinguirlos,
+a partir de propiedades puramente estructurales de los modelos.
+
+En [\cite{FervariVQW21}, sección 2] se presenta un contraejemplo que atestigua que la recíproca del teorema no es cierta para cualquier par de modelos.
+Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar en qué clases de modelos vale la recíproca del teorema.
+En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca, el cuál es un gran resultado en términos computacionales. (si tengo un algoritmo que decide existencia de bisimulacion entonces decide equivalencia entre modelos).
+
+\begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]
+    Sean $\modults,w$ y $\modults',w'$ dos STEUs punteados finitos, entonces
+    \begin{center}
+        $\model,w \modequiv \model', w' \quad\text{implies}\quad \model,w \bisim \model', w'$.
+    \end{center}
+\end{teorema}
+
+\subsection[short]{Complejidad Computacional}
+Estaría bien meter una pequeña subsección con conceptos generales de complejidad?.
