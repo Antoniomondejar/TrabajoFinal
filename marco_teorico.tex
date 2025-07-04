@@ -1,23 +1,192 @@
-Durante toda la sección, consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable y a $\AGT$ como un conjunto no vacío de agentes con cardinalidad contable. 
+Se introducirá ahora la lógica `Knowing-How' multi-agente basada en la incerteza (\KHilogic), presentada en \cite{ArecesFSV25}.
+
+\subsection[short]{Sintaxis y Semántica}
+Consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable 
+y a $\AGT$ como un conjunto no vacío de agentes con cardinalidad contable. 
 
 \begin{definicion}
     El lenguaje \KHilogic está compuesto por las fórmulas dadas por la gramática:
     \begin{center}
         $\varphi ::= p \mid \neg \varphi \mid \varphi \vee \varphi \mid \varphi \wedge \varphi \mid \kh_i(\varphi,\varphi)$,
     \end{center}
-    donde $p \in \PROP$ e $i \in \AGT$. Las constantes booleanas son definidas de la forma usual. Las fórmulas de la pinta $\KHilogic(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo hacer que $\varphi$ valga''.
+    donde $p \in \PROP$ e $i \in \AGT$. Las constantes booleanas son definidas de la forma usual. Las fórmulas de la forma 
+    $\kh_i(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo hacer que $\varphi$ valga''.
 \end{definicion}
 
-A las fórmulas de $\KHilogic$ las interpretaremos sobre grafos dirigidos etiquetados (o digo sistemas de transiciones etiquetados?), en donde las aristas representarán las acciones disponibles para los agentes.
+Antes de definir la semántica de la lógica, se definirán algunos conceptos que serán útiles.
+
 
 \begin{definicion}[Acciones y planes]
-    Sea $\ACT$ un conjunto enumerable de nombres de acciones, y sea $\ACT^*$ el conjunto de secuencias finitas de elementos de $\ACT$. A los elementos de $\ACT^*$ los llamaremos planes, siendo $\epsilon$ el plan vacío. Sea $\sigma \in \ACT^*$, denotaremos $|\sigma|$ al largo de $\sigma$ (notar $|\epsilon| = 0$). Para un plan $\sigma$ y $0 \leq k \leq |\sigma|$, el plan $\sigma_k$ es el prefijo de $\sigma$ hasta la $k-$ésima posición inclusive. Para $0 < k \leq |\sigma|$, la acción $\sigma[k]$ es la que se encuentra en la $k-$ésima posición de $\sigma$.  
+    Sea $\ACT$ un conjunto enumerable de nombres de acciones, y sea $\ACT^*$ el conjunto de secuencias finitas de elementos de $\ACT$. 
+    A los elementos de $\ACT^*$ los llamaremos planes, siendo $\epsilon$ el plan vacío. Sea $\sigma \in \ACT^*$, denotaremos $|\sigma|$ 
+    al largo de $\sigma$ (notar $|\epsilon| = 0$). Para un plan $\sigma$ y $0 \leq k \leq |\sigma|$, el plan $\sigma[..k]$ es el prefijo 
+    de $\sigma$ hasta la $k-$ésima posición inclusive. Para $0 < k \leq |\sigma|$, la acción $\sigma[k]$ es la que se encuentra en la 
+    $k-$ésima posición de $\sigma$.  
 \end{definicion}
 
-Esta definición revisar que entra en conflicto con la demo de contracción por bisimulación, porque uso $\sigma_1,...,\sigma_k$ para enumerar un conjunto de planes.
+\begin{definicion}[Sistemas de Transiciones Etiquetados]
+    Un \emph{Sistema de Transición Etiquetado (STE)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ donde $\W$ es un conjunto no 
+    vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in A$ para algún $A \subseteq \ACT\}$ es una colección de relaciones binarias
+    sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de etiquetado y $\ACT$ es un conjunto enumerable de nombres de acciones.
+    Dado un STE $\modlts$ y $w \in \W$, se llamará al par $(\modlts,w)$ un STE punteado (los paréntesis usualmente se descartan).
+\end{definicion}
 
-Todavía no defino bien bien lo que son los modelos.
+\begin{definicion}[STE basado en la incerteza]
+    Un \emph{STE-multiagente basado en la incerteza (STEU)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
+    donde $\tup{\W,\R,\V,\ACT}$ es un (STE) y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
+    $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un (STEU) $\modults$ y $w \in \W$, se llamará 
+    al par $(\modults,w)$ un STEU punteado.
+\end{definicion}
+
+Se utilizarán secuencias de acciones, o planes, para representar el conocimiento de los agentes. Las fórmulas de \KHilogic 
+se interpretarán sobre sistemas de transiciones etiquetados extendidos con una familia de relaciones de indistinguibilidad entre planes. 
+Notar que para cada agente $i \in \AGT$, $P_i$ representará los planes que el agente tiene a su disposición. Luego $\sim_i$ 
+será una relación de equivalencia sobre $P_i$, dos planes estarán relacionados cuando un agente no sepa distinguirlos.
+
+Sea $\model = \tup{\W,\R,\sim,\V,\ACT}$ un (STEU) y sea $i \in \AGT$, para un plan $\sigma \in P_i$, sea $[\sigma]_i$ su clase de 
+equivalencia en $\sim_i$. Notar que hay una correspondencia uno-a-uno entre cada $\sim_i$ y la partición de $P_i$ en sus correspondientes 
+clases de equivalencia $\S_i := \{[\sigma]_i \mid \sigma \in P_i\}$. Por lo tanto, de ahora en adelante nos referiremos a los (STEU) como
+una tupla $\tup{\W,\R,\{S_i\}_{i \in \AGT},\V,\ACT}$.
+
+Dada entonces la incerteza de un agente sobre $\ACT^*$, sus habilidades dependerán no solo de lo que un solo plan puede lograr, sino que de 
+lo que cada clase de equivalencia dentro de su relación de indistinguibilidad pueda garantizar.
+
 
 \begin{definicion}
-    Sea $\{\R_a \subseteq \W \times \W \mid a \in A,$ para algún $A \subseteq \ACT \}$ una colección de relaciones binarias sobre $\W$. Definimos $\R_\epsilon := \{(w,w) \mid w \in \W\}$ y, para $\sigma \in \ACT^*$ y $a \in \ACT$, $\R_{\sigma a} := \{(w,v) \in \W \times \W \mid$ existe $u \in \W$ tal que $(w,u) \in \R_\sigma$ y $(u,v) \in \R_a \}$. Luego sea $u \in \W$ y $\sigma \in \ACT^*$, definimos $\R_\sigma(u) := \{v\in\W \mid (u,v) \in \R_\sigma\}$, y para $U\subseteq\W$ definimos $\R_\sigma(U) := \bigcup\limits_{u \in U} \R_\sigma(u)$
+    Sea $\{\R_a \subseteq \W \times \W \mid a \in A,$ para algún $A \subseteq \ACT \}$ una colección de relaciones binarias sobre $\W$. 
+    Se define $\R_\epsilon := \{(w,w) \mid w \in \W\}$ y, para $\sigma \in \ACT^*$ y $a \in \ACT$, 
+    $\R_{\sigma a} := \{(w,v) \in \W \times \W \mid$ existe $u \in \W$ tal que $(w,u) \in \R_\sigma$ y $(u,v) \in \R_a \}$. 
+    Luego sea $u \in \W$ y $\sigma \in \ACT^*$, se define $\R_\sigma(u) := \{v\in\W \mid (u,v) \in \R_\sigma\}$, y para $U\subseteq\W$ 
+    definimos $\R_\sigma(U) := \bigcup\limits_{u \in U} \R_\sigma(u)$.
+
+    Sea $\pi \subseteq \ACT^*$, $u \in \W$ y $U \subseteq \W$, se define
+    \[
+        \R_\strategy := \bigcup_{\sigma \in \strategy} \R_{\sigma},
+    \qquad
+        \R_{\strategy}(u) := \bigcup_{\sigma \in \strategy} \R_\sigma(u),
+    \qquad
+        \R_{\strategy}(U) := \bigcup_{u \in U} \R_{\strategy}(u).
+    \]
+\end{definicion}
+
+La idea presentada en \cite{ArecesFSV25} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando exista un 
+conjunto de planes `adecuado' que pueda ejecutar desde cualquier estado en el que valga $\psi$ y que lleve sólo a estados donde valga $\varphi$. 
+Una parte crucial entonces es determinar qué se considerará un conjunto de planes `adecuado'.
+
+\begin{definicion}[Ejecutabilidad Fuerte]
+    Sea $\{\R_a \subseteq \W \times \W \mid a \in A$, para algún $A \subseteq \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
+    es fuertemente ejecutable ($\feexec$) en un estado $w \in \W$ si y sólo si $\R_\sigma$ está definido y, a su vez, $v \in \R_{\sigma[..k]}$ implica que 
+    $\R_{\sigma[k+1]}(v) \neq \emptyset$ para cada $k \in \{0,...,|\sigma|-1\}$. Se define el conjunto $\feexec$($\sigma$) $:= \{w \in \W \mid \sigma$ es $\feexec$ en $w\}$.
+    
+    Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
+    Luego, $\feexec$($\pi$) $:= \cap_{\sigma \in \pi}$ $\feexec$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
+
+\end{definicion}
+
+Intuitivamente, ejecutabilidad fuerte sobre planes pide que cada ejecución parcial de un plan (incluyendo $\epsilon$) pueda ser completada, y, ejecutabilidad fuerte sobre
+clases de planes pide que cada plan de la clase sea ejecutable fuertemente.
+
+A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un STEU de la siguiente manera.
+
+\begin{definicion}[\KHilogic sobre STEUs]
+    La relación $\models$ entre un STEU punteado $\modults,w$ (con $\model = \tup{\W,\R,\{S_i\}_{i\in\AGT},\V,\ACT})$ y las fórmulas de \KHilogic está definida inductivamente 
+    de la siguiente forma:
+
+    \begin{nscenter}
+    \begin{tabular}{@{}l@{\;\;\;}c@{\;\;\;}l@{}}
+        $\modults,w \models p$ & \iffdef & $p\in\V(w)$, \\
+        $\modults,w \models \neg\varphi$ & \iffdef & $\modults,w \not\models\varphi$, \\ 
+        $\modults,w \models \varphi\vee\psi$ & \iffdef & $\modults,w \models \varphi \,\mbox{ or }\, \modults,w \models\psi$, \\
+        $\modults,w \models \khi(\psi,\varphi)$ & \iffdef & \begin{minipage}[t]{0.68\textwidth}
+                                                         existe $\strategy \in \S_i$ tal que \\
+                                                         {\centering
+                                                           \begin{inline-cond-kh}\item $\truthset{\modults}{\psi} \subseteq \feexec(\strategy)$ and \item $\R_\strategy(\truthset{\modults}{\psi}) \subseteq \truthset{\modults}{\varphi}$,\end{inline-cond-kh}
+                                                          }
+                                                       \end{minipage}
+    \end{tabular}
+    \end{nscenter}
+    donde $\truthset{\modults}{\varphi} := \{w \in \W \mid \modults,w \models \varphi\}$. El conjunto de planes $\pi$ en la claúsula semántica de $\khi(\psi,\varphi)$ es llamado
+    el testigo de $\khi(\psi,\varphi)$ en $\modults$.
+\end{definicion}
+
+
+Notar que $\khi(\psi,\varphi)$ vale en un estado $w$ cuando existe un conjunto de planes $\pi$ tal que al ejecutar cualquier plan $\sigma \in \pi$ a partir de un estado donde vale $\psi$,
+completará cualquier ejecución parcial terminando en un estado donde vale $\varphi$. También, cabe destacar que como $w$ no tiene ningún rol en la cláusula semántica de $\khi$,
+dicho operador actúa \emph{globalmente}. Por lo tanto, $\truthset{\modults}{\khi(\psi,\varphi)}$ es $\W$ o $\emptyset$.
+
+
+\subsection[short]{Bisimulación}
+
+La bisimulación es una herramienta crucial a la hora de analizar el poder expresivo de un lenguaje formal. Se presentará aquí su definición junto con algunos resultados 
+deseables a la hora de estudiar la noción de bisimulación de una lógica modal, los cuáles fueron estudiados en \cite{ArecesFSV25}.
+
+Primero, introduciremos una notación que nos será útil.
+
+\begin{definicion}
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un STEU sobre $\PROP$ y $\AGT$.
+
+    Tomemos un conjunto de planes $\pi \subseteq \ACT^*$, un conjunto de estados $U \subseteq \W$ y un agente $i \in \AGT$.
+    \begin{itemize}
+        \item Escribiremos $U \ultsExecStrat{\pi} T$ $\iffdef$ $U \subseteq \feexec(\pi)$ y $\R_\pi(U) \subseteq T$.
+        \item Escribiremos $U \ultsExecAgi T$ $\iffdef$ existe $\pi \in \S_i$ tal que $U \ultsExecStrat{\pi} T$.
+    \end{itemize}
+    A su vez, decimos que $U \subseteq \W$ es \KHilogic-definible en $\modults$ si y sólo si existe una \KHilogic-fórmula $\varphi$ tal que
+    $U = \truthset{\modults}{\varphi}$.
+\end{definicion}
+
+Una observación que surge de esta definición es que si un conjunto es proposicionalmente definible entonces es \KHilogic-definible, dado que 
+toda fórmula proposicional sobre $\PROP$ es también una \KHilogic-fórmula.
+
+Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice que vale también la recíproca, 
+es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
+
+\begin{proposicion}
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un STEU. Para todo $U \subseteq \W$, si $U$ es \KHilogic-definible, entonces $U$ es proposicionalmente definible.
+\end{proposicion}
+
+Ahora si, presentamos la noción de bisimulación.
+
+\begin{definicion}[\KHilogic-bisimulación]
+    Sean $\modults$ y $\modults'$ dos STEUs, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W$.
+    \begin{itemize}
+        \item Sea $u \in W$ y $U \subseteq \W$, definimos
+        \begin{nscenter}
+            \begin{tabular}{@{}c@{}}
+                $Z(u) := \csetsc{u' \in \W'}{uZu'}$, \qquad $Z(U) := \bigcup_{u \in U} Z(u)$.
+            \end{tabular}
+        \end{nscenter}
+        \item Sea $u' \in \W'$ y $U' \subseteq \W'$, definimos
+        \begin{nscenter}
+            \begin{tabular}{@{}c@{}}
+                $Z^{-1}(u') := \csetsc{u \in \W}{uZu'}$; \qquad $Z^{-1}(U') := \bigcup_{u' \in U'} Z^{-1}(u')$.
+            \end{tabular}
+        \end{nscenter}
+    \end{itemize}
+
+    Una relación binaria no vacía $Z \subseteq \W \times \W'$ es llamada una \KHilogic-bisimulación entre $\modults$ y 
+    $\modults'$ si y sólo si $(w,w') \in Z$ implica lo siguiente
+    \begin{itemize}
+        \item \textbf{Atom}: $\V(w)=\V'(w')$.
+
+        \item \textbf{$\khi$-Zig}: para cada \emph{proposicionalmente} definible $U \subseteq \W$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W'$ tal que
+        \begin{multicols}{2}
+            \begin{cond-bisim}
+                \item $Z(U) \ultsExecAgi T'$, 
+                \item $T' \subseteq Z(T)$.
+            \end{cond-bisim}
+        \end{multicols}
+        
+        \item \textbf{$\khi$-Zag}: para cada \emph{proposicionalmente} definible $U' \subseteq \W'$, si $U' \ultsExecAgi T'$ para algún $T' \subseteq \W'$, entonces existe $T \subseteq \W$ tal que
+        \begin{multicols}{2}
+            \begin{cond-bisim}
+                \item $Z^{-1}(U') \ultsExecAgi T$,
+                \item $T \subseteq Z^{-1}(T')$.
+            \end{cond-bisim}
+        \end{multicols}
+
+        \item \textbf{A-Zig}: para cada $u \in \W$ existe $u' \in \W'$ tal que $(u,u') \in Z$.
+
+        \item \textbf{A-Zag}: para cada $u' \in \W'$ existe $u \in \W$ tal que $(u,u') \in Z$.
+    \end{itemize} 
+
 \end{definicion}
