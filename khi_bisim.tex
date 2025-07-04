@@ -6,8 +6,8 @@ modelos y una relación binaria entre ellos pueda decidir si dicha relación es 
 Ahora bien, esta naturaleza procedural para verificar si una relación entre dos modelos es una bisimulación,
 también nos permite encontrar un procedimiento que decida dados modelos si existe una bisimulación entre ellos.
 
-De esta discusión surge la pregunta que se encara a lo largo de esta sección. ¿Cuál es la complejidad
-computacional de los problemas mencionados?.
+De esta discusión surge la pregunta que se encara a lo largo de esta sección. ¿Cuál es la dificultad intrínseca 
+de los problemas mencionados?.
 
 \begin{definicion}
     Definimos el problema de decidir si existe una \KHilogic-bisimulación entre dos modelos como:
@@ -132,7 +132,7 @@ entre dos modelos $\modults_1$ y $\modults_2$ basta con verificar que $Z'$ es un
     
         Notemos que como $U$ es proposicionalmente definible entonces existe una fórmula $\varphi$ 
         proposicional que lo define. Como $w \in U$, esto nos dice que $\modults, w \models \varphi$. 
-        Luego por Lema 1, $\modults, v \models \varphi$, por lo que $v \in U$. Como $v \in U$ y $(v,w') \in Z$ 
+        Luego por \ref{ref:propositional-equivalence}, $\modults, v \models \varphi$, por lo que $v \in U$. Como $v \in U$ y $(v,w') \in Z$ 
         entonces $w' \in Z(U)$.
     
         Lo cuál demuestra que $Z(U) = Z'(U)$. Por lo que $Z'(U) \ultsExecAgi T''$. Finalmente, concluimos 
@@ -172,7 +172,8 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     guardas del if hacen lo mismo pero en distintos modelos):
 
     \begin{algorithm}
-        \begin{algorithmic}
+        \caption{Verificador de contraejemplos}
+        \begin{algorithmic}[1]
             \small
             \State{{\bf Procedure} CheckBisimilarity($\modults_1,\modults_2,\tup{U,b})$} 
             \State Compute $Z'$

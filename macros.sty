@@ -37,7 +37,7 @@
 %------------------------------------------------
 
 % defining the format for proofs
-% \theoremstyle{nonumberplain}
+\theoremstyle{nonumberplain}
 \theoremheaderfont{\itshape}
 \theorembodyfont{\normalfont}
 \theoremsymbol{\ensuremath{\blacksquare}}
@@ -180,8 +180,15 @@
 \newlist{inline-cond-kh}{enumerate*}{1}
 \setlist[inline-cond-kh]{label=\itmkhformat{\arabic*}}
 
-\newcommand{\feexec}{\mathrm{FE}}
+\newcommand{\sexec}{\mathrm{SE}}
 
 % modal equivalence
 \newcommand{\modequiv}{\mathrel{\leftrightsquigarrow}}
 \newcommand{\planequiv}{\mathrel{\leftrightarrows}}
+
+
+\newcommand{\lts}{\ensuremath{\mathrm{LTS}}\xspace}
+\newcommand{\ltss}{{\lts}s\xspace}
+\newcommand{\ults}{\ensuremath{\mathrm{LTS}^U}\xspace}
+\newcommand{\ultss}{{\ults}s\xspace}
+

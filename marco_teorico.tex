@@ -1,4 +1,4 @@
-Se introducirá ahora la lógica `Knowing-How' multi-agente basada en la incerteza (\KHilogic), presentada en \cite{ArecesFSV25}.
+Se introducirá ahora la lógica `Knowing-How' multi-agente basada en la incertidumbre (\KHilogic), presentada en \cite{ArecesFSV25}.
 
 \subsection[short]{Sintaxis y Semántica}
 Consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable 
@@ -24,17 +24,17 @@ Antes de definir la semántica de la lógica, se definirán algunos conceptos qu
 \end{definicion}
 
 \begin{definicion}[Sistemas de Transiciones Etiquetados]
-    Un \emph{Sistema de Transición Etiquetado (STE)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ donde $\W$ es un conjunto no 
+    Un \emph{Sistema de Transición Etiquetado (\lts, Labeled Transition System)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ donde $\W$ es un conjunto no 
     vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in A$ para algún $A \subseteq \ACT\}$ es una colección de relaciones binarias
     sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de etiquetado y $\ACT$ es un conjunto enumerable de nombres de acciones.
-    Dado un STE $\modlts$ y $w \in \W$, se llamará al par $(\modlts,w)$ un STE punteado (los paréntesis usualmente se descartan).
+    Dado un \lts $\modlts$ y $w \in \W$, se llamará al par $(\modlts,w)$ un \lts punteado (los paréntesis usualmente se descartan).
 \end{definicion}
 
-\begin{definicion}[STE basado en la incerteza]
-    Un \emph{STE-multiagente basado en la incerteza (STEU)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
-    donde $\tup{\W,\R,\V,\ACT}$ es un (STE) y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
-    $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un (STEU) $\modults$ y $w \in \W$, se llamará 
-    al par $(\modults,w)$ un STEU punteado.
+\begin{definicion}[\lts basado en la incertidumbre]
+    Un \emph{\lts-multiagente basado en la incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
+    donde $\tup{\W,\R,\V,\ACT}$ es un \lts y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
+    $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un \ults $\modults$ y $w \in \W$, se llamará 
+    al par $(\modults,w)$ un \ults punteado.
 \end{definicion}
 
 Se utilizarán secuencias de acciones, o planes, para representar el conocimiento de los agentes. Las fórmulas de \KHilogic 
@@ -42,12 +42,12 @@ se interpretarán sobre sistemas de transiciones etiquetados extendidos con una 
 Notar que para cada agente $i \in \AGT$, $P_i$ representará los planes que el agente tiene a su disposición. Luego $\sim_i$ 
 será una relación de equivalencia sobre $P_i$, dos planes estarán relacionados cuando un agente no sepa distinguirlos.
 
-Sea $\model = \tup{\W,\R,\sim,\V,\ACT}$ un (STEU) y sea $i \in \AGT$, para un plan $\sigma \in P_i$, sea $[\sigma]_i$ su clase de 
+Sea $\model = \tup{\W,\R,\sim,\V,\ACT}$ un \ults y sea $i \in \AGT$, para un plan $\sigma \in P_i$, sea $[\sigma]_i$ su clase de 
 equivalencia en $\sim_i$. Notar que hay una correspondencia uno-a-uno entre cada $\sim_i$ y la partición de $P_i$ en sus correspondientes 
-clases de equivalencia $\S_i := \{[\sigma]_i \mid \sigma \in P_i\}$. Por lo tanto, de ahora en adelante nos referiremos a los (STEU) como
+clases de equivalencia $\S_i := \{[\sigma]_i \mid \sigma \in P_i\}$. Por lo tanto, de ahora en adelante nos referiremos a los \ults como
 una tupla $\tup{\W,\R,\{S_i\}_{i \in \AGT},\V,\ACT}$.
 
-Dada entonces la incerteza de un agente sobre $\ACT^*$, sus habilidades dependerán no solo de lo que un solo plan puede lograr, sino que de 
+Dada entonces la incertidumbre de un agente sobre $\ACT^*$, sus habilidades dependerán no solo de lo que un solo plan puede lograr, sino que de 
 lo que cada clase de equivalencia dentro de su relación de indistinguibilidad pueda garantizar.
 
 
@@ -74,21 +74,21 @@ Una parte crucial entonces es determinar qué se considerará un conjunto de pla
 
 \begin{definicion}[Ejecutabilidad Fuerte]
     Sea $\{\R_a \subseteq \W \times \W \mid a \in A$, para algún $A \subseteq \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
-    es fuertemente ejecutable ($\feexec$) en un estado $w \in \W$ si y sólo si $\R_\sigma$ está definido y, a su vez, $v \in \R_{\sigma[..k]}$ implica que 
-    $\R_{\sigma[k+1]}(v) \neq \emptyset$ para cada $k \in \{0,...,|\sigma|-1\}$. Se define el conjunto $\feexec$($\sigma$) $:= \{w \in \W \mid \sigma$ es $\feexec$ en $w\}$.
+    es fuertemente ejecutable ($\sexec$) en un estado $w \in \W$ si y sólo si $\R_\sigma$ está definido y, a su vez, $v \in \R_{\sigma[..k]}$ implica que 
+    $\R_{\sigma[k+1]}(v) \neq \emptyset$ para cada $k \in \{0,...,|\sigma|-1\}$. Se define el conjunto $\sexec$($\sigma$) $:= \{w \in \W \mid \sigma$ es $\sexec$ en $w\}$.
     
     Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
-    Luego, $\feexec$($\pi$) $:= \cap_{\sigma \in \pi}$ $\feexec$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
+    Luego, $\sexec$($\pi$) $:= \cap_{\sigma \in \pi}$ $\sexec$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
 
 \end{definicion}
 
 Intuitivamente, ejecutabilidad fuerte sobre planes pide que cada ejecución parcial de un plan (incluyendo $\epsilon$) pueda ser completada, y, ejecutabilidad fuerte sobre
 clases de planes pide que cada plan de la clase sea ejecutable fuertemente.
 
-A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un STEU de la siguiente manera.
+A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un \ults de la siguiente manera.
 
-\begin{definicion}[\KHilogic sobre STEUs]
-    La relación $\models$ entre un STEU punteado $\modults,w$ (con $\model = \tup{\W,\R,\{S_i\}_{i\in\AGT},\V,\ACT})$ y las fórmulas de \KHilogic está definida inductivamente 
+\begin{definicion}[\KHilogic sobre \ultss]
+    La relación $\models$ entre un \ults punteado $\modults,w$ (con $\model = \tup{\W,\R,\{S_i\}_{i\in\AGT},\V,\ACT})$ y las fórmulas de \KHilogic está definida inductivamente 
     de la siguiente forma:
 
     \begin{nscenter}
@@ -99,7 +99,7 @@ A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un 
         $\modults,w \models \khi(\psi,\varphi)$ & \iffdef & \begin{minipage}[t]{0.68\textwidth}
                                                          existe $\strategy \in \S_i$ tal que \\
                                                          {\centering
-                                                           \begin{inline-cond-kh}\item $\truthset{\modults}{\psi} \subseteq \feexec(\strategy)$ and \item $\R_\strategy(\truthset{\modults}{\psi}) \subseteq \truthset{\modults}{\varphi}$,\end{inline-cond-kh}
+                                                           \begin{inline-cond-kh}\item $\truthset{\modults}{\psi} \subseteq \sexec(\strategy)$ and \item $\R_\strategy(\truthset{\modults}{\psi}) \subseteq \truthset{\modults}{\varphi}$,\end{inline-cond-kh}
                                                           }
                                                        \end{minipage}
     \end{tabular}
@@ -122,11 +122,11 @@ deseables a la hora de estudiar la noción de bisimulación de una lógica modal
 Primero, introduciremos una notación que nos será útil.
 
 \begin{definicion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un STEU sobre $\PROP$ y $\AGT$.
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults sobre $\PROP$ y $\AGT$.
 
     Tomemos un conjunto de planes $\pi \subseteq \ACT^*$, un conjunto de estados $U \subseteq \W$ y un agente $i \in \AGT$.
     \begin{itemize}
-        \item Escribiremos $U \ultsExecStrat{\pi} T$ $\iffdef$ $U \subseteq \feexec(\pi)$ y $\R_\pi(U) \subseteq T$.
+        \item Escribiremos $U \ultsExecStrat{\pi} T$ $\iffdef$ $U \subseteq \sexec(\pi)$ y $\R_\pi(U) \subseteq T$.
         \item Escribiremos $U \ultsExecAgi T$ $\iffdef$ existe $\pi \in \S_i$ tal que $U \ultsExecStrat{\pi} T$.
     \end{itemize}
     A su vez, decimos que $U \subseteq \W$ es \KHilogic-definible en $\modults$ si y sólo si existe una \KHilogic-fórmula $\varphi$ tal que
@@ -140,13 +140,13 @@ Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice 
 es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
 
 \begin{proposicion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un STEU. Para todo $U \subseteq \W$, si $U$ es \KHilogic-definible, entonces $U$ es proposicionalmente definible.
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Para todo $U \subseteq \W$, si $U$ es \KHilogic-definible, entonces $U$ es proposicionalmente definible.
 \end{proposicion}
 
 Ahora si, presentamos la noción de bisimulación.
 
-\begin{definicion}[\KHilogic-bisimulación]
-    Sean $\modults$ y $\modults'$ dos STEUs, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W$.
+\begin{definicion}\label{def:bisimulation}[\KHilogic-bisimulación]
+    Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W$.
     \begin{itemize}
         \item Sea $u \in W$ y $U \subseteq \W$, definimos
         \begin{nscenter}
@@ -197,7 +197,7 @@ Para poder formalizar las propiedades cruciales de una bisimulación, definiremo
 equivalencia entre modelos con respecto a \KHilogic.
 
 \begin{definicion}[\KHilogic-equivalencia]
-    Dos STEUs punteados $\modults,w$ y $\modults',w'$ son \KHilogic-equivalentes ($\model, w \modequiv \model', w'$)
+    Dos \ultss punteados $\modults,w$ y $\modults',w'$ son \KHilogic-equivalentes ($\model, w \modequiv \model', w'$)
     si y sólo si, para cada $\varphi \in \KHilogic$,
     \begin{center}
         $\model, w \models \varphi$ \quad si y sólo \quad $\model', w' \models \varphi$.
@@ -208,7 +208,7 @@ Ahora podemos presentar la correspondencia esperada entre $\bisim$ y $\modequiv$
 Usualmente nos referimos a este resultado como el Teorema de Invarianza para Bisimulación.
 
 \begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]
-    Sean $\modults,w$ y $\modults',w'$ dos STEUs, entonces
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss, entonces
     \begin{center}
         $\modults,w \bisim \modults',w'$ implica $\modults,w \modequiv \modults',w'$.
     \end{center}
@@ -222,11 +222,8 @@ Un problema ampliamente estudiado en la literatura de las lógicas modales es el
 En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca, el cuál es un gran resultado en términos computacionales. (si tengo un algoritmo que decide existencia de bisimulacion entonces decide equivalencia entre modelos).
 
 \begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]
-    Sean $\modults,w$ y $\modults',w'$ dos STEUs punteados finitos, entonces
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
     \begin{center}
-        $\model,w \modequiv \model', w' \quad\text{implies}\quad \model,w \bisim \model', w'$.
+        $\model,w \modequiv \model', w'$ implica $\model,w \bisim \model', w'$.
     \end{center}
 \end{teorema}
-
-\subsection[short]{Complejidad Computacional}
-Estaría bien meter una pequeña subsección con conceptos generales de complejidad?.
