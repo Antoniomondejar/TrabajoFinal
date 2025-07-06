@@ -199,7 +199,7 @@ Porque es una condición mucho más algorítmica, deja servido el corolario de \
         
         Supongamos que no es cierto, es decir, existe $Z \subseteq \W \times \W$ autobisimulación de $\modults$ tal que hay $w,v \in \W$ que cumplen que $(w,v) \in Z$ y $(w,v) \notin A_\modults$. 
 
-        Como $Z$ es una autobisimulación entonces satisface (atom), es decir, $\V(w) = \V(v)$. Pero notemos que por definición de $A_\modults$, $(w,v) \in A_\modults$, lo cuál es absurdo, pues dijimos que $(w,v) \notin A_\modults$.
+        Como $Z$ es una autobisimulación entonces satisface (Atom), es decir, $\V(w) = \V(v)$. Pero notemos que por definición de $A_\modults$, $(w,v) \in A_\modults$, lo cuál es absurdo, pues dijimos que $(w,v) \notin A_\modults$.
 
         El absurdo vino de suponer que $Z \nsubseteq A_\modults$.
 
@@ -264,10 +264,10 @@ Todo este resultado se puede hacer con caso infinito, reescribiendo el lema en v
 
     A su vez, por cómo definimos $Z$, es fácil ver que también (A-zig) y (A-zag) son satisfechos.
     
-    Demostremos entonces que se satisfacen (\KHilogic-zig) y (\KHilogic-zag).
+    Demostremos entonces que se satisfacen ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
-        \item (\KHilogic-zig) Sean $U, T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W'$ que
+        \item ($\khi$-zig) Sean $U, T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W'$ que
 
         \begin{multicols}{2}
             \begin{itemize}
@@ -296,9 +296,9 @@ Todo este resultado se puede hacer con caso infinito, reescribiendo el lema en v
 
         Probamos entonces que $\pi'$ es fuertemente ejecutable en $S$ y que $\R'_{\pi'}(S) \subseteq T'$, luego esto nos dice que $S \ultsExecAgi T'$. Y como $S = Z(U)$, $Z(U) \ultsExecAgi T'$.
 
-        Queda demostrado entonces \KHilogic-zig. (MEJORAR ESTA DEMO).
+        Queda demostrado entonces $\khi$. (MEJORAR ESTA DEMO).
 
-        \item (\KHilogic-zag) Sean $U, T \in \W'$ tales que $U \ultsExecAgi T$ con $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W$ tal que
+        \item ($\khi$-zag) Sean $U, T \in \W'$ tales que $U \ultsExecAgi T$ con $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W$ tal que
         \begin{multicols}{2}
             \begin{itemize}
                 \item $Z^{-1}(U) \ultsExecAgi T'$, 
@@ -322,7 +322,7 @@ Todo este resultado se puede hacer con caso infinito, reescribiendo el lema en v
         
         Como $a_{\sigma_i}$ es fuertemente ejecutable en $[w]$ entonces existe $[v']$ tal que $([w],[v']) \in \R_{a_{\sigma_i}}$. Ahora bien, como existe dicha arista, por la definición de $\R'$, ocurre que $\sigma_i$ es fuertemente ejecutable en todo nodo de $[w]$. Pero como $\sigma_i$ es fuertemente ejecutable en todo nodo de $[w]$ y $(w,v) \in \R_{\sigma_i}$ entonces $([w],[v]) \in \R'_{a_{\sigma_i}}$. Pero como $\R'_{\pi'}(U) \subseteq T$, entonces $[v] \in T$, lo que nos dice que $v \in T'$.
         
-        Luego demostramos que $\R_{\sigma_i}(Z^{-1}(U)) \subseteq T'$. Como $\sigma_i$ era un elemento fijo pero arbitrario de $\pi$ entonces vale para todo $\pi$. Luego $\R_\pi(Z^{-1}(U)) \subseteq T'$, lo cual demuestra \KHilogic-zag.
+        Luego demostramos que $\R_{\sigma_i}(Z^{-1}(U)) \subseteq T'$. Como $\sigma_i$ era un elemento fijo pero arbitrario de $\pi$ entonces vale para todo $\pi$. Luego $\R_\pi(Z^{-1}(U)) \subseteq T'$, lo cual demuestra $\khi$.
     \end{itemize}
 
     Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
@@ -388,10 +388,10 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 \begin{demostracion}
     Queremos ver que $Z = \{(w,[w]) \mid w \in \W\}$ es una \KHilogic-bisimulación.
     
-    Por definición de la contracción por bisimulación en (LMB) se puede ver que se satisface (atom). Luego, por definición de Z, es fácil ver que (A-zig) y (A-zag) son satisfechas. Demostremos entonces (\KHilogic-zig) y (\KHilogic-zag).
+    Por definición de la contracción por bisimulación en (LMB) se puede ver que se satisface (Atom). Luego, por definición de Z, es fácil ver que (A-zig) y (A-zag) son satisfechas. Demostremos entonces ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
-        \item (\KHilogic-zig). Sean $U, T$ ambos subconjuntos de $\W$ tales que $U$ es proposicionalmente definible y $U \ultsExecAgi T$. Queremos ver que existe $T' \subseteq \W'$ tal que
+        \item ($\khi$-zig). Sean $U, T$ ambos subconjuntos de $\W$ tales que $U$ es proposicionalmente definible y $U \ultsExecAgi T$. Queremos ver que existe $T' \subseteq \W'$ tal que
 
         \begin{multicols}{2}
             \begin{itemize}
@@ -419,9 +419,9 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 
         Ahora bien, como $[w_1] \in Z(U)$, entonces existe $w_1' \in U$ tal que $w_1'\in [w_1]$. Luego notemos que aplicando sucesivamente el Lema 3 sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$. Como $\R_\pi(U) \subseteq T$ esto nos dice que $w'_{|\sigma|+1} \in T$. Finalmente, por definición de $T'$, $[w_{|\sigma|+1}] \in T'$. Luego como $[v] = [w_{|\sigma|+1}]$, $[v] \in T'$.
 
-        Entonces demostramos que $\pi$ es fuertemente ejecutable en $Z(U)$ y que $\R'_\pi(Z(U)) \subseteq T'$. Juntando ambos resultados, concluimos que $Z(U) \ultsExecAgi T'$, lo cuál demuestra (\KHilogic-zig).
+        Entonces demostramos que $\pi$ es fuertemente ejecutable en $Z(U)$ y que $\R'_\pi(Z(U)) \subseteq T'$. Juntando ambos resultados, concluimos que $Z(U) \ultsExecAgi T'$, lo cuál demuestra ($\khi$-zig).
 
-       \item (\KHilogic-zag) Sean $U,T$ ambos subconjuntos de $\W'$ tales que $U$ es proposicionalmente definible y $U \ultsExecAgi T$. Queremos ver que existe $T' \subseteq \W$ tal que
+       \item ($\khi$-zag) Sean $U,T$ ambos subconjuntos de $\W'$ tales que $U$ es proposicionalmente definible y $U \ultsExecAgi T$. Queremos ver que existe $T' \subseteq \W$ tal que
 
        \begin{multicols}{2}
             \begin{itemize}
@@ -448,7 +448,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 
         Ahora bien, por la definición de $\R'$, esto nos dice que $[w_1],...,[w_{|\sigma|+1}]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, como $w_1 \in Z^{-1}(U)$ entonces $[w_1] \in U$. Luego notemos que como $\R'_\pi(U) \subseteq T$, esto nos dice que $[w_{|\sigma|+1}] \in T$, lo cuál implica que $w_{|\sigma|+1} \in T'$. Como $v = w_{|\sigma|+1}$ entonces $v \in T'$. 
 
-        Entonces demostramos que $\pi$ es fuertemente ejecutable en todo $Z^{-1}(U)$ y que $\R'_\pi(Z^{-1}(U)) \subseteq T'$. Juntando ambos resultados, concluimos que $Z^{-1}(U) \ultsExecAgi T'$, lo cuál demuestra (\KHilogic-zag).
+        Entonces demostramos que $\pi$ es fuertemente ejecutable en todo $Z^{-1}(U)$ y que $\R'_\pi(Z^{-1}(U)) \subseteq T'$. Juntando ambos resultados, concluimos que $Z^{-1}(U) \ultsExecAgi T'$, lo cuál demuestra ($\khi$-zag).
     \end{itemize}
 
     Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.

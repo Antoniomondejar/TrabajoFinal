@@ -83,7 +83,7 @@ Una parte crucial entonces es determinar qué se considerará un conjunto de pla
 \end{definicion}
 
 Intuitivamente, ejecutabilidad fuerte sobre planes pide que cada ejecución parcial de un plan (incluyendo $\epsilon$) pueda ser completada, y, ejecutabilidad fuerte sobre
-clases de planes pide que cada plan de la clase sea ejecutable fuertemente.
+clases de planes pide que cada plan de la clase sea fuertemente ejecutable.
 
 A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un \ults de la siguiente manera.
 
@@ -145,7 +145,7 @@ es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmen
 
 Ahora si, presentamos la noción de bisimulación.
 
-\begin{definicion}\label{def:bisimulation}[\KHilogic-bisimulación]
+\begin{definicion}[\KHilogic-bisimulación]\label{def:bisimulation}
     Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W$.
     \begin{itemize}
         \item Sea $u \in W$ y $U \subseteq \W$, definimos
@@ -167,7 +167,7 @@ Ahora si, presentamos la noción de bisimulación.
     \begin{itemize}
         \item \textbf{Atom}: $\V(w)=\V'(w')$.
 
-        \item \textbf{$\khi$-Zig}: para cada \emph{proposicionalmente} definible $U \subseteq \W$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W'$ tal que
+        \item \textbf{$\khi$-zig}: para cada \emph{proposicionalmente} definible $U \subseteq \W$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W'$ tal que
         \begin{multicols}{2}
             \begin{cond-bisim}
                 \item $Z(U) \ultsExecAgi T'$, 
@@ -175,7 +175,7 @@ Ahora si, presentamos la noción de bisimulación.
             \end{cond-bisim}
         \end{multicols}
         
-        \item \textbf{$\khi$-Zag}: para cada \emph{proposicionalmente} definible $U' \subseteq \W'$, si $U' \ultsExecAgi T'$ para algún $T' \subseteq \W'$, entonces existe $T \subseteq \W$ tal que
+        \item \textbf{$\khi$-zag}: para cada \emph{proposicionalmente} definible $U' \subseteq \W'$, si $U' \ultsExecAgi T'$ para algún $T' \subseteq \W'$, entonces existe $T \subseteq \W$ tal que
         \begin{multicols}{2}
             \begin{cond-bisim}
                 \item $Z^{-1}(U') \ultsExecAgi T$,
@@ -183,9 +183,9 @@ Ahora si, presentamos la noción de bisimulación.
             \end{cond-bisim}
         \end{multicols}
 
-        \item \textbf{A-Zig}: para cada $u \in \W$ existe $u' \in \W'$ tal que $(u,u') \in Z$.
+        \item \textbf{A-zig}: para cada $u \in \W$ existe $u' \in \W'$ tal que $(u,u') \in Z$.
 
-        \item \textbf{A-Zag}: para cada $u' \in \W'$ existe $u \in \W$ tal que $(u,u') \in Z$.
+        \item \textbf{A-zag}: para cada $u' \in \W'$ existe $u \in \W$ tal que $(u,u') \in Z$.
     \end{itemize} 
 
     Escribiremos $\modults,w \bisim \modults',w'$ cuando exista una \KHilogic-bisimulación $Z$ entre
@@ -207,8 +207,8 @@ equivalencia entre modelos con respecto a \KHilogic.
 Ahora podemos presentar la correspondencia esperada entre $\bisim$ y $\modequiv$, demostrada en \cite{ArecesFSV25}.
 Usualmente nos referimos a este resultado como el Teorema de Invarianza para Bisimulación.
 
-\begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]
-    Sean $\modults,w$ y $\modults',w'$ dos \ultss, entonces
+\begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]\label{ref:bisim-implies-equivalence}
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados, entonces
     \begin{center}
         $\modults,w \bisim \modults',w'$ implica $\modults,w \modequiv \modults',w'$.
     \end{center}
@@ -221,7 +221,7 @@ En [\cite{FervariVQW21}, sección 2] se presenta un contraejemplo que atestigua 
 Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar en qué clases de modelos vale la recíproca del teorema.
 En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca, el cuál es un gran resultado en términos computacionales. (si tengo un algoritmo que decide existencia de bisimulacion entonces decide equivalencia entre modelos).
 
-\begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]
+\begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]\label{ref:finite-equivalence-implies-bisim}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
     \begin{center}
         $\model,w \modequiv \model', w'$ implica $\model,w \bisim \model', w'$.

@@ -23,7 +23,7 @@ para decidir si existe una bisimulación entre dos modelos, no parece haber una 
 opción que buscar una relación binaria candidata y verificar si efectivamente es una bisimulación. 
 
 A su vez, esta `búsqueda+verificación' parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
-entre dos modelos, y verificar las condiciones (\KHilogic-zig) y (\KHilogic-zag) llevan consigo una cantidad exponencial
+entre dos modelos, y verificar las condiciones ($\khi$-zig) y ($\khi$-zag) llevan consigo una cantidad exponencial
 de conjuntos proposicionalmente definibles a considerar.
 
 (Texto introduciendo caracterización de existencia de bisimulación)
@@ -93,15 +93,15 @@ entre dos modelos $\modults_1$ y $\modults_2$ basta con verificar que $Z'$ es un
     Queremos ver que $Z'$ es una \KHilogic-bisimulación entre $\modults_1$ y $\modults_2$,
     dado que existe $Z \subseteq \W \times \W'$, \KHilogic-bisimulación entre ellos.
 
-    Notemos que como $Z$ es una bisimulación, entonces cumple (atom). Luego, notemos que
+    Notemos que como $Z$ es una bisimulación, entonces cumple (Atom). Luego, notemos que
     por la definición de $Z'$, $Z \subseteq Z'$, pues $Z'$ contiene todos los pares de
-    $\W \times \W'$ que satisfacen (atom). Esto nos dice que $Z'$ satisface (A-zig) y (A-zag).
-    A su vez, cómo mencionamos, $Z'$ contiene todos los pares que satisfacen (atom).
+    $\W \times \W'$ que satisfacen (Atom). Esto nos dice que $Z'$ satisface (A-zig) y (A-zag).
+    A su vez, cómo mencionamos, $Z'$ contiene todos los pares que satisfacen (Atom).
 
-    Demostremos entonces que $Z'$ cumple (\KHilogic-zig) y (\KHilogic-zag).
+    Demostremos entonces que $Z'$ cumple ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
-        \item (\KHilogic-zig) Sean $U,T \subseteq \W$ tales que $U$ es proposicionalmente definible 
+        \item ($\khi$-zig) Sean $U,T \subseteq \W$ tales que $U$ es proposicionalmente definible 
         y $U \ultsExecAgi T$ queremos ver que existe $T' \subseteq \W'$ tal que:
     
         \begin{multicols}{2}
@@ -128,7 +128,7 @@ entre dos modelos $\modults_1$ y $\modults_2$ basta con verificar que $Z'$ es un
     
         Sea $w' \in Z'(U)$, entonces existe $w \in U$ tal que $(w,w') \in Z'$, por lo que $\V(w) = \V'(w')$. 
         Ahora bien, como $Z$ cumple (A-zag), existe $v \in \W$ tal que $(v,w') \in Z$, y cómo $Z$ cumple 
-        (atom) entonces $\V(v) = \V'(w')$. Luego $\V(w) = \V(v)$.
+        (Atom) entonces $\V(v) = \V'(w')$. Luego $\V(w) = \V(v)$.
     
         Notemos que como $U$ es proposicionalmente definible entonces existe una fórmula $\varphi$ 
         proposicional que lo define. Como $w \in U$, esto nos dice que $\modults, w \models \varphi$. 
@@ -136,10 +136,10 @@ entre dos modelos $\modults_1$ y $\modults_2$ basta con verificar que $Z'$ es un
         entonces $w' \in Z(U)$.
     
         Lo cuál demuestra que $Z(U) = Z'(U)$. Por lo que $Z'(U) \ultsExecAgi T''$. Finalmente, concluimos 
-        que $Z'$ cumple (\KHilogic-zig).
+        que $Z'$ cumple ($\khi$-zig).
     
     
-        \item (\KHilogic-zag) Análogo a (\KHilogic-zig).
+        \item ($\khi$-zag) Análogo a ($\khi$-zig).
     \end{itemize}
     
     Queda demostrado que $Z'$ es una \KHilogic-bisimulación.
@@ -174,48 +174,48 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     \begin{algorithm}
         \caption{Verificador de contraejemplos}
         \begin{algorithmic}[1]
-            \small
-            \State{{\bf Procedure} CheckBisimilarity($\modults_1,\modults_2,\tup{U,b})$} 
-            \State Compute $Z'$
-            \State Check (A-zig), if not \Return 0
-            \State Check (A-zag), if not \Return 0
-            \If{$b$}
-            \State Check if $U$ is propositionally definable in $\modults_1$, if not \Return 1
-                \ForAll{$S_i$}
-                    \ForAll{$\pi \in \S_i$}
-                        \If{$U \subseteq SE(\pi)$}
-                        \State $foundStrat \gets False$
-                            \ForAll{$\pi' \in \S_i'$}
-                                \If{$Z'(U) \subseteq SE(\pi') \wedge \R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$}
-                                    \State $foundStrat \gets True$
-                                \EndIf         
-                            \EndFor
-                            \If{$\neg foundStrat$}
-                                \Return 0
+            \Function{CheckBisimilarity}{$\modults_1,\modults_2,\tup{U,b}$} 
+                \State Compute $Z'$
+                \State Check (A-zig), if not \Return 0
+                \State Check (A-zag), if not \Return 0
+                \If{$b$}
+                \State Check if $U$ is propositionally definable in $\modults_1$, if not \Return 1
+                    \ForAll{$S_i$}
+                        \ForAll{$\pi \in \S_i$}
+                            \If{$U \subseteq \sexec(\pi)$}
+                            \State $foundStrat \gets False$
+                                \ForAll{$\pi' \in \S_i'$}
+                                    \If{$Z'(U) \subseteq \sexec(\pi') \wedge \R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$}
+                                        \State $foundStrat \gets True$
+                                    \EndIf         
+                                \EndFor
+                                \If{$\neg foundStrat$}
+                                    \Return 0
+                                \EndIf
                             \EndIf
-                        \EndIf
+                        \EndFor
                     \EndFor
-                \EndFor
-            \Else
-                \State Check if $U$ is propositionally definable in $\modults_2$, if not \Return 1
-                \ForAll{$S_i'$}
-                    \ForAll{$\pi' \in \S_i'$}
-                        \If{$U \subseteq SE(\pi')$}
-                        \State $foundStrat \gets false$
-                            \ForAll{$\pi \in \S_i$}
-                                \If{$Z'^{-1}(U) \subseteq SE(\pi) \wedge \R_{\pi}(Z'^{-1}(u)) \subseteq Z'^{-1}(\R'_{\pi'}(U))$}
-                                    \State $foundStrat \gets true$
-                                \EndIf         
-                            \EndFor
-                            \If{$\neg foundStrat$}
-                                \Return 0
+                \Else
+                    \State Check if $U$ is propositionally definable in $\modults_2$, if not \Return 1
+                    \ForAll{$S_i'$}
+                        \ForAll{$\pi' \in \S_i'$}
+                            \If{$U \subseteq \sexec(\pi')$}
+                            \State $foundStrat \gets false$
+                                \ForAll{$\pi \in \S_i$}
+                                    \If{$Z'^{-1}(U) \subseteq \sexec(\pi) \wedge \R_{\pi}(Z'^{-1}(U)) \subseteq Z'^{-1}(\R'_{\pi'}(U))$}
+                                        \State $foundStrat \gets true$
+                                    \EndIf         
+                                \EndFor
+                                \If{$\neg foundStrat$}
+                                    \Return 0
+                                \EndIf
                             \EndIf
-                        \EndIf
+                        \EndFor
                     \EndFor
-                \EndFor
-            \EndIf
-            \State \Return 1
-            \end{algorithmic}
+                \EndIf
+                \State \Return 1
+            \EndFunction
+        \end{algorithmic}
     \end{algorithm}
 
     Primero notemos que el algoritmo propuesto corre en tiempo polinomial en el tamaño de $\tup{\modults_1,\modults_2}$.
@@ -243,14 +243,14 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
             \item $b = 1$
                 Primero notemos que si $U$ no es proposicionalmente definible en $\modults_1$, entonces el algoritmo devuelve 1.
 
-                Supongamos entonces $U$ proposicionalmente definible. Sea $\pi \in \S_i$ tal que $U \subseteq SE(\pi)$, 
+                Supongamos entonces $U$ proposicionalmente definible. Sea $\pi \in \S_i$ tal que $U \subseteq \sexec(\pi)$, 
                 entonces el algoritmo ingresa al $if$ de la línea 8 e inicializa $foundStrat$ en $false$.
                 
                 Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $U$ es proposicionalmente definible y 
-                $Z'$ cumple (\KHilogic-zig), existe $T \subseteq \W'$ tal que $Z'(U) \ultsExecAgi T$ y,
+                $Z'$ cumple ($\khi$-zig), existe $T \subseteq \W'$ tal que $Z'(U) \ultsExecAgi T$ y,
                 a su vez, $T \subseteq Z'(\R_\pi(U))$.
                 
-                Ahora bien, como $Z'(U) \ultsExecAgi T$, entonces existe $\pi' \in \S_i'$ tal que $Z'(U) \subseteq SE(\pi')$ y 
+                Ahora bien, como $Z'(U) \ultsExecAgi T$, entonces existe $\pi' \in \S_i'$ tal que $Z'(U) \subseteq \sexec(\pi')$ y 
                 $\R'_{\pi'}(Z'(U)) \subseteq T$.
                 
                 Pero como $T \subseteq Z'(\R_\pi(U))$, entonces $\R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$, por lo que 
@@ -259,7 +259,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
                 Finalmente, esto demuestra que el algoritmo finaliza su ejecución en la última línea donde devuelve 1.
             \item $b = 0$
                 Este caso es análogo al caso $b = 1$, con la diferencia de que hay que considerar el hecho de que 
-                $Z'$ satisface (\KHilogic-zag).
+                $Z'$ satisface ($\khi$-zag).
         \end{itemize}
 
         \item ($\leftarrow$) Para demostrar esta dirección, lo que haremos será ver que siendo 
@@ -268,36 +268,36 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
         
         Como $\tup{\modults_1,\modults_2} \not \in \KHiBisim$, entonces sabemos que $Z'$ no es una bisimulación.
 
-        Notemos que por su definición, $Z'$ cumple (atom). Analicemos los posibles casos donde podría fallar $Z$.
+        Notemos que por su definición, $Z'$ cumple (Atom). Analicemos los posibles casos donde podría fallar $Z$.
 
         \begin{itemize}
             \item (A-zig) Si $Z'$ no satisface (A-zig) entonces el algoritmo lo identifica en la segunda línea y devuelve 0, 
             por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
             \item (A-zag) Similarmente, si $Z'$ no satisface (A-zag) el algoritmo lo identifica en la tercer línea y 
             nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
-            \item (\KHilogic-zig) Supongamos entonces que $Z'$ no satisface (\KHilogic-zig), luego existen $U, T$ tal que
+            \item ($\khi$-zig) Supongamos entonces que $Z'$ no satisface ($\khi$-zig), luego existen $U, T$ tal que
             $U \ultsExecAgi T$ con $U$ proposicionalmente definible, y a su vez, no existe $T'$ tal que $Z'(U) \ultsExecAgi T'$ y 
             $T' \subseteq Z'(T)$.
 
             Analicemos entonces la ejecución de CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$).
 
-            Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq SE(\pi)$ y, 
+            Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq \sexec(\pi)$ y, 
             a su vez, $\R_\pi(U) \subseteq T$. 
 
             Esto nos dice que al considerar el plan $\pi$, el algoritmo ingresa al $if$ de la línea 8 e inicializa 
             la variable $foundStrat$ en $false$.
 
-            Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z'(U) \not \subseteq SE(\pi')$ o que 
+            Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z'(U) \not \subseteq \sexec(\pi')$ o que 
             $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'$ entonces 
             el valor de $foundStrat$ permanece en $false$ y el algoritmo devuelve 0 en la línea 15.
 
-            Sea $\pi' \in \S_i'$, supongamos entonces que $Z'(U) \subseteq SE(\pi')$ y veamos que 
+            Sea $\pi' \in \S_i'$, supongamos entonces que $Z'(U) \subseteq \sexec(\pi')$ y veamos que 
             $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$.
 
-            Notemos que como $Z'(U) \subseteq SE(\pi')$, entonces $Z'(U) \ultsExecAgi \R'_{\pi'}(Z'(U))$. Ahora bien, 
-            como mencionamos que (\KHilogic-zig) falla para este caso, entonces ocurre que 
+            Notemos que como $Z'(U) \subseteq \sexec(\pi')$, entonces $Z'(U) \ultsExecAgi \R'_{\pi'}(Z'(U))$. Ahora bien, 
+            como mencionamos que ($\khi$-zig) falla para este caso, entonces ocurre que 
             $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(T)$, pues en caso contrario $T' := \R'_{\pi'}(Z'(U))$ serviría como 
-            testigo de (\KHilogic-zig).
+            testigo de ($\khi$-zig).
 
             Pero como $\R_\pi(U) \subseteq T$, entonces es claro que $Z'(\R_\pi(U)) \subseteq Z'(T)$. Luego como 
             $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(T)$ entonces también ocurre que $\R'_{\pi'}(Z'(U)) \not \subseteq Z'(\R_\pi(U))$, 
@@ -307,7 +307,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
 
             Finalmente, CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$) = 0.
 
-            \item (\KHilogic-zag) Análogo al caso recién analizado.
+            \item ($\khi$-zag) Análogo al caso recién analizado.
         \end{itemize}
     
     \end{itemize}
@@ -320,7 +320,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     
 %     Dados $\modults_1, \modults_2$ y $x$, verificar que el conjunto $Z'$ mencionado en el lema 4 sea una \KHilogic-bisimulación entre los dos modelos recibidos. Notar que podemos verificar polinomialmente que $Z'$ cumple (A-zig) y (A-zag).
 
-%     Luego el algoritmo verificará que $Z'$ cumpla con (\KHilogic-zig) o (\KHilogic-zag) con respecto al subconjunto $x$,  dependiendo de si $x$ es un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$. Notar que sólo nos interesarán los $x$ que sean proposicionalmente definibles, así que el algoritmo deberá encargarse de chequear que $x$ efectivamente sea un conjunto proposicionalmente definible. 
+%     Luego el algoritmo verificará que $Z'$ cumpla con ($\khi$-zig) o ($\khi$-zag) con respecto al subconjunto $x$,  dependiendo de si $x$ es un subconjunto del dominio de $\modults_1$ o del dominio de $\modults_2$. Notar que sólo nos interesarán los $x$ que sean proposicionalmente definibles, así que el algoritmo deberá encargarse de chequear que $x$ efectivamente sea un conjunto proposicionalmente definible. 
 
 %     En caso de serlo, simplemente analizará a qué conjunto se puede llegar desde $x$ utilizando cada plan del modelo y para cada uno de ellos, verificar que $Z'(x)$ tenga algún plan con el que cumpla la condición deseada. 
     
@@ -381,7 +381,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
         \end{itemize}
 
         Notar que estos dos modelos son claramente no \KHilogic-bisimilares, dado que no existe relación binaria no vacía 
-        que satisfaga (atom). Pero es correcto porque sólo utilizaremos esta definición en uno de los casos donde 
+        que satisfaga (Atom). Pero es correcto porque sólo utilizaremos esta definición en uno de los casos donde 
         $\varphi \not \in \DNFTAUT$. 
         
         \item En el caso de que $\varphi$ evalúe a $true$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
@@ -415,8 +415,8 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     al cuál moverse es que dicho $U$ sirve como contraejemplo para afirmar que $\varphi$ no es una tautología.
 
 \medskip\medskip
-        
-    Notemos que ambos modelos son polinomiales en el tamaño de $\varphi$.
+
+    Notemos que ambos modelos tienen tamaño polinomial con respecto al tamaño de $\varphi$.
 
     A su vez, la construcción de los modelos, solo tiene el costo extra computacional de analizar si $\varphi$ evalúa a $true$ 
     en la asignación que asigna $false$ a $p_1,...,p_n$, lo cuál es claramente computable en tiempo polinomial.
@@ -433,19 +433,19 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     $p_1,...,p_n$, por lo que consideramos el segundo caso del mapeo $f$. 
 
     Veamos que $Z := \{(w,w) \mid w \in \W \}$ es una bisimulación entre $\modults_1$ y $\modults_2$. Es fácil ver que 
-    $Z$ satisface (atom), pues ambos modelos utilizan la misma función de valuación $\V$.
+    $Z$ satisface (Atom), pues ambos modelos utilizan la misma función de valuación $\V$.
 
     A su vez, tanto (A-zig) como (A-zag) son claramente satisfechos por $Z$.
 
-    Analicemos entonces (\KHilogic-zig) y (\KHilogic-zag).
+    Analicemos entonces ($\khi$-zig) y ($\khi$-zag).
 
     Primero, cabe resaltar que, por la definición de $Z$, para cada $X \subseteq \W$ se cumple que $X = Z(X)$.
 
     Ahora bien, notemos que cada plan de $\modults_2$ está también en $\modults_1$, y más aún, las aristas con las etiquetas 
     que aparecen en dichos planes son exactamente las mismas en ambos modelos. Juntando lo recién mencionado y el hecho de que 
-    $U = Z(U)$, es fácil notar que Z satisface (\KHilogic-zag).
+    $U = Z(U)$, es fácil notar que Z satisface ($\khi$-zag).
 
-    Luego solo queda ver que $Z$ satisface (\KHilogic-zig).
+    Luego solo queda ver que $Z$ satisface ($\khi$-zig).
 
     Sea $U, T \subseteq \W$ tal que $U$ es proposicionalmente definible y $U \ultsExecAgi T$, queremos ver que existe 
     $T' \subseteq \W$ tal que:
@@ -459,7 +459,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
 
     Notemos primero que si el plan que atestigua $U \ultsExecAgi T$ es de la forma $in_{\varphi_j}out_{\varphi_j}$, 
     entonces $T$ sirve como $T'$ dado que ese mismo plan y las mismas aristas con dichas etiquetas están en $\modults_2$, 
-    similar al análisis realizado para el caso (\KHilogic-zag).
+    similar al análisis realizado para el caso ($\khi$-zag).
 
     Entonces consideremos el caso en el que el plan que atestigua $U \ultsExecAgi T$ es $test$. En dicho caso, 
     si analizamos la definición de $\R$, ese plan puede ser fuertemente ejecutable sólo si $U \subseteq \{p_1,...,p_n\}$ 
@@ -486,7 +486,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     Finalmente, $T' := X$ nos sirve para demostrar que $Z(U) \ultsExecAgi T'$ y, a su vez, 
     $T' \subseteq X \subseteq U \cup \{e\} \subseteq T = Z(T)$.
 
-    Lo cual demuestra que $Z$ satisface (\KHilogic-zig). 
+    Lo cual demuestra que $Z$ satisface ($\khi$-zig). 
 
     Juntando los puntos mencionados, demostramos que $Z$ es una bisimulación entre $\modults_1$ y $\modults_2$, 
     por lo que $\tup{\modults_1,\modults_2} \in \KHiBisim$. 
@@ -539,7 +539,7 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     permite encontrar un $T'$ adecuado.
     
     Hemos analizado entonces todos los planes y ninguno permite encontrar un $T'$ que cumpla con lo requerido, 
-    luego $Z$ no satisface (\KHilogic-zig).
+    luego $Z$ no satisface ($\khi$-zig).
 
     Hemos demostrado entonces que $Z$ no es una \KHilogic-bisimulación.
 

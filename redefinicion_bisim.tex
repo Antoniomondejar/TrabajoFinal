@@ -2,14 +2,14 @@ La noción de bisimulación de una lógica modal nos permite relacionar dos mode
 que comparten entre sí, con las que se logra garantizar la equivalencia lógica entre ellos. En ese sentido, consideramos que la 
 bisimulación modela la idea de equivalencia en cuanto al comportamiento de ambos modelos respecto a una lógica en particular.
 
-Ahora bien, si analizamos la definición presentada en \ref{def:bisimulation}, podemos notar que en (\KHilogic-zig) y (\KHilogic-zag) se piden condiciones 
+Ahora bien, si analizamos la definición presentada en \ref{def:bisimulation}, podemos notar que en ($\khi$-zig) y ($\khi$-zag) se piden condiciones 
 sobre los conjuntos proposicionalmente definibles de cada modelo, lo cuál naturalmente no es una condición estructural del modelo, 
 ya que dichos conjuntos dependen de la existencia de una fórmula, es decir, un objeto puramente sintáctico de la lógica. 
 
 Es así como surge la motivación de esta sección. Propondremos una nueva noción de bisimulación para la lógica presentada, modificando las condiciones
-(\KHilogic-zig) y (\KHilogic-zag) para que solo analicen características estructurales de ambos modelos.
+($\khi$-zig) y ($\khi$-zag) para que sólo se consideren características estructurales de ambos modelos.
 
-Primero veremos algunos lemas para caracterizar los conjuntos proposicionalmente definibles de un modelo $\modults$.
+Primero veremos algunos lemas para caracterizar los conjuntos proposicionalmente definibles del dominio de un modelo $\modults$.
 
 \begin{lema}\label{ref:propositional-equivalence}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults, y sean $w$, $v \in \W$
@@ -58,7 +58,7 @@ Primero veremos algunos lemas para caracterizar los conjuntos proposicionalmente
     
 \end{demostracion}
 
-Ahora definimos para cada modelo una relación de equivalencia sobre su dominio, la cuál particiona a los nodos de acuerdo
+Definiremos para cada modelo una relación de equivalencia sobre su dominio, la cuál particiona a los nodos de acuerdo
 a su función de valuación.
 
 \begin{definicion}
@@ -72,9 +72,9 @@ a su función de valuación.
     \end{center}
 \end{definicion}
 
-Ahora estamos en condiciones de presentar esta propiedad de los conjuntos proposicionalmente definibles.
+Ahora estamos en condiciones de presentar esta propiedad de los conjuntos proposicionalmente definibles del dominio de un modelo $\modults$.
 
-\begin{lema}\label{ref:propositionaly-definable-lemma}
+\begin{lema}\label{ref:propositionally-definable-lemma}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $U \subseteq \W$ tal que $U$ es proposicionalmente definible, entonces
     \begin{center}
         para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$.
@@ -95,17 +95,17 @@ Ahora estamos en condiciones de presentar esta propiedad de los conjuntos propos
     lo que $v \in U$. Lo que nos dice que $s_i \subseteq U$ que era lo que queríamos demostrar.  
 \end{demostracion}
 
-A partir de esta propiedad, es como surge la nueva noción de bisimulación que proponemos para la lógica `Knowing-How' multi-agente con 
+A partir de esta propiedad, surge la nueva noción de bisimulación que proponemos para la lógica `Knowing-How' multi-agente con 
 incertidumbre.
 
-\begin{definicion}[\KHilogic-bisimulación redefinición]
+\begin{definicion}[\KHilogic-bisimulación$^*$]\label{def:bisim_redefinition}
     Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente.
-    Una relación binaria no vacía $Z \subseteq \W \times \W'$ es llamada una \KHilogic-bisimulación entre $\modults$ y 
+    Una relación binaria no vacía $Z \subseteq \W \times \W'$ es llamada una \KHilogic-bisimulación$^*$ entre $\modults$ y 
     $\modults'$ si y sólo si $(w,w') \in Z$ implica lo siguiente
     \begin{itemize}
         \item \textbf{Atom}: $\V(w)=\V'(w')$.
 
-        \item \textbf{$\khi$-Zig}: Sea $U \subseteq \W$ tal que para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W'$ tal que
+        \item \textbf{$\khi$-zig$^*$}: Sea $U \subseteq \W$ tal que para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W'$ tal que
         \begin{multicols}{2}
             \begin{cond-bisim}
                 \item $Z(U) \ultsExecAgi T'$, 
@@ -113,7 +113,7 @@ incertidumbre.
             \end{cond-bisim}
         \end{multicols}
         
-        \item \textbf{$\khi$-Zag}: Sea $U' \subseteq \W'$ tal que para cada $s_i' \in \rho_{\modults'}$ se cumple que $s_i' \cap U' = \emptyset$ o $s_i' \subseteq U'$, si $U' \ultsExecAgi T'$ para algún $T' \subseteq \W'$, entonces existe $T \subseteq \W$ tal que
+        \item \textbf{$\khi$-zag$^*$}: Sea $U' \subseteq \W'$ tal que para cada $s_i' \in \rho_{\modults'}$ se cumple que $s_i' \cap U' = \emptyset$ o $s_i' \subseteq U'$, si $U' \ultsExecAgi T'$ para algún $T' \subseteq \W'$, entonces existe $T \subseteq \W$ tal que
         \begin{multicols}{2}
             \begin{cond-bisim}
                 \item $Z^{-1}(U') \ultsExecAgi T$,
@@ -121,19 +121,179 @@ incertidumbre.
             \end{cond-bisim}
         \end{multicols}
 
-        \item \textbf{A-Zig}: para cada $u \in \W$ existe $u' \in \W'$ tal que $(u,u') \in Z$.
+        \item \textbf{A-zig}: para cada $u \in \W$ existe $u' \in \W'$ tal que $(u,u') \in Z$.
 
-        \item \textbf{A-Zag}: para cada $u' \in \W'$ existe $u \in \W$ tal que $(u,u') \in Z$.
+        \item \textbf{A-zag}: para cada $u' \in \W'$ existe $u \in \W$ tal que $(u,u') \in Z$.
     \end{itemize} 
 
-    Escribiremos $\modults,w \bisim' \modults',w'$ (quizás usar nuevo símbolo) cuando exista una \KHilogic-bisimulación $Z$ entre
+    Escribiremos $\modults,w \bisim^* \modults',w'$ cuando exista una \KHilogic-bisimulación$^*$ $Z$ entre
     $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
 \end{definicion}
 
-Una vez definida la nueva noción, notemos que \ref{ref:propositionaly-definable-lemma} nos permite demostrar de forma casi directa que
-toda relación binaria que satisface las nuevas condiciones presentadas de (\KHilogic-zig) y (\KHilogic-zag) también satisface las condiciones
+Una vez definida la nueva noción, notemos que \ref{ref:propositionally-definable-lemma} nos permite demostrar de forma casi directa que
+toda relación binaria que satisface las nuevas condiciones presentadas de ($\khi$-zig$^*$) y ($\khi$-zag$^*$) también satisface las condiciones
 presentadas en \ref{def:bisimulation}.
 
-\begin{lema}
-    Sea $Z$ una bisimulación con la nueva def, entonces $Z$ es una bisimulación con la vieja def. (reescribir).
+\begin{lema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-bisimilitud]\label{ref:new_bisim-implies-old_bisim}
+    Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Si $Z \subseteq \W \times \W'$ es una \KHilogic-bisimulación$^*$ entonces $Z$ es una \KHilogic-bisimulación.
 \end{lema}
+
+\begin{demostracion}
+    Queremos ver que $Z$ es una \KHilogic-bisimulación.
+
+    Notemos que $Z$ satisface (Atom), (A-zig) y (A-zag) dado que $Z$ es una \KHilogic-bisimulación$^*$.
+
+    Veamos entonces que satisface ($\khi$-zig) y ($\khi$-zag).
+
+    \begin{itemize}
+        \item ($\khi$-zig) Sea $U \subseteq \W$ proposicionalmente definible y sea $T \subseteq \W$ tal que $U \ultsExecAgi T$, queremos ver que existe
+        $T' \subseteq \W'$ tal que
+
+        \begin{multicols}{2}
+            \begin{cond-bisim}
+                \item $Z(U) \ultsExecAgi T'$, 
+                \item $T' \subseteq Z(T)$.
+            \end{cond-bisim}
+        \end{multicols}
+        Notemos que como $U$ es proposicionalmente definible entonces por \ref{ref:propositionally-definable-lemma}, $U$ satisface que para cada $s_i \in \rho_\modults$ se cumple
+        que $s_i \cap U = \emptyset$ o $s_i \subseteq U$.
+    
+        Luego como $Z$ satisface ($\khi$-zig$^*$) tenemos asegurada la existencia de dicho $T'$.
+    
+        \item ($\khi$-zag) Análogo a ($\khi$-zig).
+    \end{itemize}
+
+    Finalmente hemos demostrado que $Z$ es una \KHilogic-bisimulación.
+\end{demostracion}
+
+Ahora bien, notemos como este lema nos permite demostrar el Teorema de Invarianza para nuestra nueva noción de bisimulación.
+
+\begin{teorema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-equivalencia]
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados, entonces
+    \begin{center}
+        $\modults,w \bisim^* \modults',w'$ implica $\modults,w \modequiv \modults',w'$.
+    \end{center}
+\end{teorema}
+
+\begin{demostracion}
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tales que $\modults,w \bisim^* \modults',w'$, entonces existe $Z$ \KHilogic-bisimulación$^*$
+    entre $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
+    
+    Luego por \ref{ref:new_bisim-implies-old_bisim} sabemos que $Z$ es una \KHilogic-bisimulación, y como $(w,w') \in Z$ entonces $\modults,w \bisim \modults',w'$.
+
+    Finalmente, por \ref{ref:bisim-implies-equivalence}, tenemos que $\modults,w \modequiv \modults',w'$.
+\end{demostracion}
+
+Una vez demostrado el Teorema de Invarianza para la noción propuesta, nos gustaría demostrar que también se mantiene la otra dirección en
+el caso finito. 
+
+Para lograr esto, primero fortaleceremos la propiedad dada en \ref{ref:propositionally-definable-lemma} para el caso finito.
+
+\begin{lema}\label{ref:finite-propositionally-definable-lemma}
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults finito y sea $U \subseteq \W$, entonces
+    para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$ si y sólo si $U$ es proposicionalmente definible.
+\end{lema}
+
+\begin{demostracion}
+    Notar que la direccion ($\leftarrow$) está demostrada en \ref{ref:propositionally-definable-lemma}. Entonces demostremos ($\rightarrow$).
+
+    Supongamos que para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$.
+
+    Primero, notemos que como $\modults$ es finito, entonces existen un número finito de variables proposicionales $p_1,...,p_n$ que aparecen en la imagen de $\V$ para algún $w \in \W$.
+
+    Ahora bien, por un lado si $U = \emptyset$, luego la fórmula $ \varphi := \bot$ define a $U$. Entonces supongamos que $U \neq \emptyset$. 
+    
+    Sea $S = \{s_1,...,s_m\}$ tal que cada $s_i \subseteq U$. Recordar que cada $s_i$ es una clase de equivalencia de la relación $A_\modults$. A su vez, para cada $w$, $v \in s_i$ se cumple que $\V(w) = \V(v)$. Se utilizará $\V(s_i)$ para hacer referencia a $\V(w)$ para cada $w \in s_i$.
+
+    Sea $\varphi_i := \bigwedge\limits_{j = 1}^{n} l_i(p_j)$ donde $l_i(p_j) = $
+    $\left\{ \begin{array}{rcl}
+            p_j & \mbox{si}
+            & p_j \in \V(s_i) \\ \neg p_j & \mbox{si} & p_j \notin \V(s_i) \\
+            \end{array}\right. 
+    $.
+
+    Veamos que por la forma en la que construimos $\varphi_i$, se cumple que $\modults, w \models \varphi_i$ si y sólo si $w \in s_i$. ($*$)
+    
+    Demostremos entonces que $\varphi := \bigvee\limits_{i = 1}^{m}\varphi_i$ define a $U$. Primero, notar que sea $w \in \W$, $\modults, w \models \varphi$ si y sólo si $\modults, w \models \varphi_i$ para algún $i \in \{1,...m\}$.  
+
+    Queremos ver entonces que, $w \in U$ si y sólo si $\modults, w \models \varphi$. 
+
+    Sea $w \in U$, por hipótesis, existe $s_i$ tal que $w \in s_i$ y a su vez $s_i \subseteq U$. Pues notar que como $w \in U$ entonces $s_i \cap U \neq \emptyset$, luego necesariamente $s_i \subseteq U$.
+    
+    Ahora bien, por $(*)$, $\modults, w \models \varphi_i$, por lo que $\modults, w \models \varphi$.
+
+    Sea $w \in \W$ tal que $\modults, w \models \varphi$, entonces existe $i \in \{1,...,m\}$ tal que $\modults, w \models \varphi_i$. Luego por $(*)$, $w \in s_i$, lo que nos dice que $w \in U$.
+
+    Luego $\varphi$ define a $U$.
+    
+    Como $\varphi$ es proposicional, $U$ es proposicionalmente definible.
+\end{demostracion}
+
+Ahora bien, notemos como este fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \ref{ref:new_bisim-implies-old_bisim}.
+
+\begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{ref:finite-old_bisim-implies-new_bisim}
+    Sean $\modults$ y $\modults'$ dos \ultss finitos, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
+    \begin{center}
+        $Z$ es una \KHilogic-bisimulación$^*$ si y sólo si $Z$ es una \KHilogic-bisimulación.
+    \end{center}
+\end{lema}
+
+\begin{demostracion}
+    Notar que la dirección ($\rightarrow$) está demostrada en \ref{ref:new_bisim-implies-old_bisim}, entonces demostremos ($\leftarrow$).
+    
+    Sea $Z$ una \KHilogic-bisimulación, veamos que es una \KHilogic-bisimulación$^*$.
+
+    Notemos que $Z$ satisface (Atom), (A-zig) y (A-zag) dado que $Z$ es una \KHilogic-bisimulación.
+
+    Así que demostremos que $Z$ satisface ($\khi$-zig) y ($\khi$-zag).
+
+    \begin{itemize}
+        \item ($\khi$-zig) Sea $U \subseteq \W$ tal que para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$ 
+        y sea $T subseteq \W$ tal que $U \ultsExecAgi T$, queremos ver que existe $T' \subseteq \W'$ tal que
+
+        \begin{multicols}{2}
+            \begin{cond-bisim}
+                \item $Z(U) \ultsExecAgi T'$, 
+                \item $T' \subseteq Z(T)$.
+            \end{cond-bisim}
+        \end{multicols}
+
+        Notemos que como para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$ y $\modults$ es finito entonces 
+        por \ref{ref:finite-propositionally-definable-lemma} $U$ es proposicionalmente definible.
+    
+        Luego como $Z$ satisface ($\khi$-zig$^*$) tenemos asegurada la existencia de dicho $T'$.
+    
+        \item ($\khi$-zag) Análogo a ($\khi$-zig). 
+    \end{itemize}
+
+    Finalmente hemos demostrado que $Z$ es una \KHilogic-bisimulación.
+\end{demostracion}
+
+Y como demostramos que en el caso finito ambas nociones de bisimulación son equivalentes, estamos en condiciones de demostrar el teorema deseado. 
+
+
+\begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud$^*$]
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
+    \begin{center}
+        $\model,w \modequiv \model', w'$ implica $\model,w \bisim^* \model', w'$.
+    \end{center}
+\end{teorema}
+
+\begin{demostracion}
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos tales que $\model,w \modequiv \model', w'$, entonces por \ref{ref:finite-equivalence-implies-bisim}
+    tenemos que $\model,w \bisim \model', w'$. Luego existe $Z$ \KHilogic-bisimulación tal que $(w,w') \in Z$.
+
+    Ahora bien, por \ref{ref:finite-old_bisim-implies-new_bisim} tenemos que $Z$ es una \KHilogic-bisimulación$^*$.
+
+    Finalmente, como $(w,w') \in Z$ entonces $\model,w \bisim^* \model', w'$.
+\end{demostracion}
+
+Hemos presentado una nueva noción de bisimulación para la lógica `Knowing How' multi-agente basada en la incertidumbre, la 
+cuál pide condiciones únicamente estructurales entre los modelos en cuestión. A su vez demostramos las principales propiedades que se 
+esperan a la hora de proponer una noción de bisimulación para una lógica modal, lo cuál sugiere que la nueva definición es adecuada.
+
+Teniendo en cuenta lo estudiado en esta sección, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.
+Por una cuestión de simplicidad, descartaremos los $*$ cuando hablemos de una \KHilogic-bisimulación$^*$ y 
+al relacionar dos \ultss punteados a partir de $\bisim^*$.  
+
+
