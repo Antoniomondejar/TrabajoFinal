@@ -1,6 +1,7 @@
+\chapter{Marco Teórico: Lógica `Knowing How' Multi-Agente Basada en la Incertidumbre}
 Se introducirá ahora la lógica `Knowing-How' multi-agente basada en la incertidumbre (\KHilogic), presentada en \cite{ArecesFSV25}.
 
-\subsection[short]{Sintaxis y Semántica}
+\section{Sintaxis y Semántica}
 Consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable 
 y a $\AGT$ como un conjunto no vacío de agentes con cardinalidad contable. 
 
@@ -31,7 +32,7 @@ Antes de definir la semántica de la lógica, se definirán algunos conceptos qu
 \end{definicion}
 
 \begin{definicion}[\lts basado en la incertidumbre]
-    Un \emph{\lts-multiagente basado en la incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
+    Un \emph{\lts-multi-agente basado en la incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
     donde $\tup{\W,\R,\V,\ACT}$ es un \lts y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
     $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un \ults $\modults$ y $w \in \W$, se llamará 
     al par $(\modults,w)$ un \ults punteado.
@@ -95,11 +96,11 @@ A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un 
     \begin{tabular}{@{}l@{\;\;\;}c@{\;\;\;}l@{}}
         $\modults,w \models p$ & \iffdef & $p\in\V(w)$, \\
         $\modults,w \models \neg\varphi$ & \iffdef & $\modults,w \not\models\varphi$, \\ 
-        $\modults,w \models \varphi\vee\psi$ & \iffdef & $\modults,w \models \varphi \,\mbox{ or }\, \modults,w \models\psi$, \\
+        $\modults,w \models \varphi\vee\psi$ & \iffdef & $\modults,w \models \varphi \,\mbox{ o }\, \modults,w \models\psi$, \\
         $\modults,w \models \khi(\psi,\varphi)$ & \iffdef & \begin{minipage}[t]{0.68\textwidth}
                                                          existe $\strategy \in \S_i$ tal que \\
                                                          {\centering
-                                                           \begin{inline-cond-kh}\item $\truthset{\modults}{\psi} \subseteq \sexec(\strategy)$ and \item $\R_\strategy(\truthset{\modults}{\psi}) \subseteq \truthset{\modults}{\varphi}$,\end{inline-cond-kh}
+                                                           \begin{inline-cond-kh}\item $\truthset{\modults}{\psi} \subseteq \sexec(\strategy)$ y \item $\R_\strategy(\truthset{\modults}{\psi}) \subseteq \truthset{\modults}{\varphi}$,\end{inline-cond-kh}
                                                           }
                                                        \end{minipage}
     \end{tabular}
@@ -110,14 +111,14 @@ A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un 
 
 
 Notar que $\khi(\psi,\varphi)$ vale en un estado $w$ cuando existe un conjunto de planes $\pi$ tal que al ejecutar cualquier plan $\sigma \in \pi$ a partir de un estado donde vale $\psi$,
-completará cualquier ejecución parcial terminando en un estado donde vale $\varphi$. También, cabe destacar que como $w$ no tiene ningún rol en la cláusula semántica de $\khi$,
+toda ejecución parcial puede ser completada terminando en un estado donde vale $\varphi$. También, cabe destacar que como $w$ no tiene ningún rol en la cláusula semántica de $\khi$,
 dicho operador actúa \emph{globalmente}. Por lo tanto, $\truthset{\modults}{\khi(\psi,\varphi)}$ es $\W$ o $\emptyset$.
 
 
-\subsection[short]{Bisimulación}
+\section{Bisimulación}
 
 La bisimulación es una herramienta crucial a la hora de analizar el poder expresivo de un lenguaje formal. Se presentará aquí su definición junto con algunos resultados 
-deseables a la hora de estudiar la noción de bisimulación de una lógica modal, los cuáles fueron estudiados en \cite{ArecesFSV25}.
+deseables a la hora de estudiar la noción de bisimulación de una lógica modal, los cuáles fueron demostrados en \cite{ArecesFSV25}.
 
 Primero, introduciremos una notación que nos será útil.
 
@@ -136,7 +137,7 @@ Primero, introduciremos una notación que nos será útil.
 Una observación que surge de esta definición es que si un conjunto es proposicionalmente definible entonces es \KHilogic-definible, dado que 
 toda fórmula proposicional sobre $\PROP$ es también una \KHilogic-fórmula.
 
-Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice que vale también la recíproca, 
+Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice que también vale la recíproca, 
 es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
 
 \begin{proposicion}
@@ -151,13 +152,13 @@ Ahora si, presentamos la noción de bisimulación.
         \item Sea $u \in W$ y $U \subseteq \W$, definimos
         \begin{nscenter}
             \begin{tabular}{@{}c@{}}
-                $Z(u) := \csetsc{u' \in \W'}{uZu'}$, \qquad $Z(U) := \bigcup_{u \in U} Z(u)$.
+                $Z(u) := \csetsc{u' \in \W'}{(u,u') \in Z}$, \qquad $Z(U) := \bigcup_{u \in U} Z(u)$.
             \end{tabular}
         \end{nscenter}
         \item Sea $u' \in \W'$ y $U' \subseteq \W'$, definimos
         \begin{nscenter}
             \begin{tabular}{@{}c@{}}
-                $Z^{-1}(u') := \csetsc{u \in \W}{uZu'}$; \qquad $Z^{-1}(U') := \bigcup_{u' \in U'} Z^{-1}(u')$.
+                $Z^{-1}(u') := \csetsc{u \in \W}{(u,u') \in Z}$; \qquad $Z^{-1}(U') := \bigcup_{u' \in U'} Z^{-1}(u')$.
             \end{tabular}
         \end{nscenter}
     \end{itemize}

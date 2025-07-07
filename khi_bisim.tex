@@ -1,3 +1,5 @@
+\chapter{\KHilogic-Bisimulación entre dos modelos}
+
 Como mencionamos en la anterior sección (todavía no hay nada escrito pero esta idea la saco de lo que dijo Carlos),
 a la hora de definir una noción de bisimulación para una lógica modal, es deseable que la misma
 tenga una naturaleza procedural, es decir, que naturalmente exista un procedimiento que dados dos
@@ -275,8 +277,8 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
             por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
             \item (A-zag) Similarmente, si $Z'$ no satisface (A-zag) el algoritmo lo identifica en la tercer línea y 
             nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
-            \item ($\khi$-zig) Supongamos entonces que $Z'$ no satisface ($\khi$-zig), luego existen $U, T$ tal que
-            $U \ultsExecAgi T$ con $U$ proposicionalmente definible, y a su vez, no existe $T'$ tal que $Z'(U) \ultsExecAgi T'$ y 
+            \item ($\khi$-zig) Supongamos entonces que $Z'$ no satisface ($\khi$-zig), luego existen $U, T \subseteq \W$ tal que
+            $U \ultsExecAgi T$ con $U$ proposicionalmente definible, y a su vez, no existe $T' \subseteq \W'$ tal que $Z'(U) \ultsExecAgi T'$ y 
             $T' \subseteq Z'(T)$.
 
             Analicemos entonces la ejecución de CheckBisimilarity($\modults_1,\modults_2,\tup{U,1}$).

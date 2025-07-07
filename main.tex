@@ -1,5 +1,4 @@
-\documentclass[a4paper,10pt]{article}
-\pagestyle{plain}
+\documentclass[a4paper,12pt,oneside,openright]{report}
 
 % this is for dealing with the Too many math alphabets used in version normal" compiling error
 \newcommand\hmmax{0} 
@@ -17,7 +16,7 @@
 \usepackage{xspace}
 \usepackage{underscore}
 \usepackage{upgreek}
-\usepackage[textsize=scriptsize]{todonotes}
+% \usepackage[textsize=scriptsize]{todonotes}
 \usepackage{lineno}
 \usepackage{pxfonts}
 \usepackage{algorithm}
@@ -51,6 +50,10 @@
   citecolor         = BrickRed          % color de las referencias
 }
 
+% para la tabla de contenido
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
 %------------------------------------------------------------------------------------------------
 
 
@@ -66,20 +69,24 @@
 
 \maketitle
 
-\section{Marco Teórico: Lógica `Knowing How' Multi-Agente Basada en la Incertidumbre}
-    \input{marco_teorico}
+{\hypersetup{linkcolor=black}%
+\tableofcontents}
+\cleardoublepage
 
-\section{Redefiniendo la Noción de Bisimulación}
-    \input{redefinicion_bisim}
+% \section{Marco Teórico: Lógica `Knowing How' Multi-Agente Basada en la Incertidumbre}
+\input{marco_teorico}
 
-\section{\KHilogic-Bisimulación entre dos modelos}
-    \input{khi_bisim}
+% \section{Redefiniendo la Noción de Bisimulación}
+\input{redefinicion_bisim}
+
+% \section{\KHilogic-Bisimulación entre dos modelos}
+\input{khi_bisim}
         
-\section{Contracción por Bisimulación para Lógica `Knowing How'}
-    \input{contraccion_bisim}
+% \section{Contracción por Bisimulación para Lógica `Knowing How'}
+\input{contraccion_bisim}
 
-\section{Ideas sueltas}
-    \input{ideas_sueltas}
+% \section{Ideas sueltas}
+\input{ideas_sueltas}
 
 
 \bibliographystyle{plain}
