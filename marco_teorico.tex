@@ -220,7 +220,7 @@ a partir de propiedades puramente estructurales de los modelos.
 
 En [\cite{FervariVQW21}, sección 2] se presenta un contraejemplo que atestigua que la recíproca del teorema no es cierta para cualquier par de modelos.
 Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar en qué clases de modelos vale la recíproca del teorema.
-En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca, el cuál es un gran resultado en términos computacionales. (si tengo un algoritmo que decide existencia de bisimulacion entonces decide equivalencia entre modelos).
+En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca.
 
 \begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]\label{ref:finite-equivalence-implies-bisim}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
@@ -228,3 +228,7 @@ En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíp
         $\model,w \modequiv \model', w'$ implica $\model,w \bisim \model', w'$.
     \end{center}
 \end{teorema}
+
+Notemos que este teorema es un gran resultado en términos computacionales. Como los algoritmos trabajan siempre con modelos finitos, este resultado
+nos dice que si se consigue un procedimiento efectivo que decida bisimilitud entre dos \ultss punteados, dicho procedimiento estará decidiendo a la vez
+equivalencia lógica entre los \ultss punteados en cuestión.

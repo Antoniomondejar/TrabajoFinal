@@ -5,11 +5,19 @@ que comparten entre sí, con las que se logra garantizar la equivalencia lógica
 bisimulación modela la idea de equivalencia en cuanto al comportamiento de ambos modelos respecto a una lógica en particular.
 
 Ahora bien, si analizamos la definición presentada en \ref{def:bisimulation}, podemos notar que en ($\khi$-zig) y ($\khi$-zag) se piden condiciones 
-sobre los conjuntos proposicionalmente definibles de cada modelo, lo cuál naturalmente no es una condición estructural de los modelos, 
+sobre los conjuntos proposicionalmente definibles de los dominios de cada modelo, lo cuál naturalmente no es una condición estructural de los modelos, 
 ya que dichos conjuntos dependen de la existencia de una fórmula, es decir, un objeto puramente sintáctico de la lógica. 
 
+A su vez, a la hora de presentar una noción de bisimulación, es deseable que la misma tenga una naturaleza `procedural', es decir,
+que dada una relación binaria entre los dominios de dos modelos sea posible diseñar un procedimiento efectivo que verifique si dicha relación 
+es una bisimulación.
+
+Nuevamente, si analizamos la definicion presentada en la sección anterior, podemos notar que para verificar que una relación binaria es una bisimulación
+tenemos que explorar necesariamente los conjuntos proposicionalmente definibles de los dominios de cada modelo, lo cuál lleva consigo una cantidad 
+infinita de fórmulas proposicionales que analizar, por lo que no parece una tarea sencilla encontrar un procedimiento efectivo que realice lo deseado.
+
 Es así como surge la motivación de esta sección. Propondremos una nueva noción de bisimulación para la lógica presentada, modificando las condiciones
-($\khi$-zig) y ($\khi$-zag) para que sólo se consideren características estructurales de ambos modelos.
+($\khi$-zig) y ($\khi$-zag) para que sólo se consideren características estructurales de ambos modelos, y, a su vez, se tenga una naturaleza procedural.
 
 Primero veremos algunos lemas para caracterizar los conjuntos proposicionalmente definibles del dominio de un modelo $\modults$.
 
@@ -97,7 +105,7 @@ Ahora estamos en condiciones de presentar esta propiedad de los conjuntos propos
     lo que $v \in U$. Lo que nos dice que $s_i \subseteq U$ que era lo que queríamos demostrar.  
 \end{demostracion}
 
-A partir de esta propiedad, surge la nueva noción de bisimulación que proponemos para la lógica `Knowing-How' multi-agente con 
+A partir de esta propiedad, surge la nueva noción de bisimulación que proponemos para la lógica `Knowing-How' multi-agente basada en la 
 incertidumbre.
 
 \begin{definicion}[\KHilogic-bisimulación$^*$]\label{def:bisim_redefinition}
@@ -251,7 +259,7 @@ Ahora bien, notemos como este fortalecimiento de la propiedad sobre los conjunto
 
     \begin{itemize}
         \item ($\khi$-zig) Sea $U \subseteq \W$ tal que para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o $s_i \subseteq U$ 
-        y sea $T subseteq \W$ tal que $U \ultsExecAgi T$, queremos ver que existe $T' \subseteq \W'$ tal que
+        y sea $T \subseteq \W$ tal que $U \ultsExecAgi T$, queremos ver que existe $T' \subseteq \W'$ tal que
 
         \begin{multicols}{2}
             \begin{cond-bisim}
@@ -292,6 +300,9 @@ Y como demostramos que en el caso finito ambas nociones de bisimulación son equ
 Hemos presentado una nueva noción de bisimulación para la lógica `Knowing How' multi-agente basada en la incertidumbre, la 
 cuál pide condiciones puramente estructurales entre los modelos en cuestión. A su vez demostramos las principales propiedades que se 
 esperan a la hora de proponer una noción de bisimulación para una lógica modal, lo cuál sugiere que la nueva definición es adecuada.
+
+También, podemos notar que la noción propuesta evita la necesidad de recorrer cada fórmula proposicional para verificar que una relación binaria
+es una bisimulación, lo cuál le aporta una naturaleza más procedural como mencionamos al principio de la sección.  
 
 Teniendo en cuenta lo estudiado en esta sección, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.
 Por una cuestión de simplicidad, descartaremos los $*$ cuando hablemos de una \KHilogic-bisimulación$^*$ y 
