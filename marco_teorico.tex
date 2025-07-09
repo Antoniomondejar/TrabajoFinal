@@ -110,7 +110,7 @@ A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un 
 \end{definicion}
 
 
-Notar que $\khi(\psi,\varphi)$ vale en un estado $w$ cuando existe un conjunto de planes $\pi$ tal que al ejecutar cualquier plan $\sigma \in \pi$ a partir de un estado donde vale $\psi$,
+Notar que $\khi(\psi,\varphi)$ vale en un estado $w$ cuando existe un conjunto de planes $\pi$ que el agente $i$ considera indistinguibles, tal que al ejecutar cualquier plan $\sigma \in \pi$ a partir de un estado donde vale $\psi$,
 toda ejecución parcial puede ser completada terminando en un estado donde vale $\varphi$. También, cabe destacar que como $w$ no tiene ningún rol en la cláusula semántica de $\khi$,
 dicho operador actúa \emph{globalmente}. Por lo tanto, $\truthset{\modults}{\khi(\psi,\varphi)}$ es $\W$ o $\emptyset$.
 
@@ -140,7 +140,7 @@ toda fórmula proposicional sobre $\PROP$ es también una \KHilogic-fórmula.
 Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice que también vale la recíproca, 
 es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
 
-\begin{proposicion}
+\begin{proposicion}\label{ref:khi_definable-implies-propositionally_definable}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Para todo $U \subseteq \W$, si $U$ es \KHilogic-definible, entonces $U$ es proposicionalmente definible.
 \end{proposicion}
 

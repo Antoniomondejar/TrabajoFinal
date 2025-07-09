@@ -239,7 +239,23 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \ref{ref:propositi
     Como $\varphi$ es proposicional, $U$ es proposicionalmente definible.
 \end{demostracion}
 
-Ahora bien, notemos como este fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \ref{ref:new_bisim-implies-old_bisim}.
+De esta lema obtenemos un corolario sobre el problema de determinar si un subconjunto del dominio de un \ults es \KHilogic-definible.
+
+\begin{corolario}[\KHilogic-definibilidad]
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults finito y sea $U \subseteq \W$, el problema de determinar si $U$ es 
+    \KHilogic-definible está en $\Poly$.
+\end{corolario}
+
+\begin{demostracion}
+
+    Primero, notemos que determinar si $U$ es \KHilogic-definible es equivalente a determinar si $U$ es proposicionalmente definible, por lo visto en 
+    \ref{ref:khi_definable-implies-propositionally_definable}.
+
+    Luego, por \ref{ref:finite-propositionally-definable-lemma}, basta con dar un algoritmo que compute $\rho_\modults$ y para cada $s_i \in \rho_\modults$ 
+    chequee que $s_i \subseteq U$ o $s_i \cap U = \emptyset$. Lo cuál es claro que puede realizarse en tiempo polinomial sobre el tamaño de $\modults$.
+\end{demostracion}
+
+Ahora bien, notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \ref{ref:new_bisim-implies-old_bisim}.
 
 \begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{ref:finite-old_bisim-implies-new_bisim}
     Sean $\modults$ y $\modults'$ dos \ultss finitos, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
@@ -306,6 +322,4 @@ es una bisimulación, lo cuál le aporta una naturaleza más procedural como men
 
 Teniendo en cuenta lo estudiado en esta sección, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.
 Por una cuestión de simplicidad, descartaremos los $*$ cuando hablemos de una \KHilogic-bisimulación$^*$ y 
-al relacionar dos \ultss punteados a partir de $\bisim^*$.  
-
-
+al relacionar dos \ultss punteados a partir de $\bisim^*$.

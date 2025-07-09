@@ -1,14 +1,16 @@
 \chapter{\KHilogic-Bisimulación entre dos modelos}
 
-Como mencionamos en la anterior sección, a la hora de definir una noción de bisimulación para una lógica modal, 
+Como mencionamos en el anterior capítulo, a la hora de definir una noción de bisimulación para una lógica modal, 
 es deseable que la misma tenga una naturaleza procedural, es decir, que naturalmente exista un procedimiento que dados dos
 modelos y una relación binaria entre ellos pueda decidir si dicha relación es una bisimulación.
 
 Ahora bien, esta naturaleza procedural para verificar si una relación entre dos modelos es una bisimulación,
 también nos permite encontrar un procedimiento efectivo que decida si existe una bisimulación entre dos modelos.
 
-De esta discusión surge la pregunta que se encara a lo largo de esta sección. ¿Cuál es la dificultad intrínseca 
+De esta discusión surge la pregunta que se encara a lo largo de este capítulo. ¿Cuál es la dificultad intrínseca 
 de los problemas mencionados?.
+
+\section{$\KHiBisim$}
 
 \begin{definicion}
     Definimos el problema de decidir si existe una \KHilogic-bisimulación entre dos modelos como:
@@ -184,10 +186,10 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
                     \ForAll{$S_i$}
                         \ForAll{$\pi \in \S_i$}
                             \If{$U \subseteq \sexec(\pi)$}
-                            \State $foundStrat \gets False$
+                            \State $foundStrat \gets false$
                                 \ForAll{$\pi' \in \S_i'$}
                                     \If{$Z'(U) \subseteq \sexec(\pi') \wedge \R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$}
-                                        \State $foundStrat \gets True$
+                                        \State $foundStrat \gets true$
                                     \EndIf         
                                 \EndFor
                                 \If{$\neg foundStrat$}
@@ -563,3 +565,6 @@ Antes de este resultado debería ir el lema de que \KHilogic-definability es pol
     A partir de los lemas 5 y 6, queda demostrado que $\KHiBisim$ es $\coNP$-completo.
 
 \end{demostracion}
+
+
+\section{Equivalencia vía Reducción de Karp con el Caso Punteado}
