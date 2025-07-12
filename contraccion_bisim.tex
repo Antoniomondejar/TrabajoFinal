@@ -169,13 +169,15 @@ incertidumbre.
     \end{center}
 \end{definicion}
 
-Recordemos ahora la definición dada en \ref{def:A_m}, y veamos el siguiente teorema que caracteriza la autobisimulación máxima de un modelo.
+Ahora bien, recordemos la definición de $A_\modults$ y de $\rho_\modults$, introducida en \ref{def:A_m}, y veamos el siguiente teorema 
+que caracteriza la autobisimulación máxima de un modelo.
 
 \begin{teorema}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, entonces se cumple que,
     \begin{itemize}
         \item $A_\modults$ es una autobisimulación de $\modults$.
-        \item Sea $Z \subseteq \W \times \W$ una autobisimulación de $\modults$ entonces $Z \subseteq A_\modults$. Es decir, $A_\modults $ es la máxima autobisimulación de $\modults$. 
+        \item Sea $Z \subseteq \W \times \W$ una autobisimulación de $\modults$ entonces $Z \subseteq A_\modults$. 
+        Es decir, $A_\modults $ es la máxima autobisimulación de $\modults$. 
     \end{itemize}
 \end{teorema}
 
@@ -188,8 +190,8 @@ Recordemos ahora la definición dada en \ref{def:A_m}, y veamos el siguiente teo
             \item (Atom) Dado $(w,v) \in A_\modults$, por definición de $A_\modults$, se cumple que $\V(w) = \V(v)$.
             \item (A-Zig) Notemos que $A_\modults$ es una relación de equivalencia, luego para cada $w\in \W$ se cumple que $(w,w) \in A_\modults$.
             \item (A-zag) Podemos utilizar el mismo argumento que en (A-zig) para demostrar este caso.
-            \item (\KHilogic-Zig) Queremos ver que para cada $U \subseteq \W$ proposicionalmente definible, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, 
-            entonces existe $T' \subseteq \W$ tal que
+            \item ($\khi$-zig) Sea $U \subseteq \W$ tal que para cada $s_i \in \rho_\modults$ se cumple que $s_i \cap U = \emptyset$ o 
+            $s_i \subseteq U$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W$ tal que
                 \begin{multicols}{2}
                     \begin{itemize}
                         \item $A_\modults(U) \ultsExecAgi T'$, 
@@ -197,19 +199,17 @@ Recordemos ahora la definición dada en \ref{def:A_m}, y veamos el siguiente teo
                     \end{itemize}
                 \end{multicols}
 
-            Sean $U,T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W$ que cumpla lo mencionado.
-
-            Como $U$ es proposicionalmente definible, entonces existe $\varphi$ proposicional tal que $w \in U$ si y sólo si $\modults, w \models \varphi$.
+            Sean $U,T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y $U$ es tal que para cada $s_i \in \rho_\modults$ se cumple que 
+            $s_i \cap U = \emptyset$ o $s_i \subseteq U$, queremos encontrar $T' \subseteq \W$ que cumpla lo mencionado.
             
             Demostremos por un lado que $U = A_\modults(U)$:
             
             ($\subseteq$) Siguiendo el argumento usado en (A-Zig), es claro que para $w \in U$ se cumple que $w \in A_\modults(U)$, pues $(w,w) \in A_\modults$ para cada $w \in \W$. 
             
             ($\supseteq$) Sea $v \in A_\modults(U)$, queremos ver que $v \in U$.
-            Como $v \in A_\modults(U)$, entonces existe $w \in U$ tal que $(w,v) \in A_\modults$. Luego, como $(w,v) \in A_\modults$ entonces $\V(w) = \V(v)$. 
+            Como $v \in A_\modults(U)$, entonces existe $w \in U$ tal que $(w,v) \in A_\modults$ y, por lo tanto, $v \in [w]$.
             
-            Ahora bien, como $w \in U$ y $\varphi$ define a $U$, esto nos dice que $\modults, w \models \varphi$. 
-            Pero por Lema 1, como $\V(w) = \V(u)$ y $\varphi$ es proposicional entonces $\modults, v \models \varphi$, luego $v \in U$.
+            Ahora bien, como $w \in U$ entonces $[w] \subseteq U$. Luego $v \in U$.
 
             Entonces demostramos que $U = A_\modults(U)$.
 
@@ -221,9 +221,9 @@ Recordemos ahora la definición dada en \ref{def:A_m}, y veamos el siguiente teo
                 \item $A_\modults(U) \ultsExecAgi T'$, pues dijimos $A_\modults(U) = U$, y por hipótesis, $U \ultsExecAgi T = T'$.  
                 \item $T' \subseteq A_\modults(T')$ pues esto se cumple para todo $X \subseteq \W$.
             \end{itemize}
-            Luego queda demostrado que $A_\modults$ satisface (\KHilogic-Zig).
+            Luego queda demostrado que $A_\modults$ satisface ($\khi$-zig).
 
-            \item (\KHilogic-Zag) Análogo a (\KHilogic-Zig), pues notemos que como $A_\modults$ es una relación de equivalencia, es simétrica.
+            \item ($\khi$-zag) Análogo a ($\khi$-zig), pues notemos que como $A_\modults$ es una relación de equivalencia, es simétrica.
         \end{itemize}
 
         Luego $A_\modults$ es una autobisimulación de $\modults$.
@@ -244,20 +244,68 @@ encontramos una forma de identificar la autobisimulación máxima de un modelo s
 
 En particular, se demuestra que la partición de nodos de acuerdo a la función de valuación $\V$ siempre es una autobisimulación.
 
-Algo interesante es que hay varias contracciones que no funcionan:
+Entonces sea $\modults$ un \ults, nos gustaría definir su contracción por bisimulación a partir de $A_\modults$ su autobisimulación máxima.
 
-Por ejemplo, dejar las estrategias y las acciones iguales y usar como aristas $\R' = \{(a,[w],[v]) \mid (a,w,v)\in \R\}$. Esta sería la contracción de la lógica modal básica
+Tomando un camino similar al de la lógica modal básica, una posible primer propuesta sería un modelo en el que se tenga como dominio al cociente 
+de $\modults$ con respecto a $A_\modults$ y se relacione a las clases de equivalencia $[w], [v] \in \rho_\modults$ siempre que 
+$w, v$ estén relacionados en $\modults$. Por otro lado, la relación de indistinguibilidad de cada agente y el conjunto de acciones de $\modults$ se conservarían.
 
-(Poner gráfico de un contraejemplo).
+Sin embargo consideremos el siguiente modelo \ref{fig:1st_proposal_original}:
 
-Otro ejemplo de contracción que no funciona es dejar las estrategias y las acciones iguales y usar como aristas $\R = \{(a,[w],[v]) \mid$ para todo $w' \in [w]$ existe $v' \in [v]$ tal que $(a,w',v') \in \R\}$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_original.jpeg}
+    \caption{$\modults$}
+    \label{fig:1st_proposal_original}
+\end{figure}
 
-(Poner gráfico de un contraejemplo).
+Con esta propuesta de contracción ($\modults'$), obtendríamos el modelo \ref{fig:1st_proposal_contraction}:
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_contraido.jpeg}
+    \caption{$\modults'$}
+    \label{fig:1st_proposal_contraction}
+\end{figure}
+
+
+Ahora bien, notemos que $\modults, w_1 \not\models \khi(p,q)$ pero $\modults', [w_1] \models \khi(p,q)$, luego $\modults,w_1$ y 
+$\modults',[w_1]$ no son bisimilares.
+
+Por lo que esta contracción por bisimulación no sería adecuada, ya que no produce un modelo bisimilar al modelo original.
+
+Otra posible propuesta sería restringir más la relación entre las puntos del modelo contraído. Es decir, relacionar las clases 
+$[w], [v] \in \rho_\modults$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ tal que $w'$ y $v'$ están relacionados en el modelo original.
+
+Luego consideremos el siguiente modelo \ref{fig:2nd_proposal_original}:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_original.jpeg}
+    \caption{$\modults$}
+    \label{fig:2nd_proposal_original}
+\end{figure}
+
+Y su contracción por bisimulación con la propuesta mencionada \ref{fig:2nd_proposal_contraction}:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_contraido.jpeg}
+    \caption{$\modults'$}
+    \label{fig:2nd_proposal_contraction}
+\end{figure}
+
+Si analizamos ambos modelos, podemos notar que $\modults,w_1 \models \khi(p,r)$ pero $\modults',[w_1] \not\models \khi(p,r)$, luego 
+$\modults,w_1$ y $\modults',[w_1]$ no son bisimilares.
+
+Por lo que esta propuesta tampoco es adecuada, ya que tampoco produce un modelo bisimilar al modelo original.
 
 Si analizamos ambos contraejemplos, notamos que la primera propuesta de contracción puede agregar caminos fuertemente ejecutables al modelo y la segunda puede eliminar 
-caminos fuertemente ejecutables en el modelo. Los fallos de ambas propuestas nos dan una idea de que no parece haber una contracción directa en la cuál 
+caminos fuertemente ejecutables del modelo. Los fallos de ambas propuestas nos dan la idea de que no parece existir una contracción directa en la cuál 
 no se modifique la relación de indistinguibilidad de cada agente y las acciones consideradas por el modelo. 
+
+A partir de lo mencionado, surge la siguiente propuesta de contracción, la cuál modifica el conjunto de acciones y la relación de indistinguibilidad 
+de cada agente.
 
 
 \begin{definicion}
@@ -363,9 +411,8 @@ no se modifique la relación de indistinguibilidad de cada agente y las acciones
 \begin{teorema}
     La contracción por bisimulación de un modelo finito $\modults$ tiene cardinalidad mínima entre los modelos $\KHilogic$-bisimilares a $\modults$.
 \end{teorema}
-(este no estoy seguro de cómo probarlo pero estaría bueno que sea cierto para demostrar que efectivamente estamos minimizando el modelo).
 
-update de esto: cardinalidad es bastante directo, pero cantidad de aristas debe ser bastante más complicado, por lo que me contaste de cocientar las clases de estrategias.
+
 
 \begin{teorema}
     Sea $\modults$ un modelo finito, encontrar su contracción por bisimulación $\modults'$ es realizable en tiempo polinomial en el tamaño de $\modults$.
@@ -377,16 +424,14 @@ update de esto: cardinalidad es bastante directo, pero cantidad de aristas debe 
 Esta definición va a ir en los premilinares pero la escribo acá para tenerla a mano al ver esta demo
 \begin{definicion}
     Supongamos $\ACT$ un conjunto de acciones no vacío enumerable.
-    Sea $\modults = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke. Sea $Z_\modults$ su autobisimulación máxima en Lógica Modal Básica (LMB) entonces definimos su contracción por LMB-bisimulación como $\modults_{LMB} = \tup{\W',\{\R'_a\}_{a\in\ACT},\V}$ donde
+    Sea $\modults = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke. Sea $Z_\modults$ su autobisimulación máxima en Lógica Modal Básica (LMB) entonces definimos su contracción por LMB-bisimulación como $\modults_{LMB} = \tup{\W',\{\R'_a\}_{a\in\ACT},\V'}$ donde
     \begin{center}
         \begin{itemize}
             \item $\W' := \W /Z_\modults$
             \item $\R_a' := \{([w],[v]) \mid$ existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v') \in \R_a \}$
             \item $\V'([w]) := \V(w)$
         \end{itemize}
-    \end{center}
-    
-    
+    \end{center} 
 \end{definicion}
 
 Notar que en el contexto de esta definición, $[w]$ se refiere a la clase de equivalencia de $w$ en la relación de equivalencia dada por $Z_\modults$. 
@@ -404,12 +449,17 @@ Notar que en el contexto de esta definición, $[w]$ se refiere a la clase de equ
 \begin{demostracion}
     Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación. Sea $([w],[v]) \in \R'_a$, veamos que para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$.
 
-    Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Ahora bien, sea $w' \in [w]$, por estar ambos $w_0$ y $w'$ en $[w]$, existe una LMB-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que, por (zig) de $Z$, como $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, $(v_0,v') \in Z$, es decir, $v' \in [v]$. Como demostramos esto para un $w'$ arbitrario en $[w]$, vale para todo elemento de $[w]$.
+    Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Ahora bien, 
+    sea $w' \in [w]$, por estar ambos $w_0$ y $w'$ en $[w]$, existe una LMB-bisimulación $Z$ tal que $(w_0,w') \in Z$. 
+    Pero notemos que, por (zig) de $Z$, como $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
+    $(v_0,v') \in Z$, es decir, $v' \in [v]$. Como demostramos esto para un $w'$ arbitrario en $[w]$, vale para todo elemento de $[w]$.
 \end{demostracion}
 
 
 \begin{teorema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ la contracción por LMB-bisimulación del modelo $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$ siendo $\modults' = \tup{\W',\R',\cset{\S_i}_{i \in \AGT},\V',\ACT}$.
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ 
+    la contracción por LMB-bisimulación del modelo $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ 
+    son $\KHilogic$-bisimilares para cada $w \in \W$ siendo $\modults' = \tup{\W',\R',\cset{\S_i}_{i \in \AGT},\V',\ACT}$.
 \end{teorema}
 
 Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ inmediatamente fijamos a $\ACT$ como el conjunto no vacío enumerable de acciones para la Lógica Modal Básica.
