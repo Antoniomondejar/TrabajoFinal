@@ -31,52 +31,52 @@ de conjuntos a considerar.
 
 (Texto introduciendo caracterización de existencia de bisimulación)
 
-\begin{lema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, y sean $w$, $v \in \W$
-    tales que $\V(w)$ = $\V(v)$ entonces para toda $\varphi$ proposicional se cumple que, 
-    \begin{center}
-    $\modults, w \models \varphi$ \quad si y sólo si \quad $ 
-    \modults, v \models \varphi$
-    \end{center}
-\end{lema}
+% \begin{lema}
+%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, y sean $w$, $v \in \W$
+%     tales que $\V(w)$ = $\V(v)$ entonces para toda $\varphi$ proposicional se cumple que, 
+%     \begin{center}
+%     $\modults, w \models \varphi$ \quad si y sólo si \quad $ 
+%     \modults, v \models \varphi$
+%     \end{center}
+% \end{lema}
 
-\begin{demostracion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $w$, $v \in \W$
-    tales que $\V(w)$ = $\V(v)$. La demostración es por inducción estructural sobre $\varphi$. 
-    Recordar que $\varphi$ es una fórmula \textbf{proposicional}.
+% \begin{demostracion}
+%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $w$, $v \in \W$
+%     tales que $\V(w)$ = $\V(v)$. La demostración es por inducción estructural sobre $\varphi$. 
+%     Recordar que $\varphi$ es una fórmula \textbf{proposicional}.
 
-    \begin{itemize}
-        \item Caso base: $\varphi = p$ donde $p \in \PROP$.
+%     \begin{itemize}
+%         \item Caso base: $\varphi = p$ donde $p \in \PROP$.
 
-        Notar que  $\modults, w \models \varphi$ si y sólo si $p \in \V(w)$.
+%         Notar que  $\modults, w \models \varphi$ si y sólo si $p \in \V(w)$.
 
-        Ahora bien, como $\V(w)$ = $\V(v)$, $p \in \V(w)$ si y sólo si $p \in \V(v)$.
+%         Ahora bien, como $\V(w)$ = $\V(v)$, $p \in \V(w)$ si y sólo si $p \in \V(v)$.
 
-        Finalmente, por la definición de $\models$, $p \in \V(v)$ si y sólo si $\modults, v \models \varphi$.  
+%         Finalmente, por la definición de $\models$, $p \in \V(v)$ si y sólo si $\modults, v \models \varphi$.  
     
-        \item Caso inductivo: La hipótesis inductiva establece que, para $\psi$ una subfórmula de $\varphi$, 
-        se cumple que $\modults, w \models \psi$ si y sólo si $\modults, v \models \psi$.
+%         \item Caso inductivo: La hipótesis inductiva establece que, para $\psi$ una subfórmula de $\varphi$, 
+%         se cumple que $\modults, w \models \psi$ si y sólo si $\modults, v \models \psi$.
 
-        \begin{itemize}
-            \item Caso $\varphi = \psi_1 \lor \psi_2$. 
+%         \begin{itemize}
+%             \item Caso $\varphi = \psi_1 \lor \psi_2$. 
     
-            Por definición de $\models$, $\modults, w \models \psi_1 \lor \psi_2$ si y sólo si $\modults,
-            w \models \psi_1$ o $\modults, w \models \psi_2$.
+%             Por definición de $\models$, $\modults, w \models \psi_1 \lor \psi_2$ si y sólo si $\modults,
+%             w \models \psi_1$ o $\modults, w \models \psi_2$.
             
-            Por hipótesis inductiva, $\modults, w \models \psi_1$ o $\modults, w \models \psi_2 $ si y sólo
-            si $\modults, v \models \psi_1$ o $\modults, v \models \psi_2$. 
+%             Por hipótesis inductiva, $\modults, w \models \psi_1$ o $\modults, w \models \psi_2 $ si y sólo
+%             si $\modults, v \models \psi_1$ o $\modults, v \models \psi_2$. 
             
-            Pero notar que, nuevamente por definición de $\models$, $\modults, v \models \psi_1$ o $\modults,
-            v \models \psi_2$ si y sólo si $\modults,v \models \psi_1 \lor \psi_2$.  
+%             Pero notar que, nuevamente por definición de $\models$, $\modults, v \models \psi_1$ o $\modults,
+%             v \models \psi_2$ si y sólo si $\modults,v \models \psi_1 \lor \psi_2$.  
 
-            \item Caso $\varphi = \neg \psi$.
+%             \item Caso $\varphi = \neg \psi$.
         
-            La demostración es similar a la del caso analizado anteriormente.
-        \end{itemize}
+%             La demostración es similar a la del caso analizado anteriormente.
+%         \end{itemize}
     
-    \end{itemize}
+%     \end{itemize}
     
-\end{demostracion}
+% \end{demostracion}
 
 \begin{lema}
     Sean $\model_1=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y 
