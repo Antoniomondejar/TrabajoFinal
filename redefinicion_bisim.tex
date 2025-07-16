@@ -73,7 +73,7 @@ Comenzaremos anunciando algunas propiedades que serán de utilidad para obtener 
 Definiremos ahora para cada modelo, una relación de equivalencia sobre su dominio, la cuál particiona a los nodos de acuerdo
 a su función de valuación.
 
-\begin{definicion}\label{def:A_m}
+\begin{definicion}\label{def:Am}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults entonces se define, 
     \begin{center}
         $A_\modults := \{(w,v) \in \W \times \W \mid \V(w) = \V(v)\}$.
@@ -192,7 +192,7 @@ Notemos como este lema nos permite demostrar el Teorema de Invarianza para nuest
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tales que $\modults,w \bisim^* \modults',w'$, entonces existe $Z$ \KHilogic-bisimulación$^*$
     entre $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
     
-    Luego por \Cref{new-implies-old} sabemos que $Z$ es una \KHilogic-bisimulación, y como $(w,w') \in Z$ entonces $\modults,w \bisim \modults',w'$.
+    Luego por \Cref{lema:new-implies-old} sabemos que $Z$ es una \KHilogic-bisimulación, y como $(w,w') \in Z$ entonces $\modults,w \bisim \modults',w'$.
 
     Finalmente, por \Cref{thm:bisim-implies-equivalence}, tenemos que $\modults,w \modequiv \modults',w'$.
 \end{demostracion}
@@ -218,7 +218,7 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
     
     Sea $S = \{s_1,...,s_m\}$, tal que cada $s_i \in \rho_\modults$ y $s_i \subseteq U$, y para cada $s \in \rho_\modults/S$ se cumple que $s \cap U = \emptyset$. 
     Recordar que cada $s_i$ es una clase de equivalencia de la relación $A_\modults$. A su vez, para cada $w$, $v \in s_i$ se cumple que 
-    $\V(w) = \V(v)$. Se utilizará $\V(s_i)$ para hacer Creferencia a $\V(w)$ para cada $w \in s_i$.
+    $\V(w) = \V(v)$. Se utilizará $\V(s_i)$ para hacer referencia a $\V(w)$ para cada $w \in s_i$.
 
     Sea $\varphi_i := \bigwedge\limits_{j = 1}^{n} l_i(p_j)$ donde $l_i(p_j) = $
     $\left\{ \begin{array}{rcl}
@@ -258,7 +258,7 @@ De esta lema obtenemos un corolario sobre el problema de determinar si un subcon
     chequee que $s \subseteq U$ o $s \cap U = \emptyset$. Lo cuál es claro que puede realizarse en tiempo polinomial sobre el tamaño de $\modults$.
 \end{demostracion}
 
-Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{new-implies-old}.
+Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{lema:new-implies-old}.
 
 \begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{lema:old-implies-new-finite}
     Sean $\modults$ y $\modults'$ dos \ultss finitos, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
@@ -268,7 +268,7 @@ Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposiciona
 \end{lema}
 
 \begin{demostracion}
-    Notar que la dirección ($\rightarrow$) está demostrada en \Cref{new-implies-old}, entonces demostremos ($\leftarrow$).
+    Notar que la dirección ($\rightarrow$) está demostrada en \Cref{lema:new-implies-old}, entonces demostremos ($\leftarrow$).
     
     Sea $Z$ una \KHilogic-bisimulación, veamos que es una \KHilogic-bisimulación$^*$.
 
