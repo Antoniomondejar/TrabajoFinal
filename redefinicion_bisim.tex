@@ -147,7 +147,7 @@ Una vez presentada la nueva definición, notemos que \Cref{lema:propositionally-
 toda relación binaria que satisface las nuevas condiciones presentadas de ($\khi$-zig$^*$) y ($\khi$-zag$^*$) también satisface las condiciones
 presentadas en la \Cref{def:bisimulation}.
 
-\begin{lema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-bisimilitud]\label{lema:new_bisim-implies-old_bisim}
+\begin{lema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-bisimilitud]\label{lema:new-implies-old}
     Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Si $Z \subseteq \W \times \W'$ es una \KHilogic-bisimulación$^*$ entonces $Z$ es una \KHilogic-bisimulación.
 \end{lema}
 
@@ -192,7 +192,7 @@ Notemos como este lema nos permite demostrar el Teorema de Invarianza para nuest
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tales que $\modults,w \bisim^* \modults',w'$, entonces existe $Z$ \KHilogic-bisimulación$^*$
     entre $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
     
-    Luego por \Cref{lema:new_bisim-implies-old_bisim} sabemos que $Z$ es una \KHilogic-bisimulación, y como $(w,w') \in Z$ entonces $\modults,w \bisim \modults',w'$.
+    Luego por \Cref{new-implies-old} sabemos que $Z$ es una \KHilogic-bisimulación, y como $(w,w') \in Z$ entonces $\modults,w \bisim \modults',w'$.
 
     Finalmente, por \Cref{thm:bisim-implies-equivalence}, tenemos que $\modults,w \modequiv \modults',w'$.
 \end{demostracion}
@@ -252,15 +252,15 @@ De esta lema obtenemos un corolario sobre el problema de determinar si un subcon
 \begin{demostracion}
 
     Primero, notemos que determinar si $U$ es \KHilogic-definible es equivalente a determinar si $U$ es proposicionalmente definible, por lo visto en 
-    \Cref{prop:khi_definable-implies-propositionally_definable}.
+    \Cref{prop:khi-implies-prop-definable}.
 
     Luego, por \Cref{lema:finite-propositionally-definable-lemma}, basta con dar un algoritmo que compute $\rho_\modults$ y para cada $s \in \rho_\modults$ 
     chequee que $s \subseteq U$ o $s \cap U = \emptyset$. Lo cuál es claro que puede realizarse en tiempo polinomial sobre el tamaño de $\modults$.
 \end{demostracion}
 
-Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{lema:new_bisim-implies-old_bisim}.
+Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{new-implies-old}.
 
-\begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{lema:finite-old_bisim-implies-new_bisim}
+\begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{lema:old-implies-new-finite}
     Sean $\modults$ y $\modults'$ dos \ultss finitos, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
     \begin{center}
         $Z$ es una \KHilogic-bisimulación$^*$ si y sólo si $Z$ es una \KHilogic-bisimulación.
@@ -268,7 +268,7 @@ Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposiciona
 \end{lema}
 
 \begin{demostracion}
-    Notar que la dirección ($\rightarrow$) está demostrada en \Cref{lema:new_bisim-implies-old_bisim}, entonces demostremos ($\leftarrow$).
+    Notar que la dirección ($\rightarrow$) está demostrada en \Cref{new-implies-old}, entonces demostremos ($\leftarrow$).
     
     Sea $Z$ una \KHilogic-bisimulación, veamos que es una \KHilogic-bisimulación$^*$.
 
@@ -311,7 +311,7 @@ Y como demostramos que en el caso finito ambas nociones de bisimulación son equ
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos tales que $\model,w \modequiv \model', w'$, entonces por \Cref{thm:finite-equivalence-implies-bisim}
     tenemos que $\model,w \bisim \model', w'$. Luego existe $Z$ \KHilogic-bisimulación tal que $(w,w') \in Z$.
 
-    Por \Cref{lema:finite-old_bisim-implies-new_bisim} tenemos que $Z$ es una \KHilogic-bisimulación$^*$. Luego, como $(w,w') \in Z$ 
+    Por \Cref{lema:old-implies-new-finite} tenemos que $Z$ es una \KHilogic-bisimulación$^*$. Luego, como $(w,w') \in Z$ 
     entonces $\model,w \bisim^* \model', w'$.
 \end{demostracion}
 
