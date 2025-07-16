@@ -1,5 +1,5 @@
-\chapter{Marco Teórico: Lógica `Knowing How' Multi-Agente Basada en la Incertidumbre}
-Se introducirá ahora la lógica `Knowing-How' multi-agente basada en la incertidumbre (\KHilogic), presentada en \cite{ArecesFSV25}.
+\chapter{Lógica de `Knowing How' Multi-Agente Basada en Incertidumbre}
+Se introducirá ahora la lógica de `Knowing-How' multi-agente basada en incertidumbre (\KHilogic), presentada en \cite{ArecesFSV25}.
 
 \section{Sintaxis y Semántica}
 Consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable 
@@ -93,6 +93,7 @@ A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un 
     de la siguiente forma:
 
     \begin{nscenter}
+    \sloppy
     \begin{tabular}{@{}l@{\;\;\;}c@{\;\;\;}l@{}}
         $\modults,w \models p$ & \iffdef & $p\in\V(w)$, \\
         $\modults,w \models \neg\varphi$ & \iffdef & $\modults,w \not\models\varphi$, \\ 
@@ -131,7 +132,8 @@ Primero, introduciremos una notación que nos será útil.
         \item Escribiremos $U \ultsExecAgi T$ $\iffdef$ existe $\pi \in \S_i$ tal que $U \ultsExecStrat{\pi} T$.
     \end{itemize}
     A su vez, decimos que $U \subseteq \W$ es \KHilogic-definible en $\modults$ si y sólo si existe una \KHilogic-fórmula $\varphi$ tal que
-    $U = \truthset{\modults}{\varphi}$.
+    $U = \truthset{\modults}{\varphi}$. Análogamente, decimos que $U \subseteq \W$ es proposicionalmente definible en $\modults$ 
+    si y sólo si existe una fórmula proposicional $\varphi$ tal que $U = \truthset{\modults}{\varphi}$.
 \end{definicion}
 
 Una observación que surge de esta definición es que si un conjunto es proposicionalmente definible entonces es \KHilogic-definible, dado que 
@@ -140,7 +142,7 @@ toda fórmula proposicional sobre $\PROP$ es también una \KHilogic-fórmula.
 Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice que también vale la recíproca, 
 es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
 
-\begin{proposicion}\label{ref:khi_definable-implies-propositionally_definable}
+\begin{proposicion}\label{prop:khi_definable-implies-propositionally_definable}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Para todo $U \subseteq \W$, si $U$ es \KHilogic-definible, entonces $U$ es proposicionalmente definible.
 \end{proposicion}
 
@@ -164,7 +166,7 @@ Ahora si, presentamos la noción de bisimulación.
     \end{itemize}
 
     Una relación binaria no vacía $Z \subseteq \W \times \W'$ es llamada una \KHilogic-bisimulación entre $\modults$ y 
-    $\modults'$ si y sólo si $(w,w') \in Z$ implica lo siguiente
+    $\modults'$ si y sólo si $(w,w') \in Z$ implica lo siguiente:
     \begin{itemize}
         \item \textbf{Atom}: $\V(w)=\V'(w')$.
 
@@ -208,7 +210,7 @@ equivalencia entre modelos con respecto a \KHilogic.
 Ahora podemos presentar la correspondencia esperada entre $\bisim$ y $\modequiv$, demostrada en \cite{ArecesFSV25}.
 Usualmente nos referimos a este resultado como el Teorema de Invarianza para Bisimulación.
 
-\begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]\label{ref:bisim-implies-equivalence}
+\begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]\label{thm:bisim-implies-equivalence}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados, entonces
     \begin{center}
         $\modults,w \bisim \modults',w'$ implica $\modults,w \modequiv \modults',w'$.
@@ -216,13 +218,16 @@ Usualmente nos referimos a este resultado como el Teorema de Invarianza para Bis
 \end{teorema}
 
 Este teorema caracteriza a la bisimulación como una noción que permite relacionar modelos \KHilogic-equivalentes, es decir, que la lógica no tiene una fórmula con la cuál distinguirlos,
-a partir de propiedades puramente estructurales de los modelos.
+a partir de propiedades puramente estructurales de los mismos.
 
 En [\cite{FervariVQW21}, sección 2] se presenta un contraejemplo que atestigua que la recíproca del teorema no es cierta para cualquier par de modelos.
 Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar en qué clases de modelos vale la recíproca del teorema.
 En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca.
 
-\begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]\label{ref:finite-equivalence-implies-bisim}
+Diremos que $\modults$, un \ults, es finito si y sólo si cada una de sus componentes tiene cardinalidad finita. Análogamente, diremos que 
+($\modults,w$), un \ults punteado, es finito si y sólo $\modults$ es finito. 
+
+\begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]\label{thm:finite-equivalence-implies-bisim}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
     \begin{center}
         $\model,w \modequiv \model', w'$ implica $\model,w \bisim \model', w'$.
@@ -232,3 +237,6 @@ En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíp
 Notemos que este teorema es un gran resultado en términos computacionales. Como los algoritmos trabajan siempre con modelos finitos, este resultado
 nos dice que si se consigue un procedimiento efectivo que decida bisimilitud entre dos \ultss punteados, dicho procedimiento estará decidiendo a la vez
 equivalencia lógica entre los \ultss punteados en cuestión.
+
+
+\section{Complejidad Computacional}

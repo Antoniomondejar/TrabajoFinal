@@ -3,10 +3,9 @@
 % adjusting vertical space in the multicols environment
 % default: \multicolsep = 12pt plus 4pt minus 3pt
 
-\setlength{\multicolsep}{6pt plus 2pt minus 1.5pt}
+% \setlength{\multicolsep}{6pt plus 2pt minus 1.5pt}
 
 %------------------------------------------------------------------------------------------------
-
 
 % defining the format for theorems, propositions, corollaries and lemmas. The main point is the symbol at the end of them
 \usepackage[hyperref,thmmarks]{ntheorem}
@@ -22,6 +21,8 @@
 \newtheorem{corolario}{Corolario}
 \newtheorem{lema}{Lema}
 \newtheorem{hecho}{Hecho}
+
+
 
 %------------------------------------------------
 
@@ -163,7 +164,7 @@
 
 
 % KH items
-\newcommand{\itmkhformat}[1]{\textbf{\textit{(\ensuremath{\bm{\kh}}-#1)}}}
+\newcommand{\itmkhformat}[1]{\textbf{\textit{(\ensuremath{\bm{\kh_i}}-#1)}}}
 \newcommand{\ITMKHi}{\itmkhformat{1}\xspace}
 \newcommand{\ITMKHii}{\itmkhformat{2}\xspace}
 % bisimulation items
@@ -192,3 +193,37 @@
 \newcommand{\ults}{\ensuremath{\mathrm{LTS}^U}\xspace}
 \newcommand{\ultss}{{\ults}s\xspace}
 
+%------------------------------------------------------------------------------------------------
+
+\usepackage{cleveref}
+
+% Abbreviated Cref
+% \Crefname{definicion}{Definición}{Definiciones}
+% \Crefname{equation}{Eq.}{Eqs.}
+% \Crefname{hecho}{Hecho}{Hechos}
+% \Crefname{lema}{Lema}{Lemas}
+\Crefname{figure}{Figura}{Figuras}
+% \Crefname{proposicion}{Proposición}{Proposiciones}
+% \Crefname{teorema}{Teorema}{Teoremas}
+% \Crefname{example}{Ejemplo}{Ejemplos}
+% \Crefname{corolario}{Corolario}{Corolarios}
+% \Crefname{enumi}{Item}{}
+% \Crefname{section}{Sec.}{Secciones}
+% \Crefname{appendix}{App.}{Apps.}
+% \Crefname{table}{Table}{Tables}
+% \Crefname{inlineenumi}{Item}{}
+% \Crefname{cond-khi}{}{}
+% \Crefname{inline-cond-khi}{}{}
+
+
+\Crefname{teorema}{Teorema}{Teoremas}
+\Crefname{proposicion}{Proposición}{Proposiciones}
+\Crefname{corolario}{Corolario}{Corolarios}
+\Crefname{lema}{Lema}{Lemas}
+\Crefname{hecho}{Hecho}{Hechos}
+\Crefname{definicion}{Definición}{Definiciones}
+\Crefname{ejemplo}{Ejemplo}{Ejemplos}
+\Crefname{nota}{Nota}{Notas}
+
+
+%------------------------------------------------------------------------------------------------
