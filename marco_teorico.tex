@@ -3,7 +3,7 @@ Se introducirá ahora la lógica de `Knowing-How' multi-agente basada en incerti
 
 \section{Sintaxis y Semántica}
 Consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable 
-y a $\AGT$ como un conjunto no vacío de agentes con cardinalidad contable. 
+y a $\AGT$ como un conjunto finito no vacío de agentes.
 
 \begin{definicion}
     El lenguaje \KHilogic está compuesto por las fórmulas dadas por la gramática:
@@ -32,7 +32,7 @@ Antes de definir la semántica de la lógica, se definirán algunos conceptos qu
 \end{definicion}
 
 \begin{definicion}[\lts basado en la incertidumbre]
-    Un \emph{\lts-multi-agente basado en la incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
+    Un \emph{\lts-multi-agente basado en incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
     donde $\tup{\W,\R,\V,\ACT}$ es un \lts y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
     $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un \ults $\modults$ y $w \in \W$, se llamará 
     al par $(\modults,w)$ un \ults punteado.
@@ -139,7 +139,7 @@ Primero, introduciremos una notación que nos será útil.
 Una observación que surge de esta definición es que si un conjunto es proposicionalmente definible entonces es \KHilogic-definible, dado que 
 toda fórmula proposicional sobre $\PROP$ es también una \KHilogic-fórmula.
 
-Ahora bien, la siguiente proposición presentada en \cite{ArecesFSV25} nos dice que también vale la recíproca, 
+La siguiente proposición presentada en \cite{ArecesFSV25} nos dice que también vale la recíproca, 
 es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
 
 \begin{proposicion}\label{prop:khi-implies-prop-definable}

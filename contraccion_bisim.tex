@@ -144,7 +144,7 @@ Como hemos mencionado a lo largo de este trabajo, la noción de bisimulación no
 características estructurales entre sí. En el capítulo anterior, determinamos qué tan complejo es decidir si existe una bisimulación entre dos 
 modelos.
 
-Ahora bien, otra pregunta que surge a la hora de estudiar una lógica modal y su respectiva noción de bisimulación es:
+Otra pregunta que surge a la hora de estudiar una lógica modal y su respectiva noción de bisimulación es:
 Dado un modelo, ¿Existe un procedimiento capaz de encontrar otro modelo que sea bisimilar?. Más aún, ¿Podría dicho procedimiento encontrar 
 un modelo de tamaño mínimo entre todos los modelos bisimilares al modelo original?.
 
@@ -171,7 +171,7 @@ incertidumbre.
     \end{center}
 \end{definicion}
 
-Ahora bien, recordemos la definición de $A_\modults$ y de $\rho_\modults$, introducida en \Cref{def:Am}, y veamos el siguiente teorema 
+Recordemos la definición de $A_\modults$ y de $\rho_\modults$, introducida en \ref{def:Am}, y veamos el siguiente teorema 
 que caracteriza la autobisimulación máxima de un modelo.
 
 \begin{teorema}
@@ -212,11 +212,11 @@ que caracteriza la autobisimulación máxima de un modelo.
             ($\supseteq$) Sea $v \in A_\modults(U)$, queremos ver que $v \in U$.
             Como $v \in A_\modults(U)$, entonces existe $w \in U$ tal que $(w,v) \in A_\modults$ y, por lo tanto, $v \in [w]$.
             
-            Ahora bien, como $w \in U$ entonces $[w] \subseteq U$. Luego $v \in U$.
+            Como $w \in U$ entonces $[w] \subseteq U$. Luego $v \in U$.
 
             Entonces demostramos que $U = A_\modults(U)$.
 
-            Ahora bien, notemos que siendo $X \subseteq \W$ entonces $X \subseteq A_\modults(X)$, pues como analizamos anteriormente 
+            Notemos que siendo $X \subseteq \W$ entonces $X \subseteq A_\modults(X)$, pues como analizamos anteriormente 
             $(w,w) \in A_\modults$ para cada $w \in \W$.
 
             Juntando lo mencionado, podemos afirmar que $T' = T$ cumple que:
@@ -275,7 +275,7 @@ Con esta propuesta de contracción ($\modults'$), obtendríamos el modelo (\Cref
 \end{figure}
 
 
-Ahora bien, notemos que $\modults, w_1 \not\models \khi(p,q)$ pero $\modults', [w_1] \models \khi(p,q)$, luego $\modults,w_1$ y 
+Notemos que $\modults, w_1 \not\models \khi(p,q)$ pero $\modults', [w_1] \models \khi(p,q)$, luego $\modults,w_1$ y 
 $\modults',[w_1]$ no son bisimilares.
 
 Por lo que esta contracción por bisimulación no sería adecuada, ya que no produce un modelo bisimilar al modelo original.
@@ -306,16 +306,17 @@ $\modults,w_1$ y $\modults',[w_1]$ no son bisimilares.
 
 Por lo que esta propuesta tampoco es adecuada, ya que tampoco produce un modelo bisimilar al modelo original.
 
-Si analizamos ambos contraejemplos, notamos que la primera propuesta de contracción puede agregar caminos fuertemente ejecutables al modelo y la segunda puede eliminar 
-caminos fuertemente ejecutables del modelo. Los fallos de ambas propuestas nos dan la idea de que no parece existir una contracción directa en la cuál 
-no se modifique la relación de indistinguibilidad de cada agente y las acciones consideradas por el modelo. 
+Si analizamos ambos contraejemplos, podemos notar que la primera propuesta de contracción podría agregar caminos fuertemente ejecutables al modelo 
+y la segunda podría eliminar caminos fuertemente ejecutables del modelo. Los fallos de ambas propuestas nos dan la idea de que no parece 
+existir una contracción directa en la cuál no se modifique la relación de indistinguibilidad de cada agente y las acciones 
+consideradas por el modelo. 
 
 A partir de lo mencionado, surge la siguiente propuesta de contracción, la cuál modifica el conjunto de acciones y la relación de indistinguibilidad 
 de cada agente.
 
 
 \begin{definicion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Se define su contracción por bisimulación como el modelo $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT'},\V',\ACT'}$ donde 
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Se define su contracción por bisimulación, $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT'},\V',\ACT'}$ donde 
     \begin{center}
         \begin{itemize}
             \item $\W' := \W/A_\modults$
@@ -324,17 +325,18 @@ de cada agente.
                 \item existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v')\in \R_\sigma$
                 \item $\sigma$ es fuertemente ejecutable para cada $w' \in [w]$.
             \end{enumerate}
-            \item $\S_i' := \{ \pi' = \{a_{\sigma_1},...,a_{\sigma_k}\} \mid  
-            $ existe $ \pi \in S_i $ tal que $ \pi = \{\sigma_1,...,\sigma_k
-            \}\}$
+            \item $\S_i' := \{ \pi' = \{a_\sigma \mid \sigma \in \pi\} \mid \pi \in S_i \}$
             \item $\V'([w]) := \V(w)$
             \item $\ACT' := \{a_\sigma \mid $ existe $ \pi\in S_i$ tal que $ \sigma \in \pi$ para algún $i \in \AGT \}$ 
         \end{itemize}
     \end{center}
 \end{definicion}
     
+Una vez presentada la contracción, demostraremos que produce un modelo bisimilar. Para ello demostraremos el siguiente teorema.
+
 \begin{teorema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $\modults'$ su contracción por bisimulación entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\modults'$ su contracción por bisimulación entonces 
+    $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{teorema}
 
 \begin{demostracion}
@@ -350,7 +352,8 @@ de cada agente.
     Demostremos entonces que se satisfacen ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
-        \item ($\khi$-zig) Sean $U, T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W'$ que
+        \item ($\khi$-zig) Sean $U, T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y para cada $s \in \rho_\modults$ se cumple que 
+        $s \subseteq U$ o $s \cap U = \emptyset$, queremos encontrar $T' \subseteq \W'$ que
 
         \begin{multicols}{2}
             \begin{itemize}
@@ -359,75 +362,88 @@ de cada agente.
             \end{itemize}
         \end{multicols}
 
-        Veamos que $T' = \{ [w] \mid w \in T\}$ cumple con lo mencionado. Por como definimos $Z$, es claro que $T'  = Z(T)$, por lo que $T' \subseteq Z(T)$. Entonces demostremos $Z(U) \ultsExecAgi T'$.
+        Veamos que $T' := \{ [w] \mid w \in T\}$ cumple con lo mencionado. Por como definimos $Z$, es claro que $T'  = Z(T)$, por lo que 
+        $T' \subseteq Z(T)$. Entonces demostremos $Z(U) \ultsExecAgi T'$.
 
+        Como $U \ultsExecAgi T$, existe $\pi \in S_i$ tal que cada plan de $\pi$ es fuertemente ejecutable en cada nodo de $U$ y 
+        $\R_\pi(U) \subseteq T$. 
 
-        Como $U \ultsExecAgi T$, existe $\pi = \{\sigma_1,...,\sigma_k\} \in S_i$ tal que cada plan de $\pi$ es fuertemente ejecutable en cada nodo de $U$ y $\R_\pi(U) \subseteq T$. 
+        Sabemos por la definición de $\modults'$ que existe $\pi' = \{a_\sigma \mid \sigma \in \pi\} \in S_i'$. Demostraremos que $\pi'$ 
+        atestigua $Z(U) \ultsExecAgi T'$, es decir, que cada $a_\sigma \in \pi$ es fuertemente ejecutable en $Z(U)$ y que además 
+        $\R'_{\pi'}(Z(U)) \subseteq T'$.
 
-        Ahora bien, sabemos por la definición de $\modults'$ que existe $\pi' =\{a_{\sigma_1},...,a_{\sigma_k}\} \in S_i'$. Luego, basta ver que cada $a_{\sigma_i}$ es fuertemente ejecutable en $Z(U)$ y que además $\R'_{\pi'}(Z(U)) \subseteq T'$, pues, juntando las dos afirmaciones concluiríamos que $Z(U) \ultsExecAgi T'$.
+        Sea $[w] \in Z(U)$, veamos que $\pi'$ es fuertemente ejecutable en $[w]$. Sea $a_\sigma \in \pi'$, queremos ver que $a_\sigma$ es fuertemente 
+        ejecutable en $[w]$. Notar que cómo $a_\sigma$ es un plan de un solo paso, solo basta con ver que exista $[v] \in \W'$  tal que 
+        $([w],[v]) \in \R'_{a_\sigma}$.
+        
+        Primero notemos que como $[w] \in Z(U)$, entonces existe $w' \in [w]$ tal que $w' \in U$. Luego, por la hipótesis sobre $U$
+        se cumple que $[w'] = [w] \subseteq U$. Pero veamos que como $\pi$ es fuertemente ejecutable en $U$ entonces es fuertemente ejecutable en cada nodo 
+        de $[w]$, por lo que existe $v' \in \W$ tal que $v \in \R_\sigma(w')$. Como $\sigma$ es fuertemente en todo $[w]$ y $(w',v') \in \R_\sigma$, entonces 
+        $([w],[v']) \in \R'_{a_\sigma}$. Queda demostrado entonces que $\pi'$ es fuertemente ejecutable en $Z(U)$.
+        
+        Demostraremos ahora que $\R'_{\pi'}(Z(U)) \subseteq T'$.
 
+        Sea $[v] \in \R'_{\pi'}(Z(U))$, entonces existe $[w] \in Z(U)$ y $a_\sigma \in \pi'$ tal que $([w],[v]) \in \R'_{a_\sigma}$. Notar que 
+        como $[w] \in Z(U)$, entonces existe $w' \in [w]$ tal que $w' \in U$ y, por lo tanto, $[w'] = [w] \subseteq U$. Si analizamos la definición 
+        de $\R'_{a_\sigma}$, como $([w],[v]) \in \R'_{a_\sigma}$ entonces existen $w'' \in [w]$ y $v'' \in [v]$ tal que $(w'',v'') \in \R_\sigma$.
+        Como $w'' \in U$ y $\R_\pi(U) \subseteq T$, entonces se cumple que $v'' \in T$, lo que nos dice que $[v''] = [v] \in T'$, que era lo que 
+        queríamos demostrar. Luego $\R'_{\pi'}(Z(U)) \subseteq T'$. 
 
-        Notemos que los planes de $\pi'$ son simplemente de un paso, es decir, deberíamos chequear que para cada elemento de $Z(U)$ existe una arista con cada una de las acciones de $\pi'$ y que cada arista de $Z(U)$ con alguna de las etiquetas de $\pi'$ se dirige hacia un nodo de $T'$. 
+        Queda demostrado entonces $Z$ satisface $\khi$-zig.
 
-        Por Lema 2, existe $S \in \mathcal{P}(\rho_\modults)$ tal que $U  = \bigcup\limits_{s_i \in S} s_{i}$. Luego, por como está definido $Z$, notemos que $Z(U) = S$.
-
-        Sean entonces $a_{\sigma_i} \in \pi'$ y $s_j \in S$ queremos ver que $a_{\sigma_i}$ es fuertemente ejecutable en $s_j$. Como cada nodo de $s_j$ está en $U$ y $\sigma_i$ es fuertemente ejecutable en todo nodo de $U$ entonces para cada nodo $w$ de $s_j$ existe $v$ tal que $(w,v) \in \R_{\sigma_i}$. A su vez, juntando lo mencionado, se puede ver que por la definición de $\R'$ entonces existe $v \in \W$ tal que $(s_j,[v]) \in \R'_{a_{\sigma_i}}$, luego $a_{\sigma_i}$ es fuertemente ejecutable en $s_j$. Como $a_{\sigma_i}$ y $s_j$ eran elementos fijos pero arbitrarios de $\pi'$ y $S$ respectivamente, vale que $\pi'$ es fuertemente ejecutable en todo $S$.
-
-        Ya demostramos entonces que $\pi'$ es fuertemente ejecutable en $S$, queda demostrar que $\R'_{\pi'}(S) \subseteq T'$.
-
-        Sean $s_j \in S$ y $a_{\sigma_i} \in \pi'$ tales que $(s_j,[v]) \in \R'_{a_{\sigma_i}}$ entonces existen $w \in s_j$ y  $v' \in [v]$ tales que $(w,v') \in \R'_{\sigma_i}$. Recordemos que $\R_\pi(U) \subseteq T$.  Luego, como $w \in U$ y $\sigma_i \in \pi$ entonces $v' \in T$, lo que nos dice que $[v] \in T'$. Entonces queda demostrado que $\R'_{\pi'}(S) \subseteq T'$, dado que $s_j$ y $a_{\sigma_i}$ son elementos fijos pero arbitrarios de $S$ y $\pi'$ respectivamente.
-
-        Probamos entonces que $\pi'$ es fuertemente ejecutable en $S$ y que $\R'_{\pi'}(S) \subseteq T'$, luego esto nos dice que $S \ultsExecAgi T'$. Y como $S = Z(U)$, $Z(U) \ultsExecAgi T'$.
-
-        Queda demostrado entonces $\khi$-zig. (MEJORAR ESTA DEMO).
-
-        \item ($\khi$-zag) Sean $U, T \in \W'$ tales que $U \ultsExecAgi T$ con $U$ proposicionalmente definible, queremos encontrar $T' \subseteq \W$ tal que
+        \item ($\khi$-zag) Sean $U', T' \in \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s \in \rho_{\modults'}$ se cumple que $s \subseteq U'$ o 
+        $s \cap U' = \emptyset$, queremos encontrar $T \subseteq \W$ tal que:
         \begin{multicols}{2}
             \begin{itemize}
-                \item $Z^{-1}(U) \ultsExecAgi T'$, 
-                \item $T' \subseteq Z^{-1}(T)$.
+                \item $Z^{-1}(U') \ultsExecAgi T$, 
+                \item $T \subseteq Z^{-1}(T')$.
             \end{itemize}
         \end{multicols}
-
-        Notar que $U = \{[w_1],...,[w_n]\mid w_i \in \W \}$ y $T = \{[v_1],...,[v_m]\mid v_i \in \W \}$.
         
-        Veamos que $T' = \bigcup\limits_{[v_i] \in T} [v_i]$ cumple con lo mencionado. Notar que por la definición de $Z$, es claro que $T' = Z^{-1}(T)$, lo que nos dice que $T' \subseteq Z^{-1}(T)$. Demostremos entonces que $Z^{-1}(U) \ultsExecAgi T'$. 
+        Veamos que $T := \bigcup\limits_{[w] \in T'} [w]$ cumple con lo mencionado. Notar que por la definición de $Z$, es claro que $T' = Z^{-1}(T)$, lo que nos dice que $T' \subseteq Z^{-1}(T)$. Demostremos entonces que $Z^{-1}(U) \ultsExecAgi T'$. 
     
-        Como $U \ultsExecAgi T$, entonces existe $\pi' = \{a_{\sigma_1},...,a_{\sigma_k}\}\in S_i'$ tal que $\pi'$ es fuertemente ejecutable en cada elemento de $U$ y $\R'_{\pi'}(U) \subseteq T$.
+        Como $U' \ultsExecAgi T'$, entonces existe $\pi' \in S_i'$ tal que $\pi'$ es fuertemente ejecutable para cada $[w] \in U'$ y $\R'_{\pi'}(U') \subseteq T'$.
 
-        Luego por como está definido $\modults$ entonces existe $\pi = \{\sigma_1,...,\sigma_k\} \in S_i$. Veamos entonces que $\pi$ es fuertemente ejecutable en cada nodo de $Z^{-1}(U)$ y a su vez que $\R_\pi(Z^{-1}(U)) \subseteq T'$.
+        Luego, por como está definido $\modults$ existe $\pi \in S_i$ tal que para cada $\sigma \in \pi$, $a_\sigma \in \pi'$. 
+        Veamos entonces que $\pi$ atestigua $Z^{-1}(U') \ultsExecAgi T$, es decir, que $\pi$ es fuertemente ejecutable para cada $w \in Z^{-1}(U')$ 
+        y, a su vez, que $\R_\pi(Z^{-1}(U')) \subseteq T$.
 
-        Sean $w \in Z^{-1}(U)$ y $\sigma_i \in \pi$, veamos que $\sigma_i$ es fuertemente ejecutable en $w$. Notemos que como $w \in Z^{-1}(U)$ entonces $[w] \in U$ y, a su vez, como $a_{\sigma_i}$ es fuertemente ejecutable en $U$, $a_{\sigma_i}$ también es fuertemente ejecutable en $[w]$. Luego, existe $[v]$ tal que $([w],[v]) \in \R'_{a_{\sigma_i}}$. Ahora bien, notemos que por la definición de $\R'$, como existe esa arista entonces se cumple que $\sigma_i$ es fuertemente ejecutable en todo nodo de $[w]$. En particular, $\sigma_i$ es fuertemente ejecutable en $w$. Finalmente, demostramos que $\pi$ es fuertemente ejecutable en $Z^{-1}(U)$.
+        Sean $w \in Z^{-1}(U')$, veamos que $\pi$ es fuertemente ejecutable en $w$. Sea $\sigma \in \pi$, veamos que $\sigma$ es fuertemente ejecutable 
+        en $w$. Notemos que como $w \in Z^{-1}(U')$ entonces $[w] \in U'$ y, a su vez, como $a_\sigma$ es fuertemente ejecutable en $U'$, $a_{\sigma_i}$ también es fuertemente ejecutable en $[w]$. 
+        Luego, existe $[v]$ tal que $([w],[v]) \in \R'_{a_\sigma}$. Notemos que por la definición de $\R'$, como existe esa arista entonces se cumple que $\sigma$ es fuertemente ejecutable 
+        para cada nodo de $[w]$. En particular, $\sigma$ es fuertemente ejecutable en $w$, lo que demuestra que $\pi$ es fuertemente ejecutable 
+        en $Z^{-1}(U')$.
 
-        Demostremos ahora que $\R_{\pi}(Z^{-1}(U)) \subseteq T'$. 
+        Demostremos ahora que $\R_{\pi}(Z^{-1}(U')) \subseteq T'$. 
 
-        Sean $w, v \in \W$ tales que $w \in Z^{-1}(U)$ y $(w,v) \in \R_{\sigma_i}$, queremos ver que $v \in T'$. Notemos que como $w \in Z^{-1}(U)$, entonces $[w] \in U$. Ahora bien como $a_{\sigma_i}$ es fuertemente ejecutable en $U$, $a_{\sigma_i}$ también es fuertemente ejecutable en $[w]$.
+        Sean $w, v \in \W$ tales que $w \in Z^{-1}(U')$ y $(w,v) \in \R_\pi$, queremos ver que $v \in T'$. Primero veamos que como $(w,v) \in \R_\pi$, 
+        entonces existe $\sigma \in \pi$ tal que $(w,v) \in \R_\sigma$. Luego, como $w \in Z^{-1}(U')$, entonces $[w] \in U'$. Como $\pi'$ es fuertemente 
+        ejecutable en $U'$, entonces $a_\sigma$ es fuertemente ejecutable en $U'$ y por lo tanto $a_\sigma$ también es fuertemente ejecutable en $[w]$.
         
-        Como $a_{\sigma_i}$ es fuertemente ejecutable en $[w]$ entonces existe $[v']$ tal que $([w],[v']) \in \R_{a_{\sigma_i}}$. Ahora bien, como existe dicha arista, por la definición de $\R'$, ocurre que $\sigma_i$ es fuertemente ejecutable en todo nodo de $[w]$. Pero como $\sigma_i$ es fuertemente ejecutable en todo nodo de $[w]$ y $(w,v) \in \R_{\sigma_i}$ entonces $([w],[v]) \in \R'_{a_{\sigma_i}}$. Pero como $\R'_{\pi'}(U) \subseteq T$, entonces $[v] \in T$, lo que nos dice que $v \in T'$.
-        
-        Luego demostramos que $\R_{\sigma_i}(Z^{-1}(U)) \subseteq T'$. Como $\sigma_i$ era un elemento fijo pero arbitrario de $\pi$ entonces vale para todo $\pi$. Luego $\R_\pi(Z^{-1}(U)) \subseteq T'$, lo cual demuestra $\khi$-zag.
+        Pero, como $a_\sigma$ es fuertemente ejecutable en $[w]$ entonces existe $[v']$ tal que $([w],[v']) \in \R_{a_\sigma}$. 
+        Como existe dicha arista, por la definición de $\R'$, ocurre que $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$. 
+        Pero como $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$ y $(w,v) \in \R_\sigma$ entonces $([w],[v]) \in \R'_{a_\sigma}$. 
+        Luego, como $\R'_{\pi'}(U') \subseteq T'$, entonces $[v] \in T'$, lo que nos dice que $v \in T$ que era lo que queríamos demostrar.
+
+        Entonces, hemos demostrado que $Z$ satisface $\khi$-zag.
     \end{itemize}
-
-    Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
-    
+    Demostramos que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{demostracion}
 
 
 
 \begin{teorema}
-    La contracción por bisimulación de un modelo finito $\modults$ tiene cardinalidad mínima entre los modelos $\KHilogic$-bisimilares a $\modults$.
+    La contracción por bisimulación de un \ults $\modults$ tiene cardinalidad mínima entre los modelos $\KHilogic$-bisimilares a $\modults$.
 \end{teorema}
-
 
 
 \begin{teorema}
-    Sea $\modults$ un modelo finito, encontrar su contracción por bisimulación $\modults'$ es realizable en tiempo polinomial en el tamaño de $\modults$.
+    Sea $\modults$ un \ults, computar su contracción por bisimulación $\modults'$ es realizable en tiempo polinomial en el 
+    tamaño de $\modults$.
 \end{teorema}
 
-(la mejor complejidad con la que se podría hacer no estoy seguro, porque tampoco definimos bien cómo va a ser la contracción, pero lo de encontrar los nodos strongly executable de cada camino se me ocurre que puede salir en $\mathcal{O}(\sum_{i} |S_i|*n*(n+m))$)
 
-
-\section{Segunda Contracción}
+\section{Segunda Propuesta de Contracción}
 
 \begin{definicion}
     Supongamos $\ACT$ un conjunto de acciones no vacío enumerable.
@@ -445,10 +461,8 @@ Notar que en el contexto de esta definición, $[w]$ se refiere a la clase de equ
 
 
 \begin{lema}
-    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación,
-    \begin{center}
-        Si $([w],[v]) \in \R'_a$ entonces para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$
-    \end{center}
+    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación.
+    Si $([w],[v]) \in \R'_a$ entonces para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$
 \end{lema}
 
 
@@ -456,15 +470,15 @@ Notar que en el contexto de esta definición, $[w]$ se refiere a la clase de equ
 \begin{demostracion}
     Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación. Sea $([w],[v]) \in \R'_a$, veamos que para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$.
 
-    Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Ahora bien, 
-    sea $w' \in [w]$, por estar ambos $w_0$ y $w'$ en $[w]$, existe una LMB-bisimulación $Z$ tal que $(w_0,w') \in Z$. 
-    Pero notemos que, por (zig) de $Z$, como $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
+    Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Sea $w' \in [w]$, por estar ambos 
+    $w_0$ y $w'$ en $[w]$, existe una LMB-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que, por (zig) de $Z$, como 
+    $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
     $(v_0,v') \in Z$, es decir, $v' \in [v]$. Como demostramos esto para un $w'$ arbitrario en $[w]$, vale para todo elemento de $[w]$.
 \end{demostracion}
 
 
 \begin{teorema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ 
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ 
     la contracción por LMB-bisimulación del modelo $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ 
     son $\KHilogic$-bisimilares para cada $w \in \W$ siendo $\modults' = \tup{\W',\R',\cset{\S_i}_{i \in \AGT},\V',\ACT}$.
 \end{teorema}
@@ -493,7 +507,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 
         Supongamos que $\pi$ no es fuertemente ejecutable en $Z(U)$. Luego existe $\sigma \in \pi$ y $[w_1],...,[w_k]$ con $0 \le k \le |\sigma|$ tal que $[w_1] \in Z(U)$, $([w_i], [w_{i+1}]) \in \R'_{\sigma[i]}$ y $\R'_{\sigma[k]}([w_k]) = \emptyset$.
 
-        Ahora bien, como $[w_1] \in Z(U)$, existe $w_1' \in U$ tal que $w_1' \in [w_1]$. Luego notemos que aplicando sucesivamente el Lema 3 en todo el camino, existen $w_1',...w_k'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}') \in \R_{\sigma[i]}$.
+        Como $[w_1] \in Z(U)$, existe $w_1' \in U$ tal que $w_1' \in [w_1]$. Luego notemos que aplicando sucesivamente el Lema 3 en todo el camino, existen $w_1',...w_k'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}') \in \R_{\sigma[i]}$.
 
         Pero veamos que esto nos dice que $\R_{\sigma[k]}(w_k') = \emptyset$. Pues, si existiera $v$ tal que $(w_k',v) \in \R_{\sigma[k]}$ entonces ocurriría que $([w_k],[v]) \in \R'_{\sigma[k]}$. Luego $\sigma \in \pi$ no es fuertemente ejecutable en $w_1' \in U$, lo cuál es absurdo, pues dijimos que $\pi$ es fuertemente ejecutable en todo $U$.
 
@@ -503,7 +517,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 
         Sea $[v] \in \R'_\pi(Z(U))$, entonces existen $\sigma \in \pi$ y $[w_1], ..., [w_{|\sigma|+1}]$ tales que $[w_1] \in Z(U)$, $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y $[w_{|\sigma|+1}] = [v]$.
 
-        Ahora bien, como $[w_1] \in Z(U)$, entonces existe $w_1' \in U$ tal que $w_1'\in [w_1]$. Luego notemos que aplicando sucesivamente el Lema 3 sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$. Como $\R_\pi(U) \subseteq T$ esto nos dice que $w'_{|\sigma|+1} \in T$. Finalmente, por definición de $T'$, $[w_{|\sigma|+1}] \in T'$. Luego como $[v] = [w_{|\sigma|+1}]$, $[v] \in T'$.
+        Como $[w_1] \in Z(U)$, entonces existe $w_1' \in U$ tal que $w_1'\in [w_1]$. Luego notemos que aplicando sucesivamente el Lema 3 sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$. Como $\R_\pi(U) \subseteq T$ esto nos dice que $w'_{|\sigma|+1} \in T$. Finalmente, por definición de $T'$, $[w_{|\sigma|+1}] \in T'$. Luego como $[v] = [w_{|\sigma|+1}]$, $[v] \in T'$.
 
         Entonces demostramos que $\pi$ es fuertemente ejecutable en $Z(U)$ y que $\R'_\pi(Z(U)) \subseteq T'$. Juntando ambos resultados, concluimos que $Z(U) \ultsExecAgi T'$, lo cuál demuestra ($\khi$-zig).
 
@@ -524,7 +538,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 
         Supongamos que $\pi$ no es fuertemente ejecutable en $Z^{-1}(U)$. Luego existe $\sigma \in \pi$ y $w_1,...,w_k$ con $0 \le k \le |\sigma|$ tal que $w_1 \in Z^{-1}(U)$, $(w_i,w_{i+1}) \in \R_{\sigma[i]}$ y $\R_{\sigma[k]}(w_k) = \emptyset$. 
 
-        Ahora bien, notemos entonces que por la definición de $\R'$, $[w_1],...,[w_k]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, que $[w_1] \in U$, pues $w_1 \in Z^{-1}(U)$. Pero notemos que como $\R_{\sigma[k]}(w_k) = \emptyset$, por la contrarrecíproca del Lema 3, podemos ver que $\R'_{\sigma[k]}([w_k]) = \emptyset$, lo que nos dice que $\sigma \in \pi$ no es fuertemente ejecutable en $[w_1] \in U$. Absurdo, pues dijimos que $\pi$ es fuertemente ejecutable en todo $U$.
+        Notemos entonces que por la definición de $\R'$, $[w_1],...,[w_k]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, que $[w_1] \in U$, pues $w_1 \in Z^{-1}(U)$. Pero notemos que como $\R_{\sigma[k]}(w_k) = \emptyset$, por la contrarrecíproca del Lema 3, podemos ver que $\R'_{\sigma[k]}([w_k]) = \emptyset$, lo que nos dice que $\sigma \in \pi$ no es fuertemente ejecutable en $[w_1] \in U$. Absurdo, pues dijimos que $\pi$ es fuertemente ejecutable en todo $U$.
 
         Esto nos dice que $\pi$ es fuertemente ejecutable en todo $Z^{-1}(U)$.
 
@@ -532,13 +546,11 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 
         Sea $v \in \R_\pi(Z^{-1}(U))$, entonces existen $\sigma \in \pi$ y $w_1,...,w_{|\sigma|+1}$ tales que $w_1 \in Z^{-1}(U)$, $(w_i,w_{i+1}) \in \R_{\sigma[i]}$ y $w_{|\sigma|+1} = v$. 
 
-        Ahora bien, por la definición de $\R'$, esto nos dice que $[w_1],...,[w_{|\sigma|+1}]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, como $w_1 \in Z^{-1}(U)$ entonces $[w_1] \in U$. Luego notemos que como $\R'_\pi(U) \subseteq T$, esto nos dice que $[w_{|\sigma|+1}] \in T$, lo cuál implica que $w_{|\sigma|+1} \in T'$. Como $v = w_{|\sigma|+1}$ entonces $v \in T'$. 
+        Por la definición de $\R'$, esto nos dice que $[w_1],...,[w_{|\sigma|+1}]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, como $w_1 \in Z^{-1}(U)$ entonces $[w_1] \in U$. Luego notemos que como $\R'_\pi(U) \subseteq T$, esto nos dice que $[w_{|\sigma|+1}] \in T$, lo cuál implica que $w_{|\sigma|+1} \in T'$. Como $v = w_{|\sigma|+1}$ entonces $v \in T'$. 
 
         Entonces demostramos que $\pi$ es fuertemente ejecutable en todo $Z^{-1}(U)$ y que $\R'_\pi(Z^{-1}(U)) \subseteq T'$. Juntando ambos resultados, concluimos que $Z^{-1}(U) \ultsExecAgi T'$, lo cuál demuestra ($\khi$-zag).
     \end{itemize}
-
     Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
-    
 \end{demostracion}
 
 \section{Comparación entre las contracciones propuestas}
