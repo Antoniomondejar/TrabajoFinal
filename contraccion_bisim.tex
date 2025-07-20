@@ -149,7 +149,7 @@ Dado un modelo, ¿Existe un procedimiento capaz de encontrar otro modelo que sea
 un modelo de tamaño mínimo entre todos los modelos bisimilares al modelo original?.
 
 En la lógica modal básica la respuesta a esta pregunta es positiva, y al modelo encontrado se lo llama la contracción por bisimulación.
-Como se presenta en [\cite{HandbookModalLogic}, capítulo 3], la contracción se define a partir del estudio de las autobisimulaciones del modelo. En particular,
+Como se presenta en \cite[Capítulo 3]{HandbookModalLogic}, la contracción se define a partir del estudio de las autobisimulaciones del modelo. En particular,
 se demuestra que la unión de dos bisimulaciones es también una bisimulación, de allí se obtiene que existe una autobisimulación máxima de un modelo.
 
 Luego, se demuestra que dicha autobisimulación máxima es una relación de equivalencia, por lo que se puede definir un modelo cuyo dominio sea el cociente
@@ -159,7 +159,7 @@ dos clases de equivalencia se relacionan entre sí cuando existen dos puntos de 
 Finalmente se concluye que dicha contracción satisface que cada punto del modelo original es bisimilar al punto que representa su clase de equivalencia, y 
 que, a su vez, es de tamaño mínimo entre todos los modelos bisimilares.
 
-Habiendo mencionado un poco la ruta de trabajo seguida para la lógica modal básica, intentaremos realizar un estudio similar para la lógica `Knowing-How' basada en la 
+Habiendo mencionado un poco la ruta de trabajo seguida para la lógica modal básica, intentaremos realizar un estudio similar para la lógica `Knowing-How' basada en 
 incertidumbre.
 
 \section{Primera Propuesta de Contracción}
@@ -172,10 +172,10 @@ incertidumbre.
 \end{definicion}
 
 Recordemos la definición de $A_\modults$ y de $\rho_\modults$, introducida en \ref{def:Am}, y veamos el siguiente teorema 
-que caracteriza la autobisimulación máxima de un modelo.
+que caracteriza la autobisimulación máxima de un \ults.
 
 \begin{teorema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo, entonces se cumple que,
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults, entonces se cumple que,
     \begin{itemize}
         \item $A_\modults$ es una autobisimulación de $\modults$.
         \item Sea $Z \subseteq \W \times \W$ una autobisimulación de $\modults$ entonces $Z \subseteq A_\modults$. 
@@ -250,10 +250,10 @@ encontramos una forma de identificar la autobisimulación máxima de un modelo s
 
 En particular, se demuestra que la partición de nodos de acuerdo a la función de valuación $\V$ siempre es una autobisimulación.
 
-Entonces sea $\modults$ un \ults, nos gustaría definir su contracción por bisimulación a partir de $A_\modults$ su autobisimulación máxima.
+Entonces sea $\modults$ un \ults, nos gustaría definir su contracción por bisimulación a partir de $A_\modults$, su autobisimulación máxima.
 
-Tomando un camino similar al de la lógica modal básica, una posible primer propuesta sería un modelo en el que se tenga como dominio al cociente 
-de $\modults$ con respecto a $A_\modults$ y se relacione a las clases de equivalencia $[w], [v] \in \rho_\modults$ siempre que 
+Tomando un camino similar al de la lógica modal básica, una posible propuesta sería un modelo en el que se tenga como dominio al cociente 
+del dominio de $\modults$ con respecto a $A_\modults$ y se relacione a las clases de equivalencia $[w], [v] \in \rho_\modults$ siempre que 
 $w, v$ estén relacionados en $\modults$. Por otro lado, la relación de indistinguibilidad de cada agente y el conjunto de acciones de $\modults$ se conservarían.
 
 Sin embargo consideremos el siguiente modelo (\Cref{fig:1stproposaloriginal}):
@@ -325,14 +325,15 @@ de cada agente.
                 \item existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v')\in \R_\sigma$
                 \item $\sigma$ es fuertemente ejecutable para cada $w' \in [w]$.
             \end{enumerate}
-            \item $\S_i' := \{ \pi' = \{a_\sigma \mid \sigma \in \pi\} \mid \pi \in S_i \}$
+            \item $\S_i' := \{ \pi' = \{a_\sigma \mid \sigma \in \pi\} \mid \pi \in \S_i \}$
             \item $\V'([w]) := \V(w)$
-            \item $\ACT' := \{a_\sigma \mid $ existe $ \pi\in S_i$ tal que $ \sigma \in \pi$ para algún $i \in \AGT \}$ 
+            \item $\ACT' := \{a_\sigma \mid $ existe $ \pi\in \S_i$ tal que $ \sigma \in \pi$ para algún $i \in \AGT \}$ 
         \end{itemize}
     \end{center}
 \end{definicion}
     
-Una vez presentada la contracción, demostraremos que produce un modelo bisimilar. Para ello demostraremos el siguiente teorema.
+Una vez presentada la contracción, nos gustaría asegurarnos que, efectivamente, construye un modelo bisimilar. Para ello demostraremos el 
+siguiente teorema.
 
 \begin{teorema}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\modults'$ su contracción por bisimulación entonces 
@@ -389,7 +390,7 @@ Una vez presentada la contracción, demostraremos que produce un modelo bisimila
         Como $w'' \in U$ y $\R_\pi(U) \subseteq T$, entonces se cumple que $v'' \in T$, lo que nos dice que $[v''] = [v] \in T'$, que era lo que 
         queríamos demostrar. Luego $\R'_{\pi'}(Z(U)) \subseteq T'$. 
 
-        Queda demostrado entonces $Z$ satisface $\khi$-zig.
+        Queda demostrado entonces que $Z$ satisface $\khi$-zig.
 
         \item ($\khi$-zag) Sean $U', T' \in \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s \in \rho_{\modults'}$ se cumple que $s \subseteq U'$ o 
         $s \cap U' = \emptyset$, queremos encontrar $T \subseteq \W$ tal que:
@@ -400,16 +401,16 @@ Una vez presentada la contracción, demostraremos que produce un modelo bisimila
             \end{itemize}
         \end{multicols}
         
-        Veamos que $T := \bigcup\limits_{[w] \in T'} [w]$ cumple con lo mencionado. Notar que por la definición de $Z$, es claro que $T' = Z^{-1}(T)$, lo que nos dice que $T' \subseteq Z^{-1}(T)$. Demostremos entonces que $Z^{-1}(U) \ultsExecAgi T'$. 
+        Veamos que $T := \bigcup\limits_{[w] \in T'} [w]$ cumple con lo mencionado. Notar que por la definición de $Z$, es claro que $T = Z^{-1}(T')$, lo que nos dice que $T \subseteq Z^{-1}(T')$. Demostremos entonces que $Z^{-1}(U') \ultsExecAgi T$. 
     
-        Como $U' \ultsExecAgi T'$, entonces existe $\pi' \in S_i'$ tal que $\pi'$ es fuertemente ejecutable para cada $[w] \in U'$ y $\R'_{\pi'}(U') \subseteq T'$.
+        Como $U' \ultsExecAgi T'$, entonces existe $\pi' \in \S_i'$ tal que $\pi'$ es fuertemente ejecutable para cada $[w] \in U'$ y $\R'_{\pi'}(U') \subseteq T'$.
 
-        Luego, por como está definido $\modults$ existe $\pi \in S_i$ tal que para cada $\sigma \in \pi$, $a_\sigma \in \pi'$. 
+        Luego, por como está definido $\modults$, existe $\pi \in \S_i$ tal que para cada $\sigma \in \pi$ se cumple que $a_\sigma \in \pi'$. 
         Veamos entonces que $\pi$ atestigua $Z^{-1}(U') \ultsExecAgi T$, es decir, que $\pi$ es fuertemente ejecutable para cada $w \in Z^{-1}(U')$ 
         y, a su vez, que $\R_\pi(Z^{-1}(U')) \subseteq T$.
 
-        Sean $w \in Z^{-1}(U')$, veamos que $\pi$ es fuertemente ejecutable en $w$. Sea $\sigma \in \pi$, veamos que $\sigma$ es fuertemente ejecutable 
-        en $w$. Notemos que como $w \in Z^{-1}(U')$ entonces $[w] \in U'$ y, a su vez, como $a_\sigma$ es fuertemente ejecutable en $U'$, $a_{\sigma_i}$ también es fuertemente ejecutable en $[w]$. 
+        Sea $w \in Z^{-1}(U')$, veamos que $\pi$ es fuertemente ejecutable en $w$. Sea $\sigma \in \pi$, queremos ver que $\sigma$ es fuertemente ejecutable 
+        en $w$. Notemos que como $w \in Z^{-1}(U')$ entonces $[w] \in U'$ y, a su vez, como $a_\sigma$ es fuertemente ejecutable en $U'$, $a_\sigma$ también es fuertemente ejecutable en $[w]$. 
         Luego, existe $[v]$ tal que $([w],[v]) \in \R'_{a_\sigma}$. Notemos que por la definición de $\R'$, como existe esa arista entonces se cumple que $\sigma$ es fuertemente ejecutable 
         para cada nodo de $[w]$. En particular, $\sigma$ es fuertemente ejecutable en $w$, lo que demuestra que $\pi$ es fuertemente ejecutable 
         en $Z^{-1}(U')$.
@@ -418,11 +419,11 @@ Una vez presentada la contracción, demostraremos que produce un modelo bisimila
 
         Sean $w, v \in \W$ tales que $w \in Z^{-1}(U')$ y $(w,v) \in \R_\pi$, queremos ver que $v \in T'$. Primero veamos que como $(w,v) \in \R_\pi$, 
         entonces existe $\sigma \in \pi$ tal que $(w,v) \in \R_\sigma$. Luego, como $w \in Z^{-1}(U')$, entonces $[w] \in U'$. Como $\pi'$ es fuertemente 
-        ejecutable en $U'$, entonces $a_\sigma$ es fuertemente ejecutable en $U'$ y por lo tanto $a_\sigma$ también es fuertemente ejecutable en $[w]$.
+        ejecutable en $U'$, entonces $a_\sigma$ es fuertemente ejecutable en $U'$ y, por lo tanto, $a_\sigma$ también es fuertemente ejecutable en $[w]$.
         
         Pero, como $a_\sigma$ es fuertemente ejecutable en $[w]$ entonces existe $[v']$ tal que $([w],[v']) \in \R_{a_\sigma}$. 
         Como existe dicha arista, por la definición de $\R'$, ocurre que $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$. 
-        Pero como $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$ y $(w,v) \in \R_\sigma$ entonces $([w],[v]) \in \R'_{a_\sigma}$. 
+        Luego, como $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$ y $(w,v) \in \R_\sigma$ entonces $([w],[v]) \in \R'_{a_\sigma}$. 
         Luego, como $\R'_{\pi'}(U') \subseteq T'$, entonces $[v] \in T'$, lo que nos dice que $v \in T$ que era lo que queríamos demostrar.
 
         Entonces, hemos demostrado que $Z$ satisface $\khi$-zag.
@@ -431,10 +432,13 @@ Una vez presentada la contracción, demostraremos que produce un modelo bisimila
 \end{demostracion}
 
 
+% \begin{teorema}
+%     La contracción por bisimulación de un \ults $\modults$ tiene cardinalidad mínima entre los modelos $\KHilogic$-bisimilares a $\modults$.
+% \end{teorema}
+Hemos demostrado entonces que la contracción propuesta es adecuada, es decir, que dado un \ults genera un \ults bisimilar a partir de su 
+autobisimulación máxima $A_\modults$.
 
-\begin{teorema}
-    La contracción por bisimulación de un \ults $\modults$ tiene cardinalidad mínima entre los modelos $\KHilogic$-bisimilares a $\modults$.
-\end{teorema}
+Luego, es deseable que la contracción propuesta sea razonable en términos computacionales. Por lo que demostraremos el siguiente teorema.
 
 
 \begin{teorema}
@@ -442,8 +446,49 @@ Una vez presentada la contracción, demostraremos que produce un modelo bisimila
     tamaño de $\modults$.
 \end{teorema}
 
+\begin{demostracion}
+    Veamos que el tamaño de $\modults'$ es polinomial con respecto al tamaño de $\modults$. Es claro que $W/A_\modults$ tiene tamaño polinomial con 
+    respecto al tamaño de $\W$ y lo mismo sucede con $\V'$. 
+
+    Luego notemos que $\ACT'$ tiene tamaño $\sum_{i} |\S_i|$, y cada $\S_i'$ tiene tamaño a lo sumo $|\S_i|$. Por último, notemos que $\R'$ tiene a lo 
+    sumo una arista por cada tupla formada por dos nodos de $\W$ y un plan conocido por algún agente $i$, luego su tamaño está acotado por 
+    $\W * \W * \sum_{i}|\S_i|$, lo cuál es polinomial con respecto al tamaño de $\modults$.
+
+    Una vez demostrado que el tamaño de $\modults'$ es polinomial con respecto al tamaño de $\modults$, basta con ver que cada componente es computable en 
+    tiempo polinomial. 
+
+    Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo polinomial. Luego notemos que como mencionamos en 
+    (sección complejidad marco teórico), model-checking está en $\Poly$ por lo que es claro que computar $\sexec(\sigma)$ y $\R_\sigma$
+    para cada $\sigma$ es realizable en tiempo polinomial. 
+
+    Luego $\modults'$ es computable en tiempo polinomial.
+\end{demostracion}
+
+Hemos presentado una contracción por bisimulación para la lógica de `Knowing How' multi-agente basada en incertidumbre y hemos demostrado que 
+la misma es adecuada, es decir, que produce un modelo bisimilar y que además es computable eficientemente.
+
+Sin embargo, algo que podemos notar a partir de la definición propuesta, es que el modelo que se encuentra difiere estructuralmente de 
+forma signicativa con respecto al modelo original. 
+Naturalmente, al modificar el conjunto de acciones básicas del modelo, el entorno de habilidades de los agentes cambia por completo y, junto con ello, 
+los planes que cada agente considera posible y su relación de indistinguibilidad cambian también. Más aún, en la contracción propuesta, los agentes 
+únicamente consideran planes de una única acción.
+
+Este análisis es el que motiva una nueva propuesta de contracción.
 
 \section{Segunda Propuesta de Contracción}
+
+Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve 
+en la mayor medida sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
+indistinguibilidad de planes de cada agente.
+
+Si recordamos las primeras propuestas analizadas en la sección anterior, notamos que no logramos encontrar una propuestra adecuada a partir de 
+la autobisimulación máxima $A_\modults$ que no modifique las componentes mencionadas. Por lo que pareciera que para encontrar tal contracción 
+debemos considerar otro dominio.  
+
+Notemos que cada \ults de la forma $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ tiene naturalmente un modelo de Kripke asociado, 
+que sería el formado por $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$. Luego, una posible propuesta sería contraer dicho modelo de Kripke como en 
+Lógica Modal Básica y utilizarlo como contracción para `Knowing-How' conservando el conjunto de acciones básicas y la relación de indistinguibilidad 
+de planes de cada agente. 
 
 \begin{definicion}
     Supongamos $\ACT$ un conjunto de acciones no vacío enumerable.
@@ -459,13 +504,10 @@ Una vez presentada la contracción, demostraremos que produce un modelo bisimila
 
 Notar que en el contexto de esta definición, $[w]$ se refiere a la clase de equivalencia de $w$ en la relación de equivalencia dada por $Z_\modults$. 
 
-
 \begin{lema}
     Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación.
     Si $([w],[v]) \in \R'_a$ entonces para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$
 \end{lema}
-
-
 
 \begin{demostracion}
     Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación. Sea $([w],[v]) \in \R'_a$, veamos que para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$.
@@ -476,6 +518,8 @@ Notar que en el contexto de esta definición, $[w]$ se refiere a la clase de equ
     $(v_0,v') \in Z$, es decir, $v' \in [v]$. Como demostramos esto para un $w'$ arbitrario en $[w]$, vale para todo elemento de $[w]$.
 \end{demostracion}
 
+Ahora, una vez presentada la contracción por LMB-bisimulación, demostraremos el teorema que nos garantiza que es posible extender dicha contracción para 
+la lógica `Knowing How' multi-agente basada en incertidumbre.
 
 \begin{teorema}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ 
@@ -553,4 +597,13 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
     Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{demostracion}
 
+Un punto muy positivo de esta contracción es que existen algoritmos muy eficientes que computan la contracción por LMB-bisimulación. En particular, 
+el algoritmo de Paige y Tarjan presentado en (citar) tiene complejidad $\bigO(m*log(n))$ siendo $n$ la cantidad de nodos del dominio del modelo y 
+$m$ la cantidad de aristas del mismo.
+
+
 \section{Comparación entre las contracciones propuestas}
+
+
+Acá irían ejemplos donde cada contracción genere un modelo de menor tamaño. También conclusiones acerca de lo que nos dice sobre expresividad cada
+contracción.
