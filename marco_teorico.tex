@@ -1,5 +1,36 @@
 \chapter{Lógica de `Knowing How' Multi-Agente Basada en Incertidumbre}
-Se introducirá ahora la lógica de `Knowing-How' multi-agente basada en incertidumbre (\KHilogic), presentada en \cite{ArecesFSV25}.
+Introduciremos un enfoque para modelar el concepto de saber cómo, presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
+lógica de `Knowing How' previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En este enfoque, el conocimiento de un agente está 
+representado en Sistemas de Transición Etiquetados (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan el cambio de estado 
+que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente estarán dadas no solo por las acciones básicas que tiene a 
+su disposición en un determinado estado, sino que también por la composición de las mismas, es decir, cada camino en el \lts. A las composiciones de acciones las 
+llamaremos planes. Se considera que un agente `conoce' un plan en un determinado estado cuando cada ejecución parcial del plan a partir de dicho estado se puede 
+completar.
+
+La lógica de `Knowing How' multi-agente basada en incertidumbre toma este enfoque como punto de partida. La principal motivación por la que 
+surge esta propuesta es que la representación del conocimiento mencionada anteriormente supone que el agente cuenta con cierto nivel de omnisciencia, 
+pues se asume que un agente conoce todo plan que pueda inferirse de su \lts asociado y que, además, sabe distinguir qué plan es adecuado entre los que tiene en su 
+disposición, en el sentido de que para todo par de planes es capaz de reconocer si provocan resultados diferentes.
+Para clarificar un poco más este argumento, veamos el siguiente ejemplo presentado en \cite{ArecesFSV25,SaraviaPHD}.
+
+Consideremos un agente que quiere hacer una torta. El agente cuenta con la habilidad de realizar cualquiera de los cuatro métodos de mezcla diferentes 
+(de batido, de la crema, de fusión y de frotamiento) y hasta podría ser capaz de identificarlos como acciones distintas entre sí. Sin embargo, 
+el agente podría no tener noción de cuáles son los efectos de utilizar un método u otro, es decir, podría no distinguir que los mismos producen resultados 
+diferentes. En este caso, podríamos considerar que el agente no sabe cómo hacer una torta, pues en los casos en los que selecciona el método correcto obtiene 
+un buen resultado y en los demás casos no. 
+Incluso, podríamos considerar más situaciones en las que la indistinguibilidad del agente no sea únicamente en acciones sino que en planes en su totalidad. Por ejemplo, 
+el agente sabe la diferencia entre añadir leche y añadir harina a la mezcla, pero podría darse el caso en el que no sepa distinguir cuál es el orden adecuado en el que 
+realizar ambas acciones. Incluso, podría ocurrir que el agente no sepa distinguir planes de distinta longitud, por ejemplo, en el proceso de horneado de la torta el agente 
+debe eventualmente abrir el horno para verificar si el proceso de horneado ya está completo, pero hacerlo con demasiada frecuencia podría afectar al resultado de la torta.
+
+Es así como estos ejemplos motivan una representación más general sobre el conocimiento de un agente, tomando en consideración no solo las habilidades con las que dispone sino 
+también su capacidad de distinguir diferentes planes. A su vez, esto permite una representación para múltiples agentes, en la que todos los agentes disponen de las mismas acciones 
+pero cada uno tiene su propia interpretación de los efectos de las mismas, así como su propia habilidad para distinguir distintos planes.
+
+Así la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una relación de indistinguibilidad para cada agente.
+
+Ahora si, introduciremos la lógica de `Knowing-How' multi-agente basada en incertidumbre (\KHilogic) definiendo su sintaxis y semántica, su noción de bisimulación y por último mencionaremos 
+algunos resultados relacionados a su complejidad computacional con respecto a los problemas de verificación de modelos y satisfacibilidad.
 
 \section{Sintaxis y Semántica}
 Consideraremos a $\PROP$ como un conjunto no vacío de variables proposicionables con cardinalidad contable 
@@ -14,10 +45,12 @@ y a $\AGT$ como un conjunto finito no vacío de agentes.
     $\kh_i(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo hacer que $\varphi$ valga''.
 \end{definicion}
 
-Antes de definir la semántica de la lógica, se definirán algunos conceptos que serán útiles.
+Formalizaremos matemáticamente algunos de los conceptos discutidos en la presentación de este capítulo. Como mencionamos, se 
+utilizarán secuencias de acciones, o planes, para representar el conocimiento de los agentes. Las fórmulas de \KHilogic se interpretarán 
+sobre sistemas de transiciones etiquetados extendidos con una familia de relaciones de indistinguibilidad entre planes.
 
 \begin{definicion}[Acciones y planes]
-    Sea $\ACT$ un conjunto enumerable de nombres de acciones, y sea $\ACT^*$ el conjunto de secuencias finitas de elementos de $\ACT$. 
+    Sea $\ACT$ un conjunto enumerable de nombres de acciones, y sea $\ACT^*$ el conjunto de secuencias finitas sobre $\ACT$. 
     A los elementos de $\ACT^*$ los llamaremos planes, siendo $\epsilon$ el plan vacío. Sea $\sigma \in \ACT^*$, denotaremos $|\sigma|$ 
     al largo de $\sigma$ (notar $|\epsilon| = 0$). Para un plan $\sigma$ y $0 \leq k \leq |\sigma|$, el plan $\sigma[..k]$ es el prefijo 
     de $\sigma$ hasta la $k-$ésima posición inclusive. Para $0 < k \leq |\sigma|$, la acción $\sigma[k]$ es la que se encuentra en la 
@@ -25,10 +58,11 @@ Antes de definir la semántica de la lógica, se definirán algunos conceptos qu
 \end{definicion}
 
 \begin{definicion}[Sistemas de Transiciones Etiquetados]
-    Un \emph{Sistema de Transición Etiquetado (\lts, Labeled Transition System)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ donde $\W$ es un conjunto no 
-    vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in A$ para algún $A \subseteq \ACT\}$ es una colección de relaciones binarias
-    sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de etiquetado y $\ACT$ es un conjunto enumerable de nombres de acciones.
-    Dado un \lts $\modlts$ y $w \in \W$, se llamará al par $(\modlts,w)$ un \lts punteado (los paréntesis usualmente se descartan).
+    Un \emph{Sistema de Transición Etiquetado (\lts, Labeled Transition System)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
+    donde $\W$ es un conjunto no vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in A$ para algún $A \subseteq \ACT\}$ es 
+    una colección de relaciones binarias sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de etiquetado y $\ACT$ es un 
+    conjunto enumerable de nombres de acciones. Dado un \lts $\modlts$ y $w \in \W$, se llamará al par $(\modlts,w)$ un \lts punteado 
+    (los paréntesis usualmente se descartan).
 \end{definicion}
 
 \begin{definicion}[\lts basado en la incertidumbre]
@@ -38,10 +72,8 @@ Antes de definir la semántica de la lógica, se definirán algunos conceptos qu
     al par $(\modults,w)$ un \ults punteado.
 \end{definicion}
 
-Se utilizarán secuencias de acciones, o planes, para representar el conocimiento de los agentes. Las fórmulas de \KHilogic 
-se interpretarán sobre sistemas de transiciones etiquetados extendidos con una familia de relaciones de indistinguibilidad entre planes. 
-Notar que para cada agente $i \in \AGT$, $P_i$ representará los planes que el agente tiene a su disposición. Luego $\sim_i$ 
-será una relación de equivalencia sobre $P_i$, dos planes estarán relacionados cuando un agente no sepa distinguirlos.
+Notar que para cada agente $i \in \AGT$, $P_i$ representará los planes que el agente tiene a su disposición. 
+Luego $\sim_i$ será una relación de equivalencia sobre $P_i$, dos planes estarán relacionados cuando un agente no sepa distinguirlos.
 
 Sea $\model = \tup{\W,\R,\sim,\V,\ACT}$ un \ults y sea $i \in \AGT$, para un plan $\sigma \in P_i$, sea $[\sigma]_i$ su clase de 
 equivalencia en $\sim_i$. Notar que hay una correspondencia uno-a-uno entre cada $\sim_i$ y la partición de $P_i$ en sus correspondientes 
@@ -69,7 +101,7 @@ lo que cada clase de equivalencia dentro de su relación de indistinguibilidad p
     \]
 \end{definicion}
 
-La idea presentada en \cite{ArecesFSV25} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando exista un 
+La idea presentada en \cite{ArecesFSV25,SaraviaPHD} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando exista un 
 conjunto de planes `adecuado' que pueda ejecutar desde cualquier estado en el que valga $\psi$ y que lleve sólo a estados donde valga $\varphi$. 
 Una parte crucial entonces es determinar qué se considerará un conjunto de planes `adecuado'.
 
@@ -80,13 +112,12 @@ Una parte crucial entonces es determinar qué se considerará un conjunto de pla
     
     Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
     Luego, $\sexec$($\pi$) $:= \cap_{\sigma \in \pi}$ $\sexec$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
-
 \end{definicion}
 
 Intuitivamente, ejecutabilidad fuerte sobre planes pide que cada ejecución parcial de un plan (incluyendo $\epsilon$) pueda ser completada, y, ejecutabilidad fuerte sobre
 clases de planes pide que cada plan de la clase sea fuertemente ejecutable.
 
-A partir de esta noción, las fórmulas de \KHilogic son interpretadas sobre un \ults de la siguiente manera.
+Ahora si, estamos en condiciones de presentar la relación de satisfacibilidad que relaciona \ultss punteados con formulas de \KHilogic. 
 
 \begin{definicion}[\KHilogic sobre \ultss]
     La relación $\models$ entre un \ults punteado $\modults,w$ (con $\model = \tup{\W,\R,\{S_i\}_{i\in\AGT},\V,\ACT})$ y las fórmulas de \KHilogic está definida inductivamente 
@@ -118,8 +149,12 @@ dicho operador actúa \emph{globalmente}. Por lo tanto, $\truthset{\modults}{\kh
 
 \section{Bisimulación}
 
-La bisimulación es una herramienta crucial a la hora de analizar el poder expresivo de un lenguaje formal. Se presentará aquí su definición junto con algunos resultados 
-deseables a la hora de estudiar la noción de bisimulación de una lógica modal, los cuáles fueron demostrados en \cite{ArecesFSV25}.
+La bisimulación es una herramienta crucial a la hora de analizar el poder expresivo de una lógica o un lenguaje formal. 
+Nos permite relacionar modelos a partir de características estructurales entre sí, las cuáles logran capturar el comportamiento de 
+los mismos con respecto a la lógica en cuestión. 
+
+Se presentará aquí su definición junto con algunos resultados deseables a la hora de estudiar la noción de bisimulación de una 
+lógica modal, los cuáles fueron demostrados en \cite{ArecesFSV25,SaraviaPHD}.
 
 Primero, introduciremos una notación que nos será útil.
 
@@ -139,7 +174,7 @@ Primero, introduciremos una notación que nos será útil.
 Una observación que surge de esta definición es que si un conjunto es proposicionalmente definible entonces es \KHilogic-definible, dado que 
 toda fórmula proposicional sobre $\PROP$ es también una \KHilogic-fórmula.
 
-La siguiente proposición presentada en \cite{ArecesFSV25} nos dice que también vale la recíproca, 
+La siguiente proposición presentada en \cite{ArecesFSV25,SaraviaPHD} nos dice que también vale la recíproca, 
 es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmente definible.
 
 \begin{proposicion}\label{prop:khi-implies-prop-definable}
@@ -193,10 +228,9 @@ Ahora si, presentamos la noción de bisimulación.
 
     Escribiremos $\modults,w \bisim \modults',w'$ cuando exista una \KHilogic-bisimulación $Z$ entre
     $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
-
 \end{definicion}
 
-Para poder formalizar las propiedades cruciales de una bisimulación, definiremos primero la noción de 
+Para poder formalizar las propiedades cruciales de la bisimulación, definiremos primero la noción de 
 equivalencia entre modelos con respecto a \KHilogic.
 
 \begin{definicion}[\KHilogic-equivalencia]
@@ -207,7 +241,7 @@ equivalencia entre modelos con respecto a \KHilogic.
     \end{center} 
 \end{definicion}
 
-Ahora podemos presentar la correspondencia esperada entre $\bisim$ y $\modequiv$, demostrada en \cite{ArecesFSV25}.
+Ahora, podemos presentar la correspondencia esperada entre $\bisim$ y $\modequiv$, demostrada en \cite{ArecesFSV25,SaraviaPHD}.
 Usualmente nos referimos a este resultado como el Teorema de Invarianza para Bisimulación.
 
 \begin{teorema}[\KHilogic-bisimilitud implica \KHilogic-equivalencia]\label{thm:bisim-implies-equivalence}
@@ -222,7 +256,7 @@ a partir de propiedades puramente estructurales de los mismos.
 
 En \cite[Sección 2]{FervariVQW21} se presenta un contraejemplo que atestigua que la recíproca del teorema no es cierta para cualquier par de modelos.
 Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar en qué clases de modelos vale la recíproca del teorema.
-En \cite{ArecesFSV25}, se demuestra que en el caso finito se satisface la recíproca.
+En \cite{ArecesFSV25,SaraviaPHD}, se demuestra que en el caso finito se satisface la recíproca.
 
 Diremos que $\modults$, un \ults, es finito si y sólo si cada una de sus componentes tiene cardinalidad finita. Análogamente, diremos que 
 ($\modults,w$), un \ults punteado, es finito si y sólo $\modults$ es finito. 
@@ -240,3 +274,40 @@ equivalencia lógica entre los \ultss punteados en cuestión.
 
 
 \section{Complejidad Computacional}
+
+A lo largo de este trabajo, analizaremos la complejidad computacional de problemas relacionados con la noción de bisimulación. 
+Por ello, vale la pena mencionar algunos resultados estudiados en \cite{ArecesFSV25,SaraviaPHD} referentes a la lógica presentada en este 
+capítulo. 
+
+A la hora de realizar un estudio computacional de una lógica, los dos problemas de decisión fundamentales a analizar son los de 
+verificación de modelos (Model Checking) y satisfacibilidad ($\SAT$).
+
+El problema de Model Checking se formula como "dado un modelo y una fórmula de la lógica, decidir si el modelo la satisface". Por otro lado, 
+$\SAT$ se formula como "dada una fórmula de la lógica, decidir si existe un modelo que la satisfaga". 
+
+Estos problemas han sido estudiados a lo largo de los años en numerosas lógicas y son centrales, no solo para la lógica computacional, sino que 
+también para la teoría de la complejidad computacional en general. 
+
+Para la lógica proposicional, el problema de Model Checking está en la clase $\Poly$, mientras que $\SAT$ es $\NP-$completo 
+\cite[Capítulo 2, Sección 3]{Goldreich_2008}. Por otro lado, en la lógica modal básica tenemos que Model Checking también 
+está en $\Poly$ pero $\SAT$ es $\PSPACE-$completo \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
+Model Checking es $\PSPACE-$completo \cite[Capítulo 5, Sección 4]{Goldreich_2008} y $\SAT$ es indecidible. 
+
+Una observación que surge a partir de estos resultados es que mientras mayor es el poder expresivo de la lógica, mayores son los recursos 
+computacionales que se necesitan para resolver ambos problemas.
+
+Metiendonos de lleno en las lógicas de `Knowing How', en \cite{Demri_Fervari_2023} se demostró que para la lógica de `Knowing How' introducida 
+en \cite{Wang15KH,Wang2018GoalDirectedKH} Model Checking es $\PSPACE-$completo. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que 
+$\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía una cota inferior de su complejidad computacional.
+
+Para \KHilogic, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resultados sobre los problemas de decisión mencionados:
+\begin{teorema}
+    El problema de Model Checking para \KHilogic está en $\Poly$.
+\end{teorema}
+
+\begin{teorema}
+    $\SAT$ para \KHilogic es $\NP-$completo.
+\end{teorema}
+
+Lo que nos dice que ambos problemas son más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a la lógica 
+de `Knowing How' previamente mencionada. 
