@@ -1,0 +1,28 @@
+\chapter{Conclusiones y Trabajo Futuro}
+
+\section{Conclusiones}
+
+
+\section{Trabajo Futuro}
+
+Los resultados obtenidos en este trabajo dejan las puertas abiertas a numerosas posibilidades dentro de la familia de lógicas de `Knowing How'. 
+En primera instancia, se podría realizar un desarrollo similar alrededor de la noción de bisimulación de la lógica de `Knowing How' presentada 
+en \cite{Wang15KH,Wang2018GoalDirectedKH}. Consideramos que el estudiado realizado para \KHilogic es fácilmente adaptable para esta lógica, logrando 
+así redefinir la bisimulación para que considere características puramente estructurales entre los modelos y así 
+darle una naturaleza más procedural. También, sería interesante analizar su versión de $\KHiBisim$ y proponer su contracción por bisimulación, 
+donde creemos que algunos lemas fundamentales estudiados en este trabajo son adaptables a esta lógica.
+
+Por otro lado, otro trabajo futuro interesante sería el de implementar algunos de los algoritmos presentados en este trabajo. Particularmente, 
+la implementación de la contracción por bisimulación sería muy beneficiosa en un contexto en el que se requiera realizar muchas consultas del 
+estilo de Model Checking sobre un \ults.
+
+Por último, a partir de los resultados estudiados en \cite{Demri_Fervari_2023} en relación a la lógica de `Knowing How' basada en incertidumbre, 
+consideramos que es posible generalizar el problema de $\KHiBisim$ a la lógica que se intepreta sobre \regults, los cuáles son \ults en donde la relación 
+de indistinguibilidad entre planes de cada agente está dada por un conjunto de autómatas finitos en lugar de conjuntos explícitos de planes. Notar que 
+a un nivel lógico o de teoría de modelos, la clase de modelos \regults es una subclase de los modelos \ults (pues restringen las clases de equivalencia 
+a lenguajes regulares), pero a nivel computacional los \regults son más generales dado que permiten representar de forma finita un conjunto 
+posiblemente infinito de planes. En \cite{Demri_Fervari_2023}, se demuestra que dado un \regults verificar si el lenguaje de un autómata 
+es $\sexec$ en un nodo es realizable en tiempo polinomial y, a su vez, se demuestra que dado dos nodos del \regults y un autómata se puede 
+decidir en tiempo polinomial si existe un camino entre ellos de forma tal que la composición de acciones del camino esté dentro del 
+lenguaje del autómata. A partir de estos resultados, es posible adaptar lo estudiado sobre $\KHiBisim$ para demostrar que su versión para 
+esta lógica sobre \regults también es $\coNP-$completo.
