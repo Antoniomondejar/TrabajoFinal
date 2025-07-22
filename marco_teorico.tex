@@ -18,6 +18,7 @@ Consideremos un agente que quiere hacer una torta. El agente cuenta con la habil
 el agente podría no tener noción de cuáles son los efectos de utilizar un método u otro, es decir, podría no distinguir que los mismos producen resultados 
 diferentes. En este caso, podríamos considerar que el agente no sabe cómo hacer una torta, pues en los casos en los que selecciona el método correcto obtiene 
 un buen resultado y en los demás casos no. 
+
 Incluso, podríamos considerar más situaciones en las que la indistinguibilidad del agente no sea únicamente en acciones sino que en planes en su totalidad. Por ejemplo, 
 el agente sabe la diferencia entre añadir leche y añadir harina a la mezcla, pero podría darse el caso en el que no sepa distinguir cuál es el orden adecuado en el que 
 realizar ambas acciones. Incluso, podría ocurrir que el agente no sepa distinguir planes de distinta longitud, por ejemplo, en el proceso de horneado de la torta el agente 
@@ -27,7 +28,8 @@ Es así como estos ejemplos motivan una representación más general sobre el co
 también su capacidad de distinguir diferentes planes. A su vez, esto permite una representación para múltiples agentes, en la que todos los agentes disponen de las mismas acciones 
 pero cada uno tiene su propia interpretación de los efectos de las mismas, así como su propia habilidad para distinguir distintos planes.
 
-Así la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una relación de indistinguibilidad para cada agente.
+Así, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
+relación de indistinguibilidad sobre planes para cada agente.
 
 Ahora si, introduciremos la lógica de `Knowing-How' multi-agente basada en incertidumbre (\KHilogic) definiendo su sintaxis y semántica, su noción de bisimulación y por último mencionaremos 
 algunos resultados relacionados a su complejidad computacional con respecto a los problemas de verificación de modelos y satisfacibilidad.
@@ -310,4 +312,4 @@ Para \KHilogic, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resu
 \end{teorema}
 
 Lo que nos dice que ambos problemas son más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a la lógica 
-de `Knowing How' previamente mencionada. 
+de `Knowing How' previamente mencionada.
