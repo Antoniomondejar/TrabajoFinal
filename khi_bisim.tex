@@ -33,9 +33,9 @@ Detalles reunión 17/07, nos dimos cuenta que capaz una mejor forma de presentar
 la complejidad de la `verificación', es decir el problema de dados dos modelos y una relación binaria entre ellos decidir si dicha relación es
 una bisimulación.
 
-Una vez caracterizada la complejidad de ese problema (que modificando un poco la demo que está ahora se puede probar que es $\coNP$-completo), 
+Una vez caracterizada la complejidad de ese problema (que modificando un poco la demo que está ahora se puede probar que es $\coNPComplete$), 
 ahi presentamos el lema que caracteriza la existencia de bisimulación entre dos modelos que trivializa la parte de `búsqueda' del problema, 
-y de ahí obtenemos que el problema es $\coNP$-completo retocando un poco la prueba de la verificación.
+y de ahí obtenemos que el problema es $\coNPComplete$ retocando un poco la prueba de la verificación.
 
 Creo que contar primero el problema $\KHiBisim$ y después analizar qué tan complicada es la `verificación' y después qué tan complicada es la `búsqueda' 
 para terminar caracterizando la complejidad del problema es un buen hilo para contar la historia. Y después en la siguiente sección probar la equivalencia 
@@ -45,7 +45,7 @@ con el caso punteado.
 (Texto introduciendo caracterización de existencia de bisimulación)
 
 
-\begin{lema}
+\begin{lema}\label{lema:bisim-existence}
     Sean $\modults_1$ y $\modults_2$ dos \ultss tales que 
     $\model_1=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y 
     $\model_2=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$.
@@ -75,7 +75,7 @@ entre dos modelos $\modults_1$ y $\modults_2$ basta con verificar que $Z'$ es un
     Demostremos entonces que $Z'$ cumple ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
-        \item ($\khi$-zig) Sean $U,T \subseteq \W$ tales que para cada $s \in \rho_\modults$ se cumple que $s \subseteq U$ 
+        \item ($\khi$-zig) Sean $U,T \subseteq \W$ tales que para cada $s \in \rho_{\modults_1}$ se cumple que $s \subseteq U$ 
         o $s \cap U = \emptyset$, y $U \ultsExecAgi T$ queremos ver que existe $T' \subseteq \W'$ tal que:
     
         \begin{multicols}{2}
@@ -149,7 +149,7 @@ Es así como este lema motiva el siguiente resultado.
                 \State Check (A-zag), if not \Return 0
                 \If{$b$}
                 \State Check if $U$ is propositionally definable in $\modults_1$, if not \Return 1
-                    \ForAll{$S_i$}
+                    \ForAll{$\S_i$}
                         \ForAll{$\pi \in \S_i$}
                             \If{$U \subseteq \sexec(\pi)$}
                             \State $foundStrat \gets false$
@@ -166,7 +166,7 @@ Es así como este lema motiva el siguiente resultado.
                     \EndFor
                 \Else
                     \State Check if $U$ is propositionally definable in $\modults_2$, if not \Return 1
-                    \ForAll{$S_i'$}
+                    \ForAll{$\S_i'$}
                         \ForAll{$\pi' \in \S_i'$}
                             \If{$U \subseteq \sexec(\pi')$}
                             \State $foundStrat \gets false$
@@ -283,17 +283,17 @@ Es así como este lema motiva el siguiente resultado.
 \end{demostracion}
 
 \begin{lema}
-    $\KHiBisim$ es $\coNP$-hard.
+    $\KHiBisim$ es $\coNPHard$.
 \end{lema}
 
 \begin{demostracion}
 
-    Demostremos que $\KHiBisim$ es $\coNP$-hard.
+    Demostremos que $\KHiBisim$ es $\coNPHard$.
 
-    Para demostrarlo, reduciremos el problema $\DNFTAUT$ a $\KHiBisim$. El problema $\DNFTAUT$ está compuesto 
+    Para ello, demostraremos que $\DNFTAUT \leq_p \KHiBisim$. El problema $\DNFTAUT$ está compuesto 
     por las fórmulas $\varphi$ proposicionales en forma disyuntiva normal que son tautologías. 
-    $\DNFTAUT$ es $\coNP$ completo, por lo que si encontramos una reducción computable en tiempo polinomial de 
-    $\DNFTAUT$ a $\KHiBisim$ habremos demostrado que $\KHiBisim$ es $\coNP$-hard.
+    $\DNFTAUT$ es $\coNPComplete$, por lo que si encontramos una reducción computable en tiempo polinomial de 
+    $\DNFTAUT$ a $\KHiBisim$ habremos demostrado que $\KHiBisim$ es $\coNPHard$.
 
     Entonces queremos encontrar una reducción $f$ computable en tiempo polinomial que transforme una $\varphi$ proposicional 
     en forma disyuntiva normal a un par de modelos $\tup{\modults_1,\modults_2}$ tal que $\varphi \in \DNFTAUT$ si y sólo si 
@@ -495,19 +495,78 @@ Es así como este lema motiva el siguiente resultado.
 
     Lo cual demuestra que $\tup{\modults_1,\modults_2} \not \in \KHiBisim$.
     \end{itemize}
-    Finalmente, demostramos que $f$ es una reducción de $\DNFTAUT$ a $\KHiBisim$, la cuál puede ser computada en tiempo polinomial. 
-    Lo cuál demuestra que $\KHiBisim$ es $\coNP$-hard.
+    Finalmente, demostramos que $f$ es una reducción de $\DNFTAUT$ a $\KHiBisim$, la cuál puede ser computada en tiempo polinomial.
+    Por lo que $\DNFTAUT \leq_p \KHiBisim$.
+    Luego, $\KHiBisim$ es $\coNPHard$.
 \end{demostracion}
 
 
-\begin{teorema}
-    $\KHiBisim$ es $\coNP$-completo.
+\begin{teorema}\label{thm:general-conp-complete}
+    $\KHiBisim$ es $\coNPComplete$.
 \end{teorema}
 
 
 \begin{demostracion}
-    A partir de los lemas 5 y 6, queda demostrado que $\KHiBisim$ es $\coNP$-completo.
+    A partir de los lemas 5 y 6, queda demostrado que $\KHiBisim$ es $\coNPComplete$.
 \end{demostracion}
 
 
 \section{Equivalencia vía Reducción de Karp con el Caso Punteado}
+
+Otro problema que surge naturalmente de $\KHiBisim$ es: dados $\modults,w$ y $\modults',w'$ dos \ultss punteados, 
+decidir si $\modults,w \bisim \modults',w'$. Notar que, esto no es otra cosa que decidir si existe $Z$ \KHilogic-bisimulación entre 
+$\modults$ y $\modults'$ que contenga al par $(w,w')$. Nos referiremos a este problema como $\PKHiBisim$.
+
+En esta sección demostraremos que $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que podremos concluir que $\PKHiBisim$ 
+es $\coNPComplete$.
+
+
+\begin{lema}\label{lema:pointed-to-general}
+    $\PKHiBisim \leq_p \KHiBisim$
+\end{lema}
+
+\begin{demostracion}
+    Dados $\modults,w$ y $\modults',w'$ dos \ultss punteados, por \Cref{lema:bisim-existence} sabemos que existe 
+    \KHilogic-bisimulación entre $\modults$ y $\modults'$ si y sólo si $Z' := \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación. 
+    
+    Luego una reducción $f$ que mapee $((\modults,w),(\modults',w'))$ a $(\modults,\modults')$ en el caso que $\V(w) = \V'(w')$ 
+    y a $(\modults_1,\modults_2)$ con $\modults_1$ y $\modults_2$ dos \ultss fijos no bisimilares en caso contrario, basta 
+    para demostrar que $\PKHiBisim \leq_p \KHiBisim$.
+\end{demostracion}
+
+\begin{lema}\label{lema:general-to-pointed}
+    $\KHiBisim \leq_p \PKHiBisim$
+\end{lema}
+
+\begin{demostracion}
+    Dados $\modults$ y $\modults'$ dos \ultss, por \Cref{lema:bisim-existence} sabemos que existe 
+    \KHilogic-bisimulación entre ellos si y sólo si $Z' := \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación.
+
+    Consideremos una reducción $f$ que mapee $(\modults,\modults')$ a $((\modults,w),(\modults',w'))$ con $w,w'$ nodos de los dominios de $\modults$ 
+    y $\modults'$ respectivamente que satisfagan $\V(w) = \V'(w')$, o en caso de no existir un par de nodos que satisfaga dicha condición tome cualquier 
+    par de nodos $w,w'$ de cada dominio. Notemos que dicha reducción basta para demostrar que $\KHiBisim \leq_p \PKHiBisim$.
+\end{demostracion}
+
+\begin{teorema}
+    $\PKHiBisim$ es $\coNPComplete$.
+\end{teorema}
+
+\begin{demostracion}
+    Por \Cref{lema:pointed-to-general}, tenemos que $\PKHiBisim \leq_p \KHiBisim$. Luego, como $\KHiBisim \in \coNP$ se puede ver que 
+    $\PKHiBisim \in \coNP$, pues basta con dar un algoritmo que ejecute la reducción polinomial de $\PKHiBisim$ a $\KHiBisim$ y luego ejecute 
+    el algoritmo que decide $\KHiBisim$.
+
+
+    Por \Cref{thm:general-conp-complete}, sabemos que $\KHiBisim$ es $\coNPComplete$. Luego, por \Cref{lema:general-to-pointed}, tenemos que 
+    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es $\coNPHard$.
+    
+    Juntando ambos argumentos, concluímos que $\PKHiBisim$ es $\coNPComplete$.
+\end{demostracion}
+
+
+Hemos demostrado entonces que $\PKHiBisim$ es $\coNPComplete$.
+
+Notemos que por \Cref{thm:finite-equivalence-implies-bisim}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ o 
+$\modults,w \modequiv \modults',w'$. Luego, al caracterizar la complejidad computacional de $\PKHiBisim$, también hemos caracterizado 
+la complejidad computacional del problema de decidir si dos \ultss punteados son lógicamente equivalentes.
+

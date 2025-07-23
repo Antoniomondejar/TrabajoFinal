@@ -67,7 +67,7 @@ sobre sistemas de transiciones etiquetados extendidos con una familia de relacio
     (los paréntesis usualmente se descartan).
 \end{definicion}
 
-\begin{definicion}[\lts basado en la incertidumbre]
+\begin{definicion}[\lts basado en incertidumbre]
     Un \emph{\lts-multi-agente basado en incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
     donde $\tup{\W,\R,\V,\ACT}$ es un \lts y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
     $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un \ults $\modults$ y $w \in \W$, se llamará 
@@ -109,7 +109,7 @@ Una parte crucial entonces es determinar qué se considerará un conjunto de pla
 
 \begin{definicion}[Ejecutabilidad Fuerte]
     Sea $\{\R_a \subseteq \W \times \W \mid a \in A$, para algún $A \subseteq \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
-    es fuertemente ejecutable ($\sexec$) en un estado $w \in \W$ si y sólo si $\R_\sigma$ está definido y, a su vez, $v \in \R_{\sigma[..k]}$ implica que 
+    es fuertemente ejecutable ($\sexec$) en un estado $w \in \W$ si y sólo si $\R_\sigma$ está definido y, a su vez, $v \in \R_{\sigma[..k]}(w)$ implica que 
     $\R_{\sigma[k+1]}(v) \neq \emptyset$ para cada $k \in \{0,...,|\sigma|-1\}$. Se define el conjunto $\sexec$($\sigma$) $:= \{w \in \W \mid \sigma$ es $\sexec$ en $w\}$.
     
     Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
@@ -290,16 +290,16 @@ $\SAT$ se formula como "dada una fórmula de la lógica, decidir si existe un mo
 Estos problemas han sido estudiados a lo largo de los años en numerosas lógicas y son centrales, no solo para la lógica computacional, sino que 
 también para la teoría de la complejidad computacional en general. 
 
-Para la lógica proposicional, el problema de Model Checking está en la clase $\Poly$, mientras que $\SAT$ es $\NP-$completo 
+Para la lógica proposicional, el problema de Model Checking está en la clase $\Poly$, mientras que $\SAT$ es $\NPComplete$ 
 \cite[Capítulo 2, Sección 3]{Goldreich_2008}. Por otro lado, en la lógica modal básica tenemos que Model Checking también 
-está en $\Poly$ pero $\SAT$ es $\PSPACE-$completo \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
-Model Checking es $\PSPACE-$completo \cite[Capítulo 5, Sección 4]{Goldreich_2008} y $\SAT$ es indecidible. 
+está en $\Poly$ pero $\SAT$ es $\PSPACEComplete$ \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
+Model Checking es $\PSPACEComplete$ \cite[Capítulo 5, Sección 4]{Goldreich_2008} y $\SAT$ es indecidible. 
 
 Una observación que surge a partir de estos resultados es que mientras mayor es el poder expresivo de la lógica, mayores son los recursos 
 computacionales que se necesitan para resolver ambos problemas.
 
 Metiendonos de lleno en las lógicas de `Knowing How', en \cite{Demri_Fervari_2023} se demostró que para la lógica de `Knowing How' introducida 
-en \cite{Wang15KH,Wang2018GoalDirectedKH} Model Checking es $\PSPACE-$completo. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que 
+en \cite{Wang15KH,Wang2018GoalDirectedKH} Model Checking es $\PSPACEComplete$. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que 
 $\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía una cota inferior de su complejidad computacional.
 
 Para \KHilogic, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resultados sobre los problemas de decisión mencionados:
@@ -308,7 +308,7 @@ Para \KHilogic, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resu
 \end{teorema}
 
 \begin{teorema}
-    $\SAT$ para \KHilogic es $\NP-$completo.
+    $\SAT$ para \KHilogic es $\NPComplete$.
 \end{teorema}
 
 Lo que nos dice que ambos problemas son más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a su versión para 
