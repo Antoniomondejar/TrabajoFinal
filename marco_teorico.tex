@@ -106,9 +106,9 @@ dadas por la función de etiquetado $\V$ y las aristas entre dos nodos estarán 
             \node[state, right of=q, xshift=1.5cm] (r) {$r$};
             
             \node at ($(p)+(0,0.5)$) {$w_1$};
-            \node at ($(r)+(0,0.5)$) {$w_2$};
+            \node at ($(r)+(0,0.5)$) {$w_4$};
             \node at ($(q)+(0,0.5)$) {$w_3$};
-            \node at ($(p2)+(0,-0.6)$) {$w_4$};
+            \node at ($(p2)+(0,-0.6)$) {$w_2$};
 
             \path (p) edge node [above] {$a$} (q)
                       edge [bend left] node [above] {$a$} (r);
@@ -152,9 +152,9 @@ entre planes de cada agente.
                 \node[state, right of=q, xshift=1.5cm] (r) {$r$};
                 
                 \node at ($(p)+(0,0.5)$) {$w_1$};
-                \node at ($(r)+(0,0.5)$) {$w_2$};
+                \node at ($(r)+(0,0.5)$) {$w_4$};
                 \node at ($(q)+(0,0.5)$) {$w_3$};
-                \node at ($(p2)+(0,-0.6)$) {$w_4$};
+                \node at ($(p2)+(0,-0.6)$) {$w_2$};
 
                 \path (p) edge node [above] {$a$} (q)
                 edge [bend left] node [above] {$a$} (r);
@@ -376,7 +376,7 @@ Ahora si, presentamos la noción de bisimulación.
 Presentaremos ahora un ejemplo introducido en \cite{SaraviaPHD} con el objetivo de esclarecer cada una de las condiciones 
 que se piden sobre una relación binaria para ser considerada una \KHilogic-bisimulación. 
 
-\begin{ejemplo}
+\begin{ejemplo}\label{ejemplo:bisim}
     Sean $\modults$ y $\modults'$ dos \ults con $\AGT = \{i\}$, cuya representación gráfica está dada por (\Cref{fig:bisim}):
     \begin{figure}[h]
         \centering
