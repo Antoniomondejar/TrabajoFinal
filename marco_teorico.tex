@@ -59,6 +59,23 @@ sobre sistemas de transiciones etiquetados extendidos con una familia de relacio
     $k-$ésima posición de $\sigma$.  
 \end{definicion}
 
+\begin{ejemplo}
+    Consideremos un robot moviendose en una grilla, el cuál tiene a su disposición la opción de moverse a cualquiera de sus 4 casilleros vecinos; es decir,
+    puede moverse a la izquierda ($`L'$), a la derecha ($`R'$), hacia arriba ($`U'$) o hacia abajo ($`D'$). En este contexto, el conjunto de acciones básicas 
+    $\ACT$ estaría definido como $\ACT = \{L,R,U,D\}$, y $\ACT^*$ sería el conjunto de secuencias finitas sobre $\ACT$, el cuál representa los distintos 
+    caminos que el robot podría tomar en la grilla. Por ejemplo, $`LLLDRR'$ y $`UURRU'$ están en $\ACT^*$. 
+
+    Luego, a partir de la definición dada, tenemos:
+    \begin{itemize}
+        \item $(LLDDRRUU)[$..$0] = \epsilon$.
+        \item $(LLDDRRUU)[$..$3] = LLD$.
+        \item $(LLDDRRUU)[$..$7] = LLDDRRU$.
+        \item $(LLDDRRUU)[5] = R$.
+        \item $(LLDDRRUU)[8] = U$.
+    \end{itemize}
+\end{ejemplo}
+
+
 \begin{definicion}[Sistemas de Transiciones Etiquetados]
     Un \emph{Sistema de Transición Etiquetado (\lts, Labeled Transition System)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
     donde $\W$ es un conjunto no vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in A$ para algún $A \subseteq \ACT\}$ es 
@@ -214,12 +231,13 @@ clases de planes pide que cada plan de la clase sea fuertemente ejecutable.
 \begin{ejemplo}
     Si consideramos el \ults presentado en \Cref{ejemplo:ults} entonces tenemos que:
     \begin{itemize}
-        \item $\sexec(a) = \{w_1,w_2\}$,
-        \item $\sexec(ab) = \{w_2\}$, 
+        \item $\sexec(a) = \{w_1,w_2\}$.
+        \item $\sexec(ab) = \{w_2\}$.
 
         Notar que, a pesar de que $\R_{ab}(w_1) \neq \emptyset$, el plan $ab$ no es fuertemente ejecutable en $w_1$ 
         dado que existe una ejecución parcial que no puede ser completada, pues notar que al tomar la arista 
         $(w_1,w_4)$ con etiqueta $a$ no existe arista con etiqueta $b$ desde $w_4$ para completar el camino.
+
         \item $\sexec(\{a,ab\}) = \sexec(a) \cap \sexec(ab) = \{w_1,w_2\} \cap \{w_2\} = \{w_2\}$.
     \end{itemize}
 \end{ejemplo}
@@ -355,6 +373,106 @@ Ahora si, presentamos la noción de bisimulación.
     $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
 \end{definicion}
 
+Presentaremos ahora un ejemplo introducido en \cite{SaraviaPHD} con el objetivo de esclarecer cada una de las condiciones 
+que se piden sobre una relación binaria para ser considerada una \KHilogic-bisimulación. 
+
+\begin{ejemplo}
+    Sean $\modults$ y $\modults'$ dos \ults con $\AGT = \{i\}$, cuya representación gráfica está dada por (\Cref{fig:bisim}):
+    \begin{figure}[h]
+        \centering
+            \begin{tikzpicture}
+                \node[state] (p) {$p$};
+                \node[state, right of=p, xshift=1cm] (p2) {$p$};
+                \node[state, right of=p2, xshift=1cm] (q) {$q$};
+                \node[state, right of=q, xshift=1cm] (q2) {$q$};
+
+                \node[state, below of=p, yshift=-1cm] (p') {$p$};
+                \node[state, below of=p', yshift=-0.8cm] (p2') {$p$};
+                \node[state, right of=p', yshift=-0.6cm, xshift=1.3cm] (q') {$q$};
+                \node[state, right of=q', xshift=1.3cm] (q2') {$q$};
+
+
+                \node at ($(p)+(0,0.5)$) {$w_1$};
+                \node at ($(p2)+(0,0.5)$) {$w_2$};
+                \node at ($(q)+(0,0.5)$) {$w_3$};
+                \node at ($(q2)+(0,0.5)$) {$w_4$};
+
+                \node at ($(p')+(0,-0.6)$) {$w_2'$};
+                \node at ($(p2')+(0,-0.6)$) {$w_1'$};
+                \node at ($(q')+(0,-0.6)$) {$w_3'$};
+                \node at ($(q2')+(0,-0.6)$) {$w_4'$};
+
+
+                \path (p) edge node [above] {$a$} (p2);
+                \path (p2) edge node [above] {$a$} (q);
+                \path (q) edge node [above] {$a$} (q2);
+                \path (p') edge node [above] {$d$} (q');
+                \path (p2') edge node [above] {$d$} (q');
+                \path (q') edge node [above] {$e$} (q2');
+
+                \path[pointed] (p) edge [bend right=35] node [above] {} (p2');
+                \path[pointed] (p2) edge node [above] {} (p');
+                \path[pointed] (q) edge node [above] {} (q');
+                \path[pointed] (q2) edge node [above] {} (q2');
+
+            \end{tikzpicture}
+            \hspace{1cm}
+            \raisebox{2.8cm}{
+                \begin{minipage}{0.45\textwidth}
+                    $\S_i = \left\{
+                        \begin{array}{c}
+                            \{aa\}
+                        \end{array}
+                    \right\}$ \\ [1.6cm]
+                    $\S_i' = \left\{
+                        \begin{array}{c}
+                            \{de,d\}
+                        \end{array}
+                    \right\}$
+                \end{minipage}
+            }
+            \caption{Representación gráfica de $\modults$ y $\modults'$}
+            \label{fig:bisim}
+    \end{figure}
+
+    $\modults$ está representado por el \ults con nodos $\{w_1,w_2,w_3,w_4\}$, mientras que $\modults'$ está representado 
+    por el \ults con nodos $\{w_1',w_2',w_3',w_4'\}$. A su vez, $\S_i$ y $\S'_i$ son sus respectivas relaciones de indistinguibilidad 
+    entre planes del agente $i$.
+
+    Consideremos la relación binaria $Z = \{(w_j, w_j') \mid 1 \leq j \leq 4\}$, la cuál está representada gráficamente con las líneas 
+    punteadas. Es posible ver que $Z$ satisface (Atom), (A-zig) y (A-zag). Analicemos como se comporta $Z$ en torno a ($\khi$-zig), para ello 
+    consideremos cada conjunto proposicionalmente definible del dominio de $\modults$:
+    \begin{itemize}
+       \item $U = \emptyset$. Definido por la fórmula $\varphi = \bot$.
+
+       Notar que $U \ultsExecAgi \emptyset$, teniendo como testigo a $\pi = \{aa\}$.
+
+       Luego, $Z(U) = \emptyset$ cumple $Z(U) \ultsExecAgi \emptyset$ a partir del testigo $\pi = \{dd,de\}$ y, 
+       como $Z(\emptyset) \subseteq \emptyset$, se cumple ($\khi$-zig) para dicho $U$.
+       \item $U = \{w_1,w_2\}$. Definido por la fórmula $\varphi = p$.
+       
+       Aquí, tenemos que $U \ultsExecAgi \{w_3,w_4\}$ a partir del testigo $\pi = \{aa\}$.
+
+       Luego, $Z(U) = \{w_1',w_2'\}$ cumple $Z(U) \ultsExecAgi \{w_3',w_4'\}$ a partir del testigo $\pi = \{de,d\}$ y, 
+       como $\{w_3'w_4'\} \subseteq Z(\{w_3,w_4\})$, se cumple ($\khi$-zig) para dicho $U$.
+       \item $U = \{w_3,w_4\}$. Definido por la fórmula $\varphi = q$.
+       
+       Notemos que no existe $\pi \in \S_i$ tal que $U \subseteq \sexec(\pi)$, luego ($\khi$-zig) se cumple trivialmente para dicho $U$.
+       \item $U = \{w_1,w_2,w_3,w_4\}$. Definido por la fórmula $\varphi = p \vee q$. 
+       
+       Similarmente al caso analizado anteriormente, no existe $\pi \in \S_i$ tal que $U \subseteq \sexec(\pi)$, por lo que ($\khi$-zig) se 
+       cumple trivialmente para dicho $U$.
+    \end{itemize}
+    Es posible ver que no existen más conjuntos proposicionalmente definibles en el dominio de $\modults$. Luego, $Z$ satisface ($\khi$-zig).
+    
+    Realizando un análisis similar sobre los conjuntos proposicionalmente definibles del dominio de $\modults'$, se puede ver que $Z$ también 
+    satisface ($\khi$-zag).
+    
+    Por lo que podemos concluir que $Z$ es una \KHilogic-bisimulación. Más aún, analizando los elementos de $Z$, podemos decir que 
+    $\modults,w_j \bisim \modults',w_j'$ para cada $1 \leq j \leq 4$. 
+\end{ejemplo}
+
+
 Para poder formalizar las propiedades cruciales de la bisimulación, definiremos primero la noción de 
 equivalencia entre modelos con respecto a \KHilogic.
 
@@ -428,7 +546,7 @@ en \cite{Wang15KH,Wang2018GoalDirectedKH} Model Checking es $\PSPACEComplete$. P
 $\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía una cota inferior de su complejidad computacional.
 
 Para \KHilogic, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resultados sobre los problemas de decisión mencionados:
-\begin{teorema}
+\begin{teorema}\label{thm:model-checking-poly}
     El problema de Model Checking para \KHilogic está en $\Poly$.
 \end{teorema}
 

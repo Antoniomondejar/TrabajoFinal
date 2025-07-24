@@ -37,6 +37,11 @@ Una vez caracterizada la complejidad de ese problema (que modificando un poco la
 ahi presentamos el lema que caracteriza la existencia de bisimulación entre dos modelos que trivializa la parte de `búsqueda' del problema, 
 y de ahí obtenemos que el problema es $\coNPComplete$ retocando un poco la prueba de la verificación.
 
+De hecho antes de presentar el lema de existencia, se podría mencionar que el hecho de que la verificación sea $\coNPComplete$, nos deja 
+un algoritmo en $\NP^{\coNP}$ que decide $\KHiBisim$, que sería uno que adivine la bisimulación y la verifique con el oráculo que sabemos 
+que es $\coNPComplete$. Después el lema de la existencia nos deja ajustarle mucho más la complejidad porque no hace falta adivinar la 
+bisimulación.
+
 Creo que contar primero el problema $\KHiBisim$ y después analizar qué tan complicada es la `verificación' y después qué tan complicada es la `búsqueda' 
 para terminar caracterizando la complejidad del problema es un buen hilo para contar la historia. Y después en la siguiente sección probar la equivalencia 
 con el caso punteado.
@@ -152,9 +157,11 @@ Es así como este lema motiva el siguiente resultado.
                     \ForAll{$\S_i$}
                         \ForAll{$\pi \in \S_i$}
                             \If{$U \subseteq \sexec(\pi)$}
+                            \State $U' \gets Z'(U)$
+                            \State $T \gets Z'(\R_\pi(U))$ 
                             \State $foundStrat \gets false$
                                 \ForAll{$\pi' \in \S_i'$}
-                                    \If{$Z'(U) \subseteq \sexec(\pi') \wedge \R'_{\pi'}(Z'(U)) \subseteq Z'(\R_\pi(U))$}
+                                    \If{$U' \subseteq \sexec(\pi') \wedge \R'_{\pi'}(U') \subseteq T$}
                                         \State $foundStrat \gets true$
                                     \EndIf         
                                 \EndFor
@@ -169,9 +176,11 @@ Es así como este lema motiva el siguiente resultado.
                     \ForAll{$\S_i'$}
                         \ForAll{$\pi' \in \S_i'$}
                             \If{$U \subseteq \sexec(\pi')$}
+                            \State $U' \gets Z'^{-1}(U)$
+                            \State $T \gets Z'^{-1}(\R'_{\pi'}(U))$ 
                             \State $foundStrat \gets false$
                                 \ForAll{$\pi \in \S_i$}
-                                    \If{$Z'^{-1}(U) \subseteq \sexec(\pi) \wedge \R_{\pi}(Z'^{-1}(U)) \subseteq Z'^{-1}(\R'_{\pi'}(U))$}
+                                    \If{$U' \subseteq \sexec(\pi) \wedge \R_{\pi}(U') \subseteq T$}
                                         \State $foundStrat \gets true$
                                     \EndIf         
                                 \EndFor

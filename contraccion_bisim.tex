@@ -457,9 +457,9 @@ Luego, es deseable que la contracción propuesta sea razonable en términos comp
     Una vez demostrado que el tamaño de $\modults'$ es polinomial con respecto al tamaño de $\modults$, basta con ver que cada componente es computable en 
     tiempo polinomial. 
 
-    Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo polinomial. Luego notemos que como mencionamos en 
-    (sección complejidad marco teórico), model-checking está en $\Poly$ por lo que es claro que computar $\sexec(\sigma)$ y $\R_\sigma$
-    para cada $\sigma$ es realizable en tiempo polinomial. 
+    Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo polinomial. Luego notemos que por 
+    \Cref{thm:model-checking-poly}, Model Checking está en $\Poly$ por lo que es claro que computar $\sexec(\sigma)$ y $\R_\sigma$
+    para cada $\sigma$ es realizable en tiempo polinomial.
 
     Luego $\modults'$ es computable en tiempo polinomial.
 \end{demostracion}
@@ -478,7 +478,7 @@ Este análisis es el que motiva una nueva propuesta de contracción.
 \section{Segunda Propuesta de Contracción}
 
 Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve 
-en la mayor medida sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
+en la mayor medida posible sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
 indistinguibilidad de planes de cada agente.
 
 Si recordamos las primeras propuestas analizadas en la sección anterior, notamos que no logramos encontrar una propuestra adecuada a partir de 
