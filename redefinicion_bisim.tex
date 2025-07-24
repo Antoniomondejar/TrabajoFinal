@@ -143,9 +143,24 @@ incertidumbre.
     $\modults$ y $\modults'$ tal que $(w,w') \in Z$.
 \end{definicion}
 
-\begin{ejemplo}
-    Consideremos $\modults$ y $\modults'$ presentados en \Cref{ejemplo:bisim}, y veamos que la relación $Z$ representada 
-    gráficamente por las líneas punteadas es una \KHilogic-bisimulación$^*$. 
+\begin{ejemplo}\label{ejemplo:bisim^*}
+    Consideremos $\modults$ y $\modults'$ presentados en \Cref{ejemplo:bisim}. Veamos que la relación $Z$, representada 
+    gráficamente por las líneas punteadas, es una \KHilogic-bisimulación$^*$. 
+
+    Como las condiciones (Atom), (A-zig) y (A-zag) se mantienen en la definición de \KHilogic-bisimulación$^*$, utilizando el mismo 
+    análisis que en \Cref{ejemplo:bisim} podemos afirmar que $Z$ las satisface.
+
+    Veamos como se comporta $Z$ con respecto a ($\khi$-zig$^*$). Primero notemos que $\rho_\modults = \{\{w_1,w_2\}, \{w_3,w_4\}\}$, ahora 
+    consideremos los subconjuntos $U$ del dominio de $\modults$ que satisfacen que para cada $s \in \rho_\modults$ se cumple que 
+    $s \subseteq U$ o $s \cap U = \emptyset$. 
+    
+    Se puede ver que los subconjuntos que cumplen esa condición son exactamente los subconjuntos 
+    proposicionalmente definibles, para los cuáles ya realizamos un análisis en el ejemplo previamente mencionado. 
+    Por lo que podemos afirmar que $Z$ satisface ($\khi$-zig$^*$).
+    
+    A su vez, podemos realizar un análisis similar para demostrar que $Z$ satisface ($\khi$-zag$^*$). 
+
+    Luego, $Z$ es una \KHilogic-bisimulación$^*$. Más aún, podemos decir que $\modults,w_j \bisim^* \modults',w_j'$ con $1 \leq j \leq 4$.
 \end{ejemplo}
 
 
@@ -248,6 +263,11 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
     Luego $\varphi$ define a $U$. Como $\varphi$ es proposicional, $U$ es proposicionalmente definible.
 \end{demostracion}
 
+Notemos como este lema justifica el argumento utilizado en \Cref{ejemplo:bisim^*}, en el que se menciona que los conjuntos proposicionalmente 
+definibles de $\modults$ son exactamente los conjuntos $U$ que satisfacen que para cada $s \in \rho_\modults$ se cumple que 
+$s \subseteq U$ o $s \cap U = \emptyset$.
+
+
 De esta lema obtenemos un corolario sobre el problema de determinar si un subconjunto del dominio de un \ults es \KHilogic-definible.
 
 \begin{corolario}[\KHilogic-definibilidad]
@@ -301,7 +321,7 @@ Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposiciona
         \item ($\khi$-zag$^*$) Análogo a ($\khi$-zig$^*$). 
     \end{itemize}
 
-    Finalmente hemos demostrado que $Z$ es una \KHilogic-bisimulación.
+    Finalmente hemos demostrado que $Z$ es una \KHilogic-bisimulación$^*$.
 \end{demostracion}
 
 Y como demostramos que en el caso finito ambas definiciones de bisimulación son equivalentes, estamos en condiciones de demostrar el teorema deseado. 
