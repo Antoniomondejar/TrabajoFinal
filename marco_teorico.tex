@@ -88,13 +88,11 @@ dadas por la función de etiquetado $\V$ y las aristas entre dos nodos estarán 
             \node[state, right of=p, yshift=-1cm, xshift=1.5cm] (q) {$q$};
             \node[state, right of=q, xshift=1.5cm] (r) {$r$};
             
-            % Labels
             \node at ($(p)+(0,0.5)$) {$w_1$};
             \node at ($(r)+(0,0.5)$) {$w_2$};
             \node at ($(q)+(0,0.5)$) {$w_3$};
             \node at ($(p2)+(0,-0.6)$) {$w_4$};
 
-            % Arrows
             \path (p) edge node [above] {$a$} (q)
                       edge [bend left] node [above] {$a$} (r);
             \path (p2) edge node [above] {$a$} (q);
@@ -109,7 +107,7 @@ dadas por la función de etiquetado $\V$ y las aristas entre dos nodos estarán 
 
 \begin{definicion}[\lts basado en incertidumbre]
     Un \emph{\lts-multi-agente basado en incertidumbre (\ults)} sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
-    donde $\tup{\W,\R,\V,\ACT}$ es un \lts y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un 
+    donde $\tup{\W,\R,\V,\ACT}$ es un \lts y $\sim$ asigna a cada $i \in \AGT$ una relación de equivalencia sobre un conjunto de planes
     $P_i \subseteq \ACT^*$, también llamada relación de indistinguibilidad. Dado un \ults $\modults$ y $w \in \W$, se llamará 
     al par $(\modults,w)$ un \ults punteado y, usualmente, los paréntesis serán omitidos.
 \end{definicion}
@@ -122,12 +120,11 @@ equivalencia en $\sim_i$. Notar que hay una correspondencia uno-a-uno entre cada
 clases de equivalencia $\S_i := \{[\sigma]_i \mid \sigma \in P_i\}$. Por lo tanto, de ahora en adelante nos referiremos a los \ults como
 una tupla $\tup{\W,\R,\{\S_i\}_{i \in \AGT},\V,\ACT}$.
 
-
-La representación gráfica de los \ultss será similar a la presentada para los \ltss, con la inclusión de la relación de indistinguibilidad $\S_i$ 
+La representación gráfica de los \ultss será similar a la presentada para los \ltss, con la inclusión de la relación de indistinguibilidad 
 entre planes de cada agente.
 
 \begin{ejemplo}\label{ejemplo:ults}
-    Siguiendo el \Cref{ejemplo:lts}, considerando $\AGT = \{i\}$ la representación gráfica 
+    Siguiendo el \Cref{ejemplo:lts} y considerando $\AGT = \{i\}$, la representación gráfica 
     de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es (\Cref{fig:ults}):
     \begin{figure}[h]
         \centering
@@ -137,13 +134,11 @@ entre planes de cada agente.
                 \node[state, right of=p, yshift=-1cm, xshift=1.5cm] (q) {$q$};
                 \node[state, right of=q, xshift=1.5cm] (r) {$r$};
                 
-                % Labels
                 \node at ($(p)+(0,0.5)$) {$w_1$};
                 \node at ($(r)+(0,0.5)$) {$w_2$};
                 \node at ($(q)+(0,0.5)$) {$w_3$};
                 \node at ($(p2)+(0,-0.6)$) {$w_4$};
 
-                % Arrows
                 \path (p) edge node [above] {$a$} (q)
                 edge [bend left] node [above] {$a$} (r);
                 \path (p2) edge node [above] {$a$} (q);
@@ -314,7 +309,7 @@ es decir, que si un conjunto es \KHilogic-definible entonces es proposicionalmen
 Ahora si, presentamos la noción de bisimulación.
 
 \begin{definicion}[\KHilogic-bisimulación]\label{def:bisimulation}
-    Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W$.
+    Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$.
     \begin{itemize}
         \item Sea $u \in W$ y $U \subseteq \W$, definimos
         \begin{nscenter}
