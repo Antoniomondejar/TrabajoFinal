@@ -207,7 +207,7 @@
 
 %------------------------------------------------------------------------------------------------
 
-\usepackage{cleveref}
+\usepackage[nameinlink]{cleveref}
 
 % Abbreviated Cref
 % \Crefname{definicion}{Definición}{Definiciones}
@@ -239,3 +239,48 @@
 
 
 %------------------------------------------------------------------------------------------------
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations,shapes,automata,positioning,decorations.pathmorphing,patterns,calc}
+
+\tikzset{
+  every picture/.style = {
+    thick,
+    ->,
+    >=stealth',
+    node distance = 1.5em and 3em,
+  }
+  ,
+  within/.style = {
+    fill = white,
+    inner sep = 2pt
+  }
+  ,
+  cross line/.style = {
+    preaction = {
+      draw=white,
+      -,
+      line width=4pt
+    }
+  }
+  , % states
+  state/.style = {
+    rectangle,
+    rounded corners = 5pt,
+    font = \small,
+    draw,
+    minimum width = 1em,
+    minimum height = 1em
+  }
+  , % labels of states
+  label-state/.style = {
+    sloped,
+    font = \small,
+    label distance = -2pt
+  }
+  , % labels of edges
+  label-edge/.style = {
+    font = \small,    
+    label distance = -2pt
+  }
+}

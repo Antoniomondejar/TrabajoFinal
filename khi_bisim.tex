@@ -282,6 +282,26 @@ Es así como este lema motiva el siguiente resultado.
     Finalmente $\KHiBisim \in \coNP$.
 \end{demostracion}
 
+Ahora daremos una cota inferior para la complejidad computacional de $\KHiBisim$. Primero introduciremos el concepto 
+de reducción de Karp y la relación $\leq_p$. 
+
+\begin{definicion}
+    Sean $L, L'$ dos problemas computacionales y sea $f$ una función que mapea instancias de $L$ a instancias de $L'$.
+
+    Diremos que $f$ es una reducción de Karp si y sólo si $f$ es computable en tiempo polinomial y para cada instancia $x$ de $L$ 
+    se cumple que:
+
+    \begin{center}
+        $x \in L$ si y sólo si $f(x) \in L'$
+    \end{center}
+\end{definicion}
+
+\begin{definicion}
+    Sean $L, L'$ dos problemas computacionales, diremos que $L \leq_p L'$ si existe $f$ una reducción de Karp de $L$ a 
+    $L'$. 
+\end{definicion}
+
+
 \begin{lema}
     $\KHiBisim$ es $\coNPHard$.
 \end{lema}
