@@ -187,8 +187,8 @@ entre planes de cada agente.
     indistinguibilidad $\S_i$ es que los planes $ab$ y $a$ son indistinguibles para $i$.
 \end{ejemplo}
 
-Dada entonces la incertidumbre de un agente sobre $\ACT^*$, sus habilidades dependerán no solo de lo que un solo plan puede lograr, sino que de 
-lo que toda una clase de equivalencia dentro de su relación de indistinguibilidad pueda lograr.
+Dada entonces la incertidumbre de un agente sobre $\ACT^*$, sus habilidades dependerán no solo de lo que un plan puede lograr, sino de 
+lo que toda una clase de equivalencia dentro de su relación de indistinguibilidad pueda garantizar.
 
 \begin{definicion}
     Sea $\{\R_a \subseteq \W \times \W \mid a \in A,$ para algún $A \subseteq \ACT \}$ una colección de relaciones binarias sobre $\W$. 
@@ -250,7 +250,6 @@ clases de planes pide que cada plan de la clase sea fuertemente ejecutable.
         \item $\sexec(\{a,ab\}) = \sexec(a) \cap \sexec(ab) = \{w_1,w_2\} \cap \{w_2\} = \{w_2\}$.
     \end{itemize}
 \end{ejemplo}
-
 
 Ahora, estamos en condiciones de presentar la relación de satisfacibilidad que relaciona \ultss punteados con formulas de \KHilogic. 
 
@@ -510,14 +509,20 @@ a partir de propiedades puramente estructurales de los mismos.
 En \cite[Sección 2]{FervariVQW21} se presenta un contraejemplo que atestigua que la recíproca del \Cref{thm:bisim-implies-equivalence} 
 no es cierta para cualquier par de modelos. Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar 
 en qué clases de modelos vale la recíproca del teorema. Dichas clases son conocidas como clases de Hennessy-Milner.
-En \cite{ArecesFSV25,SaraviaPHD}, se demuestra que la clase de \ults finitos es una clase de Hennessy-Milner, es decir, satisface la 
-recíproca de \Cref{thm:bisim-implies-equivalence}.
+En \cite{ArecesFSV25,SaraviaPHD}, se demuestra que la clase de \ults finitos (en el sentido de que tienen dominios finitos) es una clase 
+de Hennessy-Milner, es decir, satisface la recíproca de \Cref{thm:bisim-implies-equivalence}.
 
-Diremos que $\modults$, un \ults, es finito si y sólo si cada una de sus componentes tiene cardinalidad finita. Análogamente, diremos que 
-($\modults,w$), un \ults punteado, es finito si y sólo si $\modults$ es finito. 
+\begin{definicion}\label{def:finite-ults}
+    Se define la clase de \ultss finitos en su dominio (\textbf{FD}):
+    \begin{center}
+        \MFD $:= \{\modults \mid \modults = \tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es un \ults tal que $\W$ es finito$\}$
+    \end{center}
+
+\end{definicion}
+
 
 \begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]\label{thm:finite-equivalence-implies-bisim}
-    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tal que $\modults, \modults' \in$ \MFD, entonces
     \begin{center}
         $\model,w \modequiv \model', w'$ implica $\model,w \bisim \model', w'$.
     \end{center}

@@ -221,10 +221,10 @@ Notemos como este lema nos permite demostrar el Teorema de Invarianza para nuest
 Una vez demostrado el Teorema de Invarianza para la definición propuesta, nos gustaría demostrar que también se mantiene la otra dirección en
 el caso finito. 
 
-Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:propositionally-definable-lemma} para el caso finito.
+Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:propositionally-definable-lemma} para \ultss con dominio finito. 
 
 \begin{lema}\label{lema:finite-propositionally-definable-lemma}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults finito y sea $U \subseteq \W$, entonces
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults en \MFD y sea $U \subseteq \W$, entonces
     para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$ si y sólo si $U$ es proposicionalmente definible.
 \end{lema}
 
@@ -233,31 +233,33 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
 
     Supongamos que para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$.
 
-    Primero, notemos que como $\modults$ es finito, entonces existe un número finito de variables proposicionales $p_1,...,p_n$ que aparecen en la imagen de $\V$ para algún $w \in \W$.
-
     Por un lado si $U = \emptyset$, luego la fórmula $ \varphi := \bot$ define a $U$. Entonces supongamos que $U \neq \emptyset$. 
     
-    Sea $S = \{s_1,...,s_m\}$, tal que cada $s_i \in \rho_\modults$ y $s_i \subseteq U$, y para cada $s \in \rho_\modults/S$ se cumple que $s \cap U = \emptyset$. 
-    Recordar que cada $s_i$ es una clase de equivalencia de la relación $A_\modults$. A su vez, para cada $w$, $v \in s_i$ se cumple que 
-    $\V(w) = \V(v)$. Se utilizará $\V(s_i)$ para hacer referencia a $\V(w)$ para cada $w \in s_i$.
+    Notemos que como $\modults \in$ \MFD, entonces $\rho_\modults$ es finito. Denotaremos a sus elementos como $\rho_\modults = \{s_1,...,s_n\}$. 
+    A su vez, como para cada $v,w \in s_i$ se cumple que $\V(w) = \V(v)$ entonces denotaremos $\V(s_i)$ a $\V(w)$ con $w \in s_i$. 
+    
+    Luego, sean $i \neq j$ entonces existe una variable proposicional $p$ tal que $p \in \V(s_i)$ y $p \not\in \V(s_j)$ o $p \not\in \V(s_i)$ 
+    y $p \in \V(s_j)$. A dicha variable la denotaremos $p_{i,j}$.
 
-    Sea $\varphi_i := \bigwedge\limits_{j = 1}^{n} l_i(p_j)$ donde $l_i(p_j) = $
+
+
+    Sea $\varphi_i := \bigwedge\limits_{\substack{j = 1 \\ j \neq i}}^{n} l(p_{i,j})$ donde $l(p_{i,j}) = $
     $\left\{ \begin{array}{rcl}
-            p_j & \mbox{si}
-            & p_j \in \V(s_i) \\ \neg p_j & \mbox{si} & p_j \notin \V(s_i) \\
+            p_{i,j} & \mbox{si}
+            & p_{i,j} \in \V(s_i) \\ \neg p_{i,j} & \mbox{si} & p_{i,j} \notin \V(s_i) \\
             \end{array}\right. 
     $.
 
     Veamos que por la forma en la que construimos $\varphi_i$, se cumple que $\modults, w \models \varphi_i$ si y sólo si $w \in s_i$. ($*$)
     
-    Demostremos entonces que $\varphi := \bigvee\limits_{i = 1}^{m}\varphi_i$ define a $U$. Primero, notar que sea $w \in \W$, 
-    $\modults, w \models \varphi$ si y sólo si $\modults, w \models \varphi_i$ para algún $i \in \{1,...m\}$.  
+    Demostremos entonces que $\varphi := \bigvee\limits_{s_i \subseteq U}\varphi_i$ define a $U$. Primero, notar que sea $w \in \W$, 
+    $\modults, w \models \varphi$ si y sólo si $\modults, w \models \varphi_i$ para algún $i \in \{1,...n\}$ tal que $s_i \subseteq U$.  
     Queremos ver entonces que, $w \in U$ si y sólo si $\modults, w \models \varphi$. 
 
-    Sea $w \in U$, entonces por hipótesis se cumple que $[w] \subseteq U$. Luego, por como definimos $S$, existe $s_i \in S$ tal que 
-    $s_i = [w]$. Por $(*)$, $\modults, w \models \varphi_i$, por lo que $\modults, w \models \varphi$.
+    Sea $w \in U$, entonces por hipótesis se cumple que $[w] \subseteq U$. Luego, existe $s_i \in \rho_\modults$ tal que 
+    $s_i = [w]$, por lo que $s_i \subseteq U$. Por $(*)$, $\modults, w \models \varphi_i$, lo que nos dice que $\modults, w \models \varphi$.
 
-    Sea $w \in \W$ tal que $\modults, w \models \varphi$, entonces existe $i \in \{1,...,m\}$ tal que $\modults, w \models \varphi_i$. 
+    Sea $w \in \W$ tal que $\modults, w \models \varphi$, entonces existe $i \in \{1,...,n\}$ con $s_i \subseteq U$ tal que $\modults, w \models \varphi_i$. 
     Luego por $(*)$, $w \in s_i$, lo que nos dice que $w \in U$.
 
     Luego $\varphi$ define a $U$. Como $\varphi$ es proposicional, $U$ es proposicionalmente definible.
@@ -267,11 +269,10 @@ Notemos como este lema justifica el argumento utilizado en \Cref{ejemplo:bisim^*
 definibles de $\modults$ son exactamente los conjuntos $U$ que satisfacen que para cada $s \in \rho_\modults$ se cumple que 
 $s \subseteq U$ o $s \cap U = \emptyset$.
 
-
 De esta lema obtenemos un corolario sobre el problema de determinar si un subconjunto del dominio de un \ults es \KHilogic-definible.
 
 \begin{corolario}[\KHilogic-definibilidad]
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults finito y sea $U \subseteq \W$, el problema de determinar si $U$ es 
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults en \MFD y sea $U \subseteq \W$, el problema de determinar si $U$ es 
     \KHilogic-definible está en $\Poly$.
 \end{corolario}
 
@@ -287,7 +288,7 @@ De esta lema obtenemos un corolario sobre el problema de determinar si un subcon
 Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{lema:new-implies-old}.
 
 \begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{lema:old-implies-new-finite}
-    Sean $\modults$ y $\modults'$ dos \ultss finitos, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
+    Sean $\modults$ y $\modults'$ dos \ultss en \MFD, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
     \begin{center}
         $Z$ es una \KHilogic-bisimulación$^*$ si y sólo si $Z$ es una \KHilogic-bisimulación.
     \end{center}
@@ -313,7 +314,7 @@ Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposiciona
             \end{cond-bisim}
         \end{multicols}
 
-        Notemos que como para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$ y $\modults$ es finito entonces 
+        Notemos que como para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$ y $\modults \in $ \MFD entonces 
         por \Cref{lema:finite-propositionally-definable-lemma} $U$ es proposicionalmente definible.
     
         Luego como $Z$ satisface ($\khi$-zig) tenemos asegurada la existencia de dicho $T'$.
@@ -327,15 +328,16 @@ Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposiciona
 Y como demostramos que en el caso finito ambas definiciones de bisimulación son equivalentes, estamos en condiciones de demostrar el teorema deseado. 
 
 \begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud$^*$]\label{thm:new-bisim-finite-equiv}
-    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos, entonces
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tales que $\modults, \modults' \in$ \MFD, entonces
     \begin{center}
         $\model,w \modequiv \model', w'$ implica $\model,w \bisim^* \model', w'$.
     \end{center}
 \end{teorema}
 
 \begin{demostracion}
-    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados finitos tales que $\model,w \modequiv \model', w'$, entonces por \Cref{thm:finite-equivalence-implies-bisim}
-    tenemos que $\model,w \bisim \model', w'$. Luego existe $Z$ \KHilogic-bisimulación tal que $(w,w') \in Z$.
+    Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados con $\modults, \modults' \in $ \MFD tales que $\model,w \modequiv \model', w'$, 
+    entonces por \Cref{thm:finite-equivalence-implies-bisim} tenemos que $\model,w \bisim \model', w'$. 
+    Luego existe $Z$ \KHilogic-bisimulación tal que $(w,w') \in Z$.
 
     Por \Cref{lema:old-implies-new-finite} tenemos que $Z$ es una \KHilogic-bisimulación$^*$. Luego, como $(w,w') \in Z$ 
     entonces $\model,w \bisim^* \model', w'$.
