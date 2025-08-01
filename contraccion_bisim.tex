@@ -1,145 +1,5 @@
 \chapter{Contracción por Bisimulación}
 
-% \begin{definicion}
-%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo entonces se define, 
-%     \begin{center}
-%         $A_\modults := \{(w,v) \in \W \times \W \mid \V(w) = \V(v)\}$
-%     \end{center}
-%     Notar que $A_\modults$ es una relación de equivalencia sobre $\W$ (hace falta probarlo? es medio directo). Luego se denotará,
-%     \begin{center}
-%         $\rho_\modults := \{ [w] \mid w \in \W $ y $[w]$ su clase de equivalencia respecto a $A_\modults\}$
-%     \end{center}
-% \end{definicion}
-
-
-% \begin{lema}
-%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ entonces,
-%     \begin{center}
-
-%     existe $S \in \mathcal{P}(\rho_\modults)$ finito tal que  $(U = \bigcup\limits_{s \in S} s_{i})$ \quad si y sólo si \quad $U$ es proposicionalmente definible. 
-%     \end{center}
-% \end{lema}
-
-% Intuitivamente, lo que nos dice este lema es que todo conjunto proposicionalmente definible viene de tomar una cierta cantidad de clases de equivalencia de $\rho_\modults$ y unirlas. Y, a su vez, cualquier unión de una cierta cantidad de clases de equivalencia es un conjunto proposicionalmente definible. 
-
-% Me gustaría cambiar este lema por para cada $s_i \in \rho_\modults$ se cumple que $s_i \subseteq U \vee s_i \cap U = \emptyset$ si y sólo si $U$ es proposicionalmente definible.
-
-% Porque es una condición mucho más algorítmica, deja servido el corolario de \KHilogic-definability.
-
-
-
-% \begin{demostracion}
-%     Se demostrará por separado los casos $(\rightarrow)$ y $(\leftarrow)$.
-
-%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$. Un primer detalle a tener en cuenta es que, dado que $\modults$ es finito, existen un número finito de variables proposicionales $p_1,...,p_n$ tales que $\{p_1,...,p_n\}$ es la imagen de $\V$.
-
-%     \begin{itemize}
-%         \item $(\rightarrow)$ Notemos primero que si $U = \emptyset$, luego la fórmula $ \varphi := \bot$ define a $U$. Entonces supongamos que $U \neq \emptyset$. (esto se podría analizar por separado o capaz permitir que S sea vacío y que en ese caso $\varphi$ sea una disyunción de 0 cosas por lo que sería el elemento neutro de la disyunción o sea $\bot$).
-        
-%         Sea $S = \{s_1,...,s_m\}$ finito tal que $S \in \mathcal{P}(\rho_\modults)$ y $U = \bigcup\limits_{s_i \in S} s_{i}$, demostremos que $U$ es proposicionalmente definible. 
-
-%         Recordar que cada $s_i$ es una clase de equivalencia de la relación $A_\modults$. A su vez, para cada $w$, $v \in s_i$ se cumple que $\V(w) = \V(v)$. Se utilizará $\V(s_i)$ para hacer referencia a $\V(w)$ para cada $w \in s_i$.
-
-%         Sea $\varphi_i := \bigwedge\limits_{j = 1}^{n} l_i(p_j)$ donde $l_i(p_j) = $
-%         $\left\{ \begin{array}{rcl}
-%                 p_j & \mbox{si}
-%                 & p_j \in \V(s_i) \\ \neg p_j & \mbox{si} & p_i \notin \V(s_i) \\
-%                 \end{array}\right.
-%         $.
-
-%         Veamos que por la forma en la que construimos $\varphi_i$, se cumple que $\modults, w \models \varphi_i$ si y sólo si $w \in s_i$. ($*$)
-%         (esto podría explicarlo/demostrarlo un poco más en profundidad si no es algo claro).
-        
-%         Demostremos entonces que $\varphi := \bigvee\limits_{i = 1}^{m}\varphi_i$ define a $U$. Primero, notar que sea $w \in \W$, $\modults, w \models \varphi$ si y sólo si $\modults, w \models \varphi_i$ para algún $i \in \{1,...m\}$.  
-
-%         Queremos ver entonces que, $w \in U$ si y sólo si $\modults, w \models \varphi$. 
-
-%         Sea $w \in U$, por hipótesis, existe $s_i$ tal que $w \in s_i$. Ahora bien, por $(*)$, $\modults, w \models \varphi_i$, por lo que $\modults, w \models \varphi$.
-
-%         Sea $w \in \W$ tal que $\modults, w \models \varphi$, entonces existe $i \in \{1,...,m\}$ tal que $\modults, w \models \varphi_i$. Luego por $(*)$, $w \in s_i$, lo que nos dice que $w \in U$.
-
-%         Luego $\varphi$ define a $U$.
-        
-%         Como $\varphi$ es proposicional, $U$ es proposicionalmente definible. 
-    
-%         \item $(\leftarrow)$ Sea $\varphi$ la fórmula proposicional que define a $U$, se quiere demostrar que existe $S = \{s_1,...,s_m\}$ finito, tal que $S \in \mathcal{P}(\rho_\modults)$ tal que $U = \bigcup\limits_{s_i \in S} s_{i}$. 
-
-%         Definamos $U' = \bigcup\limits_{w \in U} [w]$, siendo $[w]$ la clase de equivalencia de $w$ con respecto a $A_\modults$. Notemos que por la definición de $U'$, existe $S \in \mathcal{P}(\rho_\modults)$ finito tal que $U' = \bigcup\limits_{s_i \in S} s_{i}$ dado que $U'$ está definido como una unión finita de elementos de $\mathcal{P}(\rho_\modults)$.
-
-%         Demostremos ahora que $U' = U$. Es claro que $U \subseteq U'$, dado que $w \in [w]$ para cada $w \in \W$.
-
-%         Queda demostrar que $U' \subseteq U$. 
-        
-%         Sea $w' \in U'$, existe $w \in U$ tal que $w' \in [w]$. Ahora bien, como $w \in U$, $\modults, w \models \varphi$. Luego, notemos que por Lema 1, $\modults, v \models \varphi$ para cada $v \in [w]$, pues $\V(w) = \V(v)$ para cada $v \in [w]$.
-%         Pero como $w' \in [w]$ esto nos dice que $\modults, w' \models \varphi$. Luego $w' \in U$.
-
-%         Finalmente $U' = U$, lo cual demuestra $(\leftarrow)$.
-%     \end{itemize}
-
-% \end{demostracion}
-
-% % IDEA PARA PROBAR LO DE QUE CADA CLASE DE EQUIVALENCIA O ESTÁ POR COMPLETO O NO ESTÁ, HABRÍA QUE PROBAR EL SII, ACÁ SOLO PRUEBO EL ->
-
-% % \begin{corolario}
-% %     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ un conjunto proposicionalmente definible, entonces
-% %     \begin{center}
-% %         $\forall s_i \in \rho_\modults.$ $(s_i \subseteq U \vee s_i \cap U = \emptyset)$
-% %     \end{center}
-% % \end{corolario}
-
-% % \begin{demostracion}
-% %     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ proposicionalmente definible.
-    
-% %     Supongamos que la propiedad es falsa, luego existe $s' \in \rho_\modults$ tal que $s' \nsubseteq U \wedge s_i \cap U \neq \emptyset$. Notemos que esto dice que existen $w,v \in s'$ tal que $w \in U$ y $v \notin U$.
-
-% %     A su vez, por Lema 2, como $U$ es proposicionalmente definible existe $S \subseteq \mathcal{P}(\rho_\modults)$ tal que $U = \bigcup\limits_{s_i \in S} s_{i}$. 
-    
-% %     Como $w \in U$ y $w \in s'$, entonces ocurre que $s' \in S$, pues recordemos que los elementos de $\rho_\modults$ son clases de equivalencia, es decir, $s'$ es la única clase que contiene a $w$. Ahora bien, pero como $v \in s'$ entonces $v\in U$, lo cuál es absurdo, pues dijimos que $v \notin U$. 
-
-% %     El absurdo vino de suponer que existía $s' \in \rho_\modults$ tal que  $s' \nsubseteq U \wedge s_i \cap U \neq \emptyset$, luego la propiedad queda demostrada.
-% % \end{demostracion}
-
-
-
-% \begin{corolario}
-%     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y sea $U \subseteq \W$ entonces el problema de decidir si $U$ es proposicionalmente definible está en $\Poly$.
-
-%     Más aún, en caso de ser definible, encontrar una fórmula $\varphi$ que define a $U$ es realizable en tiempo polinomial en el tamaño de $\modults$.
-% \end{corolario}
-% (Este corolario es el problema de \KHilogic-definibilidad, porque como dijimos un conjunto es \KHilogic-definible si y sólo si es proposicionalmente definible)
-
-% \begin{demostracion}
-%     Queremos encontrar un algoritmo que dado $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un modelo finito y $U \subseteq \W$ decida en tiempo polinomial en el tamaño de $\modults$ si $U$ es proposicionalmente definible.
-
-%     Por Lema 2, sabemos que basta con encontrar $S \in \mathcal{P}(\rho_\modults)$ tal que $U = \bigcup\limits_{s_i \in S} s_{i}$ o determinar que no existe tal $S$.
-    
-%     Como $\rho_\modults$ es la partición de $\W$ con respecto a la relación de equivalencia $A_\modults$, dicho $S \in \mathcal{P}(\rho_\modults)$ existirá si y sólo si ocurre que para cada $s_i \in \rho_\modults$ se cumple que $s_i \subseteq U$ o $s_i$ $\cap$ $U = \emptyset$. (Puedo desarrollar esto acá o incluso probar un lema más que enuncie esto, pero la idea intuitiva es que como queremos chequear que U es unión de clases de equivalencia, entonces si o si tiene que ocurrir que para cada clase de equivalencia están todos sus nodos en U o ninguno está en U)
-
-%     Entonces notemos que basta con dar un algoritmo que encuentre las clases de equivalencia de $\rho_\modults$ y para cada una de ellas chequee que, o todos sus nodos pertenecen a $U$ o ninguno de ellos lo hace.
-
-%     % acá va algoritmo que chequea si u es definible
-
-    
-
-
-        
-
-%     Luego, en caso de ser $U$ definible, tendremos computado ya el conjunto $S \in \mathcal{P}(\rho_\modults)$ tal que $U = \bigcup\limits_{s_i \in S} s_{i}$, que estaría formado por las clases de equivalencia que encontramos en el paso anterior que están completamente contenidas en $U$.
-
-%     Ahora bien, a partir de dicho conjunto $S = \{s_1,...,s_m\}$, podemos computar una fórmula que define a $U$ siguiendo la misma estrategia mencionada en la demostración del Lema 2. 
-    
-%     Es decir, podemos computar $\varphi := \bigvee\limits_{i = 1}^{m}\varphi_i$, con $\varphi_i := \bigwedge\limits_{j = 1}^{n} l_i(p_j)$ donde $l_i(p_j) = $
-%         $\left\{ \begin{array}{rcl}
-%                 p_j & \mbox{si}
-%                 & p_j \in \V(s_i) \\ \neg p_j & \mbox{si} & p_j \notin \V(s_i) \\
-%                 \end{array}\right.
-%         $.
-
-%     Notar que la cantidad de disyunciones ($m$) de $\varphi$ está acotada por la cantidad de elementos de $\W$ y por otro lado la cantidad de conjunciones de cada término ($n$) es la cantidad de variables proposicionales que aparecen en la imagen de $\V$. Juntando estos dos argumentos, podemos deducir que el tamaño de $\varphi$ es $\bigO(|\W| *|\V|)$, lo cuál es polinomial en el tamaño de $\modults$.
-
-%     Falta escribir el algoritmo y probar su complejidad.
-% \end{demostracion}
-
 Como hemos mencionado a lo largo de este trabajo, la noción de bisimulación nos permite relacionar modelos lógicamente equivalentes a partir de 
 características estructurales entre sí. En el capítulo anterior, determinamos qué tan complejo es decidir si existe una bisimulación entre dos 
 modelos.
@@ -258,22 +118,77 @@ $w, v$ estén relacionados en $\modults$. Por otro lado, la relación de indisti
 
 Sin embargo consideremos el siguiente modelo (\Cref{fig:1stproposaloriginal}):
 
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_original.jpeg}
+%     \caption{$\modults$}
+%     \label{fig:1stproposaloriginal}
+% \end{figure}
+
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_original.jpeg}
-    \caption{$\modults$}
+    \hspace{3.4cm}
+    \vspace{0.1cm}
+    \begin{tikzpicture}
+        \node[state] (p) {$p$};
+        \node[state, below of=p, yshift=-1.5cm] (p2) {$p$};
+        \node[state, right of=p, yshift=-1cm, xshift=1.5cm] (q) {$q$};
+        
+        \node at ($(p)+(0,0.5)$) {$w_1$};
+        \node at ($(q)+(0,0.5)$) {$w_3$};
+        \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+
+        \path (p) edge [bend left] node [above] {$a$} (q);
+        \path (p2) edge [bend right] node [above] {$b$} (q);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \raisebox{1.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{b\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults$}
     \label{fig:1stproposaloriginal}
 \end{figure}
 
 Con esta propuesta de contracción ($\modults'$), obtendríamos el modelo (\Cref{fig:1stproposalcontraction}):
 
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_contraido.jpeg}
+%     \caption{$\modults'$}
+%     \label{fig:1stproposalcontraction}
+% \end{figure}
+
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_contraido.jpeg}
-    \caption{$\modults'$}
+    \hspace{3.2cm}
+    \vspace{0.8cm}
+    \begin{tikzpicture}
+        \node[state] (p) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        
+        \node at ($(p)+(0,0.6)$) {$[w_1]$};
+        \node at ($(q)+(0,0.6)$) {$[w_3]$};
+
+        \path (p) edge [bend left] node [above] {$a$} (q)
+              (p) edge [bend right] node [above] {$b$} (q);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \raisebox{0.4cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{b\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults'$}
     \label{fig:1stproposalcontraction}
 \end{figure}
-
 
 Notemos que $\modults, w_1 \not\models \khi(p,q)$ pero $\modults', [w_1] \models \khi(p,q)$, luego $\modults,w_1$ y 
 $\modults',[w_1]$ no son bisimilares.
@@ -285,19 +200,81 @@ $[w], [v] \in \rho_\modults$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ t
 
 Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
 
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_original.jpeg}
+%     \caption{$\modults$}
+%     \label{fig:2ndproposaloriginal}
+% \end{figure}
+
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_original.jpeg}
-    \caption{$\modults$}
+    \hspace{2.6cm}
+    \vspace{0.2cm}
+    \begin{tikzpicture}
+        \node[state] (p) {$p$};
+        \node[state, right of=p, yshift=1cm, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift=-1.5cm] (q2) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        
+        \node at ($(p)+(0,0.5)$) {$w_1$};
+        \node at ($(r)+(0,0.5)$) {$w_4$};
+        \node at ($(q)+(0,0.5)$) {$w_2$};
+        \node at ($(q2)+(0.05,-0.6)$) {$w_3$};
+
+        \path (p) edge [bend left] node [above] {$a$} (q);
+        \path (q) edge [bend left] node [above] {$b$} (r);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \raisebox{1.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S_i = \left\{
+                \begin{array}{c}
+                    \{ab\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults$}
     \label{fig:2ndproposaloriginal}
 \end{figure}
 
+
 Y su contracción por bisimulación con la propuesta mencionada (\Cref{fig:2ndproposalcontraction}):
 
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_contraido.jpeg}
+%     \caption{$\modults'$}
+%     \label{fig:2ndproposalcontraction}
+% \end{figure}
+
+
+
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_contraido.jpeg}
-    \caption{$\modults'$}
+    \hspace{2.54cm}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        
+        \node at ($(p)+(0,0.75)$) {$[w_1]$};
+        \node at ($(r)+(0,0.75)$) {$[w_4]$};
+        \node at ($(q)+(0,0.75)$) {$[w_2]$};
+
+        \path (p) edge [bend left] node [above] {$a$} (q);
+    \end{tikzpicture}
+    \hspace{0.82cm}
+    \raisebox{0.14cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{ab\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults'$}
     \label{fig:2ndproposalcontraction}
 \end{figure}
 
@@ -625,9 +602,413 @@ Un punto muy positivo de esta contracción es que existen algoritmos eficientes 
 el algoritmo de Paige y Tarjan presentado en \cite[`Partición Relacional más Gruesa']{Paige&TarjanContraction} tiene complejidad $\bigO(m*log(n))$ siendo $n$ la cantidad de nodos del dominio del modelo y 
 $m$ la cantidad de aristas del mismo.
 
+\section{Tercera Propuesta de Contracción}
+
+Lo dejo escrito en palabras para recordar la idea intuitiva de la contracción.
+
+Se define una nueva $A_\modults$, en la cuál dos nodos $w, v$ están en la misma clase de equivalencia si y sólo si para todo sufijo de 
+$\sigma \in \pi$ con $\pi \in \S_i$ para algún $i \in \AGT$ se cumple que dicho sufijo es fuertemente ejecutable en ambos nodos o no lo 
+es en ninguno de los dos. Se puede ver que esto es una relación de equivalencia.
+
+Se puede demostrar también que esta relación de equivalencia incluye a la autobisimulación máxima en lógica modal básica (en parte demuestra 
+que es ``mejor o igual'' que la segunda propuesta).
+
+Idea rápida de la demo:
+Sea $\modults$ un modelo de Kripke. Sean $w,v$ dos nodos en su dominio que pertenecen a la misma clase de equivalencia 
+de la autobisimulación máxima de lógica modal básica, y supongamos que existe un plan $\sigma$ que es fuertemente ejecutable en w pero no en v. Entonces, existe algún paso $j$ del 
+plan $\sigma$ en el cuál a partir de toda ejecución parcial de $\sigma[..j-1]$ desde $w$ se puede ejecutar la acción $\sigma[j]$ pero existe una 
+ejecución parcial de $\sigma[..j-1]$ desde $v$ en la cuál no es posible ejecutar la acción $\sigma[j]$.
+
+Luego, consideremos la fórmula $\Box_{\sigma[1]}...\Box_{\sigma[j-1]}\diamond_{\sigma[j]} \top$. Notemos que esta fórmula no se cumple en 
+$\modults,v$ pero si en $\modults,w$. Lo cuál es absurdo, pues $w$ y $v$ están en la misma clase de equivalencia por lo que satisfacen las 
+mismas fórmulas. Luego todo plan es fuertemente ejecutable en $w$ si y sólo si es fuertemente ejecutable en $v$, por lo que están en la 
+misma clase de equivalencia en la nueva $A_\modults$.
+
+Se cocienta el dominio por esta nueva $A_\modults$ y las aristas se definen como en lógica modal básica, es decir, si $(w,v) \in \R_a$ 
+entonces $([w],[v]) \in \R'_a$.
 
 \section{Comparación entre las contracciones propuestas}
 
+Presentaremos tres \ultss de ejemplo, con el objetivo de obtener un mejor entendimiento sobre el comportamiento de cada una de las 
+contracciones propuestas.
 
-Acá irían ejemplos donde cada contracción genere un modelo de menor tamaño. También conclusiones acerca de lo que nos dice sobre expresividad cada
-contracción.
+En este primer ejemplo, consideraremos el siguiente modelo $\modults_1$ (\Cref{fig:1st-example-contraction}):
+
+\begin{figure}[h]
+    \hspace{2.3cm}
+    \vspace{0.3cm}
+    \begin{tikzpicture}
+        \node[state] (p) {$p$};
+        \node[state, below of=p, yshift=-1cm] (p2) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift=-1cm] (q2) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        \node[state, right of=p2, xshift=3.5cm] (r2) {$r$};
+
+        
+        \node at ($(p)+(0,0.5)$) {$w_1$};
+        \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+        \node at ($(q)+(0,0.5)$) {$w_3$};
+        \node at ($(q2)+(0.05,-0.6)$) {$w_4$};
+        \node at ($(r)+(0,0.5)$) {$w_5$};
+        \node at ($(r2)+(0.05,-0.6)$) {$w_6$};
+
+
+        \path (p) edge node [above] {$a$} (q)
+              (p) edge node [above] {$a$} (q2);
+        \path (p2) edge node [below] {$a$} (q)
+              (p2) edge node [below] {$a$} (q2);       
+        \path (q) edge node [above] {$b$} (r);
+        \path (q2) edge node [above] {$c$} (r)
+              (q2) edge [bend left=50] node [below] {$c$} (p2)
+              (q2) edge node [above] {$b$} (r2);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \raisebox{1.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S_i = \left\{
+                \begin{array}{c}
+                    \{ab\}, \{ac\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults_1$.}
+    \label{fig:1st-example-contraction}
+\end{figure}
+
+Ahora, analicemos cómo serían los modelos obtenidos por cada una de las contracciones propuestas en este 
+capítulo.
+
+El modelo obtenido por la primera propuesta es (\Cref{fig:1st-example-1st-contraction}):
+
+\begin{figure}[h]
+    \hspace{2.2cm}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        
+        \node at ($(p)+(0,-0.7)$) {$[w_1]$};
+        \node at ($(q)+(0,-0.7)$) {$[w_3]$};
+        \node at ($(r)+(0,-0.7)$) {$[w_5]$};
+
+        \path (p) edge [bend left=40] node [above] {$a_{ab}$} (r);
+    \end{tikzpicture}
+    \hspace{0.82cm}
+    \raisebox{0.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{a_{ab}\}, \{a_{ac}\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Primera propuesta de contracción de $\modults_1$.}
+    \label{fig:1st-example-1st-contraction}
+\end{figure}
+
+Por otro lado, podemos notar que la segunda y tercera propuesta producen exactamente el mismo 
+modelo bisimilar a $\modults$, el cuál es (\Cref{fig:1st-example-2nd-3rd-contraction}):
+
+
+\begin{figure}[h]
+    \hspace{1.6cm}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, yshift = 1cm, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift = -1.4cm] (q2) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        
+        \node at ($(p)+(0,0.7)$) {$[w_1]$};
+        \node at ($(q)+(0,0.7)$) {$[w_3]$};
+        \node at ($(q2)+(0,-0.7)$) {$[w_4]$};
+        \node at ($(r)+(0,0.7)$) {$[w_5]$};
+
+        \path (p) edge node [above] {$a$} (q)
+              (p) edge node [above] {$a$} (q2);
+        \path (q) edge node [above] {$b$} (r)
+              (q2) edge node [above] {$b$} (r)
+              (q2) edge [bend right= 45, sloped] node [below] {$c$} (r)
+              (q2) edge [bend left=45, sloped] node [below] {$c$} (p);
+        
+    \end{tikzpicture}
+    \hspace{1.35cm}
+    \raisebox{1.85cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{ab\}, \{ac\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Segunda y tercera propuesta de contracción de $\modults_1$.}
+    \label{fig:1st-example-2nd-3rd-contraction}
+\end{figure}
+
+Como se puede notar, para $\modults_1$ la primer propuesta de contracción produce un modelo de tamaño significativamente menor 
+a los obtenidos por las demás propuestas y, a su vez, solo conserva información puramente relevante para la lógica.
+
+Luego, consideremos el siguiente modelo $\modults_2$ (\Cref{fig:2nd-example-contraction}):
+
+\begin{figure}[h]
+    \hspace{1.9cm}
+    \vspace{0.3cm}
+    \begin{tikzpicture}
+        \node[state] (p) {$p$};
+        \node[state, below of=p, yshift=-1cm] (p2) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift=-1cm] (q2) {$q$};
+        \node[state, right of=p, xshift=4cm, yshift=-.9cm] (r) {$r$};
+
+        
+        \node at ($(p)+(0,0.5)$) {$w_1$};
+        \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+        \node at ($(q)+(0,0.5)$) {$w_3$};
+        \node at ($(q2)+(0.05,-0.6)$) {$w_4$};
+        \node at ($(r)+(0,0.5)$) {$w_5$};
+
+
+        \path (p) edge node [above] {$a$} (q);
+        \path (p2) edge node [below] {$a$} (q2);
+        \path (q) edge node [sloped, above] {$b,c,d$} (r);
+        \path (q2) edge node [sloped, below] {$b,c,d$} (r)
+              (r) edge [bend left=60, sloped] node [below] {$a$} (q2);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \raisebox{1.5cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{ab\},
+                    \{ac\}, \{ad\} \\
+                    \{aba\}, \{aca\}, 
+                    \{ada\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults_2$.}
+    \label{fig:2nd-example-contraction}
+\end{figure}
+
+A partir de la primera propuesta obtenemos el siguiente modelo (\Cref{fig:2nd-example-1st-contraction}):
+
+\begin{figure}[h]
+    \hspace{0.486cm}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, xshift=2.1cm] (q) {$q$};
+        \node[state, right of=p, xshift=5.1cm] (r) {$r$};
+        
+        \node at ($(p)+(0,-0.7)$) {$[w_1]$};
+        \node at ($(q)+(0,-0.7)$) {$[w_3]$};
+        \node at ($(r)+(0,-0.7)$) {$[w_5]$};
+
+        \path (p) edge [bend left=50] node [above] {$a_{ab}, a_{ac}, a_{ad}$} (r);
+        \path (p) edge node [above] {$a_{a}, a_{aba}, a_{aca}$} (q);
+        \path (p) edge node [below] {$a_{ada}$} (q);
+        \path (r) edge node [above] {$a_{a}, a_{aba}, a_{aca}$} (q);
+        \path (r) edge node [below] {$a_{ada}$} (q);
+        \path (r) edge [loop above, looseness=15] node [above] {$a_{ab}, a_{ac}, a_{ad}$} (r);
+
+    \end{tikzpicture}
+    \hspace{0.45cm}
+    \raisebox{0.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{a_{a}\}, \{a_{ab}\},
+                    \{a_{ac}\}, \{a_{ad}\} \\
+                    \{a_{aba}\}, \{a_{aca}\}, 
+                    \{a_{ada}\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Primer propuesta de contracción de $\modults_2$.}
+    \label{fig:2nd-example-1st-contraction}
+\end{figure}
+
+Por otro lado, en este ejemplo nuevamente obtenemos el mismo modelo a partir de la segunda y tercera propuesta de 
+contracción (\Cref{fig:2nd-example-2nd-3rd-contraction}):
+
+\begin{figure}[h]
+    \hspace{1.05cm}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        
+        \node at ($(p)+(0,-0.7)$) {$[w_1]$};
+        \node at ($(q)+(0,-0.7)$) {$[w_3]$};
+        \node at ($(r)+(0,-0.7)$) {$[w_5]$};
+
+        \path (p) edge node [above] {$a$} (q);
+        \path (q) edge [bend left, sloped] node [above] {$b,c,d$} (r);
+        \path (r) edge [bend left] node [below] {$a$} (q);
+
+    \end{tikzpicture}
+    \hspace{1.8cm}
+    \raisebox{0.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{ab\},
+                    \{ac\}, \{ad\} \\
+                    \{aba\}, \{aca\}, 
+                    \{ada\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Segunda y tercera propuesta de contracción de $\modults_2$.}
+    \label{fig:2nd-example-2nd-3rd-contraction}
+\end{figure}
+
+En este ejemplo, podemos notar que la cantidad de aristas del modelo obtenido por la primera propuesta aumenta con respecto 
+a $\modults_2$, pero dicho aumento está atestiguado por el tamaño de $\S_i$, por lo que es polinomial en el tamaño de $\modults_2$. 
+Por otro lado, analizando los modelos obtenidos por las demás propuestas, podemos observar que efectivamente se obtiene un modelo 
+bisimilar de menor tamaño que $\modults_2$, por lo que en estos casos podríamos concluir que la segunda y la tercera propuesta se 
+comportan ``mejor'' que la primera.
+
+
+Por último, presentaremos un tercer ejemplo, $\modults_3$, el cuál comparte una notoria similitud con $\modults_2$ pero que evidencia 
+como la tercera propuesta logra superar a la segunda (\Cref{fig:3rd-example-contraction}):
+
+\begin{figure}[h]
+    \hspace{1.6cm}
+    \vspace{0.3cm}
+    \begin{tikzpicture}
+        \node[state] (p) {$p$};
+        \node[state, below of=p, yshift=-1cm] (p2) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift=-1cm] (q2) {$q$};
+        \node[state, right of=p, xshift=4.15cm, yshift=-.9cm] (r) {$r$};
+
+        
+        \node at ($(p)+(0,0.5)$) {$w_1$};
+        \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+        \node at ($(q)+(0,0.5)$) {$w_3$};
+        \node at ($(q2)+(0.05,-0.6)$) {$w_4$};
+        \node at ($(r)+(0,0.5)$) {$w_5$};
+
+
+        \path (p) edge node [above] {$a$} (q);
+        \path (p2) edge node [below] {$a$} (q2);
+        \path (q) edge node [sloped, above] {$b,c,d,e,f$} (r);
+        \path (q2) edge node [sloped, below] {$b,c,d$} (r)
+              (r) edge [bend left=60, sloped] node [below] {$a$} (q2);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \raisebox{1.5cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{ab\},
+                    \{ac\}, \{ad\} \\
+                    \{aba\}, \{aca\}, 
+                    \{ada\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Representación gráfica de $\modults_3$.}
+    \label{fig:3rd-example-contraction}
+\end{figure}
+
+Una primera observación es que la contracción obtenida por la primera propuesta es exactamente la misma 
+que la presentada en \Cref{fig:2nd-example-1st-contraction}.
+
+Luego, la segunda propuesta obtiene el siguiente modelo (\Cref{fig:3rd-example-2nd-contraction}):
+
+\begin{figure}[h]
+    \hspace{0.9cm}
+    \vspace{0.4cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, yshift = 1cm, xshift=1.3cm] (q) {$q$};
+        \node[state, below of=q, yshift = -1.4cm] (q2) {$q$};
+        \node[state, right of=p, xshift=4cm] (r) {$r$};
+        
+        \node at ($(p)+(0,0.7)$) {$[w_1]$};
+        \node at ($(q)+(0,0.7)$) {$[w_3]$};
+        \node at ($(q2)+(0.05,-0.7)$) {$[w_4]$};
+        \node at ($(r)+(0.05,0.7)$) {$[w_5]$};
+
+        \path (p) edge node [above] {$a$} (q)
+              (p) edge node [above] {$a$} (q2);
+        \path (q) edge node [above, sloped] {$b,c,d,e,f$} (r)
+              (q2) edge node [below, sloped] {$b,c,d$} (r)
+              (r) edge [bend left=50, sloped] node [below] {$a$} (q2);
+        
+    \end{tikzpicture}
+    \hspace{1.4cm}
+    \raisebox{1.85cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{ab\},
+                    \{ac\}, \{ad\} \\
+                    \{aba\}, \{aca\}, 
+                    \{ada\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Segunda propuesta de contracción de $\modults_3$.}
+    \label{fig:3rd-example-2nd-contraction}
+\end{figure}
+
+Notemos que en la segunda propuesta, los mundos etiquetados por la variable $q$ no pertenecen a la misma 
+clase de equivalencia de la máxima autobisimulación de la lógica modal básica debido a que $w_3$ tiene aristas 
+etiquetadas con las acciones $e, f$ mientras que $w_4$ no las tiene. Sin embargo, notemos que a partir de los planes  
+conocidos por el agente $i$, dados por la relación de indistinguibilidad $\S_i$, no es realmente relevante el hecho de que desde $w_4$ no 
+se puedan ejecutar las acciones $e, f$ dado que el agente $i$ no conoce planes donde dichas acciones sean ejecutadas. 
+
+La virtud de la tercera contracción consiste en tomar este análisis en consideración a la hora de decidir qué nodos unir en la misma 
+clase de equivalencia. Luego, el modelo obtenido por la tercera propuesta es (\Cref{fig:3rd-example-3rd-contraction}):
+
+\begin{figure}[h]
+    \hspace{0.9cm}
+    \vspace{0.5cm}
+    \begin{tikzpicture}
+        \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, right of=p, xshift=4cm] (r) {$r$};
+        
+        \node at ($(p)+(0,-0.7)$) {$[w_1]$};
+        \node at ($(q)+(0,-0.7)$) {$[w_3]$};
+        \node at ($(r)+(0,-0.7)$) {$[w_5]$};
+
+        \path (p) edge node [above] {$a$} (q);
+        \path (q) edge [bend left] node [above, sloped] {$b,c,d,e,f$} (r);
+        \path (r) edge [bend left] node [below] {$a$} (q);
+
+    \end{tikzpicture}
+    \hspace{1.8cm}
+    \raisebox{0.8cm}{
+        \begin{minipage}{0.45\textwidth}
+            $\S'_i = \left\{
+                \begin{array}{c}
+                    \{a\}, \{ab\},
+                    \{ac\}, \{ad\} \\
+                    \{aba\}, \{aca\}, 
+                    \{ada\}
+                \end{array}
+            \right\}$
+        \end{minipage}
+    }
+    \caption{Tercera propuesta de contracción de $\modults_3$.}
+    \label{fig:3rd-example-3rd-contraction}
+\end{figure}
+
+Así, podemos observar como la tercera propuesta logra unir a $w_3$ y $w_4$ en la misma clase de equivalencia 
+y de esta forma obtener el modelo de menor tamaño de entre los obtenidos por las tres propuestas analizadas 
+en este trabajo. 
