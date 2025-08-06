@@ -85,7 +85,7 @@ los sistemas de transición etiquetados.
 
 \begin{definicion}[Sistema de Transición Etiquetado]
     Un \emph{Sistema de Transición Etiquetado (\lts, por sus siglas en inglés)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
-    donde $\W$ es un conjunto no vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in A$ para algún $A \subseteq \ACT\}$ es 
+    donde $\W$ es un conjunto no vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ es 
     una colección de relaciones binarias sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de etiquetado y $\ACT$ es un 
     conjunto enumerable de nombres de acciones.
 \end{definicion}
@@ -191,7 +191,7 @@ Dada entonces la incertidumbre de un agente sobre $\ACT^*$, sus habilidades depe
 lo que toda una clase de equivalencia dentro de su relación de indistinguibilidad pueda garantizar.
 
 \begin{definicion}
-    Sea $\{\R_a \subseteq \W \times \W \mid a \in A,$ para algún $A \subseteq \ACT \}$ una colección de relaciones binarias sobre $\W$. 
+    Sea $\{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ una colección de relaciones binarias sobre $\W$. 
     Se define $\R_\epsilon := \{(w,w) \mid w \in \W\}$ y, para $\sigma \in \ACT^*$ y $a \in \ACT$, 
     $\R_{\sigma a} := \{(w,v) \in \W \times \W \mid$ existe $u \in \W$ tal que $(w,u) \in \R_\sigma$ y $(u,v) \in \R_a \}$. 
     Luego sea $u \in \W$ y $\sigma \in \ACT^*$, se define $\R_\sigma(u) := \{v\in\W \mid (u,v) \in \R_\sigma\}$, y para $U\subseteq\W$ 
@@ -226,16 +226,18 @@ Entonces, una parte crucial es determinar qué se considerará un conjunto de pl
 inspiración del campo de ``planning'' en Inteligencia Artificial (IA), surge la noción de ejecutabilidad fuerte.
 
 \begin{definicion}[Ejecutabilidad Fuerte]
-    Sea $\{\R_a \subseteq \W \times \W \mid a \in A$, para algún $A \subseteq \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
-    es fuertemente ejecutable ($\sexec$) en un estado $w \in \W$ si y sólo si $\R_\sigma$ está definido y, a su vez, $v \in \R_{\sigma[..k]}(w)$ implica que 
-    $\R_{\sigma[k+1]}(v) \neq \emptyset$ para cada $k \in \{0,...,|\sigma|-1\}$. Se define el conjunto $\sexec$($\sigma$) $:= \{w \in \W \mid \sigma$ es $\sexec$ en $w\}$.
+    Sea $\{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
+    es fuertemente ejecutable ($\sexec$) en un estado $w \in \W$ si y sólo si para cada $k \in \{0,...,|\sigma|-1\}$ se cumple que $v \in \R_{\sigma[..k]}(w)$ 
+    implica $\R_{\sigma[k+1]}(v) \neq \emptyset$. Se define el conjunto $\sexec^{\model}$($\sigma$) $:= \{w \in \W \mid \sigma$ es 
+    $\sexec$ en $w\}$.
     
     Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
-    Por último, $\sexec$($\pi$) $:= \cap_{\sigma \in \pi}$ $\sexec$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
+    Por último, $\sexec^{\model}$($\pi$) $:= \cap_{\sigma \in \pi}$ $\sexec$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
 \end{definicion}
 
 Intuitivamente, ejecutabilidad fuerte sobre planes pide que cada ejecución parcial de un plan (incluyendo $\epsilon$) pueda ser completada, y, ejecutabilidad fuerte sobre
-clases de planes pide que cada plan de la clase sea fuertemente ejecutable.
+clases de planes pide que cada plan de la clase sea fuertemente ejecutable. Cuando el \ults sea claro por el contexto, omitiremos los $\model$ 
+y escribiremos simplemente $\sexec(\sigma)$ y $\sexec(\pi)$. 
 
 \begin{ejemplo}
     Si consideramos el \ults presentado en \Cref{ejemplo:ults} entonces tenemos que:

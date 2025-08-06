@@ -106,7 +106,7 @@ que caracteriza la autobisimulación máxima de un \ults.
 \end{demostracion}
 
 Una primera observación que surge a partir de este teorema es que, a diferencia de lo mencionado sobre el caso de la lógica modal básica, 
-encontramos una forma de identificar la autobisimulación máxima de un modelo sin necesidad de demostrar que la unión preserva bisimulación. 
+encontramos una forma de identificar la autobisimulación máxima de un modelo sin necesidad de demostrar que la unión de dos bisimulaciones es una bisimulación. 
 
 En particular, se demuestra que la partición de nodos de acuerdo a la función de valuación $\V$ siempre es una autobisimulación.
 
@@ -117,13 +117,6 @@ del dominio de $\modults$ con respecto a $A_\modults$ y se relacione a las clase
 $w, v$ estén relacionados en $\modults$. Por otro lado, la relación de indistinguibilidad de cada agente y el conjunto de acciones de $\modults$ se conservarían.
 
 Sin embargo consideremos el siguiente modelo (\Cref{fig:1stproposaloriginal}):
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_original.jpeg}
-%     \caption{$\modults$}
-%     \label{fig:1stproposaloriginal}
-% \end{figure}
 
 \begin{figure}[h]
     \hspace{3.4cm}
@@ -155,13 +148,6 @@ Sin embargo consideremos el siguiente modelo (\Cref{fig:1stproposaloriginal}):
 \end{figure}
 
 Con esta propuesta de contracción ($\modults'$), obtendríamos el modelo (\Cref{fig:1stproposalcontraction}):
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{imagenes/1ra_propuesta_contraido.jpeg}
-%     \caption{$\modults'$}
-%     \label{fig:1stproposalcontraction}
-% \end{figure}
 
 \begin{figure}[h]
     \hspace{3.2cm}
@@ -200,12 +186,6 @@ $[w], [v] \in \rho_\modults$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ t
 
 Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
 
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_original.jpeg}
-%     \caption{$\modults$}
-%     \label{fig:2ndproposaloriginal}
-% \end{figure}
 
 \begin{figure}[h]
     \hspace{2.6cm}
@@ -240,14 +220,6 @@ Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
 
 
 Y su contracción por bisimulación con la propuesta mencionada (\Cref{fig:2ndproposalcontraction}):
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{imagenes/2da_propuesta_contraido.jpeg}
-%     \caption{$\modults'$}
-%     \label{fig:2ndproposalcontraction}
-% \end{figure}
-
 
 
 \begin{figure}[h]
@@ -409,9 +381,6 @@ siguiente teorema.
 \end{demostracion}
 
 
-% \begin{teorema}
-%     La contracción por bisimulación de un \ults $\modults$ tiene cardinalidad mínima entre los modelos $\KHilogic$-bisimilares a $\modults$.
-% \end{teorema}
 Hemos demostrado entonces que la contracción propuesta es adecuada, es decir, que dado un \ults genera un \ults bisimilar a partir de su 
 autobisimulación máxima $A_\modults$.
 
@@ -711,7 +680,7 @@ El modelo obtenido por la primera propuesta es (\Cref{fig:1st-example-1st-contra
 \end{figure}
 
 Por otro lado, podemos notar que la segunda y tercera propuesta producen exactamente el mismo 
-modelo bisimilar a $\modults$, el cuál es (\Cref{fig:1st-example-2nd-3rd-contraction}):
+modelo bisimilar a $\modults_1$, el cuál es (\Cref{fig:1st-example-2nd-3rd-contraction}):
 
 
 \begin{figure}[h]
@@ -750,7 +719,7 @@ modelo bisimilar a $\modults$, el cuál es (\Cref{fig:1st-example-2nd-3rd-contra
     \label{fig:1st-example-2nd-3rd-contraction}
 \end{figure}
 
-Como se puede notar, para $\modults_1$ la primer propuesta de contracción produce un modelo de tamaño significativamente menor 
+Como se puede notar, para $\modults_1$ la primera propuesta de contracción produce un modelo de tamaño significativamente menor 
 a los obtenidos por las demás propuestas y, a su vez, solo conserva información puramente relevante para la lógica.
 
 Luego, consideremos el siguiente modelo $\modults_2$ (\Cref{fig:2nd-example-contraction}):
