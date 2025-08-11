@@ -343,6 +343,27 @@ Y como demostramos que en el caso finito ambas definiciones de bisimulación son
     entonces $\model,w \bisim^* \model', w'$.
 \end{demostracion}
 
+Por otro lado, a partir del siguiente ejemplo, podemos ver como la otra dirección de \Cref{lema:new-implies-old} no se cumple para todo 
+par de modelos en el caso infinito.
+
+\begin{ejemplo}
+    Consideremos a $\PROP$ como un conjunto de variables proposicionales con la cardinalidad de los naturales. Es claro que $\mathcal{P}(\PROP)$ tiene 
+    cardinalidad real. Luego, consideremos un modelo con dominio $\mathcal{P}(\PROP)$, donde su función de etiquetado $\V$ es la función 
+    identidad, es decir, $\V(x) = x$ para todo $x \in \mathcal{P}(\PROP)$.
+    
+    Es claro la partición $\rho_\modults$ de este modelo son todos `singletons', 
+    dado que cada nodo tiene una imagen distinta en su función de valuación. Pero, notemos que como $\PROP$ tiene cardinalidad contable, entonces la 
+    cardinalidad del conjunto de fórmulas proposicionales es también contable, luego existe algún elemento de $\mathcal{P}(\PROP)$ que no es proposicionalmente 
+    definible (por una cuestión de cardinalidad). Llamemos a dicho elemento $x$.
+    
+    Entonces eso nos da un ejemplo de un conjunto del dominio de un \ults que satisface que para todo $s \in \rho_\modults$ se cumple que 
+    $s \cap U = \emptyset$ o $s \subseteq U$ pero dicho conjunto no es proposicionalmente definible. Esto dice que no vale la vuelta del \Cref{lema:propositionally-definable-lemma}.
+
+    Para ver que no vale la vuelta del \Cref{lema:new-implies-old}, hay que armarse dos modelos con dominio $\mathcal{P}(\PROP)$ que hagan cosas
+    distintas únicamente en el mundo $x$ y en el resto de mundos se comporten igual. (tengo más o menos la idea de cómo armarlo pero no se bien cómo escribirlo ahora).
+\end{ejemplo}
+
+
 Hemos presentado una nueva definición de bisimulación para la lógica de `Knowing How' multi-agente basada en incertidumbre, la 
 cuál pide condiciones puramente estructurales entre los modelos en cuestión. A su vez, demostramos las principales propiedades que se 
 esperan a la hora de proponer una definicion de bisimulación para una lógica modal, lo cuál sugiere que la nueva definición es adecuada.
