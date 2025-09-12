@@ -12,6 +12,13 @@
 %\usepackage{chronology}
 \usepackage{chronosys}
 \usepackage{soul}
+\usepackage{algorithm}
+\usepackage{float}
+\usepackage[noend]{algpseudocode}
+\algrenewcommand{\algorithmiccomment}[1]{\hfill // #1}
+\algrenewcommand\alglinenumber[1]{\scriptsize #1:}
+\usepackage[font=scriptsize]{caption}
+\captionsetup[algorithm]{font=scriptsize}
 \usetikzlibrary{calc}
 %
 \usetheme[progressbar=frametitle]{metropolis}
@@ -20,6 +27,7 @@
 %\setbeamertemplate{navigation symbols}{}
 \setbeamercolor{title}{bg=red!65!black, fg=black}
 \usepackage{ragged2e}
+\usepackage[dvipsnames]{xcolor}
 \justifying
 \input{macros}
 \newcommand{\reff}[1]{\dgray{[#1]}}
@@ -803,11 +811,11 @@
     {Bisimulation for \KHilogic}
 
     \begin{definition}\label{def:notation}
-Let $\model=\tup{\W,\ACT,\R,\Unc,\V}$ be an \ults over \PROP and \AGT. Take $\pi \in \pow(\ACT^*)$, $X, T \subseteq \W$ and $i \in \AGT$.
+Let $\model=\tup{\W,\ACT,\R,\Unc,\V}$ be an \ults over \PROP and \AGT. Take $\pi \in \pow(\ACT^*)$, $X, T \subseteq \W$ and $i \in \AGT$. \pause
 \begin{itemize} \itemsep 0pt
-    \item Write $X \ultsExecStrat{\pi} T$ $\siffdefs$ $X \subseteq \stexec(\pi)$ and $\R_{\pi}(X) \subseteq T$.
+    \item Write $X \ultsExecStrat{\pi} T$ $\siffdefs$ $X \subseteq \stexec(\pi)$ and $\R_{\pi}(X) \subseteq T$. \pause
 
-    \item Write $X \ultsExecAgi T$ $\siffdefs$ there is $\pi \in \Unc(i)$ such that $X \ultsExecStrat{\pi} T$.
+    \item Write $X \ultsExecAgi T$ $\siffdefs$ there is $\pi \in \Unc(i)$ such that $X \ultsExecStrat{\pi} T$. \pause
 \end{itemize}
 Additionally, $X \subseteq \W$ is propositionally definable in $\model$ iff there is a propositional formula $\varphi$ such that $X = \{ x \in \W \mid \model, x \models \varphi\}$.
 \end{definition}
@@ -830,19 +838,19 @@ Now we introduce the notion of bisimulation for $\KHilogic$.
 
         \item[($\khi$-zig):] for any \emph{propositionally} definable $P \subseteq \W$, if $P \ultsExecAgi T$ for some $T \subseteq \W$, then there is $T' \subseteq \W'$ such that: 
             1) $Z(P) \ultsExecAgi T'$, and
-            2) $T' \subseteq Z(T)$.
+            2) $T' \subseteq Z(T)$. \pause
 
         \item[($\khi$-zag):] % analogous to \textbf{$\khi$-Zig}.
         for any \emph{propositionally} definable $P' \subseteq \W'$, if $P' \ultsExecAgi T'$ for some $T' \subseteq \W'$, then there is $T \subseteq \W$ such that: 
             1) $Z^{-1}(P') \ultsExecAgi T$, and
             2) $T \subseteq Z^{-1}(T')$. \pause
 
-        \item[($\A$-zig):] for all $t\in\W$ there is a $t'\in\W'$ such that $tZt'$.
+        \item[($\A$-zig):] for all $t\in\W$ there is a $t'\in\W'$ such that $tZt'$. \pause
 
         \item[($\A$-zag):] for all $t'\in\W'$ there is a $t\in\W$ such that $tZt'$. \pause
     \end{description}
-    We write $\model,s \bisim \model',s'$ when there is an
-    $\KHilogic$-bisimulation $Z$ between $\model$ and $\model'$ such that
+    We write $\model \bisim \model'$ when there is an
+    $\KHilogic$-bisimulation $Z$ between $\model$ and $\model'$. \\Also, we write $\model,s \bisim \model',s'$ if
     $sZs'$.
     \end{footnotesize}
     \end{definition}
@@ -918,13 +926,13 @@ Let $\model,s$ and $\model',s'$ be two \ultss. $\model,s\bisim\model',s'$ implie
         Let $\model=\tup{\W,\ACT,\R,\Unc,\V}$ be an \ults, and let $P\subseteq \W$ be a propositionally definable set. Then, for all $[s]\in\qpart{\model}$, either $[s]\cap P =\emptyset$ or $[s]\subseteq P$. 
         \\If $\model$ is finite domain, then the converse also holds.
         \end{small}
-    \end{lemma}
+    \end{lemma} \pause
+    This lemma motivates our new proposal for the ($\khi$-zig) and ($\khi$-zag) conditions.
 \end{frame}
 
 %=============================================================
 
 \begin{frame}{Redefining \KHilogic-bisimulation}
-    This lemma motivates our new proposal for the ($\khi$-zig) and ($\khi$-zag) conditions. \pause 
 
     \begin{footnotesize}
     \begin{definition}[$\KHilogic^*$-bisimulation]
@@ -933,21 +941,21 @@ Let $\model,s$ and $\model',s'$ be two \ultss. $\model,s\bisim\model',s'$ implie
         \pause
         \begin{description} 
             \item[($\khi$-zig*):] 
-            for all $P\subseteq\W$ such that for any $[t]\in\qpart{\model}$ either 
-            $[t]\cap P =\emptyset$ or $[t]\subseteq P$, then, 
+            for all $P\subseteq\W$ such that {\color{NavyBlue}{for any $[t]\in\qpart{\model}$ either 
+            $[t]\cap P =\emptyset$ or $[t]\subseteq P$}}, then, 
             if $P \ultsExecAgi T$ for some $T \subseteq \W$, then there is $T' \subseteq \W'$ such that: 
                 1) $Z(P) \ultsExecAgi T'$, and
-                2) $T' \subseteq Z(T)$.
+                2) $T' \subseteq Z(T)$.\pause
                 
-            \item[($\khi$-zag*):] for all $P'\subseteq\W'$ such that for any $[t']\in\qpart{\model'}$ either 
-            $[t]'\cap P' =\emptyset$ or $[t']\subseteq P'$, then, 
+            \item[($\khi$-zag*):] for all $P'\subseteq\W'$ such that {\color{NavyBlue}for any $[t']\in\qpart{\model'}$ either 
+            $[t]'\cap P' =\emptyset$ or $[t']\subseteq P'$}, then, 
             if $P' \ultsExecAgi T'$ for some $T' \subseteq \W'$, then there is $T \subseteq \W$ such that: 
                 1) $Z^{-1}(P') \ultsExecAgi T$, and
                 2) $T \subseteq Z^{-1}(T')$.\pause
 
         \end{description}
-        We write $\model,s \nbisim \model',s'$ when there is an
-        $\KHilogic^*$-bisimulation $Z$ between $\model$ and $\model'$ such that
+        We write $\model \nbisim \model'$ when there is an
+        $\KHilogic^*$-bisimulation $Z$ between $\model$ and $\model'$. \\Also, we write $\model,s \nbisim \model',s'$ if
         $sZs'$.
     \end{definition}
 \end{footnotesize}
@@ -1037,9 +1045,211 @@ over plans for the agent $i$ in each model.
 
 %=============================================================
 
+% Comentario hablado, now that we gave a more algoritmical nature to the notion of bisimulation, we will study some
+% computational problems regarding this concept. 
+
+
 \begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    We will study the problem of deciding whether there exists an \KHilogic-bisimulation between two \ultss. \pause
+    
+    \begin{definition}
+        \begin{small}
+        Define the problem $\khibisimpb$ as: 
+            \[ 
+            \khibisimpb \eqdef \set{\tup{\model,\model'} \mid \model,\model' \text{ are finite \ults  and }  \model \bisim\model'}.
+            \]
+        \end{small}
+    \end{definition}\pause
+
+    This problem can be thought as a ``search and verification'' problem.
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+
+    We will first characterize the complexity of deciding if a binary relation is an \KHilogic-bisimulation between two \ultss. \pause
+
+    \begin{definition}
+    \label{def:checkkhibisimpb}
+        \begin{small}        
+            Define the problem $\checkkhibisimpb$ as: 
+            \[ 
+            \begin{array}{ll}
+            \checkkhibisimpb \eqdef &  \{\tup{\model,\model',Z} \mid \text{ Z is an $\KHilogic$-bisimulation} \\ 
+            & \ \text{ between }  \model \text{ and } \model'\}.
+            \end{array}
+            \]
+        \end{small}
+    \end{definition} \pause
+
+    The conditions \blue{($\khi$-zig)} and \blue{($\khi$-zag)} suggest that this problem may be a good fit in the class $\coNP$.
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    To prove the upper bound it is enough to provide a polynomial non-deterministic algorithm that decides its complement. \pause
+    
+    For every ``no-instance'' there exist a counterexample $x$ of polynomial length that can be efficiently verified. \pause
+
+    The counterexamples that we will consider are subsets of nodes of the two models, and the algorithm 
+    will check if the ($\khi$-zig) or ($\khi$-zag) conditions are satisfied in that particular subset.\pause
+
+    \begin{lemma}
+        $\checkkhibisimpb \in \coNP$. 
+    \end{lemma}
     
 \end{frame}
+
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    Now, we want to provide a lower-bound for the complexity of $\checkkhibisimpb$.\pause
+
+    To do that we will reduce the following $\coNPComplete$ problem:\pause
+
+    \begin{definition}
+        \[ 
+            \dnftautpb \eqdef \set{\varphi \mid \varphi \text{ is a propositional tautology in DNF}}.
+        \]
+    \end{definition}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    We define a polynomial reduction that maps a propositional formula $\varphi$ to a tuple $\tup{\model,\model',Z}$ 
+    in a way that:\pause 
+    \begin{center}
+        $\varphi\in\dnftautpb$ iff $\tup{\model,\model',Z}\in\checkkhibisimpb$.
+    \end{center}
+\end{frame}
+
+%=============================================================
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    \begin{small}
+    \begin{center}
+        $\varphi = (p_1 \wedge \neg p_2) \vee (p_2) \vee (\neg p_1)$  
+    \end{center}
+    \end{small}\pause
+    \begin{figure}[t]
+        \begin{small}
+        \begin{center}
+        \begin{tikzpicture}
+            % Nodes at rotated positions
+            \node[state] (phi1) at (0,0) {$q_3$};
+            \node[state] (phi2) at (0,1.5) {$q_4$};
+            \node[state] (phi3) at (0,3) {$q_5$};
+            
+            \node[state] (p1) at (2.6,0.5) {$q_1$};
+            \node[state] (p2) at (2.6,1.5) {$q_2$};
+            
+            \node[state] (e) at (5.2,1.5) {$q_6$};
+
+            % Labels
+            \node at ($(phi1)+(-0.5,0)$) {$t_1$};
+            \node at ($(phi2)+(-0.5,0)$) {$t_2$};
+            \node at ($(phi3)+(-0.5,0)$) {$t_3$};
+            \node at ($(e)+(0.4,0)$) {$e$};
+            
+            \node at ($(p1)+(0.3,-0.3)$)  {$s_1$};
+            \node at ($(p2)+(0.3,-0.3)$) {$s_2$};
+
+            % Edges
+            \path (p1) edge[->] node [above, inner sep=2pt] {\footnotesize $in_{\varphi_1}$} (phi1);
+            \path (p1) edge[->] node [above, inner sep=1pt] {\footnotesize $in_{\varphi_2}$} (phi2);
+            \path (p2) edge[->] node [above, inner sep=1pt] {\footnotesize $in_{\varphi_2}$} (phi2);
+            \path (p2) edge[->, bend right=20] node [above, inner sep=1pt] {\footnotesize $in_{\varphi_3}$} (phi3);
+
+            \path (phi1) edge[->, bend right=45] node [below, inner sep=1pt] {\footnotesize $out_{\varphi_1}$} (p1);
+            \path (p1) edge [loop below] node [below] {\footnotesize $test$} (p1);
+            \path (phi2) edge[->, bend left=40] node [above, inner sep=1pt] {\footnotesize $out_{\varphi_2}$} (p2);
+            \path (p2) edge [loop above] node [above] {\footnotesize $test$} (p2);
+            \path (phi3) edge[->, bend left=50] node [above] {\footnotesize $out_{\varphi_3}$} (e);
+            \path (p1) edge[->, bend right] node [below] {\footnotesize $test$} (e);
+            \path (p2) edge[->, bend left] node [above] {\footnotesize $test$} (e);
+        \end{tikzpicture} \\
+            \smallskip 
+
+                    $\begin{array}{ll}
+                        \Unc(agt) = &
+                         \left\{\{in_{\varphi_1}out_{\varphi_1}\},
+                        \{in_{\varphi_2}out_{\varphi_2}\},
+                        \{in_{\varphi_3}out_{\varphi_3}\},
+                        \{test\} \right\}\\
+                        \Unc'(agt) = & 
+                        \left\{\{in_{\varphi_1}out_{\varphi_1}\},
+                        \{in_{\varphi_2}out_{\varphi_2}\},
+                        \{in_{\varphi_3}out_{\varphi_3}\} \right\}
+                    \end{array}$
+    \end{center}
+    \caption{Graphical representation of $\model$ and $\model'$.}
+    \label{fig:karp-reduction}
+    \end{small}
+    \end{figure}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    \begin{lemma}
+        $\checkkhibisimpb$ is $\coNPHard$.
+    \end{lemma}\pause
+
+    \vspace{5mm}
+
+    Now, we can present the desired complexity result for $\checkkhibisimpb$.\pause
+
+    \vspace{5mm}
+
+    \begin{theorem}
+        $\checkkhibisimpb$ is $\coNPComplete$.
+    \end{theorem}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    Going back to $\khibisimpb$, we characterized the complexity of the ``verification'' subproblem.\pause
+
+    The ``search'' subproblem seems computationally expensive. There are an exponential number of binary relations to consider. \pause
+
+    Remarkably, the ``search'' part is not actually needed, as we can use a particular relation that works universally. 
+\end{frame}
+
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    \begin{lemma}
+        Let $\model$ and $\model'$ be \ults such that $\tup{\S,\ACT,\R,\Unc,\V}$ and $\model' = \tup{\S',\ACT',\R',\Unc',\V'}$.
+        % $s\in\S$ and $s'\in\S'$. 
+        $\model\bisim\model'$ implies that $\universalbis\eqdef\set{(t,t')\in\S\times\S'\mid \V(t)=\V'(t')}$ is an $\KHilogic$-bisimulation between $\model$ and $\model'$. 
+    \end{lemma}\pause
+
+    This lemma states that deciding the existence of a \KHilogic-bisimulation reduces to verifying if $\universalbis$ is a \KHilogic-bisimulation.\pause
+
+    \begin{theorem}
+        $\khibisimpb$ is $\coNPComplete$.
+    \end{theorem}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Computational aspects of \KHilogic-bisimulation}
+    We can also extend this results for the pointed version of the problem.\pause
+
+    \begin{corollary}
+        Deciding $\pkhibisimpb$ is $\coNPComplete$, where 
+        \[ 
+            \pkhibisimpb \eqdef \set{\tup{\model,s,\model',s'} \mid \model,s \nbisim\model',s'}.
+        \]
+    \end{corollary}
+\end{frame}
+
 
 %=============================================================
 
@@ -1051,7 +1261,7 @@ over plans for the agent $i$ in each model.
         \begin{itemize}
             \item We presented a new definition for \KHilogic-bisimulation that requires only purely structural conditions, and proved the desired adequacy results. \pause
             \item We established that verification/existence of \KHilogic-bisimulation between two \ultss is \coNPComplete. \pause
-            \item Also, that is the case for the pointed version of the problem too. \pause
+            \item Also, that is the case for the pointed version of the problem. \pause
             \item We proposed two computationally efficient approaches for bisimulation-based model contraction. \pause
             \item Future work: extend this results to other knowing how logics, and also to the version of this logic interpreted 
             over \ults extended with finite automata.
