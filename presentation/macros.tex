@@ -1,0 +1,362 @@
+%------------------------------------------------------------------------------------------------
+
+\usepackage[spanish]{babel}
+
+\selectlanguage{spanish}
+
+%------------------------------------------------------------------------------------------------
+
+\usepackage{multicol}
+
+\setlength{\multicolsep}{3pt plus 2pt minus 1.5pt}
+
+%------------------------------------------------------------------------------------------------
+
+\usepackage{natbib}
+
+\setcitestyle{round,comma,authoryear,aysep={},yysep={,}}
+
+%------------------------------------------------------------------------------------------------
+
+\theoremstyle{plain}
+
+\newtheorem{proposition}[theorem]{Proposición}
+
+%------------------------------------------------------------------------------------------------
+
+\usepackage{enumitem}
+
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=$\circ$}
+
+% \setlist[enumerate,1]{label={\textit{(\arabic*)}}}
+% \setlist[enumerate,2]{label={\textit{(\alph*)}}}
+
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{label=\textbf{\textit{(\arabic*)}}}
+
+\newlist{compactenumerate}{enumerate}{2}
+\setlist[compactenumerate,1]{label=\textbf{(\arabic*)}, leftmargin=1.75em, rightmargin=0em, topsep=0.25em, itemsep=0.25em}
+\setlist[compactenumerate,2]{label=\textbf{(\alph*)}, leftmargin=1.75em, rightmargin=0em, topsep=0.25em, itemsep=0.25em}
+
+\newlist{compactitemize}{itemize}{2}
+\setlist[compactitemize,1]{label=\textbullet, leftmargin=1em, rightmargin=0em, topsep=0.25em, itemsep=0.25em}
+\setlist[compactitemize,2]{label=--, leftmargin=1em, rightmargin=0em, topsep=0.25em, itemsep=0.25em}
+
+
+\newlist{cond-s}{enumerate}{1}
+\setlist[cond-s]{label=\itmsformat{\arabic*}, leftmargin=3em, itemindent=0pt}
+
+\newlist{inline-cond-s}{enumerate*}{1}
+\setlist[inline-cond-s,1]{label=\itmsformat{\arabic*}}
+
+\newlist{cond-kh}{enumerate}{1}
+\setlist[cond-kh]{label=\itmkhformat{\arabic*}, leftmargin=3em, itemindent=0pt}
+
+\newlist{inline-cond-kh}{enumerate*}{1}
+\setlist[inline-cond-kh]{label=\itmkhformat{\arabic*}}
+
+\newlist{cond-bisim}{enumerate}{1}
+\setlist[cond-bisim]{label=\itmbisimformat{\arabic*}, leftmargin=3em, itemindent=0pt}
+
+\newlist{inline-cond-bisim}{enumerate*}{1}
+\setlist[inline-cond-bisim]{label=\itmbisimformat{\arabic*}}
+
+%------------------------------------------------------------------------------------------------
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,decorations,shapes,automata,positioning,decorations.pathmorphing,patterns}
+
+\tikzset{
+  every picture/.style = {
+    thick,
+    ->,
+    >=stealth',
+    node distance = 1.5em and 3em,
+  }
+  ,
+  frame rectangle/.style = {
+    framed,
+    draw=black,
+    rounded corners,
+  }
+  ,
+  cross line/.style = {
+    preaction = {
+      draw=white,
+      -,
+      line width=4pt
+    }
+  }
+  , % states
+  state/.style = {
+    rectangle,
+    rounded corners = 5pt,
+    font = \footnotesize,
+    draw,
+    minimum width = 1.25em,
+    minimum height = 1.25em
+  }
+  , % labels of states
+  label-state/.style = {
+    sloped,
+    font = \tiny,
+    label distance = -2pt
+  }
+  , % labels of edges
+  label-edge/.style = {
+    font = \scriptsize,    
+    label distance = -2pt
+  }
+}
+
+%------------------------------------------------------------------------------------------------
+
+% Environments and others
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\newcommand{\bsparagraph}[1]{\bigskip\noindent\textbf{#1}\,}
+\newcommand{\msparagraph}[1]{\medskip\noindent\textbf{#1}\,}
+\newcommand{\ssparagraph}[1]{\smallskip\noindent\textbf{#1}\,}
+\newcommand{\nsparagraph}[1]{\noindent\textbf{#1}\,}
+
+\newenvironment{nscenter}
+ {\parskip=4pt\par\nopagebreak\centering}
+ {\par\noindent\ignorespacesafterend}
+
+\newenvironment{ctabular}[1]
+{\begin{center}\begin{tabular}{#1}}
+{\end{tabular} \end{center}}
+
+\newenvironment{csmalltabular}[1]
+{\begin{center}\begin{small}\begin{tabular}{#1}}
+{\end{tabular}\end{small} \end{center}}
+
+\newenvironment{cfootnotesizetabular}[1]
+{\begin{center}\begin{footnotesize}\begin{tabular}{#1}}
+{\end{tabular}\end{footnotesize} \end{center}}
+
+\newenvironment{ltabular}[1]
+{\begin{flushleft}\begin{tabular}{#1}}
+{\end{tabular} \end{flushleft}}
+
+\newenvironment{lsmalltabular}[1]
+{\begin{flushleft}\begin{small}\begin{tabular}{#1}}
+{\end{tabular}\end{small} \end{flushleft}}
+
+\newenvironment{lfootnotesizetabular}[1]
+{\begin{flushleft}\begin{footnotesize}\begin{tabular}{#1}}
+{\end{tabular}\end{footnotesize} \end{flushleft}}
+
+\newenvironment{lttabular}[1]
+{\begin{flushleft}\begin{tabular}[t]{#1}}
+{\end{tabular} \end{flushleft}}
+
+\newcommand{\notaVersion}{
+  \thanks{\texttt{\jobname.tex}, \emph{compiled \today, \currenttime.}}
+}
+
+\newcommand{\iffdef}{\ensuremath{\mbox{\it iff}_{\mbox{\tiny\it  def}}}}
+
+\newcommand{\siidef}{\ensuremath{\mbox{\it sii}_{\mbox{\tiny\it  def}}}}
+
+%------------------------------------------------------------------------------------------------
+% utils
+
+%abbreviations
+\newcommand{\ti}[1]{\textit{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+% Sets \cset{x,y} = {x,y}
+\newcommand{\cset}[1]{\{ #1 \}}
+% Sets with condition \csetsc{y}{xRy} = {y | xRy}
+\newcommand{\csetsc}[2]{\{ #1  \mid #2 \}}
+% Sets with domain and condition \csetc{y}{A}{xRy} = {y \in A | xRy}
+\newcommand{\csetc}[3]{\{ #1 \in #2 \mid #3 \}}
+
+%notation
+\newcommand{\card}[1]{{\mid\!{#1}\!\mid}}
+\newcommand{\tup}[1]{\langle #1 \rangle}
+\newcommand{\pow}[1]{\mathcal P #1}
+\newcommand{\natnum}{\mathbb{N}}
+\newcommand{\intint}[2]{[#1 \mathop{..} #2]}
+\newcommand{\truthset}[2]{\llbracket #2 \rrbracket^{#1}}
+
+
+% KH items
+\newcommand{\itmkhformat}[1]{\textbf{\textit{(\ensuremath{\bs{\kh}}-#1)}}}
+\newcommand{\ITMKHi}{\itmkhformat{1}\xspace}
+\newcommand{\ITMKHii}{\itmkhformat{2}\xspace}
+
+%for proofs 
+\newcommand{\Limp}{\Rightarrow}
+\newcommand{\prooflr}{\ensuremath{\bs{(\Rightarrow)}}\xspace}
+\newcommand{\proofrl}{\ensuremath{\bs{(\Leftarrow)}}\xspace}
+\newcommand{\proofsb}{\ensuremath{\bs{(\subseteq)}}\xspace}
+\newcommand{\proofsp}{\ensuremath{\bs{(\supseteq)}}\xspace}
+
+%------------------------------------------------------------------------------------------------
+
+% basic sets
+\newcommand{\PROP}{{\rm \sf Prop}\xspace}
+\newcommand{\ACT}{{\rm \sf Act}\xspace}
+\newcommand{\AGT}{{\rm \sf Agt}\xspace}
+\newcommand{\ACTP}{{\operatorname{A}}\xspace}
+
+% syntax
+\newcommand{\kt}{\mathsf{K}}
+\newcommand{\kh}{{\operatorname{\sf Kh}}}
+\newcommand{\khi}{{\operatorname{\sf Kh}_i}}
+\newcommand{\khj}{{\operatorname{\sf Kh}_j}}
+\newcommand{\khist}{{\operatorname{Kh}^{\stexec}_i}}
+\newcommand{\khiwk}{{\operatorname{Kh}^{\wkexec}_i}}
+\newcommand{\limp}{\rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\A}{{\operatorname{\sf A}}}
+\newcommand{\E}{{\operatorname{\sf E}}}
+\newcommand{\lh}[2]{\tup{#1,#2}}
+\newcommand{\blh}[2]{[#1,#2]}
+\newcommand{\dialhepis}[1]{\tup{#1}}
+\newcommand{\boxlhepis}[1]{[#1]}
+\newcommand{\learn}{{\sf L}}
+\newcommand{\arefdiam}{\tup{\not\sim}}
+\newcommand{\arefbox}{[\not\sim]}
+\newcommand{\gann}[1]{[!#1]}
+\newcommand{\dgann}[1]{\tup{!#1}}
+\newcommand{\refdiam}[2]{\tup{#1{\,\not\sim\,}#2}}
+\newcommand{\refbox}[2]{[{#1{\,\not\sim\,}#2}]}
+\newcommand{\srefbox}[1]{[!{#1}]}
+% languages
+\newcommand{\KHlogic}{\ensuremath{\mathsf{L}_\kh}\xspace}
+\newcommand{\KHilogic}{\ensuremath{\mathsf{L}_\khi}\xspace}
+\newcommand{\PAKHilogic}{\mathsf{PAL}_{\khi}}
+\newcommand{\LHlogic}{\mathsf{L_{Lh}}}
+\newcommand{\Reflogic}{\mathsf{L_{Ref}}}
+\newcommand{\AReflogic}{\mathsf{L_{ARef}}}
+% translation
+\newcommand{\tr}[1]{\operatorname{tr}_{#1}}
+\newcommand{\KHiMLlogic}{\ensuremath{\mathsf{L}_{\khi,\Box}}\xspace}
+\newcommand{\KHiMLReflogic}{\ensuremath{\mathsf{L}_{\khi,\Box,[!\_]}}\xspace}
+
+
+% models
+\newcommand{\modlts}{\mathcal{S}}
+\newcommand{\modults}{\mathcal{S}}
+\newcommand{\esm}{\ults}
+\newcommand{\model}{\modults}
+\newcommand{\cults}{\mathcal{C}}
+\newcommand{\clts}{\mathcal{C}_2}
+
+\newcommand{\W}{\operatorname{S}}
+\newcommand{\R}{\operatorname{R}}
+\renewcommand{\S}{\operatorname{U}}
+\newcommand{\V}{\operatorname{V}}
+
+\newcommand{\strategy}{\pi}
+\newcommand{\D}[1]{\operatorname{D}_{#1}}
+\newcommand{\DS}[1]{\operatorname{P}_{#1}}
+
+\newcommand{\lts}{\textup{LTS}\xspace}
+\newcommand{\ltss}{{\lts}s\xspace}
+\newcommand{\ults}{\textup{LTS$^\text{\textup{U}}$}\xspace}
+\newcommand{\ultss}{{\ults}s\xspace}
+
+\newcommand{\cmodel}{\modults^\Gamma}
+
+\newcommand{\sel}{\mathsf{sel}}
+\newcommand{\proj}{\mathsf{pr}}
+
+% notions of executability
+\newcommand{\stexec}{\operatorname{SE}}
+% \newcommand{\wkexec}{\operatorname{WE}}
+
+
+% axiom systems
+\newcommand{\axm}[1]{{\rm \textsf{#1}}}
+\newcommand{\KHaxiom}{\ensuremath{\mathcal{L}^{\lts}_{\kh}}\xspace}
+\newcommand{\KHiaxiom}{\ensuremath{\mathcal{L}^{\ults}_{\khi}}\xspace}
+\newcommand{\axset}{\mathcal{L}}
+
+% completeness proof
+\newcommand{\smcs}{\boldsymbol{\Phi}}
+\newcommand{\restkh}[1]{#1\vert_{\kh}}
+\newcommand{\restnkh}[1]{#1\vert_{\lnot\kh}}
+\newcommand{\restkhi}[1]{#1\vert_{\khi}}
+\newcommand{\restnkhi}[1]{#1\vert_{\lnot\khi}}
+\newcommand{\resta}[1]{#1\vert_{\A}}
+\newcommand{\restna}[1]{#1\vert_{\lnot\A}}
+
+% bisimulation
+\newcommand{\ultsExec}{\Rightarrow}
+\newcommand{\ultsExecStrat}[1]{\stackrel{#1}{\ultsExec}}
+
+\newcommand{\bisim}{\xspace\mathrel{\raisebox{.5ex}{\small\ensuremath{\underline{\!\leftrightarrow\!}}}}\xspace}
+
+% modal equivalence
+\newcommand{\modequiv}{\leftrightsquigarrow}
+
+% format
+\newcommand{\itm}[1]{{\bfseries \itshape (#1)}}
+\newcommand{\ITM}[1]{{\bfseries \itshape (#1)}}
+
+%------------------------------------------------------------------------------------------------
+
+% Complexity classes
+\newcommand{\NP}{{\rm\textsf{NP}}\xspace}
+\newcommand{\Poly}{{\rm\textsf{P}}\xspace}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\gray}[1]{\textcolor{gray}{#1}}
+\newcommand{\green}[1]{\textcolor{green!70!blue!60}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+\newcommand{\orange}[1]{\textcolor{red!20!orange!100}{#1}}
+\newcommand{\dgray}[1]{\textcolor{gray!40!black!80}{#1}}
+\newcommand{\highlight}[1]{\orange{#1}}
+\newcommand{\defstyle}[1]{\textcolor{violet}{#1}}
+
+\renewcommand*{\implies}{\ensuremath\mbox{ implies }}
+
+% \newcommand{\Poly}{\rm\textsf{P}\xspace}
+\newcommand{\coNP}{\rm\textsf{co-NP}\xspace}
+\newcommand{\coNPHard}{\rm\textsf{co-NP-hard}\xspace}
+\newcommand{\coNPComplete}{{coNP-complete}\xspace}
+
+
+% \renewcommand{\S}{\operatorname{U}}
+% \newcommand{\R}{\operatorname{R}}
+\newcommand{\N}{\operatorname{N}}
+% \renewcommand{\S}{\operatorname{\asda}}
+\newcommand{\Unc}{\operatorname{U}}
+\newcommand{\Sother}{\operatorname{\mathbb{T}}}
+\newcommand{\Ster}{\operatorname{\mathbb{U}}}
+% \newcommand{\V}{\operatorname{V}}
+\newcommand{\compose}{{;}}
+\newcommand{\REACH}[1]{(\leadsto_{#1}^*)}
+
+% \newcommand{\PROP}{{\rm \sf Prop}\xspace}
+\newcommand{\FORM}{{\rm \sf Form}\xspace}
+% \newcommand{\AGT}{{\rm \sf Agt}\xspace}
+% \newcommand{\ACT}{{\rm \sf Act}\xspace}
+\newcommand{\plans}{\uppi}
+\newcommand{\plan}{\sigma}
+
+% \newcommand{\ultsExec}{\Rightarrow}
+% \newcommand{\ultsExecStrat}[1]{\stackrel{#1}{\ultsExec}}
+\newcommand{\ultsExecAgi}{\stackrel{i}{\ultsExec}}
+
+
+\renewcommand{\iff}{\mbox{\it iff}}
+\newcommand{\siffs}{\;\iff\;}
+% \newcommand{\iffdef}{\ensuremath{\mbox{\it iff}_{\mbox{\tiny\it  def}}}}
+\newcommand{\siffdefs}{\iffdef}
+% \newcommand{\ra}{\rightarrow}
+\newcommand{\To}{\Rightarrow}
+% \newcommand{\lra}{\leftrightarrow}
+\renewcommand{\implies}{\ra}
+\newcommand{\inter}{\overset{int}{\longrightarrow}}
+\newcommand{\rewtr}{\overset{\Tr}{\longrightarrow}}
+\newcommand{\darrow}{\leftrightarrow}

@@ -1,0 +1,909 @@
+\documentclass{beamer}
+\usepackage{xspace, amssymb, amsmath, tikz, hyperref,mathtools}
+\usepgflibrary{arrows}
+\tikzstyle{point}=[circle,draw]
+\usetikzlibrary{arrows,automata,shapes,decorations.markings,decorations.pathmorphing,backgrounds,fit,snakes}
+\usepackage[c]{esvect}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage[all]{xy}
+%\usepackage{newmacros}
+%\newtheorem{proposition}{Proposition}
+%\usepackage{chronology}
+\usepackage{chronosys}
+\usepackage{soul}
+%
+\usetheme[progressbar=frametitle]{metropolis}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{items}[ball]
+%\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{title}{bg=red!65!black, fg=black}
+\usepackage{ragged2e}
+\justifying
+\input{macros}
+\newcommand{\reff}[1]{\dgray{[#1]}}
+
+\begin{document}
+%\includeonlyframes{current}
+
+
+%\addtobeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+%\addtobeamertemplate{footline}{\hfill \blue{\insertframenumber/\inserttotalframenumber}\hspace{2em}\null}
+ 
+\title[Computational Aspects of Bisimulations for a Logic of Knowing How]{Computational Aspects of Bisimulations for a Logic of Knowing How}%{\large Logic in AI: A Modern View}
+\author[Antonio Mondejar]
+		{{\small Antonio Mondejar}  \\ {\tiny Logics, Interaction and Intelligent Systems Group (LIIS), \\  FAMAF-UNC / CONICET, Argentina (dejo todo o saco algo?)}
+        \\
+        {\tiny \emph{(Joint work with Carlos Areces and Raul Fervari)}} \\
+        \bigskip
+}
+
+\date[DL(R) 2025 Workshop]
+{ \tiny{DL(R) 2025 Workshop - Instituto de Ingeniería Matemática y Computacional, 
+        Universidad Católica de Chile}}
+%\titlegraphic{\hfill \includegraphics[height=2.5cm]{accion.jpg}\\}
+% %
+%\centering\includegraphics[scale=.1]{logocjcc.png}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\tikzset{
+    >=stealth',
+    ar/.style={
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+%=============================================================
+
+\begin{frame}
+    \frametitle{The concept(s) of knowledge}
+    
+    \begin{small}
+    \begin{itemize}
+        \item Usually, \blue{epistemic} logic is about ``knowing that'' \gray{(Hintikka 1962)}: 
+            \begin{itemize}
+                \item \emph{John knows that it is raining in Paris}, 
+                \item \emph{the robot knows that it is standing next to a wall}... \pause
+                \item Typically, modal formulas $\mathsf{K_i}\varphi$ expressing \emph{``agent $i$ \orange{knows that}~$\varphi$''}.
+            \end{itemize} \pause
+       \item Study other patterns of reasoning: 
+        \begin{itemize}
+            \item knowing why, 
+            \item knowing whether, 
+            \item knowing who, 
+            \item \orange{knowing how}.
+        \end{itemize}
+    \end{itemize}
+    
+    \end{small}
+        
+    \end{frame}
+
+%=============================================================
+
+\begin{frame}{Knowing How}
+    \begin{small}
+    \begin{itemize}
+        \item Autonomous \orange{agent}: intelligent entities operating in a given en\-vir\-on\-ment (perception, decision making, etc).
+        \item Related to the abilities of the agents to achieve a certain goal.
+        \item Inspired by \orange{AI planning}.
+        \item Interpreted as: \emph{there exists a \blue{proper} course of action (sequence of actions) that the agent can take to achieve the goal.} \pause
+            \begin{itemize}
+                \item How is the agent's knowledge represented?
+                \item What does ``proper'' means?
+            %    \item Different courses of actions?
+            \end{itemize}
+    \end{itemize}
+\end{small}
+\end{frame}
+
+
+%=============================================================
+
+% \begin{frame}
+%     {History of Knowing How Approaches}
+
+%     \begin{small}
+%         \begin{itemize}
+%             \item Knowing that + Abilities \gray{(Lespérance et al. 2000), (Herzig \& Troquard 2006), etc}.
+%             \item A single binary modality for knowing how $\kh(\psi,\varphi)$ and variants: \gray{(Wang 2015)}.
+%             \item Knowing how + knowing that \gray{(Fervari et al. 2017)}.
+%             \item Semantics based on indistinguishability/uncertainty between plans \gray{(Areces et al. 2021)}.
+%         \end{itemize} \pause
+
+%         \blue{We argue the latter enables us to develop a full theory of epistemic logic of knowing how.}
+%     \end{small}
+% \end{frame}
+
+%=============================================================
+
+\begin{frame}{Models: Labelled Transition Systems (\ltss)}
+    \begin{small}
+    \begin{block}{}
+    An LTS is a tuple $\modlts = \tup{\W, \cset{\R_a}_{a \in \ACT}, \V}$ where:
+        \begin{itemize} 
+            \item $\W$ is a non empty countable set of states \quad\quad $\bullet$ $\V:\PROP \to 2^{\W}$
+            \item $\R_a \subseteq \W \times \W$, for each $a \in \ACT$.
+        \end{itemize}
+    \end{block}
+    \pause 
+    \begin{ctabular}{c}
+    \begin{tikzpicture}[frame rectangle]
+    \node [state, label = {[label-state]left:$w_1$}] (w1) {$p$};
+    \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {};
+    \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {$q$};
+    \node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {};
+    
+    \path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+                edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+            (w2) edge node [label-edge, above] {$b$} (w3);
+    \end{tikzpicture}\pause
+    \end{ctabular}
+    
+    A transition $a$ from $w_1$ to $w_2$ is read as \blue{``after executing action $a$ at state $w_1$, the agent reaches state $w_2$''.}
+    \pause 
+    
+    \medskip 
+    For a set of actions $\ACT$, a \orange{plan} $\sigma$ is an element from $\ACT^*$ (finite sequences of symbols from $\ACT$, such as $a$, $ab$ and the empty plan $\epsilon$).
+    
+    
+    \end{small}
+    \end{frame}
+
+%=============================================================
+
+    \begin{frame}{Strong executability}
+    
+    A plan must be \orange{fail-proof}: each partial execution must be completed.
+    
+    \renewcommand{\arraystretch}{1.6}
+    \begin{ctabular}{cc}
+    \begin{tabular}{@{\ \ \ \ \ \ \ }c}
+        \begin{tikzpicture}[frame rectangle]
+    \node [state, label = {[label-state]left:$w_1$}] (w1) {$p$};
+    \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {};
+    \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {$q$};
+    \node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {};
+    
+    \path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+                edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+            (w2) edge node [label-edge, above] {$b$} (w3);
+        \end{tikzpicture}
+    \end{tabular}
+    &
+    \begin{tabular}{l}
+      \footnotesize  $ab$ is not SE at $w_1$ \pause
+    \end{tabular}
+    \end{ctabular}
+    
+    \vspace*{-1em}
+    \begin{block}{\textbf{Definition:}}
+    A plan $\sigma$ is \orange{strongly executable} (SE) at $u \in \W$ iff for all partial execution of $\sigma$ from $u$, such an execution can be completed.
+    \\We will use $\stexec(\sigma)$ to denote the set of nodes of an \ults where $\sigma$ is SE.
+    \end{block}
+    
+    \end{frame}
+
+%=============================================================
+%     \begin{frame}{\KHlogic over \lts}
+%     \begin{small}
+%     \begin{block}{Definition (Syntax of \KHlogic)}
+%     \begin{nscenter}
+%         $\varphi ::= p \mid \neg\varphi \mid \varphi\vee\varphi \mid
+%         \kh(\varphi,\varphi)$
+%     \end{nscenter}
+%     $\kh(\psi,\varphi)$: \emph{\blue{``whenever $\psi$ holds, the agent knows how to achieve $\varphi$''}}.
+%     \end{block}
+    
+%     \pause
+    
+%     \begin{block}{\textbf{Definition (\KHlogic over \lts)}}
+%         $\modlts,w \models p$  \  iff  \ $w\in\V(p)$ \\ \pause 
+%         \medskip
+%         $\modlts,w \models \orange{\kh(\psi,\varphi)}$  \  iff  \ 
+%         \orange{there exists} a plan $\sigma \in \ACT^*$ such that:
+        
+%         \begin{quote}
+%             \begin{enumerate}
+%             \item $\sigma$ is SE at \orange{every state} satisfying $\psi$; and, 
+%             \item from every $\psi$-state, executing $\sigma$ \orange{always ends} at $\varphi$-states.
+%             \end{enumerate}
+%         \end{quote}
+%     \end{block}
+%     \end{small}
+%     \end{frame}
+    
+%     %=============================================================
+%     \begin{frame}{Example}
+    
+    
+%     %\renewcommand{\arraystretch}{1.6}
+%     \begin{ctabular}{cc}
+%     \begin{tabular}{c}
+%         \begin{tikzpicture}[frame rectangle,scale=.9]
+%     \node [state, label = {[label-state]left:$w_1$}] (w1) {$p$};
+%     \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {$r$};
+%     \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {$q$};
+%     \node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {$r$};
+    
+%     \path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+%                 edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+%             (w2) edge node [label-edge, above] {$b$} (w3);
+%         \end{tikzpicture}
+%     \end{tabular}
+%     &
+%     \begin{scriptsize}
+%     \begin{tabular}{l}
+%       $\modlts,w_1\models\kh(p,r)$\\ \pause
+%       \quad the plan \orange{$a$} is SE $w_1$ (the only $p$-state), and  \\  
+%       \quad takes the agent from $\orange{p}$ only to $\orange{r}$-states. \\ \pause 
+%       \\
+%       $\modlts,w_1\not\models\kh(p,q)$\\ \pause  
+%       \quad - \orange{$\epsilon$} and \orange{$a$}: are SE at $w_1$ ($p$-state),  \\
+%       \quad but do not lead to $q$; \\ \pause 
+%       \quad - \orange{$ab$} is {\bf not} SE at $w_1$. 
+%       \end{tabular}
+%     \end{scriptsize}
+%     \end{ctabular}
+    
+%     \end{frame}
+% %=============================================================
+%     \begin{frame}{Conceptual analysis}
+%         \begin{small}
+%             \begin{itemize}
+%                 \item The logic reached some consensus in the community.
+%                 \item Simple language and semantics, and features nice properties (e.g. decidability, axiomatizability). 
+%                 \item But look at these properties:
+%                 \begin{itemize}
+%                     \item \orange{$\kh(\psi,\chi) \land \kh(\chi,\varphi)$} implies \orange{$\kh(\psi,\varphi)$} \\ 
+%                         \quad \emph{\scriptsize \dgray{Should the agent know how to compose plans?}} \pause
+%                     \item If \orange{$\psi \ra \varphi$} holds \textbf{everywhere} then \orange{$\kh(\psi,\varphi)$} holds. \\
+%                         \quad \emph{\scriptsize \dgray{Universal validities should imply knowing how?}} \pause
+%                 \end{itemize}
+%                 \item Moreover, in this setting, abilities = knowledge. \pause
+%             \end{itemize}
+%             \begin{block}{}
+%             Arguably, this is a logic of knowing how, but not an \textbf{epistemic} logic of knowing how.
+%             \end{block}
+%         \end{small}
+%     \end{frame}
+
+% %=============================================================
+
+\begin{frame}{Towards an epistemic logic of knowing how}
+    \begin{small}
+    There are many reasons to {\bf not} knowing how. What if...
+    \begin{itemize}
+    
+    \item The agent is not aware of the existence of certain plans? \pause
+    
+    
+     \item The agent is not able to \orange{distinguish} certain plan from another?\pause
+    
+     \item The agent \orange{does not care} about the difference among certain plans? \pause
+    \end{itemize}
+    
+    A notion of \orange{epistemic indistinguishability} at the level of plans is introduced in order to address these issues \gray{(Areces et al. 2021)}.
+    \end{small}  %\pause 
+    
+    % \smallskip
+    
+    % \begin{footnotesize}
+    % \begin{block}{ }
+    % {C. Areces, R. Fervari, A. Saravia, F. Vel\'azquez-Quesada. 
+    
+    % \emph{\dgray{Uncertainty-Based Semantics for Multi-Agent Knowing How Logics. (TARK 2021).}}}
+    % \end{block}
+    % \end{footnotesize}
+    
+    \end{frame}
+
+% %=============================================================
+
+%     \begin{frame}{Knowing How + Uncertainty}
+%         \begin{columns}
+        
+%         \column{.4\textwidth}
+        
+        
+%         \includegraphics[scale=.2]{all.jpg}
+        
+        
+%         \column{.7\textwidth}
+        
+%         \begin{block} {} 
+%         \scriptsize{{C. Areces, R. Fervari, A. Saravia, F. Vel\'azquez-Quesada. 
+        
+%         \emph{\dgray{Uncertainty-Based Semantics for Multi-Agent Knowing How Logics. (TARK 2021).}}}}
+        
+%         \end{block}
+        
+%         \end{columns}
+        
+%         \bigskip
+        
+%         \footnotesize
+%         \blue{\url{https://cs.famaf.unc.edu.ar/~rfervari/files/papers/2021-tark.pdf}}      
+%     \end{frame}
+        
+    %=============================================================
+    
+    \begin{frame}{Uncertainty-based \lts (\ults)}
+    \begin{small}
+    \begin{block}{}
+    An \orange{$\ults$} is a tuple $\modults = \tup{\W, \ACT, \cset{\R_a}_{a \in \ACT}, \orange{\cset{\sim_i}_{i \in \AGT}}, \V}$ where:
+    \begin{itemize}
+        \item $\tup{\W, \cset{\R_a}_{a \in \ACT}, \V}$ is an \lts, \quad $\bullet$ $\ACT$ is a non empty set of actions,  
+        \item \orange{$\sim_i$} is an \orange{equivalence relation} over a non-empty set of plans, for each $i\in\AGT$ (a set of \orange{agent} symbols).
+    \end{itemize}
+    \end{block}
+    
+    \bigskip
+    
+    \begin{nscenter}
+    % \begin{tikzpicture}[frame rectangle]
+    %     \node [state, label = {[label-state]left:$w$}] (w1) {$p$};
+    %     \node [state, right = of w1] (w2) {$q$};
+    %     \node [state, right = of w2] (w3) {$r$};
+    %     \node [state, above = of w3] (w4) {};
+    %     \path (w1) edge node [label-edge, below] {$a$} (w2)
+    %                 edge node [label-edge, above] {$c$} (w4)
+    %         (w2) edge node [label-edge, below] {$b$} (w3);
+    %     \node [above right = -10pt and 3em of w3] {$ab \sim_ic$};
+    
+    %         \end{tikzpicture}
+    \begin{tikzpicture}[frame rectangle]
+        \node [state, label = {[label-state]left:$w_1$}] (w1) {$p$};
+        \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {$r$};
+        \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {$q$};
+        \node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {$r$};
+     \node [above right = -30pt and 2em of w3] {$a \sim_i ab$};
+
+        % \node [below = 0.01em of s] (t) { \scriptsize{$a\sim_j a, \ ab \sim_j ab$  (\orange{$\Unc(j)=\{\{a\},\{ab\}\}$})}};
+        
+        \path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+                    edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+                (w2) edge node [label-edge, above] {$b$} (w3);
+            \end{tikzpicture}
+    \end{nscenter}
+    \pause
+
+    We call \blue{$\Unc(i)$} the set of equivalence classes (over plans) by $\sim_i$. 
+
+    \end{small}
+    \end{frame}
+
+%=============================================================
+
+\begin{frame}{Semantics over \ults}
+
+    \begin{small}
+        \begin{block}{Definition (\KHilogic over \ults).}
+            Formulas of the language $\KHilogic$ are given by
+            \[
+                \varphi ::= p \mid \neg\varphi \mid \varphi\vee\varphi \mid \khi(\varphi,\varphi),
+            \]
+            with $p \in \PROP$ and $i \in \AGT$. \pause $\khi(\psi,\varphi)$ is read as \defstyle{``agent $i$ knows how to achieve $\varphi$ given $\psi$''.} \pause
+            \\ 
+        \medskip
+        $\modults,w \models \orange{\khi(\psi,\varphi)}$ iff there exists \orange{a set of plans} $\strategy \in \Unc(i)$ such that:
+
+        \begin{quote}
+            \begin{enumerate}
+            \item \orange{each plan in $\strategy$} is SE at every $\psi$-state; and
+            \item from $\psi$-states, \orange{each plan in $\strategy$} always ends at $\varphi$-states.
+            \end{enumerate}
+        \end{quote}
+        \end{block}
+
+        % \pause
+
+        % \begin{block}{Property:}
+        %     Define $\orange{\A\varphi} := \bigvee_{i\in\AGT}\khi(\neg\varphi,\bot)$, we have:
+        %     \begin{nscenter}
+        %         $\model,w\models\A\varphi \mbox{ iff for all $v$, } \model,v\models\varphi;$
+        %     \end{nscenter}
+        %     i.e., $\A$ is the standard \orange{universal} modality (and its dual: $\E\varphi:=\neg\A\neg\varphi$).
+        % \end{block}
+
+    \end{small}
+
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Example}
+
+\begin{ctabular}{cc}
+\begin{tabular}{c}
+    \begin{tikzpicture}[frame rectangle]
+\node [state, label = {[label-state]left:$w_1$}] (w1) {$p$};
+\node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {$r$};
+\node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {$q$};
+\node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {$r$};
+
+\node [below = 2em of w4] (s) { \scriptsize{$a\sim_i ab$ (\orange{$\Unc(i)=\{\{a,ab\}\}$})}};
+\node [below = 0.01em of s] (t) { \scriptsize{$a\sim_j a, \ ab \sim_j ab$  (\orange{$\Unc(j)=\{\{a\},\{ab\}\}$})}};
+
+\path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+            edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+        (w2) edge node [label-edge, above] {$b$} (w3);
+    \end{tikzpicture}
+\end{tabular}
+&
+\begin{scriptsize}
+\begin{tabular}{l}
+  \blue{$\model,w_1\models\neg\khi(p,r)$}\\ \pause
+  \ \ take $\strategy = \{a,ab\}$: \\ \pause
+  \quad - \orange{$a$} is SE at $w_1$ ($p$-state), and  \\  
+  \quad takes from $\orange{p}$-states to $\orange{r}$-states. \\ \pause 
+ % \\
+  %$\modlts,w_1\not\models\kh(p,q)$\\ \pause  
+  \quad  - \orange{$ab$} is not SE at $w_1$ ($p$-state). \\ \pause
+  \quad  - thus, $\strategy=\{a,ab\}$ is not SE at $w_1$. \\ \pause 
+  \\ 
+  \blue{$\model,w_1\models\kh_j(p,r)$}\\ \pause
+  \ \ take $\strategy' = \{a\}$: \\ % \pause
+  \quad - \orange{$a$} is SE at $w_1$ ($p$-state), and  \\  
+  \quad takes from $\orange{p}$-states to $\orange{r}$-states. \\ %\pause 
+  \quad  - thus, $\strategy'=\{a\}$ works as a witness.
+  \end{tabular}
+\end{scriptsize}
+\end{ctabular}
+
+
+\end{frame}
+
+%=============================================================
+% \begin{frame}{Ontic vs. Epistemic Information}
+%     \begin{small}
+%         Summing up, \ultss comprise two kinds of information:\pause
+%         \begin{itemize}
+%         \item \orange{Ontic information}: provided by the graph part.  \\
+%             \begin{itemize}
+%             \item[$\blacktriangleright$] the available states, the accessibility relations, etc.\pause
+%             \end{itemize}
+%         \item \orange{Epistemic information}: given by the indistinguishability sets $\Unc(i)$.   \\ 
+%             \begin{itemize} 
+%             \item[$\blacktriangleright$] the perception of each agent about her own abilities.
+%             \end{itemize}
+%         \end{itemize}
+        
+%         % So, different kinds of updates have different meanings.
+%     \end{small}
+%     \end{frame}
+
+%=============================================================
+
+% \begin{frame}{Ontic Updates vs. Epistemic Updates}
+%     \begin{small}
+%         \begin{itemize}
+%             \item Updating the LTS = update what an agent \orange{can} do.
+%             % \item \orange{Public annoucenments}-like operators: modify the set of states or the actions in the model.
+%             % \item Not expressible in the underlying language. \pause
+%             \item Updating the relation $\sim_i$ (or the set $\Unc(i)$) = \orange{epistemic updates} (affecting the ``knowing how'').\pause
+%             \item {\bf Proposal:} refining the \highlight{indistinguishability  between plans}, i.e., making plans distinguishable for the agent.
+%         \end{itemize}
+%     \end{small}
+% \end{frame}
+
+% %=============================================================
+
+%     \begin{frame}
+%     \frametitle{Epistemic updates: Refinement ($\Reflogic$)}
+%     \begin{small}
+%         \begin{definition}[$\Reflogic$ formulas]
+%         \begin{nscenter}
+%         $\varphi ::= p \mid \neg\varphi \mid \varphi\vee\varphi \mid
+%         \khi(\varphi,\varphi)\mid \highlight{\refdiam{\sigma_1}{\sigma_2}\varphi}$
+%         \end{nscenter}
+%         \end{definition}\pause
+        
+%         $\refdiam{\sigma}{\sigma_2}\varphi$: \emph{``After it is stated that plans $\sigma_1$ and $\sigma_2$ are distinguishable, $\varphi$ holds.''}
+%     \end{small}
+%     \end{frame}
+
+% %=============================================================
+
+%     \begin{frame}
+%         \frametitle{Epistemic updates: Refinement ($\Reflogic$) (cont.)}
+%     \begin{block}{}
+%         \centering
+%     \scalebox{.8}{
+%         \begin{tikzpicture}[frame rectangle]
+%             \node [state, label = {[label-state]left:$w_1$}] (w1) {$p$};
+%             \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {$r$};
+%             \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {$q$};
+%             \node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {$r$};
+            
+%             \path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+%                         edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+%                     (w2) edge node [label-edge, above] {$b$} (w3);
+%         \end{tikzpicture}
+%     }
+%     \medskip
+        
+%     \begin{nscenter}
+%     $\Unc(i) = \cset{\cset{\mathit{a}},\cset{\mathit{b}}}$, \quad\quad 
+%     \only<1-3>{
+%     $\Unc(j) = \cset{\cset{\mathit{a},\mathit{b}}}$}
+%     \only<4->{
+%     $\Unc(j) = \defstyle{\cset{\cset{\mathit{a}},\cset{\mathit{b}}}}$}
+%     \end{nscenter}
+%     \end{block}
+    
+%     \begin{small}
+%     \begin{itemize}
+%     \item $\model,w \models \khi(p,r)$ and $\model,w\models \refdiam{a}{b}\khi(p,r)$.\pause 
+%         \begin{itemize}
+%             \item {\bf  preserves knowledge} \pause
+%         \end{itemize}
+%     \item  $\model,w \not\models \khj(p,r)$\pause\ but $\model,w\models \refdiam{a}{b}\khj(p,r)$;\pause 
+%         \begin{itemize}
+%             \item {\bf  generates new knowledge} 
+%         \end{itemize}
+%     \end{itemize}
+%     \end{small}
+    
+%     \end{frame}
+
+%     %=============================================================
+
+%     \begin{frame}{Expressivity}
+%         \begin{small}
+%         \begin{block}{Property: }
+%             $\Reflogic$ is \highlight{more expressive} than $\KHilogic$.
+%         \end{block}
+%         \pause 
+        
+%         {\bf Proof:} Let $\model$ and $\model'$ be the LTSs below, with $\Unc(i):=\cset{\cset{a}}$ and $\S'_i:=\cset{\cset{a,b}}$:
+%             \begin{center}
+%                 \begin{tikzpicture}[->]
+%             \node[state] at (0,1) (p) [label=left:$w$]{$p$};
+%             \node[left = of p] (m) {$\model$};
+%             \node[state] at (1.75,0.6) (nq) {\phantom{$p$}};
+%             \node[state] at (1.75,1.4) (q) {$q$};
+%             \path (p) edge [above] node {$a$} (q);
+%             \path (p) edge [below] node {$a$} (nq);
+%             \end{tikzpicture}
+%             \hspace{2cm}
+%             \begin{tikzpicture}[->]
+%                 \node[state] at (0,1) (p) [label=left:$w'$]{$p$};
+%                 \node[state] at (1.75,0.6) (nq) {\phantom{$p$}};
+%             \node[state] at (1.75,1.4) (q) {$q$};
+%             \path (p) edge [above] node {$a$} (q);
+%             \path (p) edge [below] node {$b$} (nq);
+%             \node[right = 7em of p] (m) {$\model'$};
+%             \end{tikzpicture}
+
+%             \end{center}
+
+%             \medskip
+
+%             $\model,w \models \neg\refdiam{a}{b}\khi(p,q)$ while $\model',w \models \refdiam{a}{b}\khi(p,q)$.
+
+%         % \pause
+
+%         % \begin{block}{Corollary.}
+%         %     There are $\Reflogic$-formulas that cannot be expressed in $\KHilogic$.
+%         % \end{block}
+%     \end{small}
+
+%     \end{frame}
+
+%     %=============================================================
+
+%     \begin{frame}
+%         {Uniform substitution}
+%         \begin{small}
+%         \orange{Uniform substitution} is an standard property in axiomatizing the logic.
+
+%         If $\varphi$ is valid, then $\varphi[p/\psi]$ is also valid.
+
+%         \pause
+%         \begin{block}{Property: }
+%             Uniform substitution fails in $\Reflogic$.
+%         \end{block}
+
+%         \pause
+
+%         \begin{block}{Proof: } Take the formula $\varphi = p \rightarrow \refdiam{a}{b}p$, and the \ults $\model$ below, with $\Unc(i)=\cset{\cset{a,b}}$:
+
+%             \begin{center}
+%             \begin{tikzpicture}[->]
+%                 \node[state] at (0,1) (p) [label=left:$w$]{$p$};
+%                 \node[left = of p] (m) {$\model$};
+%                 \node[state] at (1.75,0.6) (nq) {\phantom{$p$}};
+%                 \node[state] at (1.75,1.4) (q) {$q$};
+%                 \path (p) edge [above] node {$a$} (q);
+%                 \path (p) edge [below] node {$b$} (nq);
+%                 \end{tikzpicture} 
+%             \end{center}
+%         \pause 
+%         Replace $\orange{p}$ by $\neg\khi(p,q)$: $\neg\khi(p,q) \rightarrow \refdiam{a}{b}\neg\khi(p,q)$ is not valid.
+%         \end{block}
+%     \end{small}
+%     \end{frame}
+
+%     %=============================================================
+
+%     \begin{frame}
+%         {Challenges}
+
+%         \begin{small}
+%             \begin{itemize}
+%                 \item This kind of updates increase the expressive power:
+%                 \begin{itemize}
+%                     \item Failure of uniform substitution.
+%                     \item No reduction axioms.
+%                 \end{itemize}
+%                 \item Quite challenging to obtain axiomatizations. \pause 
+%                 \item (A) solution: extend the expressivity of the underlying \orange{static} language. 
+%             \end{itemize}
+%         \end{small}
+%     \end{frame}
+
+%     %=============================================================
+
+%     \begin{frame}
+%         {Proposal: A Knowing How Logic with Explicit Actions}
+%         \begin{small}
+%         \begin{definition}[$\KHiMLlogic$]
+%             Formulas of the language $\KHiMLlogic$ are given by
+%             \[
+%                 \varphi ::= p \mid \neg\varphi \mid \varphi\vee\varphi \mid \khi(\varphi,\varphi) \mid [a]\varphi,
+%             \]
+%             with $p \in \PROP$, $i \in \AGT$ and $a \in \ACT$. Define: $\tup{a}\varphi := \neg[a]\neg\varphi$.
+%             % As usual, we define the dual modality: $\tup{a}\varphi := \neg[a]\neg\varphi$. Formulas of the form $[a]\varphi$ are read as: \emph{``every execution of action $a$ leads always to situations in which $\varphi$ holds''};
+%             % whereas  $\tup{a}\varphi$ stands for 
+%             % \emph{``there exists a situation after executing action $a$ in which $\varphi$ holds''}.
+%             \end{definition}
+
+%             \begin{definition}
+%                 $\model,w\models[a]\varphi$ iff for all $v$ s.t. $(w,v)\in \R_a$, $\model,v\models\varphi$.
+%             \end{definition}
+%         \end{small}
+%     \end{frame}
+
+%     %=============================================================
+
+%     \begin{frame}
+%         {Action Refinement}
+
+%         \begin{small}
+%         \begin{definition}[$\KHiMLReflogic$]
+%             $\model,w\models\orange{[!a]}\varphi$ iff $\orange{\model^a},w\models\varphi$,
+
+%             \medskip
+
+%             \noindent where $a\in\ACT$ and $\model^a$ is as $\model$, except that for all $i\in\AGT$ we have:
+
+%             \begin{itemize}
+%                 \item $\S^a_i = (\Unc(i)\setminus\pi) \ \cup \ \{\{a\}\}$, if $a\in\pi$;
+%                 \item $\S^a_i = \Unc(i)\ \cup \ \{\{a\}\}$, otherwise.
+%             \end{itemize}
+%         \end{definition}
+%         \pause
+%         Let $\model$ be such that $\Unc(i):=\cset{\cset{a,b}}$. 
+%         \begin{center}
+%         \begin{tikzpicture}[->]
+%         \node[state] at (0,1) (p) [label=left:$w$]{$p$};
+%         \node[left = of p] (m) {$\model$};
+%         \node[state] at (1.75,0.6) (nq) {{$q$}};
+%         \node[state] at (1.75,1.4) (q) {\phantom{$p$}};
+%         \path (p) edge [above] node {$a$} (q);
+%         \path (p) edge [below] node {$b$} (nq);
+%         \end{tikzpicture} 
+%         \end{center} 
+%        $\model,w\not\models\khi(p,q)$ and $\model,w\models[!b]\khi(p,q)$.
+%     \end{small}
+%     \end{frame}
+
+% %=============================================================
+
+%     \begin{frame}
+%         {Reduction Axioms}
+
+%         \begin{small}
+%         \begin{enumerate}
+%             \item $\srefbox{a}p \lra p$ 
+%             \item  $\srefbox{a} \neg \varphi_1 \lra \neg \srefbox{a} \varphi_1$
+%             \item $\srefbox{a} (\varphi_1 \vee \varphi_2) \lra (\srefbox{a} \varphi_1 \vee \srefbox{a} \varphi_2)$ 
+%             \item $\srefbox{a}[a]\varphi_1 \lra [a]\srefbox{a}\varphi_1$ \pause 
+%             \item $\orange{\srefbox{a}} \khi(\varphi_1,\varphi_2) \lra (\khi(\orange{\srefbox{a}} \varphi_1,\orange{\srefbox{a}} \varphi_2) \vee$ \\ 
+%             \quad\quad\quad\quad\quad\quad\quad\quad \  $\blue{\A}(\orange{\srefbox{a}} \varphi_1 \ra (\blue{\tup{a}\top} \wedge [a] \orange{\srefbox{a}}\varphi_2)))$
+%         \end{enumerate} \pause
+
+%         \medskip 
+
+%         Via reduction axioms, we can \orange{eliminate all the occurrences of a [!a] modality} (i.e., embed $\KHiMLReflogic$ into $\KHiMLlogic$).
+%     \end{small}
+
+%     \end{frame}
+
+% %=============================================================
+
+%     \begin{frame}
+%         {Example}
+%         \begin{small}
+
+%         Let $\model$ be s.t. $\Unc(i):=\cset{\cset{a,b}}$, $\model,w\not\models\khi(p,q)$ and $\model,w\models\defstyle{[!b]\khi(p,q)}$.
+        
+%         \begin{center}
+%         \begin{tikzpicture}[->]
+%         \node[state] at (0,1) (p) [label=left:$w$]{$p$};
+%         \node[left = of p] (m) {$\model$};
+%         \node[state] at (1.75,0.6) (nq) {{$q$}};
+%         \node[state] at (1.75,1.4) (q) {\phantom{$p$}};
+%         \path (p) edge [above] node {$a$} (q);
+%         \path (p) edge [below] node {$b$} (nq);
+%         \end{tikzpicture} 
+%         \end{center} 
+        
+%         \begin{tabular}{llr}
+%         & $\model,w\models\orange{[!b]}\khi(p,q)$ & {\bf (5)}\\ \pause 
+%         iff & $\model,w\models\khi(\orange{[!b]p},\orange{[!b]q}) \vee \blue{\A}(\orange{[!b]p} \ra (\blue{\tup{b}\top} \wedge [b]\orange{[!b]q}))$ & {\bf (1)} \\ \pause
+%         iff & $\model,w\models\khi(p,q) \vee \A(p \ra (\tup{b}\top \wedge [b]q))$  
+%         \end{tabular}
+%     \end{small}
+%     \end{frame}
+
+% %=============================================================
+% \begin{frame}
+%     {Axiomatization}
+%     \begin{scriptsize}
+%     \begin{table}
+%         $$
+%         \begin{array}{l@{\quad \quad  }l@{\quad}l}
+%         \hline
+%         \mbox{Axioms}
+%         & \axm{Taut}  & \vdash \varphi \mbox{ for $\varphi$ a propositional tautology} \\
+%         & \axm{DistA} & \vdash \A(\varphi\ra\psi) \ra (\A\varphi \ra \A\psi) \\
+%         & \axm{TA}    & \vdash \A\varphi \ra \varphi \\
+%         & \axm{Dist$\square$} & \vdash [a](\varphi\ra\psi) \ra ([a]\varphi \ra [a]\psi) \\
+%         & \axm{A$\square$} & \vdash \A\varphi \ra [a]\varphi \\
+%         \hline
+%         & \axm{4KhA}  & \vdash \khi(\psi,\varphi) \ra \A\khi(\psi,\varphi) \\
+%         & \axm{5KhA}  & \vdash \neg\khi(\psi,\varphi) \ra \A\neg\khi(\psi,\varphi) \\
+%         & \axm{KhE}   & \vdash \left(\E\psi \land \khi(\psi,\varphi)\right) \rightarrow \E\varphi \\
+%         & \axm{KhA}   & \vdash \left(\A(\chi \rightarrow \psi) \land \khi(\psi,\varphi) \land \A(\varphi \rightarrow \theta)\right) \rightarrow \khi(\chi, \theta) \\
+%         \hline
+%         \mbox{Rules}
+%         &  \axm{MP}   & \mbox{From $\vdash \varphi$ and $\vdash \varphi \rightarrow \psi$ infer $\vdash \psi$ }\\
+%         &  \axm{NecA} & \mbox{From $\vdash \varphi$ infer $\vdash \A\varphi$} \\
+%         \hline
+%         \end{array}
+%         $$
+%        % \caption{Axiomatization $\axset_{\khi,\square}$ for $\KHiMLlogic$ w.r.t.\ $\ultss$.}\label{tab:khimlaxiom}
+%         \end{table}
+
+%         \begin{theorem}
+%             \begin{enumerate}
+%                \item The axiom system above is sound and complete for \KHiMLlogic.  \pause
+%                \item The axiom system above + the reduction axioms is sound and complete for \KHiMLReflogic.
+%             \end{enumerate}
+%         \end{theorem}
+    
+%     \end{scriptsize}
+% \end{frame}
+
+%=============================================================
+
+\begin{frame}
+    {Bisimulation for \KHilogic}
+
+    \begin{definition}\label{def:notation}
+Let $\model=\tup{\W,\ACT,\R,\Unc,\V}$ be an \ults over \PROP and \AGT. Take $\pi \in \pow(\ACT^*)$, $X, T \subseteq \W$ and $i \in \AGT$.
+\begin{itemize} \itemsep 0pt
+    \item Write $X \ultsExecStrat{\pi} T$ $\siffdefs$ $X \subseteq \stexec(\pi)$ and $\R_{\pi}(X) \subseteq T$.
+
+    \item Write $X \ultsExecAgi T$ $\siffdefs$ there is $\pi \in \Unc(i)$ such that $X \ultsExecStrat{\pi} T$.
+\end{itemize}
+Additionally, $X \subseteq \W$ is propositionally definable in $\model$ iff there is a propositional formula $\varphi$ such that $X = \{ x \in \W \mid \model, x \models \varphi\}$.
+\end{definition}
+
+\pause
+Now we introduce the notion of bisimulation for $\KHilogic$. 
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Bisimulation for \KHilogic}
+    \begin{definition}[$\KHilogic$-bisimulation]\label{def:bisim-khi}
+    \begin{footnotesize}
+    Let $\model = \tup{\W,\ACT,\R,\Unc,\V}$ and $\model' = \tup{\W',\ACT',\R',\Unc',\V'}$ be $\ultss$. 
+    A non-empty $Z \subseteq \W \times \W'$ is called an \defstyle{$\KHilogic$-bisimulation} between $\model$ and $\model'$ iff $sZs'$ implies all of the following.
+    \pause
+    \begin{description} 
+        \item[(Atom):] $\V(s)=\V'(s')$. \pause
+
+        \item[($\khi$-zig):] for any \emph{propositionally} definable $P \subseteq \W$, if $P \ultsExecAgi T$ for some $T \subseteq \W$, then there is $T' \subseteq \W'$ such that: 
+            1) $Z(P) \ultsExecAgi T'$, and
+            2) $T' \subseteq Z(T)$.
+
+        \item[($\khi$-zag):] % analogous to \textbf{$\khi$-Zig}.
+        for any \emph{propositionally} definable $P' \subseteq \W'$, if $P' \ultsExecAgi T'$ for some $T' \subseteq \W'$, then there is $T \subseteq \W$ such that: 
+            1) $Z^{-1}(P') \ultsExecAgi T$, and
+            2) $T \subseteq Z^{-1}(T')$. \pause
+
+        \item[($\A$-zig):] for all $t\in\W$ there is a $t'\in\W'$ such that $tZt'$.
+
+        \item[($\A$-zag):] for all $t'\in\W'$ there is a $t\in\W$ such that $tZt'$. \pause
+    \end{description}
+    We write $\model,s \bisim \model',s'$ when there is an
+    $\KHilogic$-bisimulation $Z$ between $\model$ and $\model'$ such that
+    $sZs'$.
+    \end{footnotesize}
+    \end{definition}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Bisimulation for \KHilogic}
+The following theorem establishes a classical adequacy result. \pause
+
+\begin{theorem}[]
+\label{th:adequacy}
+Let $\model,s$ and $\model',s'$ be two \ultss. $\model,s\bisim\model',s'$ implies $\model,s\models\varphi$ iff $\model',s'\models\varphi$, for all $\KHilogic$-formulas $\varphi$. Moreover, if $\model$ and $\model'$ are finite domain, the converse also holds.
+\end{theorem}
+\end{frame}
+
+
+%=============================================================
+
+
+\begin{frame}{Bisimulation for \KHilogic}
+    There are some aspects about this definition that can be target of criticism. \pause
+    
+    \begin{description}
+        \item[($\khi$-zig):] for any \red{\emph{propositionally} definable} $P \subseteq \W$, if $P \ultsExecAgi T$ for some $T \subseteq \W$, then there is $T' \subseteq \W'$ such that: 
+            1) $Z(P) \ultsExecAgi T'$, and
+            2) $T' \subseteq Z(T)$.
+
+        \item[($\khi$-zag):] % analogous to \textbf{$\khi$-Zig}.
+        for any \red{\emph{propositionally} definable} $P' \subseteq \W'$, if $P' \ultsExecAgi T'$ for some $T' \subseteq \W'$, then there is $T \subseteq \W$ such that: 
+            1) $Z^{-1}(P') \ultsExecAgi T$, and
+            2) $T \subseteq Z^{-1}(T')$.
+    \end{description}
+
+    % \begin{itemize}
+    %     \item It is asking for the existence of a purely syntactic object such as a propositional formula.
+    %     \item Makes it difficult to operate computationally over bisimulations.
+    % \end{itemize}
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Redefining \KHilogic-Bisimulation}
+    In order to address these issues, we introduce a new definition for \KHilogic-bisimulation. \pause
+
+    First, we characterize the propositionally definable sets of an \ults.
+\end{frame}
+
+
+%=============================================================
+
+\begin{frame}
+    {Final remarks}
+
+    \begin{small}
+        \begin{itemize}
+            \item We presented a new definition for \KHilogic-bisimulation and proved the desired adequacy results. \pause
+            \item We established that verification/existence of \KHilogic-bisimulation between two \ultss is \coNPComplete. \pause
+            \item Also, that is the case for the pointed version of the problem too. \pause
+            \item We proposed two computationally efficient approaches for bisimulation-based model contraction. \pause
+            \item Future work: extend this results to other knowing how logics, and also to the version of this logic interpreted 
+            over \ults extended with finite automata.
+        \end{itemize}
+    \end{small}
+\end{frame}
+
+%=============================================================
+\end{document}
