@@ -12,13 +12,6 @@
 %\usepackage{chronology}
 \usepackage{chronosys}
 \usepackage{soul}
-\usepackage{algorithm}
-\usepackage{float}
-\usepackage[noend]{algpseudocode}
-\algrenewcommand{\algorithmiccomment}[1]{\hfill // #1}
-\algrenewcommand\alglinenumber[1]{\scriptsize #1:}
-\usepackage[font=scriptsize]{caption}
-\captionsetup[algorithm]{font=scriptsize}
 \usetikzlibrary{calc}
 %
 \usetheme[progressbar=frametitle]{metropolis}
@@ -1107,7 +1100,7 @@ over plans for the agent $i$ in each model.
 %=============================================================
 
 \begin{frame}{Computational aspects of \KHilogic-bisimulation}
-    Now, we want to provide a lower-bound for the complexity of $\checkkhibisimpb$.\pause
+    Now, we want to provide a lower-bound for the computational complexity of $\checkkhibisimpb$.\pause
 
     To do that we will reduce the following $\coNPComplete$ problem:\pause
 
@@ -1186,8 +1179,6 @@ over plans for the agent $i$ in each model.
                         \{in_{\varphi_3}out_{\varphi_3}\} \right\}
                     \end{array}$
     \end{center}
-    \caption{Graphical representation of $\model$ and $\model'$.}
-    \label{fig:karp-reduction}
     \end{small}
     \end{figure}
 \end{frame}
@@ -1225,9 +1216,9 @@ over plans for the agent $i$ in each model.
 
 \begin{frame}{Computational aspects of \KHilogic-bisimulation}
     \begin{lemma}
-        Let $\model$ and $\model'$ be \ults such that $\tup{\S,\ACT,\R,\Unc,\V}$ and $\model' = \tup{\S',\ACT',\R',\Unc',\V'}$.
+        Let $\model$ and $\model'$ be \ults such that $\tup{\W,\ACT,\R,\Unc,\V}$ and $\model' = \tup{\W',\ACT',\R',\Unc',\V'}$.
         % $s\in\S$ and $s'\in\S'$. 
-        $\model\bisim\model'$ implies that $\universalbis\eqdef\set{(t,t')\in\S\times\S'\mid \V(t)=\V'(t')}$ is an $\KHilogic$-bisimulation between $\model$ and $\model'$. 
+        $\model\bisim\model'$ implies that $\universalbis\eqdef\set{(t,t')\in\W\times\W'\mid \V(t)=\V'(t')}$ is an $\KHilogic$-bisimulation between $\model$ and $\model'$. 
     \end{lemma}\pause
 
     This lemma states that deciding the existence of a \KHilogic-bisimulation reduces to verifying if $\universalbis$ is a \KHilogic-bisimulation.\pause
