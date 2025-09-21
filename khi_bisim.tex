@@ -1,18 +1,20 @@
 \chapter{Estudio Computacional de \KHilogic-Bisimulación}
 
 Como mencionamos en el anterior capítulo, a la hora de definir una noción de bisimulación para una lógica modal, 
-es deseable que la misma tenga una naturaleza procedural, es decir, que naturalmente exista un procedimiento que dados dos
-modelos y una relación binaria entre ellos pueda decidir si dicha relación es una bisimulación.
+es deseable que la misma tenga una naturaleza puramente estructural, lo cuál resulta de gran importancia a la hora de 
+definir, de una manera más natural, un procedimiento que dados dos modelos y una relación binaria entre ellos pueda decidir 
+si dicha relación es una bisimulación.
 
-Esta naturaleza procedural para verificar si una relación entre dos modelos es una bisimulación,
+Esta naturaleza estructural para verificar si una relación entre dos modelos es una bisimulación,
 también nos permite encontrar un procedimiento efectivo que decida si existe una bisimulación entre dos modelos. 
 Dicho problema de decisión es usualmente conocido en la literatura de las lógicas modales como comparación de modelos (Model Comparison).
 
-En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados.
+En este capítulo, estudiaremos la complejidad computacional de diferentes variantes del problema de decidir si dos modelos son equivalentes 
+bajo bisimulación.
 
 \section{Verificación de Bisimulaciones}
 
-En esta sección analizaremos la complejidad del problema de decidir si una relación binaria es una \KHilogic-bisimulación.  
+En esta sección analizaremos la complejidad del problema de decidir si una relación binaria es una \KHilogic-bisimulación entre dos modelos.  
 
 \begin{definicion}
     Definimos el problema de decidir si una relación binaria entre los dominios de dos \ults es una \KHilogic-bisimulación como:
@@ -27,8 +29,8 @@ para resolverlo.
 En primera instancia, si consideramos las distintas condiciones que se requieren sobre una relación binaria para ser considerada una 
 \KHilogic-bisimulación podemos observar que tanto ($\khi$-zig) como ($\khi$-zag) exigen propiedades sobre una cantidad potencialmente 
 exponencial de subconjuntos de los dominios de cada \ults. Sin embargo, una vez fijado un subconjunto sobre el que analizar el  
-comportamiento de la relación binaria en relación a ($\khi$-zig) o ($\khi$-zag), las demás condiciones requeridas son verificables 
-eficientemente.
+comportamiento de la relación binaria en relación a ($\khi$-zig) o ($\khi$-zag), no es difícil notar que las demás condiciones 
+requeridas son verificables eficientemente.
 
 Este análisis nos permite establecer una cota superior sobre la complejidad computacional de $\CBisim$.
 
@@ -250,9 +252,9 @@ $H \leq_p \CBisim$. Este análisis motiva el estudio del siguiente problema comp
     \end{center}
 \end{definicion}
 
-Una vez presentado este problema, enunciamos el siguiente resultado (demostrado en cite) que justifica su estudio en este trabajo.
+Una vez presentado este problema, enunciamos el siguiente resultado que justifica su estudio en este trabajo.
 
-\begin{teorema}\label{thm:dnftaut-conp-complete}
+\begin{teorema}[\cite{AroraB09}]\label{thm:dnftaut-conp-complete}
     $\DNFTAUT$ es $\coNPComplete$.
 \end{teorema}
 
@@ -300,7 +302,7 @@ Presentaremos un ejemplo con el objetivo de esclarecer el mapeo introducido.
 
 \begin{ejemplo}
     Consideremos la fórmula $\varphi = (p_1 \wedge \neg p_2) \vee (p_2) \vee (\neg p_1)$, el mapeo $f$ introducido en la 
-    \Cref{def:karp-reduction} construye el siguiente modelo $\model$ (\Cref{fig:karp-reduction}): 
+    \Cref{def:karp-reduction} construye el modelo $\model$ \Cref{fig:karp-reduction}: 
 
     \begin{figure}[t]
         \hspace*{0.5cm}
@@ -392,11 +394,9 @@ problemas en cuestión.
     Queremos demostrar que $f$ es una reducción de Karp de $\DNFTAUT$ a $\CBisim$. Para ello, tenemos que probar que $f$ es computable 
     en tiempo polinomial y, que $x \in \DNFTAUT$ si y sólo si $f(x) \in \CBisim$.
 
-    Notemos que ambos \ultss construídos por $f$ tienen tamaño polinomial con respecto al tamaño de $\varphi$.
-
-    Por lo que es fácil notar que $f$ es computable en tiempo polinomial en el tamaño de $\varphi$.
-
-    Ahora queremos demostrar que $\varphi \in \DNFTAUT$ si y sólo si $\tup{\modults,\modults',Z} \in \CBisim$.
+    Notemos que ambos \ultss construídos por $f$ tienen tamaño polinomial con respecto al tamaño de $\varphi$. Por lo que es fácil notar 
+    que $f$ es computable en tiempo polinomial en el tamaño de $\varphi$. Ahora queremos demostrar que $\varphi \in \DNFTAUT$ si y sólo 
+    si $\tup{\modults,\modults',Z} \in \CBisim$.
 
     Por una cuestión de simplicidad y para garantizar correctitud, consideraremos que si $\varphi \not\in \DNFTAUT$ entonces la asignación 
     que atestigua dicha situación \textbf{no} es aquella asignación que asigna $false$ a todas las variables proposicionales de $\varphi$. 
@@ -409,9 +409,8 @@ problemas en cuestión.
     son las variables proposicionales que aparecen en $\varphi$, veamos que $\tup{\modults,\modults',Z} \in \CBisim$ con 
     $\tup{\model,\model',Z}$ construídos por el mapeo $f$.
 
-    Es fácil ver que $Z$ satisface (Atom), pues ambos modelos utilizan la misma función de etiquetado $\V$.
-
-    A su vez, tanto (A-zig) como (A-zag) son claramente satisfechos por $Z$.
+    Es fácil ver que $Z$ satisface (Atom), pues ambos modelos utilizan la misma función de etiquetado $\V$. A su vez, 
+    tanto (A-zig) como (A-zag) son claramente satisfechos por $Z$.
 
     Analicemos entonces ($\khi$-zig) y ($\khi$-zag).
 
@@ -471,7 +470,7 @@ problemas en cuestión.
     donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, 
     entonces $\tup{\modults,\modults',Z} \notin \CBisim$.
 
-    Como $\varphi \notin \DNFTAUT$, existe una asignación $\overrightarrow{a}$ sobre las variables $p_1,...,p_n$ que hace fallar 
+    Como $\varphi \notin \DNFTAUT$, existe una asignación $\overrightarrow{a}$ sobre las variables $p_1,...,p_n$ que hace falsa 
     cada $\varphi_j$. Denotemos a $U$ como el conjunto de variables a las que se le asigna $true$ en $\overrightarrow{a}$.
 
     Como mencionamos al principio de la demostración consideraremos que la asignación $\overrightarrow{a}$ tiene un conjunto $U$ no vacío 
@@ -493,7 +492,7 @@ problemas en cuestión.
     Notemos que los planes que tiene a su disposición $Z(U) = U$ son de la forma $in_{\varphi_j}out_{\varphi_j}$.
 
     Sea entonces $\varphi_j$, analicemos qué sucede en relación al plan $in_{\varphi_j}out_{\varphi_j}$. 
-    Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace fallar a $\varphi_j$, entonces, 
+    Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace falso a $\varphi_j$, entonces, 
     o bien ocurre que existe una variable en $U$ que aparece en forma negativa en $\varphi_j$, 
     o existe una variable en $\{p_1,...,p_n\}$\textbackslash$U$ que aparece en forma positiva en $\varphi_j$.
 
@@ -531,7 +530,7 @@ Luego, a partir de este lema obtenemos de forma directa el resultado deseado.
 Finalmente, hemos establecido una cota inferior para la complejidad computacional de $\CBisim$. 
 
 Juntando los resultados presentados en esta sección, hemos encontrado un lugar preciso donde colocar a $\CBisim$ 
-dentro de la teoría de la complejidad computacional, considerando la gran incertidumbre presente en la misma. Finalizamos la sección 
+dentro de la teoría de la complejidad computacional, un resultado desconocido hasta el momento. Finalizamos la sección 
 con el teorema que captura esta idea.
 
 \begin{teorema}
