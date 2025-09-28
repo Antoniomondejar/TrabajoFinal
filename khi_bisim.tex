@@ -2,15 +2,14 @@
 
 Como mencionamos en el anterior capítulo, a la hora de definir una noción de bisimulación para una lógica modal, 
 es deseable que la misma tenga una naturaleza puramente estructural, lo cuál resulta de gran importancia a la hora de 
-definir, de una manera más natural, un procedimiento que dados dos modelos y una relación binaria entre ellos pueda decidir 
+definir, de una manera más natural, un procedimiento que dados dos modelos y una relación binaria entre sus dominios pueda decidir 
 si dicha relación es una bisimulación.
 
-Esta naturaleza estructural para verificar si una relación entre dos modelos es una bisimulación,
+Esta naturaleza estructural para verificar si una relación entre los dominios de dos modelos es una bisimulación,
 también nos permite encontrar un procedimiento efectivo que decida si existe una bisimulación entre dos modelos. 
 Dicho problema de decisión es usualmente conocido en la literatura de las lógicas modales como comparación de modelos (Model Comparison).
 
-En este capítulo, estudiaremos la complejidad computacional de diferentes variantes del problema de decidir si dos modelos son equivalentes 
-bajo bisimulación.
+En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados.
 
 \section{Verificación de Bisimulaciones}
 
@@ -19,7 +18,7 @@ En esta sección analizaremos la complejidad del problema de decidir si una rela
 \begin{definicion}
     Definimos el problema de decidir si una relación binaria entre los dominios de dos \ults es una \KHilogic-bisimulación como:
     \begin{center}
-        $\CBisim := \{\tup{\model,\model',Z} \mid Z$ es una \KHilogic-bisimulación entre $\model$ y $\model'\}$.
+        $\CBisim \eqdef \{\tup{\model,\model',Z} \mid Z$ es una \KHilogic-bisimulación entre $\model$ y $\model'\}$.
     \end{center}
 \end{definicion}
 
@@ -39,9 +38,10 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
 \end{lema}
 
 \begin{demostracion}
-    Para demostrar que $\CBisim \in \coNP$ debemos dar un algoritmo $A$ que corra en tiempo polinomial sobre el tamaño de su input 
-    y un polinomio $p$ tal que $\tup{\model,\model',Z} \not\in \CBisim$ si y sólo si existe un 
-    certificado $x$ con $|x| \le p(|\modults|+|\modults'|+|Z|)$, tal que $A(\modults,\modults',Z,x) = 1$. 
+    Para demostrar que $\CBisim \in \coNP$ debemos demostrar que su complemento está en la clase $\NP$. Para ellos, basta con dar un 
+    algoritmo $A$ que corra en tiempo polinomial con respecto al tamaño de su input y un polinomio $p$ tales que 
+    $\tup{\model,\model',Z} \not\in \CBisim$ si y sólo si existe un certificado $x$ con $|x| \le p(|\modults|+|\modults'|+|Z|)$ 
+    tal que $A(\modults,\modults',Z,x) = 1$. 
     
     Esencialmente, a los $x$ los llamaremos ``contraejemplos'' y sólo nos interesarán los que sean de la forma $\tup{U,b}$ con $U$ un 
     subconjunto del dominio de alguno de los modelos y $b$ un bit que nos indica de qué dominio es subconjunto $U$. 
@@ -54,7 +54,8 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
 
     Proponemos entonces el siguiente algoritmo, el cuál llamaremos \textsf{CounterexampleChecker} (\Cref{alg:counter-example-checker}):
 
-    \begin{algorithm}
+    \begin{algorithm}[t]
+        \begin{footnotesize}
         \caption{Verificador de contraejemplos}
         \label{alg:counter-example-checker}
         \begin{algorithmic}[1]
@@ -64,13 +65,13 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                         \If{$U \subseteq \sexec^{\model}(\pi)$}
                         \State $U' \gets Z(U)$
                         \State $T \gets Z(\R_\pi(U))$ 
-                        \State $foundStrat \gets false$
+                        \State \textit{foundStrat} $\gets 0$
                             \ForAll{$\pi' \in \S_i'$}
                                 \If{$U' \subseteq \sexec^{\model'}(\pi') \wedge \R'_{\pi'}(U') \subseteq T$}
-                                    \State $foundStrat \gets true$
+                                    \State \textit{foundStrat} $\gets 1$
                                 \EndIf         
                             \EndFor
-                            \If{$\neg foundStrat$}
+                            \If{$\neg$ \textit{foundStrat}}
                                 \Return 1
                             \EndIf
                         \EndIf
@@ -86,24 +87,24 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 \State Check (A-zig), if not \Return 1
                 \State Check (A-zag), if not \Return 1
                 \If{$b$}
-                    \State If there exists $s \in \rho_\model$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
+                    \State If exists $s \in \rho_\model$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model,\model',Z,U$}
                 \Else
-                    \State If there exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
+                    \State If exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model',\model,Z^{-1},U$} \Comment{Notice the parameters.}
                 \EndIf
             \EndFunction
         \end{algorithmic}
+    \end{footnotesize}
     \end{algorithm}
 
-    Veamos que el algoritmo \textsf{CounterexampleChecker} corre en tiempo polinomial en el tamaño de 
-    $\tup{\modults,\modults',Z}$. Notemos que los chequeos de las líneas 14, 15, 16, 18 y 21 son claramente realizables 
-    eficientemente. Por otro lado, analizando la función \textsf{NotSimulates}, podemos ver que los cómputos de $\R_\pi$ y $\sexec(\pi)$ 
-    con $\pi \in \S_i$ son realizables en tiempo polinomial en el tamaño de cada \ults, como sugiere la demostración del 
+    Notemos que los chequeos de las líneas 14, 15, 16, 18 y 21 son claramente realizables en tiempo polinomial. Por 
+    otro lado, analizando la función \textsf{NotSimulates} podemos ver que los cómputos de $\R_\pi$ y $\sexec(\pi)$ 
+    para $\pi \in \S_i$ son realizables en tiempo polinomial con respecto al tamaño de cada \ults, como sugiere la demostración del 
     \Cref{thm:model-checking-poly} presentada en \cite{ArecesFSV25,SaraviaPHD}. Por lo que podemos afirmar que 
-    \textsf{CounterexampleChecker} corre en tiempo polinomial.
+    \textsf{CounterexampleChecker} corre en tiempo polinomial con respecto al tamaño de $\tup{\model,\model',Z}$.
     
     Ahora, queremos ver que $\tup{\modults,\modults',Z} \not\in \CBisim$ si y sólo si
     la ejecución de \textsf{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,b}$) devuelve 1 para 
@@ -141,25 +142,25 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
             a su vez, $\R_\pi(U) \subseteq T$. 
             
             Esto nos dice que al considerar la ejecución de \textsf{NotSimulates}, cuando se itera sobre el plan $\pi$, el algoritmo 
-            ingresa al $if$ de la línea 4 e inicializa la variable $foundStrat$ en $false$.
+            ingresa al \textit{if} de la línea 4 e inicializa la variable \textit{foundStrat} en 0.
 
             Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z(U) \not \subseteq \sexec^{\model'}(\pi')$ o que 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'\in\S'_i$ entonces 
-            el valor de $foundStrat$ permanece en $false$ y \textsf{NotSimulates} devuelve 1 en la línea 11.
+            el valor de \textit{foundStrat} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea 11.
 
             Sea $\pi' \in \S'_i$, supongamos entonces que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y veamos que 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$.
 
             Notemos que como $Z(U) \subseteq \sexec^{\model'}(\pi')$, entonces $Z(U) \ultsExecAgi \R'_{\pi'}(Z(U))$. 
             Como mencionamos que ($\khi$-zig) falla para este caso, entonces ocurre que 
-            $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$, pues en caso contrario $T' := \R'_{\pi'}(Z(U))$ serviría como 
+            $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$, pues en caso contrario $T' = \R'_{\pi'}(Z(U))$ serviría como 
             testigo de ($\khi$-zig).
 
             Pero, como $\R_\pi(U) \subseteq T$, entonces es claro que $Z(\R_\pi(U)) \subseteq Z(T)$. Luego como 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$ entonces también ocurre que $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, 
             que era lo que queríamos ver.
 
-            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea 8 con la variable $foundStrat$ valiendo $false$, luego 
+            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea 8 con la variable \textit{foundStrat} valiendo 0, luego 
             devuelve 1 en la línea 11.
 
             Finalmente, \textsf{CounterexampleChecker}($\modults,\modults',Z,\tup{U,1}$) = 1.
@@ -180,7 +181,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
         Primero, notemos que como $\tup{\modults,\modults',Z} \in \CBisim$, entonces $Z$ es una bisimulación 
         entre $\modults$ y $\modults'$.
 
-        Luego, viendo la ejecución de \textsf{CounterexampleChecker}, los chequeos de (Atom), (A-zig) y (A-zag) darán $true$ como resultado.
+        Luego, viendo la ejecución de \textsf{CounterexampleChecker}, los chequeos de (Atom), (A-zig) y (A-zag) darán 1 como resultado.
         
         Analicemos ahora los dos casos posibles:
 
@@ -192,7 +193,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 Supongamos entonces $U$ cumple con lo mencionado. Luego, se ejecuta \textsf{NotSimulates} en la línea 19. 
                 
                 Sea $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$, 
-                entonces el algoritmo ingresa al $if$ de la línea 4 e inicializa $foundStrat$ en $false$.
+                entonces el algoritmo ingresa al \textit{if} de la línea 4 e inicializa \textit{foundStrat} en 0.
                 
                 Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $Z$ cumple ($\khi$-zig), existe 
                 $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq Z(\R_\pi(U))$.
@@ -201,7 +202,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 $\R'_{\pi'}(Z(U)) \subseteq T'$.
                 
                 Pero como $T' \subseteq Z(\R_\pi(U))$, entonces $\R'_{\pi'}(Z(U)) \subseteq Z(\R_\pi(U))$, por lo que 
-                el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de $foundStrat$ a $true$.
+                el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de \textit{foundStrat} a 1.
                 
                 Como este análisis vale para todo $\pi \in \S_i$, esto demuestra que \textsf{NotSimulates} finaliza su ejecución en la 
                 línea 12 donde devuelve 0. Por lo que \textsf{CounterexampleChecker} devuelve 0 a partir de ($\modults,\modults',\tup{U,b}$).
@@ -216,8 +217,8 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
 
 Como mencionamos, este lema nos permite establecer una cota superior sobre la complejidad computacional de $\CBisim$. 
 Sin embargo, a la hora de determinar que un problema se encuentra en una clase de complejidad tal como $\coNP$, también es deseable 
-determinar que el problema es difícil para dicha clase ($\coNPHard$). De esta forma, obtendríamos una perspectiva más precisa de su 
-dificultad intrínseca.
+determinar si se da el caso de que el problema sea difícil para dicha clase ($\coNPHard$). De esta forma, obtendríamos una 
+perspectiva más precisa de su dificultad intrínseca.
 
 Con ese objetivo en mente, introduciremos dos conceptos cruciales de la teoría de la complejidad computacional, los cuáles nos permitirán 
 establecer relaciones de ``dificultad computacional'' entre problemas de decisión.
@@ -241,14 +242,14 @@ establecer relaciones de ``dificultad computacional'' entre problemas de decisi�
 Intuitivamente, $L \leq_p L'$ nos dice que si obtenemos un algoritmo que decida $L'$ entonces podemos obtener naturalmente un algoritmo 
 que decida $L$ con un costo computacional extra a lo sumo polinomial. 
 
-Luego, para continuar con la tarea de demostrar \textit{hardness} para $\coNP$, queremos ver que dado $L \in \coNP$ entonces ocurre que 
+Luego, para continuar con la tarea de demostrar \textit{hardness} para $\coNP$, queremos ver que para cada $L \in \coNP$ entonces ocurre que 
 $L \leq_p \CBisim$. Dado que la relación $\leq_p$ es transitiva, basta con encontrar un problema $H$ que sea $\coNPHard$ y ver que 
 $H \leq_p \CBisim$. Este análisis motiva el estudio del siguiente problema computacional:
 
 \begin{definicion}
     Definimos el problema de decidir si una fórmula proposicional $\varphi$ en forma disyuntiva normal es una tautología como:
     \begin{center}
-        $\DNFTAUT := \{ \varphi \mid \varphi$ tiene forma disyuntiva normal y es una tautología$\}$.
+        $\DNFTAUT \eqdef \{ \varphi \mid \varphi$ tiene forma disyuntiva normal y es una tautología$\}$.
     \end{center}
 \end{definicion}
 
@@ -268,20 +269,20 @@ Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontr
     proposicionales $p_1,...,p_n$, $f$ mapea a $\varphi$ con $\tup{\model,\model',Z}$ donde:
     % \end{center}\textsc{}
     \begin{itemize}
-        \item $\model := \tup{\W, \R \cup \{\R_{test}\}, \{\S \cup \{\{test\}\}\}, \V, \ACT \cup \{test\}}$,
-        \item $\model' := \tup{\W, \R, \{\S\}, \V, \ACT}$,
-        \item $Z := \{(w,w) \mid w \in \W\}$.
+        \item $\model \eqdef \tup{\W, \R \cup \{\R_{test}\}, \{\S \cup \{\{test\}\}\}, \V, \ACT \cup \{test\}}$,
+        \item $\model' \eqdef \tup{\W, \R, \{\S\}, \V, \ACT}$,
+        \item $Z \eqdef \{(w,w) \mid w \in \W\}$.
     \end{itemize}
     con:
     \begin{itemize}
-        \item $\W := \{p_i\mid i\in\{1,...,n\}\} \cup \{\varphi_i \mid i \in \{1,...,m\}\} \cup \{e\}$
-        \item $\ACT := \{in_{\varphi_i} \mid i \in \{1,...,m\}\} \cup \{out_{\varphi_i} \mid i \in \{1,...,m\}\}$
-        \item $\S := \{\{in_{\varphi_i}out_{\varphi_i}\} \mid i \in \{1,...,m\}\}$
-        \item $\R_{in_{\varphi_j}} := \{(p_i,\varphi_j) \mid p_i$ no aparece en forma negativa en $\varphi_j\}$
-        \item $\R_{out_{\varphi_j}} := \{(\varphi_j,p_i) \mid p_i$ aparece en forma positiva en $\varphi_j\} \cup \{(\varphi_j,e) \mid \varphi_j$ no tiene variables positivas$\}$,        
-        \item $\R_{test} := \{(p_i,p_i) \mid i \in \{1,...,n\}\} \cup \{(p_i,e)\mid i\in \{1,...,n\}\}$,
-        \item $\R := \{\R_{in_{\varphi_j}}\mid j \in \{1,...,m\}\} \cup \{\R_{out_{\varphi_j}}\mid j \in \{1,...,m\}\}$,
-        \item $\V := \{(p_i,\{q_i\}) \mid i \in \{1,...,n\}\} \cup 
+        \item $\W \eqdef \{p_i\mid i\in\{1,...,n\}\} \cup \{\varphi_i \mid i \in \{1,...,m\}\} \cup \{e\}$
+        \item $\ACT \eqdef \{in_{\varphi_i} \mid i \in \{1,...,m\}\} \cup \{out_{\varphi_i} \mid i \in \{1,...,m\}\}$
+        \item $\S \eqdef \{\{in_{\varphi_i}out_{\varphi_i}\} \mid i \in \{1,...,m\}\}$
+        \item $\R_{in_{\varphi_j}} \eqdef \{(p_i,\varphi_j) \mid p_i$ no aparece en forma negativa en $\varphi_j\}$
+        \item $\R_{out_{\varphi_j}} \eqdef \{(\varphi_j,p_i) \mid p_i$ aparece en forma positiva en $\varphi_j\} \cup \{(\varphi_j,e) \mid \varphi_j$ no tiene variables positivas$\}$,        
+        \item $\R_{test} \eqdef \{(p_i,p_i) \mid i \in \{1,...,n\}\} \cup \{(p_i,e)\mid i\in \{1,...,n\}\}$,
+        \item $\R \eqdef \{\R_{in_{\varphi_j}}\mid j \in \{1,...,m\}\} \cup \{\R_{out_{\varphi_j}}\mid j \in \{1,...,m\}\}$,
+        \item $\V \eqdef \{(p_i,\{q_i\}) \mid i \in \{1,...,n\}\} \cup 
                      \{(\varphi_i,\{q_{i+n}\}) \mid i \in \{1,...,m\}\} \cup 
                      \{(e,\{q_{n+m+1}\})\}$ donde $q_1,...,q_{n+m+1} \in \PROP$ son $n+m+1$ variables proposicionales distintas.
     \end{itemize}
@@ -368,13 +369,13 @@ Presentaremos un ejemplo con el objetivo de esclarecer el mapeo introducido.
     \end{figure}
 
     Por otro lado, el modelo $\model'$ construído por $f$ es similar a $\model$ con la diferencia de que no se consideran las aristas 
-    definidas por $\R_{test}$ y la clase $\{test\}$ no se encuentra en $S_{agt}$.
+    definidas por $\R_{test}$ y la clase $\{test\}$ no es parte de la relación de indistinguibilidad del agente $agt$.
 \end{ejemplo}
 
 La motivación de este mapeo es utilizar los subconjuntos $U \subseteq \{p_1,...,p_n\}$ para `codificar' las posibles 
 asignaciones a las variables proposicionales de $\varphi$. Pues sea $U \subseteq \{p_1,...,p_n\}$, podemos considerar que con $U$ estamos representando una asignación 
 $\overrightarrow{a}$ en la que asignamos $true$ a las variables dentro de $U$ y $false$ a las variables dentro de 
-$\{p_1,...,p_n\}$\textbackslash$U$. En particular, la intención es construir dos \ults de forma tal que al verificar la condición ($\khi$-zig) sobre $U$, estemos 
+$\{p_1,...,p_n\}\setminus U$. En particular, la intención es construir dos \ults de forma tal que al verificar la condición ($\khi$-zig) sobre $U$, estemos 
 verificando a la vez el valor obtenido por la evaluación de $\varphi$ en $\overrightarrow{a}$.
 
 Luego, la idea es que $\varphi$ evaluará a $true$ en la asignación $\overrightarrow{a}$ siempre que exista un término $\varphi_j$ que permita 
@@ -444,9 +445,9 @@ problemas en cuestión.
     Notemos que $\R_{test}(U) = U \cup \{e\}$, entonces necesariamente $U \cup \{e\} \subseteq T$.
 
     Consideremos ahora la asignación $\overrightarrow{a}$ que asigna $true$ a las variables en $U$ y $false$ a las variables 
-    en $\{p_1,...,p_n\} / U$. Como $\varphi$ es una tautología, entonces existe un término $\varphi_j$ que se vuelve verdadero a partir 
+    en $\{p_1,...,p_n\} \setminus U$. Como $\varphi$ es una tautología, entonces existe un término $\varphi_j$ que se vuelve verdadero a partir 
     de $\overrightarrow{a}$, es decir, en $\varphi_j$ las variables que aparecen en forma positiva son algún subconjunto de 
-    $U$ y las variables que aparecen en forma negativa son algún subconjunto de $\{p_1,...,p_n\}$\textbackslash$U$.
+    $U$ y las variables que aparecen en forma negativa son algún subconjunto de $\{p_1,...,p_n\} \setminus U$.
 
     Como las variables que aparecen en $\varphi_j$ en forma negativa no están en $U$, entonces, analizando la definición de $\R$, 
     podemos ver que el plan $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. 
@@ -458,7 +459,7 @@ problemas en cuestión.
     las variables positivas que aparecen en $\varphi_j$ son un subconjunto, posiblemente vacío, de $U$.
     Entonces necesariamente de $\varphi_j$ las aristas con etiqueta $out_{\varphi_j}$ van a un conjunto $X \subseteq U \cup \{e\}$, 
     es decir, $X = \R_{in_{\varphi_j}out_{\varphi_j}}(U) \subseteq U \cup \{e\} \subseteq T$. 
-    Finalmente, $T' := X$ nos sirve para demostrar que $Z(U) \ultsExecAgagt T'$ y, a su vez, 
+    Finalmente, $T' = X$ nos sirve para demostrar que $Z(U) \ultsExecAgagt T'$ y, a su vez, 
     $T' = X \subseteq U \cup \{e\} \subseteq T = Z(T)$.
 
     Lo cual demuestra que $Z$ satisface ($\khi$-zig). 
@@ -494,7 +495,7 @@ problemas en cuestión.
     Sea entonces $\varphi_j$, analicemos qué sucede en relación al plan $in_{\varphi_j}out_{\varphi_j}$. 
     Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace falso a $\varphi_j$, entonces, 
     o bien ocurre que existe una variable en $U$ que aparece en forma negativa en $\varphi_j$, 
-    o existe una variable en $\{p_1,...,p_n\}$\textbackslash$U$ que aparece en forma positiva en $\varphi_j$.
+    o existe una variable en $\{p_1,...,p_n\}\setminus U$ que aparece en forma positiva en $\varphi_j$.
 
     Si ocurre que una variable de $U$ aparece en forma negativa en $\varphi_j$ entonces el plan 
     $in_{\varphi_j}out_{\varphi_j}$ no será fuertemente ejecutable en dicha variable y, por lo tanto, 
@@ -502,9 +503,9 @@ problemas en cuestión.
 
     Por otro lado, si ninguna variable de $U$ aparece en forma negativa en $\varphi_j$ entonces 
     $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. Sin embargo, notemos que 
-    entonces existe una variable $p_k$ en $\{p_1,...,p_n\}$\textbackslash$U$ que aparece en forma positiva en $\varphi_j$. 
+    entonces existe una variable $p_k$ en $\{p_1,...,p_n\}\setminus U$ que aparece en forma positiva en $\varphi_j$. 
     Como $p_k$ aparece en forma positiva en $\varphi_j$ entonces $p_k \in \R_{in_{\varphi_j}out_{\varphi_j}}(U)$. 
-    Luego $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan no nos 
+    Luego $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan tampoco 
     permite encontrar un $T'$ adecuado.
     
     Hemos analizado entonces todos los planes disponibles para el agente $agt$ en $\model'$ y ninguno permite encontrar un 
@@ -530,7 +531,7 @@ Luego, a partir de este lema obtenemos de forma directa el resultado deseado.
 Finalmente, hemos establecido una cota inferior para la complejidad computacional de $\CBisim$. 
 
 Juntando los resultados presentados en esta sección, hemos encontrado un lugar preciso donde colocar a $\CBisim$ 
-dentro de la teoría de la complejidad computacional, un resultado desconocido hasta el momento. Finalizamos la sección 
+dentro de la teoría de la complejidad computacional. Finalizamos la sección 
 con el teorema que captura esta idea.
 
 \begin{teorema}
@@ -549,7 +550,7 @@ principio de esta sección: el de la comparación de modelos.
 \begin{definicion}
     Definimos el problema de decidir si existe una \KHilogic-bisimulación entre dos modelos como:
     \begin{center}
-        $\KHiBisim := \{\tup{\modults,\modults'} \mid$ existe una \KHilogic-bisimulación
+        $\KHiBisim \eqdef \{\tup{\modults,\modults'} \mid$ existe una \KHilogic-bisimulación
         entre $\modults$ y $\modults'\}$
     \end{center}
 \end{definicion}
@@ -640,7 +641,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
             \end{itemize}
         \end{multicols}
     
-        Demostremos que $T' := T''$ cumple con lo mencionado. Es claro que como $Z \subseteq \universalbis$ y 
+        Demostremos que $T' = T''$ cumple con lo mencionado. Es claro que como $Z \subseteq \universalbis$ y 
         $T'' \subseteq Z(T)$ entonces $T'' \subseteq \universalbis(T)$. Entonces, nos queda demostrar que $\universalbis(U) \ultsExecAgi T''$.
     
         Esto lo demostraremos analizando que $Z(U) = \universalbis(U)$. Nuevamente, como $Z \subseteq \universalbis$
@@ -817,7 +818,8 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 
 \begin{demostracion}
     Dados $\modults,w$ y $\modults',w'$ dos \ultss punteados, por \Cref{lema:bisim-existence} sabemos que existe 
-    \KHilogic-bisimulación entre $\modults$ y $\modults'$ si y sólo si $Z' := \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación. 
+    \KHilogic-bisimulación entre $\modults$ y $\modults'$ si y sólo si $\universalbis = \{(v,v') \mid \V(v) = \V'(v')\}$ es una 
+    \KHilogic-bisimulación. 
     
     Luego una reducción $f$ que mapee $((\modults,w),(\modults',w'))$ a $(\modults,\modults')$ en el caso que $\V(w) = \V'(w')$ 
     y a $(\modults,\modults')$ con $\modults$ y $\modults'$ dos \ultss fijos no bisimilares en caso contrario, basta 
@@ -830,7 +832,7 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 
 \begin{demostracion}
     Dados $\modults$ y $\modults'$ dos \ultss, por \Cref{lema:bisim-existence} sabemos que existe 
-    \KHilogic-bisimulación entre ellos si y sólo si $Z' := \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación.
+    \KHilogic-bisimulación entre ellos si y sólo si $\universalbis = \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación.
 
     Consideremos una reducción $f$ que mapee $(\modults,\modults')$ a $((\modults,w),(\modults',w'))$ con $w,w'$ nodos de los dominios de $\modults$ 
     y $\modults'$ respectivamente que satisfagan $\V(w) = \V'(w')$, o en caso de no existir un par de nodos que satisfaga dicha condición tome cualquier 
@@ -848,15 +850,13 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 
 
     Por \Cref{thm:khibisim-conpcomplete}, sabemos que $\KHiBisim$ es $\coNPComplete$. Luego, por \Cref{lema:general-to-pointed}, tenemos que 
-    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es $\coNPHard$.
-    
-    Juntando ambos argumentos, concluímos que $\PKHiBisim$ es $\coNPComplete$.
+    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es $\coNPHard$. Juntando ambos argumentos, concluímos que $\PKHiBisim$ es $\coNPComplete$.
 \end{demostracion}
 
 
 Hemos demostrado entonces que $\PKHiBisim$ es $\coNPComplete$.
 
-Notemos que por \Cref{thm:new-bisim-finite-equiv}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ o 
+Notemos que por \Cref{thm:new-bisim-finite-equiv}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ y 
 $\modults,w \modequiv \modults',w'$. Luego, al caracterizar la complejidad computacional de $\PKHiBisim$, también hemos caracterizado 
-la complejidad computacional del problema de decidir si dos \ultss punteados son lógicamente equivalentes.
+la complejidad computacional del problema de decidir si dos \ultss punteados satisfacen exactamente las mismas \KHilogic-fórmulas.
 

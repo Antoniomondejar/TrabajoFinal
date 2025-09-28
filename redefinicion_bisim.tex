@@ -5,9 +5,9 @@ que comparten entre sí, con las que se logra garantizar la equivalencia lógica
 bisimulación modela la idea de equivalencia en cuanto al comportamiento de ambos modelos respecto a una lógica en particular, lo cuál nos brinda
 una caracterización de la expresividad de la misma.
 
-Si analizamos la noción presentada en la \Cref{def:bisimulation}, podemos notar que ($\khi$-zig) y ($\khi$-zag) requieren condiciones 
-sobre los conjuntos proposicionalmente definibles de los dominios de cada modelo. Dicha condición establece la existencia de una fórmula proposicional
-(es decir, de un objeto sintáctico), que defina exactamente un conjunto. Esto contradice la naturaleza estructural y puramente semántica 
+Si analizamos la noción presentada en la \Cref{def:bisimulation}, podemos notar que ($\khi$-zig) y ($\khi$-zag) establecen condiciones 
+sobre los conjuntos proposicionalmente definibles de los dominios de cada modelo. La cuantificación sobre dichos conjuntos depende necesariamente
+de la existencia de una fórmula proposicional, es decir, de un objeto sintáctico. Esto contradice la naturaleza estructural y puramente semántica 
 de las bisimulaciones. 
 
 A su vez, a la hora de presentar una noción de bisimulación, es deseable que la misma tenga una naturaleza `procedural', es decir,
@@ -76,11 +76,11 @@ a su función de valuación.
 \begin{definicion}\label{def:Am}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults entonces se define, 
     \begin{center}
-        $A_\modults := \{(w,v) \in \W \times \W \mid \V(w) = \V(v)\}$.
+        $A_\modults \eqdef \{(w,v) \in \W \times \W \mid \V(w) = \V(v)\}$.
     \end{center}
     Notar que $A_\modults$ es una relación de equivalencia sobre $\W$. Luego se denotará,
     \begin{center}
-        $\rho_\modults := \{ [w] \mid w \in \W $ y $[w]$ su clase de equivalencia respecto a $A_\modults\}$.
+        $\rho_\modults \eqdef \{ [w] \mid w \in \W $ y $[w]$ su clase de equivalencia respecto a $A_\modults\}$.
     \end{center}
 \end{definicion}
 
@@ -233,7 +233,7 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
 
     Supongamos que para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$.
 
-    Por un lado si $U = \emptyset$, luego la fórmula $ \varphi := \bot$ define a $U$. Entonces supongamos que $U \neq \emptyset$. 
+    Por un lado si $U = \emptyset$, luego la fórmula $ \varphi = \bot$ define a $U$. Entonces supongamos que $U \neq \emptyset$. 
     
     Notemos que como $\modults \in$ \MFD, entonces $\rho_\modults$ es finito. Denotaremos a sus elementos como $\rho_\modults = \{s_1,...,s_n\}$. 
     A su vez, como para cada $v,w \in s_i$ se cumple que $\V(w) = \V(v)$ entonces denotaremos $\V(s_i)$ a $\V(w)$ con $w \in s_i$. 
@@ -243,7 +243,7 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
 
 
 
-    Sea $\varphi_i := \bigwedge\limits_{\substack{j = 1 \\ j \neq i}}^{n} l(p_{i,j})$ donde $l(p_{i,j}) = $
+    Sea $\varphi_i = \bigwedge\limits_{\substack{j = 1 \\ j \neq i}}^{n} l(p_{i,j})$ donde $l(p_{i,j}) = $
     $\left\{ \begin{array}{rcl}
             p_{i,j} & \mbox{si}
             & p_{i,j} \in \V(s_i) \\ \neg p_{i,j} & \mbox{si} & p_{i,j} \notin \V(s_i) \\
@@ -252,7 +252,7 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
 
     Veamos que por la forma en la que construimos $\varphi_i$, se cumple que $\modults, w \models \varphi_i$ si y sólo si $w \in s_i$. ($*$)
     
-    Demostremos entonces que $\varphi := \bigvee\limits_{s_i \subseteq U}\varphi_i$ define a $U$. Primero, notar que sea $w \in \W$, 
+    Demostremos entonces que $\varphi = \bigvee\limits_{s_i \subseteq U}\varphi_i$ define a $U$. Primero, notar que sea $w \in \W$, 
     $\modults, w \models \varphi$ si y sólo si $\modults, w \models \varphi_i$ para algún $i \in \{1,...n\}$ tal que $s_i \subseteq U$.  
     Queremos ver entonces que, $w \in U$ si y sólo si $\modults, w \models \varphi$. 
 
@@ -281,8 +281,9 @@ De esta lema obtenemos un corolario sobre el problema de determinar si un subcon
     Primero, notemos que determinar si $U$ es \KHilogic-definible es equivalente a determinar si $U$ es proposicionalmente definible, por lo visto en 
     \Cref{prop:khi-implies-prop-definable}.
 
-    Luego, por \Cref{lema:finite-propositionally-definable-lemma}, basta con dar un algoritmo que compute $\rho_\modults$ y para cada $s \in \rho_\modults$ 
-    chequee que $s \subseteq U$ o $s \cap U = \emptyset$. Lo cuál es claro que puede realizarse en tiempo polinomial sobre el tamaño de $\modults$.
+    Luego, por \Cref{lema:finite-propositionally-definable-lemma}, basta con dar un algoritmo que compute $\rho_\modults$ y 
+    para cada $s \in \rho_\modults$ chequee que $s \subseteq U$ o $s \cap U = \emptyset$. No es díficil notar que esto 
+    puede realizarse en tiempo polinomial sobre el tamaño de $\modults$.
 \end{demostracion}
 
 Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{lema:new-implies-old}.

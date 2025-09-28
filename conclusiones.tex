@@ -17,14 +17,14 @@ la implementación de la contracción por bisimulación sería muy beneficiosa e
 estilo de Model Checking sobre un \ults.
 
 Por último, a partir de los resultados estudiados en \cite{Demri_Fervari_2023} en relación a la lógica de `Knowing How' basada en incertidumbre, 
-consideramos que es posible generalizar el resultado de complejidad del problema de $\KHiBisim$ a la lógica que se intepreta sobre \regults, los 
+consideramos que es posible generalizar el resultado de complejidad del problema de $\KHiBisim$ para la lógica que se intepreta sobre $\regults$, los 
 cuáles son \ults en donde la relación de indistinguibilidad entre planes de cada agente está dada por un conjunto de autómatas finitos en lugar 
 de conjuntos explícitos de planes. 
-Notar que a un nivel lógico o de teoría de modelos, la clase de modelos \regults es una subclase de los modelos \ults (pues restringen las clases de equivalencia 
-a lenguajes regulares), pero a nivel computacional los \regults son más poderosos dado que permiten representar de forma finita un conjunto 
-posiblemente infinito de planes. En \cite{Demri_Fervari_2023}, se demuestra que dado un \regults verificar si el lenguaje de un autómata 
-es fuertemente ejecutable en un nodo es realizable en tiempo polinomial. A su vez, se demuestra que dado un \regults con $A$ un autómata dentro de la relación de indistinguibilidad de 
-un agente, es posible computar en tiempo polinomial $\R_{L(A)}(w)$ para $w$ en el dominio del \regults, siendo $L(A)$ el lenguaje aceptado 
+Notar que a un nivel lógico o de teoría de modelos, la clase de modelos $\regults$ es una subclase de los modelos \ults (pues restringen las clases de equivalencia 
+a lenguajes regulares). Sin embargo, a nivel computacional los $\regults$ son más poderosos, dado que permiten representar de forma finita un conjunto 
+posiblemente infinito de planes. En \cite{Demri_Fervari_2023}, se demuestra que dado un $\regults$ verificar si el lenguaje de un autómata 
+es fuertemente ejecutable en un nodo es realizable en tiempo polinomial. A su vez, se demuestra que dado un $\regults$ con $A$ un autómata dentro de la relación de indistinguibilidad de 
+un agente, es posible computar en tiempo polinomial $\R_{L(A)}(w)$ para $w$ en el dominio del $\regults$, siendo $L(A)$ el lenguaje aceptado 
 por el autómata $A$.
 A partir de estos resultados, conjeturamos que es posible adaptar lo estudiado sobre $\KHiBisim$ para demostrar que su versión para 
-esta lógica sobre \regults también es $\coNPComplete$.
+esta lógica sobre $\regults$ también es $\coNPComplete$.

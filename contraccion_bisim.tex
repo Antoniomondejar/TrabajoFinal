@@ -268,15 +268,15 @@ de cada agente.
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Se define su contracción por bisimulación, $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT'},\V',\ACT'}$ donde 
     \begin{center}
         \begin{itemize}
-            \item $\W' := \W/A_\modults$
-            \item $\R' := \{\R'_{a_\sigma} \subseteq \W' \times \W' \mid a_\sigma \in \ACT'\}$ donde $([w],[v]) \in \R'_{a_\sigma}$ si y sólo si
+            \item $\W' \eqdef \W/A_\modults$
+            \item $\R' \eqdef \{\R'_{a_\sigma} \subseteq \W' \times \W' \mid a_\sigma \in \ACT'\}$ donde $([w],[v]) \in \R'_{a_\sigma}$ si y sólo si
             \begin{enumerate}
                 \item existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v')\in \R_\sigma$
                 \item $\sigma$ es fuertemente ejecutable para cada $w' \in [w]$.
             \end{enumerate}
-            \item $\S_i' := \{ \pi' = \{a_\sigma \mid \sigma \in \pi\} \mid \pi \in \S_i \}$
-            \item $\V'([w]) := \V(w)$
-            \item $\ACT' := \{a_\sigma \mid $ existe $ \pi\in \S_i$ tal que $ \sigma \in \pi$ para algún $i \in \AGT \}$ 
+            \item $\S_i' \eqdef \{ \pi' = \{a_\sigma \mid \sigma \in \pi\} \mid \pi \in \S_i \}$
+            \item $\V'([w]) \eqdef \V(w)$
+            \item $\ACT' \eqdef \{a_\sigma \mid $ existe $ \pi\in \S_i$ tal que $ \sigma \in \pi$ para algún $i \in \AGT \}$ 
         \end{itemize}
     \end{center}
 \end{definicion}
@@ -312,7 +312,7 @@ siguiente teorema.
             \end{itemize}
         \end{multicols}
 
-        Veamos que $T' := \{ [w] \mid w \in T\}$ cumple con lo mencionado. Por como definimos $Z$, es claro que $T'  = Z(T)$, por lo que 
+        Veamos que $T' = \{ [w] \mid w \in T\}$ cumple con lo mencionado. Por como definimos $Z$, es claro que $T'  = Z(T)$, por lo que 
         $T' \subseteq Z(T)$. Entonces demostremos $Z(U) \ultsExecAgi T'$.
 
         Como $U \ultsExecAgi T$, existe $\pi \in S_i$ tal que cada plan de $\pi$ es fuertemente ejecutable en cada nodo de $U$ y 
@@ -350,7 +350,7 @@ siguiente teorema.
             \end{itemize}
         \end{multicols}
         
-        Veamos que $T := \bigcup\limits_{[w] \in T'} [w]$ cumple con lo mencionado. Notar que por la definición de $Z$, es claro que $T = Z^{-1}(T')$, lo que nos dice que $T \subseteq Z^{-1}(T')$. Demostremos entonces que $Z^{-1}(U') \ultsExecAgi T$. 
+        Veamos que $T = \bigcup\limits_{[w] \in T'} [w]$ cumple con lo mencionado. Notar que por la definición de $Z$, es claro que $T = Z^{-1}(T')$, lo que nos dice que $T \subseteq Z^{-1}(T')$. Demostremos entonces que $Z^{-1}(U') \ultsExecAgi T$. 
     
         Como $U' \ultsExecAgi T'$, entonces existe $\pi' \in \S_i'$ tal que $\pi'$ es fuertemente ejecutable para cada $[w] \in U'$ y $\R'_{\pi'}(U') \subseteq T'$.
 
@@ -441,9 +441,9 @@ de planes de cada agente.
     Sea $\modults = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke. Sea $Z_\modults$ su autobisimulación máxima en Lógica Modal Básica (LMB) entonces definimos su contracción por LMB-bisimulación como $\modults_{LMB} = \tup{\W',\{\R'_a\}_{a\in\ACT},\V'}$ donde
     \begin{center}
         \begin{itemize}
-            \item $\W' := \W /Z_\modults$
-            \item $\R_a' := \{([w],[v]) \mid$ existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v') \in \R_a \}$
-            \item $\V'([w]) := \V(w)$
+            \item $\W' \eqdef \W /Z_\modults$
+            \item $\R_a' \eqdef \{([w],[v]) \mid$ existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v') \in \R_a \}$
+            \item $\V'([w]) \eqdef \V(w)$
         \end{itemize}
     \end{center} 
 \end{definicion}
@@ -469,9 +469,10 @@ Ahora, una vez presentada la contracción por LMB-bisimulación, demostraremos e
 la lógica `Knowing How' multi-agente basada en incertidumbre.
 
 \begin{teorema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ 
-    la contracción por LMB-bisimulación del modelo de Kripke $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ 
-    son $\KHilogic$-bisimilares para cada $w \in \W$ siendo $\modults' = \tup{\W',\R',\cset{\S_i}_{i \in \AGT},\V',\ACT}$.
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\modults_{LMB}$ 
+    la contracción por LMB-bisimulación del modelo de Kripke $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, 
+    entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$ 
+    siendo $\modults' = \tup{\W',\R',\cset{\S_i}_{i \in \AGT},\V',\ACT}$.
 \end{teorema}
 
 Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ inmediatamente fijamos a $\ACT$ como el conjunto no vacío enumerable de acciones para la Lógica Modal Básica.
@@ -491,7 +492,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
                 \item $T' \subseteq Z(T)$.
             \end{itemize}
         \end{multicols}
-        Veamos que $T' := \{[w] \mid w \in T\}$ cumple con lo mencionado. Notemos que $T' = Z(T)$, por lo que solo debemos demostrar 
+        Veamos que $T' = \{[w] \mid w \in T\}$ cumple con lo mencionado. Notemos que $T' = Z(T)$, por lo que solo debemos demostrar 
         $Z(U) \ultsExecAgi T'$.
 
         Como $U \ultsExecAgi T$, existe $\pi \in S_i$ tal que $\pi$ es fuertemente ejecutable en $U$ y a su vez $\R_\pi(U) \subseteq T$.
