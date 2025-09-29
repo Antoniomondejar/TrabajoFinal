@@ -1,4 +1,4 @@
-\chapter{Lógica de ``Knowing How'' Multi-Agente Basada en Incertidumbre}
+\chapter{Lógica de ``Knowing How'' Basada en Incertidumbre}
 En este capítulo, introduciremos un enfoque para modelar el concepto de ``saber cómo'', presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
 lógica previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
 representado en Sistemas de Transición Etiquetado (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
@@ -7,7 +7,7 @@ su disposición en un determinado estado, sino que también por la composición 
 llamaremos planes. Se considera que un plan es ``adecuado'' para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
 a partir de dicho estado se puede completar. En tal caso, diremos que el plan es ``fuertemente ejecutable'' en dicho estado.
 
-La lógica de ``Knowing How'' multi-agente basada en incertidumbre toma este enfoque como punto de partida. La principal motivación por la que 
+La lógica de ``Knowing How'' basada en incertidumbre toma este enfoque como punto de partida. La principal motivación por la que 
 surge esta nueva propuesta es que la representación del conocimiento mencionada anteriormente supone que el agente cuenta con cierto nivel de omnisciencia, 
 pues se asume que un agente conoce todo plan que pueda inferirse de su \lts asociado y que, además, es capaz de distinguir qué plan es adecuado de entre 
 los que tiene a su disposición, en el sentido de que para todo par de planes es capaz de reconocer si provocan resultados diferentes.
@@ -31,7 +31,7 @@ pero cada uno tiene su propia interpretación de los efectos de las mismas, así
 Así, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
 relación de indistinguibilidad sobre planes para cada agente.
 
-Una vez hechas estas consideraciones, introduciremos la lógica de ``Knowing-How'' multi-agente basada en incertidumbre (\KHilogic) definiendo 
+Una vez hechas estas consideraciones, introduciremos la lógica de ``Knowing-How'' basada en incertidumbre (\KHilogic) definiendo 
 su sintaxis y semántica, y su noción de bisimulación. Por último, mencionaremos algunos resultados relacionados a su complejidad 
 computacional con respecto a los problemas de model-checking y satisfacibilidad, con el objetivo de brindar una perspectiva completa acerca 
 del comportamiento computacional de la lógica.
@@ -86,12 +86,12 @@ los sistemas de transición etiquetados.
 \begin{definicion}[Sistema de Transición Etiquetado]
     Un \emph{Sistema de Transición Etiquetado (\lts, por sus siglas en inglés)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
     donde $\W$ es un conjunto no vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ es 
-    una colección de relaciones binarias sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de etiquetado y $\ACT$ es un 
+    una colección de relaciones binarias sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de valuación y $\ACT$ es un 
     conjunto enumerable de nombres de acciones.
 \end{definicion}
 
 Gráficamente, un \lts se representa como un grafo dirigido etiquetado, donde los nodos serán los elementos de $\W$, cada uno marcado con las variables proposicionales 
-dadas por la función de etiquetado $\V$ y las aristas entre dos nodos estarán dadas por los pares de $\R_a$ para cada $a \in \ACT$.
+dadas por la función de valuación $\V$ y las aristas entre dos nodos estarán dadas por los pares de $\R_a$ para cada $a \in \ACT$.
 
 \begin{ejemplo}\label{ejemplo:lts}
     Sea $\modlts = \tup{\W, \R, \V, \ACT}$ un \lts con:
@@ -347,7 +347,7 @@ Ahora, estamos en condiciones de presentar la noción de bisimulación para \KHi
         \item Sea $u' \in \W'$ y $U' \subseteq \W'$, definimos
         \begin{nscenter}
             \begin{tabular}{@{}c@{}}
-                $Z^{-1}(u') \eqdef \csetsc{u \in \W}{(u,u') \in Z}$; \qquad $Z^{-1}(U') \eqdef \bigcup_{u' \in U'} Z^{-1}(u')$.
+                $Z^{-1}(u') \eqdef \csetsc{u \in \W}{(u,u') \in Z}$, \qquad $Z^{-1}(U') \eqdef \bigcup_{u' \in U'} Z^{-1}(u')$.
             \end{tabular}
         \end{nscenter}
     \end{itemize}
@@ -517,7 +517,7 @@ de Hennessy-Milner, es decir, satisface la recíproca de \Cref{thm:bisim-implies
 \begin{definicion}\label{def:finite-ults}
     Se define la clase de \ultss finitos en su dominio (\textbf{FD}):
     \begin{center}
-        \MFD $\eqdef \{\modults \mid \modults = \tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es un \ults y $\W$ es finito$\}$
+        \MFD $\eqdef \{\modults \mid \modults = \tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es un \ults con $\W$ es finito$\}$
     \end{center}
 
 \end{definicion}
