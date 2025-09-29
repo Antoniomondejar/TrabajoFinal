@@ -1,6 +1,6 @@
 \chapter{Redefiniendo la Noción de Bisimulación}
 
-La noción de bisimulación de una lógica modal nos permite relacionar dos modelos a partir de características puramente estructurales 
+La noción de bisimulación de una lógica modal nos permite relacionar dos modelos a partir de características estructurales 
 que comparten entre sí, con las que se logra garantizar la equivalencia lógica entre ellos. En ese sentido, consideramos que la 
 bisimulación modela la idea de equivalencia en cuanto al comportamiento de ambos modelos respecto a una lógica en particular, lo cuál nos brinda
 una caracterización de la expresividad de la misma.
@@ -165,7 +165,7 @@ incertidumbre.
 
 
 Una vez presentada la nueva definición, notemos que \Cref{lema:propositionally-definable-lemma} nos permite demostrar de forma casi directa que
-toda relación binaria que satisface las nuevas condiciones presentadas de ($\khi$-zig$^*$) y ($\khi$-zag$^*$) también satisface las condiciones
+toda relación binaria que satisface las nuevas condiciones ($\khi$-zig$^*$) y ($\khi$-zag$^*$) también satisface las condiciones
 presentadas en la \Cref{def:bisimulation}.
 
 \begin{lema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-bisimilitud]\label{lema:new-implies-old}
@@ -175,7 +175,8 @@ presentadas en la \Cref{def:bisimulation}.
 \begin{demostracion}
     Queremos ver que $Z$ es una \KHilogic-bisimulación.
 
-    Notemos que $Z$ satisface (Atom), (A-zig) y (A-zag) dado que $Z$ es una \KHilogic-bisimulación$^*$.
+    Notemos que $Z$ satisface (Atom), (A-zig) y (A-zag) dado que es una \KHilogic-bisimulación$^*$. A su vez, por el mismo motivo, $Z$ 
+    es no vacía.
 
     Veamos entonces que satisface ($\khi$-zig) y ($\khi$-zag).
 
@@ -265,11 +266,11 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
     Luego $\varphi$ define a $U$. Como $\varphi$ es proposicional, $U$ es proposicionalmente definible.
 \end{demostracion}
 
-Notemos como este lema justifica el argumento utilizado en \Cref{ejemplo:bisim^*}, en el que se menciona que los conjuntos proposicionalmente 
+Notemos como el \Cref{lema:finite-propositionally-definable-lemma} justifica el argumento utilizado en \Cref{ejemplo:bisim^*}, en el que se menciona que los conjuntos proposicionalmente 
 definibles de $\modults$ son exactamente los conjuntos $U$ que satisfacen que para cada $s \in \rho_\modults$ se cumple que 
 $s \subseteq U$ o $s \cap U = \emptyset$.
 
-De esta lema obtenemos un corolario sobre el problema de determinar si un subconjunto del dominio de un \ults es \KHilogic-definible.
+De este lema obtenemos un corolario sobre el problema de determinar si un subconjunto del dominio de un \ults es \KHilogic-definible.
 
 \begin{corolario}[\KHilogic-definibilidad]
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults en \MFD y sea $U \subseteq \W$, el problema de determinar si $U$ es 
@@ -286,7 +287,8 @@ De esta lema obtenemos un corolario sobre el problema de determinar si un subcon
     puede realizarse en tiempo polinomial con respecto al tamaño de $\modults$.
 \end{demostracion}
 
-Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también \Cref{lema:new-implies-old}.
+Luego, veamos como el fortalecimiento de la propiedad sobre los conjuntos proposicionalmente definibles nos permite fortalecer también el 
+\Cref{lema:new-implies-old}.
 
 \begin{lema}[\KHilogic-bisimilitud implica \KHilogic-bisimilitud$^*$]\label{lema:old-implies-new-finite}
     Sean $\modults$ y $\modults'$ dos \ultss en \MFD, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$, entonces 
@@ -316,7 +318,7 @@ Notemos como el fortalecimiento de la propiedad sobre los conjuntos proposiciona
         \end{multicols}
 
         Notemos que como para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$ y $\modults \in $ \MFD entonces 
-        por \Cref{lema:finite-propositionally-definable-lemma} $U$ es proposicionalmente definible.
+        por \Cref{lema:finite-propositionally-definable-lemma} tenemos que $U$ es proposicionalmente definible.
     
         Luego como $Z$ satisface ($\khi$-zig) tenemos asegurada la existencia de dicho $T'$.
     
@@ -344,35 +346,47 @@ Y como demostramos que en el caso finito ambas definiciones de bisimulación son
     entonces $\model,w \bisim^* \model', w'$.
 \end{demostracion}
 
-Por otro lado, a partir del siguiente ejemplo, podemos ver como la otra dirección de \Cref{lema:new-implies-old} no se cumple para todo 
-par de modelos en el caso infinito.
+A partir del siguiente ejemplo podemos ver como la recíproca del \Cref{lema:new-implies-old} y la recíproca 
+del \Cref{lema:propositionally-definable-lemma} no son válidas en el caso de \ultss con dominio infinito.
 
 \begin{ejemplo}
-    Consideremos a $\PROP$ como un conjunto de variables proposicionales con la cardinalidad de los naturales. Es claro que $\mathcal{P}(\PROP)$ tiene 
-    cardinalidad real. Luego, consideremos un modelo con dominio $\mathcal{P}(\PROP)$, donde su función de etiquetado $\V$ es la función 
-    identidad, es decir, $\V(x) = x$ para todo $x \in \mathcal{P}(\PROP)$.
+    Sea $\PROP$ un conjunto de símbolos proposicionales con la cardinalidad de $\mathbb{N}$. Es claro que $\mathcal{P}(\PROP)$ tiene 
+    la cardinalidad de $\mathbb{R}$. Luego, consideremos un modelo $\model$ con dominio $\mathcal{P}(\PROP)$, donde su función de valuación 
+    $\V$ es la función identidad, es decir, $\V(w) = w$ para todo $w \in \mathcal{P}(\PROP)$.
     
-    Es claro la partición $\rho_\modults$ de este modelo son todos `singletons', 
-    dado que cada nodo tiene una imagen distinta en su función de valuación. Pero, notemos que como $\PROP$ tiene cardinalidad contable, entonces la 
-    cardinalidad del conjunto de fórmulas proposicionales es también contable, luego existe algún elemento de $\mathcal{P}(\PROP)$ 
-    (es decir, del dominio del modelo que estamos considerando) que no es proposicionalmente definible (por una cuestión de cardinalidad). 
-    Llamemos a dicho elemento $x$.
+    Notemos que la partición $\rho_\modults$ de este modelo está compuesta por clases de equivalencia de un solo elemento, 
+    dado que cada nodo tiene una imagen distinta en su función de valuación. Por otro lado, como $\PROP$ tiene cardinalidad contable, entonces la 
+    cardinalidad del conjunto de fórmulas proposicionales es también contable. Luego, existe algún elemento $x \in \mathcal{P}(\PROP)$ 
+    (el dominio del modelo considerado en este ejemplo) tal que $\{x\}$ no es proposicionalmente definible.
     
-    Entonces eso nos da un ejemplo de un conjunto del dominio de un \ults que satisface que para todo $s \in \rho_\modults$ se cumple que 
-    $s \cap U = \emptyset$ o $s \subseteq U$ pero dicho conjunto no es proposicionalmente definible. Esto dice que no vale la vuelta del \Cref{lema:propositionally-definable-lemma}.
+    Entonces, $\{x\}$ es un ejemplo de un subconjunto del dominio de $\model$ que satisface que para todo $s \in \rho_\modults$ se cumple que 
+    $s \cap \{x\} = \emptyset$ o $s \subseteq \{x\}$ pero no es proposicionalmente definible. Luego, la vuelta del \Cref{lema:propositionally-definable-lemma}
+    no es válida para el caso de \ultss con dominio infinito.
 
-    Para ver que no vale la vuelta del \Cref{lema:new-implies-old}, hay que armarse dos modelos con dominio $\mathcal{P}(\PROP)$ que hagan cosas
-    distintas únicamente en el mundo $x$ y en el resto de mundos se comporten igual. (tengo más o menos la idea de cómo armarlo pero no se bien cómo escribirlo ahora).
+    Ahora, consideremos dos modelos $\model = \tup{\mathcal{P}(\PROP),\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y 
+    $\model'=\tup{\mathcal{P}(\PROP),\R,\cset{\S'_i}_{i \in \AGT},\V,\ACT}$ donde $\ACT = \{a,b\}$, $\V(w) = w$, 
+    $\S_i = \{\{a\}, \{b\}\}$, $\S'_i = \{\{a\}\}$, $\R_a = \mathcal{P}(\PROP) \times \mathcal{P}(\PROP)$ y $\R_b = \{(x,x)\}$ 
+    siendo $x$ el elemento mencionado anteriormente. 
+    
+    Notemos que en $\model$ se da que $\{x\} \ultsExecAgi \{x\}$ a través de $\{b\}$. Por otro lado, en $\model'$ no existe $\pi \in \S'_i$ que 
+    atestigue $\{x\} \ultsExecAgi \{x\}$, pues el único elemento de $\S'_i$ es $\{a\}$ y $\R_a(x) = \mathcal{P}(\PROP) \not\subseteq \{x\}$.
+
+    Luego, si consideramos la relación binaria $Z = \{(w,w) \mid \mathcal{P}(\PROP) \times \mathcal{P}(\PROP)\}$, podemos ver que $Z$ no es una 
+    \KHilogic-bisimulación$^*$ entre $\model$ y $\model'$ por lo analizado en el párrafo anterior. Sin embargo, como $\{x\}$ \textbf{no} 
+    es proposicionalmente definible, dicho conjunto no es considerado a la hora de analizar la condición ($\khi$-zig); luego, es posible 
+    demostrar que $Z$ es una \KHilogic-bisimulación entre $\model$ y $\model'$. Teniendo esto en consideración, hemos demostrado que la vuelta 
+    del \Cref{lema:new-implies-old} no es válida para el caso de \ultss con dominio infinito.
 \end{ejemplo}
 
 
-Hemos presentado una nueva definición de bisimulación para la lógica de `Knowing How' multi-agente basada en incertidumbre, la 
-cuál pide condiciones puramente estructurales entre los modelos en cuestión. A su vez, demostramos las principales propiedades que se 
-esperan a la hora de proponer una definicion de bisimulación para una lógica modal, lo cuál sugiere que la nueva definición es adecuada.
+Hemos presentado una nueva definición de bisimulación para la lógica de `Knowing How' multi-agente basada en incertidumbre, en la que sólo 
+se consideran características estructurales de los modelos en cuestión. A su vez, demostramos las principales propiedades 
+que se esperan de la noción de bisimulación de una lógica modal, lo cuál sugiere que esta nueva definición es 
+adecuada.
 
 También, podemos notar que la definicion propuesta evita la necesidad de listar cada fórmula proposicional para verificar que una relación binaria
-es una bisimulación, lo cuál le aporta una naturaleza más procedural como mencionamos al principio del capítulo.  
+es una bisimulación, lo cuál le aporta una naturaleza más procedural como mencionamos al principio del capítulo.
 
-Teniendo en cuenta lo estudiado en esta sección, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.
+Teniendo en cuenta lo estudiado en este capítulo, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.
 Por una cuestión de simplicidad, descartaremos los $*$ cuando hablemos de una \KHilogic-bisimulación$^*$ y 
 al relacionar dos \ultss punteados a partir de $\bisim^*$.
