@@ -9,7 +9,8 @@ Esta naturaleza estructural para verificar si una relación entre los dominios d
 también nos permite encontrar un procedimiento efectivo que decida si existe una bisimulación entre dos modelos. 
 Dicho problema de decisión es usualmente conocido en la literatura de las lógicas modales como comparación de modelos (Model Comparison).
 
-En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados.
+En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados. Cabe destacar que en los resultados presentados 
+nos referiremos siempre a \ultss finitos, es decir, \ultss en los cuáles cada una de sus componentes tiene tamaño finito.
 
 \section{Verificación de Bisimulaciones}
 
@@ -65,13 +66,13 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                         \If{$U \subseteq \sexec^{\model}(\pi)$}
                         \State $U' \gets Z(U)$
                         \State $T \gets Z(\R_\pi(U))$ 
-                        \State \textit{foundStrat} $\gets 0$
+                        \State \textit{foundWitness} $\gets 0$
                             \ForAll{$\pi' \in \S_i'$}
                                 \If{$U' \subseteq \sexec^{\model'}(\pi') \wedge \R'_{\pi'}(U') \subseteq T$}
-                                    \State \textit{foundStrat} $\gets 1$
+                                    \State \textit{foundWitness} $\gets 1$
                                 \EndIf         
                             \EndFor
-                            \If{$\neg$ \textit{foundStrat}}
+                            \If{$\neg$ \textit{foundWitness}}
                                 \Return 1
                             \EndIf
                         \EndIf
@@ -87,11 +88,11 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 \State Check (A-zig), if not \Return 1
                 \State Check (A-zag), if not \Return 1
                 \If{$b$}
-                    \State If exists $s \in \rho_\model$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
+                    \State If there exists $s \in \rho_\model$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model,\model',Z,U$}
                 \Else
-                    \State If exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
+                    \State If there exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model',\model,Z^{-1},U$} \Comment{Notice the parameters.}
                 \EndIf
@@ -142,11 +143,11 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
             a su vez, $\R_\pi(U) \subseteq T$. 
             
             Esto nos dice que al considerar la ejecución de \textsf{NotSimulates}, cuando se itera sobre el plan $\pi$, el algoritmo 
-            ingresa al \textit{if} de la línea 4 e inicializa la variable \textit{foundStrat} en 0.
+            ingresa al \textit{if} de la línea 4 e inicializa la variable \textit{foundWitness} en 0.
 
             Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z(U) \not \subseteq \sexec^{\model'}(\pi')$ o que 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'\in\S'_i$ entonces 
-            el valor de \textit{foundStrat} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea 11.
+            el valor de \textit{foundWitness} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea 11.
 
             Sea $\pi' \in \S'_i$, supongamos entonces que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y veamos que 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$.
@@ -160,7 +161,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$ entonces también ocurre que $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, 
             que era lo que queríamos ver.
 
-            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea 8 con la variable \textit{foundStrat} valiendo 0, luego 
+            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea 8 con la variable \textit{foundWitness} valiendo 0, luego 
             devuelve 1 en la línea 11.
 
             Finalmente, \textsf{CounterexampleChecker}($\modults,\modults',Z,\tup{U,1}$) = 1.
@@ -193,7 +194,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 Supongamos entonces $U$ cumple con lo mencionado. Luego, se ejecuta \textsf{NotSimulates} en la línea 19. 
                 
                 Sea $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$, 
-                entonces el algoritmo ingresa al \textit{if} de la línea 4 e inicializa \textit{foundStrat} en 0.
+                entonces el algoritmo ingresa al \textit{if} de la línea 4 e inicializa \textit{foundWitness} en 0.
                 
                 Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $Z$ cumple ($\khi$-zig), existe 
                 $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq Z(\R_\pi(U))$.
@@ -202,7 +203,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 $\R'_{\pi'}(Z(U)) \subseteq T'$.
                 
                 Pero como $T' \subseteq Z(\R_\pi(U))$, entonces $\R'_{\pi'}(Z(U)) \subseteq Z(\R_\pi(U))$, por lo que 
-                el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de \textit{foundStrat} a 1.
+                el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de \textit{foundWitness} a 1.
                 
                 Como este análisis vale para todo $\pi \in \S_i$, esto demuestra que \textsf{NotSimulates} finaliza su ejecución en la 
                 línea 12 donde devuelve 0. Por lo que \textsf{CounterexampleChecker} devuelve 0 a partir de ($\modults,\modults',\tup{U,b}$).
@@ -275,15 +276,15 @@ Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontr
     \end{itemize}
     con:
     \begin{itemize}
-        \item $\W \eqdef \{p_i\mid i\in\{1,...,n\}\} \cup \{\varphi_i \mid i \in \{1,...,m\}\} \cup \{e\}$
-        \item $\ACT \eqdef \{in_{\varphi_i} \mid i \in \{1,...,m\}\} \cup \{out_{\varphi_i} \mid i \in \{1,...,m\}\}$
-        \item $\S \eqdef \{\{in_{\varphi_i}out_{\varphi_i}\} \mid i \in \{1,...,m\}\}$
+        \item $\W \eqdef \{p_i\mid i\in\{1,...,n\}\} \cup \{\varphi_j \mid j \in \{1,...,m\}\} \cup \{e\}$
+        \item $\ACT \eqdef \{in_{\varphi_j} \mid j \in \{1,...,m\}\} \cup \{out_{\varphi_j} \mid j \in \{1,...,m\}\}$
+        \item $\S \eqdef \{\{in_{\varphi_j}out_{\varphi_j}\} \mid j \in \{1,...,m\}\}$
         \item $\R_{in_{\varphi_j}} \eqdef \{(p_i,\varphi_j) \mid p_i$ no aparece en forma negativa en $\varphi_j\}$
         \item $\R_{out_{\varphi_j}} \eqdef \{(\varphi_j,p_i) \mid p_i$ aparece en forma positiva en $\varphi_j\} \cup \{(\varphi_j,e) \mid \varphi_j$ no tiene variables positivas$\}$,        
         \item $\R_{test} \eqdef \{(p_i,p_i) \mid i \in \{1,...,n\}\} \cup \{(p_i,e)\mid i\in \{1,...,n\}\}$,
         \item $\R \eqdef \{\R_{in_{\varphi_j}}\mid j \in \{1,...,m\}\} \cup \{\R_{out_{\varphi_j}}\mid j \in \{1,...,m\}\}$,
         \item $\V \eqdef \{(p_i,\{q_i\}) \mid i \in \{1,...,n\}\} \cup 
-                     \{(\varphi_i,\{q_{i+n}\}) \mid i \in \{1,...,m\}\} \cup 
+                     \{(\varphi_j,\{q_{j+n}\}) \mid j \in \{1,...,m\}\} \cup 
                      \{(e,\{q_{n+m+1}\})\}$ donde $q_1,...,q_{n+m+1} \in \PROP$ son $n+m+1$ variables proposicionales distintas.
     \end{itemize}
     Notar que decimos que $p_i$ aparece en forma `positiva' en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$
@@ -306,66 +307,54 @@ Presentaremos un ejemplo con el objetivo de esclarecer el mapeo introducido.
     \Cref{def:karp-reduction} construye el modelo $\model$ \Cref{fig:karp-reduction}: 
 
     \begin{figure}[t]
-        \hspace*{0.5cm}
-        \vspace{0.1cm}
-        \begin{tikzpicture}
-            \node[state] (phi1) {$q_3$};
-            \node[state, right of=phi1, xshift=1cm] (phi2) {$q_4$};
-            \node[state, right of=phi2, xshift=1cm] (phi3) {$q_5$};
+        \begin{center}
+        \begin{tikzpicture}[scale=1.3]
+            % Nodes at rotated positions
+            \node[state] (phi1) at (0,0) {$q_3$};
+            \node[state] (phi2) at (0,1.5) {$q_4$};
+            \node[state] (phi3) at (0,3) {$q_5$};
             
-            \node[state, below of=phi1, xshift=0.8cm, yshift=-1.8cm] (p1) {$q_1$};
-            \node[state, right of=p1, xshift=1cm] (p2) {$q_2$};
+            \node[state] (p1) at (2.6,0.5) {$q_1$};
+            \node[state] (p2) at (2.6,1.5) {$q_2$};
             
-            \node[state, below of=p1, xshift=0.9cm, yshift=-1.8cm] (e) {$q_6$};
-            
+            \node[state] (e) at (5.2,1.5) {$q_6$};
 
+            % Labels
+            \node at ($(phi1)+(-0.5,0)$) {$\varphi_1$};
+            \node at ($(phi2)+(-0.5,0)$) {$\varphi_2$};
+            \node at ($(phi3)+(-0.5,0)$) {$\varphi_3$};
+            \node at ($(e)+(0.4,0)$) {$e$};
+            
+            \node at ($(p1)+(0.35,-0.3)$)  {$p_1$};
+            \node at ($(p2)+(0.35,-0.3)$) {$p_2$};
 
-            \node at ($(phi1)+(0,0.5)$) {$\varphi_1$};
-            \node at ($(phi2)+(0,0.5)$) {$\varphi_2$};
-            \node at ($(phi3)+(0,0.5)$) {$\varphi_3$};
-            \node at ($(e)+(0.05,-0.6)$) {$e$};
-            
-            \node at ($(p1)+(0.05,-0.6)$) [right] {$p_1$};
-            \node at ($(p2)+(0.05,-0.6)$) [left] {$p_2$};
-            
-            
-            \path (p1) edge node [below, sloped, inner sep=2pt] {\footnotesize $in_{\varphi_1}$} (phi1);
-            \path (p1) edge node [above, sloped, inner sep=1pt] {\footnotesize $in_{\varphi_2}$} (phi2);
-            \path (p2) edge node [above, sloped, inner sep=1pt] {\footnotesize $in_{\varphi_2}$} (phi2);
-            \path (p2) edge [bend right = 20] node [below, sloped, inner sep=0.8pt] {\footnotesize $in_{\varphi_3}$} (phi3);
+            % Edges
+            \path (p1) edge node [above, inner sep=2pt] {\footnotesize $in_{\varphi_1}$} (phi1);
+            \path (p1) edge node [above, inner sep=1pt] {\footnotesize $in_{\varphi_2}$} (phi2);
+            \path (p2) edge node [above, inner sep=1pt] {\footnotesize $in_{\varphi_2}$} (phi2);
+            \path (p2) edge[bend right=20] node [above, inner sep=1pt] {\footnotesize $in_{\varphi_3}$} (phi3);
 
-            \path (phi1) edge [bend right = 45] node [below, sloped, inner sep=1pt] {\footnotesize $out_{\varphi_1}$} (p1);
-            \path (p1) edge [loop right] node [above, sloped, inner sep=2pt] {\footnotesize $test$} (p1);
-            \path (phi2) edge [bend left=40] node [above, sloped, inner sep=1pt] {\footnotesize $out_{\varphi_2}$} (p2);
-            \path (p2) edge [loop right] node [above, sloped, inner sep=2pt] {\footnotesize $test$} (p2);
-
-            \path (phi3) edge [bend left = 50] node [below, sloped, inner sep=1pt] {\footnotesize $out_{\varphi_3}$} (e);
-            \path (p1) edge [bend right] node [above, sloped] {\footnotesize $test$} (e);
-            \path (p2) edge [bend left] node [above, sloped] {\footnotesize $test$} (e);
-            
-
-            % \path[pointed] (p) edge [bend right=35] node [above] {} (p2');
-            % \path[pointed] (p2) edge node [above] {} (p');
-            % \path[pointed] (q) edge node [above] {} (q');
-            % \path[pointed] (q2) edge node [above] {} (q2');
-            
-        \end{tikzpicture}
-        % \hspace{0.1cm}
-        \hspace{1.4cm}
-        \raisebox{3cm}{
-            \begin{minipage}{0.45\textwidth}
-                $\S_{agt} = \left\{
-                    \begin{array}{c}
-                        \{in_{\varphi_1}out_{\varphi_1}\},
-                        \{in_{\varphi_2}out_{\varphi_2}\},\\
+            \path (phi1) edge[bend right=45] node [below, inner sep=1pt] {\footnotesize $out_{\varphi_1}$} (p1);
+            \path (p1) edge [loop below] node [below] {\footnotesize $test$} (p1);
+            \path (phi2) edge[bend left=40] node [above, inner sep=1pt] {\footnotesize $out_{\varphi_2}$} (p2);
+            \path (p2) edge [loop above] node [above] {\footnotesize $test$} (p2);
+            \path (phi3) edge[bend left=50] node [above] {\footnotesize $out_{\varphi_3}$} (e);
+            \path (p1) edge[bend right] node [below] {\footnotesize $test$} (e);
+            \path (p2) edge[bend left] node [above] {\footnotesize $test$} (e);
+        \end{tikzpicture} \\
+            \smallskip 
+                    \footnotesize
+                    $\begin{array}{ll}
+                        
+                        \S_{agt} = &
+                         \left\{\{in_{\varphi_1}out_{\varphi_1}\},
+                        \{in_{\varphi_2}out_{\varphi_2}\},
                         \{in_{\varphi_3}out_{\varphi_3}\},
-                        \{test\}
-                    \end{array}
-                \right\}$
-            \end{minipage}
-        }
-        \caption{Representación gráfica de $\model$}
-        \label{fig:karp-reduction}
+                        \{test\} \right\}
+                    \end{array}$
+    \end{center}
+    \caption{Representación gráfica de $\model$.}
+    \label{fig:karp-reduction}
     \end{figure}
 
     Por otro lado, el modelo $\model'$ construído por $f$ es similar a $\model$ con la diferencia de que no se consideran las aristas 
@@ -401,7 +390,7 @@ problemas en cuestión.
 
     Por una cuestión de simplicidad y para garantizar correctitud, consideraremos que si $\varphi \not\in \DNFTAUT$ entonces la asignación 
     que atestigua dicha situación \textbf{no} es aquella asignación que asigna $false$ a todas las variables proposicionales de $\varphi$. 
-    Notar que esta consideración no pierde generalidad, dado que no es difícil modificar el mapeo $f$ para considerar dicho caso y 
+    Notar que esta consideración no quita generalidad, dado que no es difícil modificar el mapeo $f$ para considerar dicho caso y 
     mapear a $\varphi$ a dos \ultss que sean trivialmente no bisimilares.  
 
     \begin{itemize}
@@ -449,7 +438,7 @@ problemas en cuestión.
     de $\overrightarrow{a}$, es decir, en $\varphi_j$ las variables que aparecen en forma positiva son algún subconjunto de 
     $U$ y las variables que aparecen en forma negativa son algún subconjunto de $\{p_1,...,p_n\} \setminus U$.
 
-    Como las variables que aparecen en $\varphi_j$ en forma negativa no están en $U$, entonces, analizando la definición de $\R$, 
+    Como las variables que aparecen en forma negativa en $\varphi_j$ no están en $U$, entonces, analizando la definición de $\R$, 
     podemos ver que el plan $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. 
     
     En particular, las aristas con etiqueta $in_{\varphi_j}$ llevarían de cada nodo de $U$ al nodo $\varphi_j$.
@@ -505,7 +494,7 @@ problemas en cuestión.
     $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. Sin embargo, notemos que 
     entonces existe una variable $p_k$ en $\{p_1,...,p_n\}\setminus U$ que aparece en forma positiva en $\varphi_j$. 
     Como $p_k$ aparece en forma positiva en $\varphi_j$ entonces $p_k \in \R_{in_{\varphi_j}out_{\varphi_j}}(U)$. 
-    Luego $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan tampoco 
+    Luego, $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan tampoco 
     permite encontrar un $T'$ adecuado.
     
     Hemos analizado entonces todos los planes disponibles para el agente $agt$ en $\model'$ y ninguno permite encontrar un 
@@ -518,7 +507,7 @@ problemas en cuestión.
     Finalmente, demostramos que $f$ es una reducción de Karp de $\DNFTAUT$ a $\KHiBisim$. Luego, $\DNFTAUT \leq_p \CBisim$.
 \end{demostracion}
 
-Luego, a partir de este lema obtenemos de forma directa el resultado deseado.
+A partir de este lema obtenemos de forma directa el resultado deseado.
 
 \begin{corolario}\label{col:cbisim-conphard}
     $\CBisim$ es $\coNPHard$.
@@ -556,11 +545,11 @@ principio de esta sección: el de la comparación de modelos.
 \end{definicion}
 
 Una vez presentado el problema, un primer análisis intuitivo que surge acerca
-del mismo es que tiene una naturaleza, a priori, de `búsqueda+verificación', pues
+del mismo es que tiene una naturaleza, a priori, de ``búsqueda y verificación'', pues
 para decidir si existe una bisimulación entre dos \ultss, no parece haber una mejor
 opción que buscar una relación binaria candidata y verificar si efectivamente es una bisimulación. 
 
-A su vez, esta `búsqueda+verificación' parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
+A su vez, esta ``búsqueda y verificación'' parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
 entre dos \ultss a considerar. Por otro lado, como estudiamos en la anterior sección, verificar que una relación binaria 
 candidata es una bisimulación es $\coNPComplete$. 
 
@@ -664,14 +653,14 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
 \end{demostracion}
 
 Esta caracterización de la existencia de bisimulaciones entre \ultss
-nos permite profundizar nuestro primer análisis. Ahora, podemos considerar a $\KHiBisim$ como un problema de `verificación', 
+nos permite profundizar nuestro primer análisis. Ahora, podemos considerar a $\KHiBisim$ como un problema de ``verificación'', 
 pues para decidir la existencia de una bisimulación solo basta con verificar que la relación $\universalbis$ sea una bisimulación, por lo 
-que la parte de `búsqueda' propia de este problema se trivializa.
+que la parte de ``búsqueda'' propia de este problema se trivializa.
 
 Luego, teniendo en cuenta las consideraciones realizadas y lo analizado en relación a $\CBisim$ en la anterior sección, podemos extender los 
 resultados presentados a $\KHiBisim$.
 
-A partir de \Cref{lema:cbisim-in-conp}, obtenemos la pertenencia a $\coNP$ de $\KHiBisim$.
+A partir del \Cref{lema:cbisim-in-conp}, obtenemos la pertenencia a $\coNP$ de $\KHiBisim$.
 
 \begin{lema}\label{lema:khibisim-in-conp}
     $\KHiBisim \in \coNP$ 
