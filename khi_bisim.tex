@@ -64,7 +64,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 \ForAll{$\S_i$}
                     \ForAll{$\pi \in \S_i$}
                         \If{$U \subseteq \sexec^{\model}(\pi)$}\label{line:pi-se-in-U}
-                        \label{line:T-reachable-states-counterexcheck}\State $T \gets \R_\pi(U)$
+                        \State $T \gets \R_\pi(U)$\label{line:T-reachable-states-counterexcheck}
                         \State $U' \gets Z(U)$
                         \State $T' \gets Z(T)$ 
                         \State \textit{foundWitness} $\gets 0$
