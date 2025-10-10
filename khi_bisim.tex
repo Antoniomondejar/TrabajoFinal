@@ -63,36 +63,37 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
             \Function{NotSimulates}{$\model,\model',Z,U$}
                 \ForAll{$\S_i$}
                     \ForAll{$\pi \in \S_i$}
-                        \If{$U \subseteq \sexec^{\model}(\pi)$}
+                        \If{$U \subseteq \sexec^{\model}(\pi)$}\label{line:pi-se-in-U}
+                        \label{line:T-reachable-states-counterexcheck}\State $T \gets \R_\pi(U)$
                         \State $U' \gets Z(U)$
-                        \State $T \gets Z(\R_\pi(U))$ 
+                        \State $T' \gets Z(T)$ 
                         \State \textit{foundWitness} $\gets 0$
-                            \ForAll{$\pi' \in \S_i'$}
-                                \If{$U' \subseteq \sexec^{\model'}(\pi') \wedge \R'_{\pi'}(U') \subseteq T$}
+                            \ForAll{$\pi' \in \S_i'$}\label{line:for-strat-in-m'}
+                                \If{$U' \subseteq \sexec^{\model'}(\pi') \wedge \R'_{\pi'}(U') \subseteq T'$}
                                     \State \textit{foundWitness} $\gets 1$
                                 \EndIf         
                             \EndFor
                             \If{$\neg$ \textit{foundWitness}}
-                                \Return 1
+                                \Return 1\label{line:did-not-find-witness}
                             \EndIf
                         \EndIf
                     \EndFor
                 \EndFor
-                \State \Return 0
+                \State \Return 0\label{line:return-0}
             \EndFunction
 
             \vspace{1.5em}
 
             \Function{CounterexampleChecker}{$\modults,\modults',Z,\tup{U,b}$} 
-                \State Check (Atom), if not \Return 1
-                \State Check (A-zig), if not \Return 1
-                \State Check (A-zag), if not \Return 1
+                \State Check (Atom), if not \Return 1\label{line:Atom}
+                \State Check (A-zig), if not \Return 1\label{line:A-zig}
+                \State Check (A-zag), if not \Return 1\label{line:A-zag}
                 \If{$b$}
-                    \State If there exists $s \in \rho_\model$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
+                    \State If there exists $s \in \rho_\model$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$\label{line:khi-zig-check} 
                     \Return 0
-                    \State \Return \Call{NotSimulates}{$\model,\model',Z,U$}
+                    \State \Return \Call{NotSimulates}{$\model,\model',Z,U$}\label{line:not-simulates-exec}
                 \Else
-                    \State If there exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$ 
+                    \State If there exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$\label{line:khi-zag-check}
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model',\model,Z^{-1},U$} \Comment{Notice the parameters.}
                 \EndIf
@@ -101,7 +102,8 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
     \end{footnotesize}
     \end{algorithm}
 
-    Notemos que los chequeos de las líneas 14, 15, 16, 18 y 21 son claramente realizables en tiempo polinomial. Por 
+    Notemos que los chequeos de las líneas \ref{line:Atom}, \ref{line:A-zig}, \ref{line:A-zag}, \ref{line:khi-zig-check} y 
+    \ref{line:khi-zag-check} son claramente realizables en tiempo polinomial. Por 
     otro lado, analizando la función \textsf{NotSimulates} podemos ver que los cómputos de $\R_\pi$ y $\sexec(\pi)$ 
     para $\pi \in \S_i$ son realizables en tiempo polinomial con respecto al tamaño de cada \ults, como sugiere la demostración del 
     \Cref{thm:model-checking-poly} presentada en \cite{ArecesFSV25,SaraviaPHD}. Por lo que podemos afirmar que 
@@ -123,11 +125,11 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
         Analicemos los posibles casos donde podría fallar $Z$:
 
         \begin{itemize}
-            \item (Atom) Si $Z$ no satisface (Atom) entonces el algoritmo lo identifica en la línea 14 y devuelve 1, por lo que
-            cualquier $\tup{U,b}$ sirve como contraejemplo.
-            \item (A-zig) Si $Z$ no satisface (A-zig) entonces el algoritmo lo identifica en la línea 15 y devuelve 1, 
+            \item (Atom) Si $Z$ no satisface (Atom) entonces el algoritmo lo identifica en la línea \ref{line:Atom} y devuelve 1, por lo 
+            que cualquier $\tup{U,b}$ sirve como contraejemplo.
+            \item (A-zig) Si $Z$ no satisface (A-zig) entonces el algoritmo lo identifica en la línea \ref{line:A-zig} y devuelve 1, 
             por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
-            \item (A-zag) Similarmente, si $Z$ no satisface (A-zag) el algoritmo lo identifica en la línea 16 y,  
+            \item (A-zag) Similarmente, si $Z$ no satisface (A-zag) el algoritmo lo identifica en la línea \ref{line:A-zag} y,  
             nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
             \item ($\khi$-zig) Supongamos entonces que $Z$ no satisface ($\khi$-zig), luego existen $U, T \subseteq \W$ tal que
             $U \ultsExecAgi T$ con $U$ que satisface que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$, 
@@ -136,18 +138,18 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
             Analicemos entonces la ejecución de \textsf{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,1}$).
 
             Como $Z$ satisface (Atom), (A-zig) y (A-zag); y, a su vez, $U$ satisface que para cada $s \in \rho_\model$ se cumple 
-            que $s \cap U = \emptyset$ o $s \subseteq U$, entonces se ejecuta la instrucción de la línea 19 y el valor de retorno de 
-            \textsf{NotSimulates} determina el valor de retorno de \textsf{CounterexampleChecker}.
+            que $s \cap U = \emptyset$ o $s \subseteq U$, entonces se ejecuta la instrucción de la línea \ref{line:not-simulates-exec} y 
+            el valor de retorno de \textsf{NotSimulates} determina el valor de retorno de \textsf{CounterexampleChecker}.
 
             Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq \sexec^{\model}(\pi)$ y, 
             a su vez, $\R_\pi(U) \subseteq T$. 
             
             Esto nos dice que al considerar la ejecución de \textsf{NotSimulates}, cuando se itera sobre el plan $\pi$, el algoritmo 
-            ingresa al \textit{if} de la línea 4 e inicializa la variable \textit{foundWitness} en 0.
+            ingresa al \textit{if} de la línea \ref{line:pi-se-in-U} e inicializa la variable \textit{foundWitness} en 0.
 
             Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z(U) \not \subseteq \sexec^{\model'}(\pi')$ o que 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'\in\S'_i$ entonces 
-            el valor de \textit{foundWitness} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea 11.
+            el valor de \textit{foundWitness} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea \ref{line:did-not-find-witness}.
 
             Sea $\pi' \in \S'_i$, supongamos entonces que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y veamos que 
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$.
@@ -161,8 +163,8 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
             $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$ entonces también ocurre que $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, 
             que era lo que queríamos ver.
 
-            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea 8 con la variable \textit{foundWitness} valiendo 0, luego 
-            devuelve 1 en la línea 11.
+            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea \ref{line:for-strat-in-m'} con la variable 
+            \textit{foundWitness} valiendo 0, luego devuelve 1 en la línea \ref{line:did-not-find-witness}.
 
             Finalmente, \textsf{CounterexampleChecker}($\modults,\modults',Z,\tup{U,1}$) = 1.
 
@@ -187,14 +189,14 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
         Analicemos ahora los dos casos posibles:
 
         \begin{itemize}
-            \item $b = 1$
+            \item $b = 1$.
                 Primero, notemos que si $U$ no satisface que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ 
-                o $s \subseteq U$, entonces el algoritmo devuelve 0 en la línea 18.
+                o $s \subseteq U$, entonces el algoritmo devuelve 0 en la línea \ref{line:khi-zig-check}.
 
-                Supongamos entonces $U$ cumple con lo mencionado. Luego, se ejecuta \textsf{NotSimulates} en la línea 19. 
+                Supongamos entonces $U$ cumple con lo mencionado. Luego, se ejecuta \textsf{NotSimulates} en la línea \ref{line:not-simulates-exec}. 
                 
                 Sea $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$, 
-                entonces el algoritmo ingresa al \textit{if} de la línea 4 e inicializa \textit{foundWitness} en 0.
+                entonces el algoritmo ingresa al \textit{if} de la línea \ref{line:pi-se-in-U} e inicializa \textit{foundWitness} en 0.
                 
                 Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $Z$ cumple ($\khi$-zig), existe 
                 $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq Z(\R_\pi(U))$.
@@ -206,8 +208,9 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                 el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de \textit{foundWitness} a 1.
                 
                 Como este análisis vale para todo $\pi \in \S_i$, esto demuestra que \textsf{NotSimulates} finaliza su ejecución en la 
-                línea 12 donde devuelve 0. Por lo que \textsf{CounterexampleChecker} devuelve 0 a partir de ($\modults,\modults',\tup{U,b}$).
-            \item $b = 0$
+                línea \ref{line:return-0} donde devuelve 0. Por lo que \textsf{CounterexampleChecker} devuelve 0 a partir de 
+                ($\modults,\modults',\tup{U,b}$).
+            \item $b = 0$.
                 Este caso es análogo al caso $b = 1$, con la diferencia de que hay que considerar el hecho de que 
                 $Z$ satisface ($\khi$-zag).
         \end{itemize}
@@ -794,11 +797,11 @@ Finalmente, juntando ambos lemas, conseguimos el siguiente resultado de compleji
 
 \section{Equivalencia con el Caso Punteado}
 
-Para terminar con este capítulo, estudiaremos otro problema que surge naturalmente de $\KHiBisim$: dados $\modults,w$ y $\modults',w'$ 
+En esta sección estudiaremos otro problema que surge naturalmente de $\KHiBisim$: dados $\modults,w$ y $\modults',w'$ 
 dos \ultss punteados, decidir si $\modults,w \bisim \modults',w'$. Notar que, esto no es otra cosa que decidir si existe una 
 \KHilogic-bisimulación entre $\modults$ y $\modults'$ que contenga al par $(w,w')$. Nos referiremos a este problema como $\PKHiBisim$.
 
-En esta sección demostraremos la equivalencia via reducción de Karp entre $\KHiBisim$ y $\PKHiBisim$, es decir, demostraremos que 
+Demostraremos la equivalencia via reducción de Karp entre $\KHiBisim$ y $\PKHiBisim$, es decir, demostraremos que 
 $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego podremos concluir que $\PKHiBisim$ es $\coNPComplete$.
 
 \begin{lema}\label{lema:pointed-to-general}
@@ -848,4 +851,98 @@ Hemos demostrado entonces que $\PKHiBisim$ es $\coNPComplete$.
 Notemos que por \Cref{thm:new-bisim-finite-equiv}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ y 
 $\modults,w \modequiv \modults',w'$. Luego, al caracterizar la complejidad computacional de $\PKHiBisim$, también hemos caracterizado 
 la complejidad computacional del problema de decidir si dos \ultss punteados satisfacen exactamente las mismas \KHilogic-fórmulas.
+
+Para terminar este capítulo, presentaremos un resultado que establece que para cada par de \ultss punteados finitos que no son bisimilares 
+existe una \KHilogic-fórmula de tamaño polinomial que los distingue. Más aún, mencionaremos cómo \textsf{CounterexampleChecker} permite construir 
+dicha fórmula.
+
+Notar que dados dos \ultss punteados no bisimilares, la relación $\universalbis$ \textbf{no} es una \KHilogic-bisimulación entre ellos. 
+Luego, analizando las condiciones de la \Cref{def:bisim_redefinition} en las que falla $\universalbis$, veremos que es posible construir 
+la fórmula en cuestión.
+
+\begin{teorema}
+    Sean $(\model,w)$ y $(\model',w')$ dos \ultss punteados finitos tales que $\model,w \not\bisim \model',w'$, entonces existe una 
+    \KHilogic-fórmula $\varphi$ de tamaño polinomial con respecto a $|\model|+|\model'|$ tal que $\model,w \models \varphi$ y 
+    $\model',w' \not\models \varphi$.
+\end{teorema}
+
+Antes de continuar con la demostración, primero introduciremos una notación que nos será de utilidad para construir la fórmula deseada.
+
+Sean $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$ dos \ultss finitos.
+
+Consideremos $\PROP' = \{ p \in \PROP \mid $ existe $w\in\W $ tal que $p \in \V(w)$ o existe $ w'\in\W'$ tal que $p\in\V'(w')\}$. 
+Definimos para cada $s \in \rho_\model$ y $X \subseteq \W$:
+\begin{itemize}
+    \item $\varphi_{s} \eqdef \bigwedge\limits_{p \in \V(s)} p \wedge \bigwedge\limits_{p \in \PROP'\setminus\V(s)}\neg p$ \\
+    \medskip
+    \item $\varphi_{X} \eqdef \bigvee\limits_{s \in \rho_\model, s \subseteq X} \varphi_s$
+\end{itemize}
+Análogamente, se definen $\varphi_{s'}$ y $\varphi_{X'}$ para cada $s' \in \rho_{\model'}$ y $X' \subseteq \W'$.
+
+A partir de la definición de $\varphi_s$, no es díficil notar que $\truthset{\model}{\varphi_s} = s$. Por otro lado, para $X \subseteq \W$
+en el que para cada $s \in \rho_\model$ se cumple que $s \cap X = \emptyset$ o $s \subseteq X$, se da que $\truthset{\model}{\varphi_X} = X$.
+
+Más aún, analizando la definición de $\universalbis$, se puede ver que $\truthset{\model'}{\varphi_s} = \universalbis(s)$ y 
+$\truthset{\model'}{\varphi_X} = \universalbis(X)$.
+
+\begin{demostracion}
+Sean $(\model,w)$ y $(\model',w')$ dos \ultss punteados finitos tales que $\model,w\not\bisim\model',w'$, con 
+$\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ 
+y $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$. Como se mencionó anteriormente, la estrategia para construir la fórmula 
+será analizar qué condición de la \Cref{def:bisim_redefinition} no es satisfecha por $\universalbis$.
+
+Primero, notar que si $(w,w') \not\in \universalbis$ entonces $\V(w) \neq \V'(w')$. Luego, $\varphi = \varphi_{[w]}$ cumple que 
+$\model,w \models \varphi$ y $\model',w'\not\models\varphi$.
+
+Ahora, consideremos las condiciones de la \Cref{def:bisim_redefinition} que podrían no ser satisfechas por $\universalbis$. Cabe destacar
+que por su definición, es claro que $\universalbis$ siempre satisface (Atom):
+\begin{itemize}
+    \item (A-zig) Si $\universalbis$ no satisface (A-zig), entonces existe $v\in\W$ para el cuál no existe $v'\in\W'$ tal que $(v,v')\in\universalbis$.
+    Lo que nos dice que no existe $v'\in\W'$ tal que $\V(v) = \V'(v')$.
+    
+    Luego, $\varphi = \E\varphi_{[v]}$ sirve para probar la propiedad deseada.
+    \item ($\khi$-zig) Si $\universalbis$ no satisface ($\khi$-zig) entonces existen $U,T \subseteq \W$ tales que para cada $s\in\rho_\model$
+    se cumple que $s \cap U = \emptyset$ o $s\subseteq U$ y $U \ultsExecAgi T$ para los cuáles no existe $T'\subseteq\W'$ tal que 
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item $\universalbis(U) \ultsExecAgi T'$, 
+            \item $T' \subseteq \universalbis(T)$.
+        \end{itemize}
+    \end{multicols} 
+    
+    Veamos ahora que $\varphi = \khi(\varphi_U,\varphi_{T^+})$ con $T^+ = \bigcup\limits_{w\in T}[w]$ nos sirve para demostrar la propiedad.
+    
+    Dado que $U \ultsExecAgi T$, entonces existe $\pi\in\S_i$ tal que $U \subseteq \sexec^\model(\pi)$ y $\R_\pi(U) \subseteq T$. Luego, como 
+    $\truthset{\model}{\varphi_U} = U$ y $T \subseteq \truthset{\model}{\varphi_{T^+}} = T^+$, entonces se da que $\model,w\models\varphi$.
+
+    Veamos ahora que $\model',w'\not\models\varphi$. Supongamos que $\model',w'\models\varphi$ y veamos que esto lleva a una contradicción. 
+    Como $\model',w'\models\varphi$, entonces existe $\pi'\in\S'_i$ tal que $\truthset{\model'}{\varphi_U} \subseteq \sexec^{\model'}(\pi')$
+    y $\R'_{\pi'}(\truthset{\model'}{\varphi_U}) \subseteq \truthset{\model'}{\varphi_{T^+}}$.
+    
+    Como se mencionó antes de empezar con la demostración, tenemos que $\truthset{\model'}{\varphi_U} = \universalbis(U)$ y 
+    $\truthset{\model'}{\varphi_{T^+}} = \universalbis(T^+)$. Luego, $\pi'$ atestigua que 
+    $\universalbis(U) \ultsExecAgi \universalbis(T^+)$.
+
+    Demostremos ahora que $\universalbis(T^+) \subseteq \universalbis(T)$. Sea $v'\in\universalbis(T^+)$, existe $v\in T^+$ tal que $(v,v')\in\universalbis$
+    y, por lo tanto, $\V(v) = \V'(v')$.
+    Pero, veamos que como $v\in T^+$, entonces existe $u\in T$ tal que $v \in [u]$, por lo que $\V(v) = \V(u)$. Luego, tenemos que 
+    $\V(u) = \V'(v')$, por lo que $(u,v') \in \universalbis$. Con lo que podemos concluir que $v' \in \universalbis(T)$.
+
+    Pero notemos entonces que $\universalbis(U) \ultsExecAgi \universalbis(T^+)$ y $\universalbis(T^+) \subseteq \universalbis(T)$. Luego, 
+    tomando $T' = \universalbis(T^+)$ encontramos un $T'$ que atestigua que la condición ($\khi$-zig) es satisfecha para los conjuntos 
+    $U$ y $T$. 
+
+    Pero esto es una contradicción, dado que iniciamos este caso suponiendo que no existía tal $T'$. Luego, podemos concluir que $\model',w'\not\models\varphi$.
+    \item Los casos (zag) son análogos a sus respectivos casos (zig), con la particularidad de que deben negarse las fórmulas construídas.
+\end{itemize}
+Es claro que la fórmula producida en cada uno de los casos analizados tiene tamaño polinomial con respecto a $|\model|+|\model'|$.
+\end{demostracion}
+
+Por último, veamos que es posible modificar $\textsf{CounterexampleChecker}$ para que, almacenando la información necesaria, construya 
+las fórmulas propuestas en caso de detectar que los \ultss punteados recibidos no son bisimilares. En particular, 
+si falla alguno de los chequeos de las líneas \ref{line:A-zig} o \ref{line:A-zag} es posible construir la fórmula presentada en la 
+demostración para los casos (A-zig)/(A-zag) almacenando el elemento para el cual falla dicha condición. 
+Por otro lado, si la ejecución de \textit{NotSimulates} devuelve 1, es posible construir la fórmula a partir del conjunto $U$ recibido 
+como input y el conjunto $T$ definido en la línea \ref{line:T-reachable-states-counterexcheck} para el cuál no se encontró un testigo, 
+siguiendo la estrategia presentada para los casos ($\khi$-zig)/($\khi$-zag) en la demostración del teorema. 
 

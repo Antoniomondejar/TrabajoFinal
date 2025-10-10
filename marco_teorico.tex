@@ -282,6 +282,11 @@ Notar que $\khi(\psi,\varphi)$ vale en un estado $w$ cuando existe un conjunto d
 toda ejecución parcial puede ser completada terminando en un estado donde vale $\varphi$. También, cabe destacar que como $w$ no tiene ningún rol en la cláusula semántica de $\khi$,
 dicho operador actúa \emph{globalmente}. Por lo tanto, $\truthset{\modults}{\khi(\psi,\varphi)}$ es $\W$ o $\emptyset$.
 
+Por otro lado, en \cite{ArecesFSV25,SaraviaPHD} se establece que la modalidad universal (ver \cite{GorankoP92}) puede ser expresada en 
+\KHilogic como $\A\varphi \eqdef \khi(\neg\varphi,\bot)$ con $i$ un nombre de agente arbitrario en $\AGT$. Notar que $\model,w\models\A\varphi$
+si y sólo si $\truthset{\model}{\varphi} = \W$. La modalidad existencial, su dual, se define como $\E\varphi \eqdef \neg\A\neg\varphi$.
+
+
 \begin{ejemplo}
     Nuevamente, consideremos el \ults presentado en \Cref{ejemplo:ults}, y veamos que:
     \begin{itemize}
