@@ -1,4 +1,4 @@
-\chapter{Estudio Computacional de \KHilogic-Bisimulación}
+\chapter{Estudio computacional de \KHilogic-bisimulación}
 
 Como mencionamos en el anterior capítulo, a la hora de definir una noción de bisimulación para una lógica modal, 
 es deseable que la misma tenga una naturaleza puramente estructural, lo cuál resulta de gran importancia a la hora de 
@@ -12,7 +12,7 @@ Dicho problema de decisión es usualmente conocido en la literatura de las lógi
 En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados. Cabe destacar que en los resultados presentados 
 nos referiremos siempre a \ultss finitos, es decir, \ultss en los cuáles cada una de sus componentes tiene tamaño finito.
 
-\section{Verificación de Bisimulaciones}
+\section{Verificación de bisimulación}
 
 En esta sección analizaremos la complejidad del problema de decidir si una relación binaria es una \KHilogic-bisimulación entre dos modelos.  
 
@@ -186,7 +186,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
 
         Luego, viendo la ejecución de \textsf{CounterexampleChecker}, los chequeos de (Atom), (A-zig) y (A-zag) darán 1 como resultado.
         
-        Analicemos ahora los dos casos posibles:
+        Analicemos ahora qué sucede para cada posible valor de $b$:
 
         \begin{itemize}
             \item $b = 1$.
@@ -290,8 +290,8 @@ Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontr
                      \{(\varphi_j,\{q_{j+n}\}) \mid j \in \{1,...,m\}\} \cup 
                      \{(e,\{q_{n+m+1}\})\}$ donde $q_1,...,q_{n+m+1} \in \PROP$ son $n+m+1$ variables proposicionales distintas.
     \end{itemize}
-    Notar que decimos que $p_i$ aparece en forma `positiva' en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$
-    A su vez, decimos que $p_i$ aparece en forma `negativa' en $\varphi_j$ si $\varphi_j = ...\wedge \neg p_i \wedge...$
+    Notar que decimos que $p_i$ aparece en forma ``positiva'' en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$
+    A su vez, decimos que $p_i$ aparece en forma ``negativa'' en $\varphi_j$ si $\varphi_j = ...\wedge \neg p_i \wedge...$
 
     También, notemos que en este mapeo se considera un único agente (lo llamaremos $agt$) cuya relación de indistinguibilidad sobre 
     planes está dada por $\S \cup \{\{test\}\}$ en $\model$ y por $\S$ en $\model'$. Como cada clase de equivalencia está formada por un 
@@ -364,13 +364,13 @@ Presentaremos un ejemplo con el objetivo de esclarecer el mapeo introducido.
     definidas por $\R_{test}$ y la clase $\{test\}$ no es parte de la relación de indistinguibilidad del agente $agt$.
 \end{ejemplo}
 
-La motivación de este mapeo es utilizar los subconjuntos $U \subseteq \{p_1,...,p_n\}$ para `codificar' las posibles 
+La motivación de este mapeo es utilizar los subconjuntos $U \subseteq \{p_1,...,p_n\}$ para ``codificar'' las posibles 
 asignaciones a las variables proposicionales de $\varphi$. Pues sea $U \subseteq \{p_1,...,p_n\}$, podemos considerar que con $U$ estamos representando una asignación 
-$\overrightarrow{a}$ en la que asignamos $true$ a las variables dentro de $U$ y $false$ a las variables dentro de 
+$\overrightarrow{a}$ en la que asignamos \textit{true} a las variables dentro de $U$ y \textit{false} a las variables dentro de 
 $\{p_1,...,p_n\}\setminus U$. En particular, la intención es construir dos \ults de forma tal que al verificar la condición ($\khi$-zig) sobre $U$, estemos 
 verificando a la vez el valor obtenido por la evaluación de $\varphi$ en $\overrightarrow{a}$.
 
-Luego, la idea es que $\varphi$ evaluará a $true$ en la asignación $\overrightarrow{a}$ siempre que exista un término $\varphi_j$ que permita 
+Luego, la idea es que $\varphi$ evaluará a \textit{true} en la asignación $\overrightarrow{a}$ siempre que exista un término $\varphi_j$ que permita 
 que a partir del plan $in_{\varphi_j}out_{\varphi_j}$ desde $\model'$ se pueda imitar el comportamiento del plan $test$ en $\model$ al 
 analizar la condición ($\khi$-zig) sobre el conjunto $U$. En caso de fallar la existencia de dicho término $\varphi_j$, tendremos que 
 ambos modelos \textbf{no} son bisimilares pero, a su vez, que dicha asignación $\overrightarrow{a}$ atestigua que $\varphi$ \textbf{no} 
@@ -385,14 +385,15 @@ problemas en cuestión.
 
 \begin{demostracion}
     Queremos demostrar que $f$ es una reducción de Karp de $\DNFTAUT$ a $\CBisim$. Para ello, tenemos que probar que $f$ es computable 
-    en tiempo polinomial y, que $x \in \DNFTAUT$ si y sólo si $f(x) \in \CBisim$.
+    en tiempo polinomial y que para cada $\varphi$ fórmula proposicional en forma disyuntiva normal, $\varphi \in \DNFTAUT$ si y sólo 
+    si $f(\varphi) \in \CBisim$.
 
     Notemos que ambos \ultss construídos por $f$ tienen tamaño polinomial con respecto al tamaño de $\varphi$. Por lo que es fácil notar 
     que $f$ es computable en tiempo polinomial en el tamaño de $\varphi$. Ahora queremos demostrar que $\varphi \in \DNFTAUT$ si y sólo 
-    si $\tup{\modults,\modults',Z} \in \CBisim$.
+    si $\tup{\modults,\modults',Z} \in \CBisim$, con $\tup{\model,\model',Z}$ definidos como en la \Cref{def:karp-reduction}.
 
     Por una cuestión de simplicidad y para garantizar correctitud, consideraremos que si $\varphi \not\in \DNFTAUT$ entonces la asignación 
-    que atestigua dicha situación \textbf{no} es aquella asignación que asigna $false$ a todas las variables proposicionales de $\varphi$. 
+    que atestigua dicha situación \textbf{no} es aquella asignación que asigna \textit{false} a todas las variables proposicionales de $\varphi$. 
     Notar que esta consideración no quita generalidad, dado que no es difícil modificar el mapeo $f$ para considerar dicho caso y 
     mapear a $\varphi$ a dos \ultss que sean trivialmente no bisimilares.  
 
@@ -436,7 +437,7 @@ problemas en cuestión.
 
     Notemos que $\R_{test}(U) = U \cup \{e\}$, entonces necesariamente $U \cup \{e\} \subseteq T$.
 
-    Consideremos ahora la asignación $\overrightarrow{a}$ que asigna $true$ a las variables en $U$ y $false$ a las variables 
+    Consideremos ahora la asignación $\overrightarrow{a}$ que asigna \textit{true} a las variables en $U$ y \textit{false} a las variables 
     en $\{p_1,...,p_n\} \setminus U$. Como $\varphi$ es una tautología, entonces existe un término $\varphi_j$ que se vuelve verdadero a partir 
     de $\overrightarrow{a}$, es decir, en $\varphi_j$ las variables que aparecen en forma positiva son algún subconjunto de 
     $U$ y las variables que aparecen en forma negativa son algún subconjunto de $\{p_1,...,p_n\} \setminus U$.
@@ -464,10 +465,10 @@ problemas en cuestión.
     entonces $\tup{\modults,\modults',Z} \notin \CBisim$.
 
     Como $\varphi \notin \DNFTAUT$, existe una asignación $\overrightarrow{a}$ sobre las variables $p_1,...,p_n$ que hace falsa 
-    cada $\varphi_j$. Denotemos a $U$ como el conjunto de variables a las que se le asigna $true$ en $\overrightarrow{a}$.
+    cada $\varphi_j$. Denotemos a $U$ como el conjunto de variables a las que se le asigna \textit{true} en $\overrightarrow{a}$.
 
     Como mencionamos al principio de la demostración consideraremos que la asignación $\overrightarrow{a}$ tiene un conjunto $U$ no vacío 
-    de variables proposicionales a las cuales se les asigna $true$.
+    de variables proposicionales a las cuales se les asigna \textit{true}
     
     Veremos entonces que $Z$ no satisface ($\khi$-zig). Notar que por lo comentado en la \Cref{def:karp-reduction}, $U$ satisface que 
     para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$. 
@@ -534,7 +535,7 @@ con el teorema que captura esta idea.
     Este teorema es consecuencia directa de los resultados presentados en \Cref{lema:cbisim-in-conp} y \Cref{col:cbisim-conphard}. 
 \end{demostracion}
 
-\section{Comparación de Modelos}
+\section{Comparación de modelos}
 
 Continuando con el objetivo de este capítulo, ahora analizaremos la complejidad computacional de otro de los problemas mencionados al 
 principio de esta sección: el de la comparación de modelos.
@@ -556,7 +557,7 @@ A su vez, esta ``búsqueda y verificación'' parece ser costosa, pues hay una ca
 entre dos \ultss a considerar. Por otro lado, como estudiamos en la anterior sección, verificar que una relación binaria 
 candidata es una bisimulación es $\coNPComplete$. 
 
-Una primera aproximación que surge de las consideraciones mencionadas es que $\KHiBisim \in \NP^{\coNP}$. Pues, basta con dar una 
+Una primera aproximación que surge de estas consideraciones es que $\KHiBisim \in \NP^{\coNP}$. Pues, basta con dar una 
 algoritmo polinomial que verifique si una relación candidata es una bisimulación utilizando como oráculo el algoritmo que decide 
 $\CBisim$.
 
@@ -749,7 +750,7 @@ Finalmente, juntando ambos lemas, conseguimos el siguiente resultado de compleji
 %     Ahora, $f$ mapeará $\varphi$ a $\tup{\modults,\modults'}$, con $\tup{\modults,\modults'}$ definidos de la siguiente manera:
 
 %     \begin{itemize}
-%         \item En el caso de que $\varphi$ evalúe a $false$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
+%         \item En el caso de que $\varphi$ evalúe a \textit{false} en la asignación que asigna a $p_1,...,p_n$ el valor \textit{false}
 
 %         \begin{itemize}
 %             \item $\model_1=\tup{\{1\},\{\},\{\},\{(1,p)\},\{a\}}$
@@ -760,7 +761,7 @@ Finalmente, juntando ambos lemas, conseguimos el siguiente resultado de compleji
 %         que satisfaga (Atom). Pero es correcto porque sólo utilizaremos esta definición en uno de los casos donde 
 %         $\varphi \not \in \DNFTAUT$. 
         
-%         \item En el caso de que $\varphi$ evalúe a $true$ en la asignación que asigna a $p_1,...,p_n$ el valor $false$:
+%         \item En el caso de que $\varphi$ evalúe a \textit{true} en la asignación que asigna a $p_1,...,p_n$ el valor \textit{false}
         
 %         \begin{itemize}
 %             \item $\model_1=\tup{\W,\R \cup \{(p_i,p_i,test) \mid i \in \{1,...n\}\} \cup 
@@ -780,7 +781,7 @@ Finalmente, juntando ambos lemas, conseguimos el siguiente resultado de compleji
 
 %     La intuición de esta reducción es que queremos usar los conjuntos proposicionalmente definibles de este modelo para considerar 
 %     cada posible asignación de valores a las variables $p_1,...,p_n$. Dado un conjunto $U \subseteq \{p_1,...,p_n\}$, 
-%     estamos considerando la asignación que asigna $true$ a las variables dentro de $U$ y asigna $false$ a las de $\{p_1,...,p_n\}/U$. 
+%     estamos considerando la asignación que asigna \textit{true} a las variables dentro de $U$ y asigna \textit{false} a las de $\{p_1,...,p_n\}/U$. 
 %     Además, notemos que como la función $\V$ es inyectiva, entonces $U$ es proposicionalmente definible.
  
 %     El plan $test$ que sólo aparece en $\modults$ es la clave de la reducción. Lo que provoca es que dada una asignación 
@@ -795,7 +796,7 @@ Finalmente, juntando ambos lemas, conseguimos el siguiente resultado de compleji
     
 % \end{demostracion}
 
-\section{Equivalencia con el Caso Punteado}
+\section{Equivalencia con el caso punteado}
 
 En esta sección estudiaremos otro problema que surge naturalmente de $\KHiBisim$: dados $\modults,w$ y $\modults',w'$ 
 dos \ultss punteados, decidir si $\modults,w \bisim \modults',w'$. Notar que, esto no es otra cosa que decidir si existe una 
@@ -813,8 +814,8 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
     \KHilogic-bisimulación entre $\modults$ y $\modults'$ si y sólo si $\universalbis = \{(v,v') \mid \V(v) = \V'(v')\}$ es una 
     \KHilogic-bisimulación. 
     
-    Luego una reducción $f$ que mapee $((\modults,w),(\modults',w'))$ a $(\modults,\modults')$ en el caso que $\V(w) = \V'(w')$ 
-    y a $(\modults,\modults')$ con $\modults$ y $\modults'$ dos \ultss fijos no bisimilares en caso contrario, basta 
+    Luego una reducción $f$ que mapee $\tup{(\modults,w),(\modults',w')}$ a $\tup{\modults,\modults'}$ en el caso que $\V(w) = \V'(w')$ 
+    y a $\tup{\modults,\modults'}$ con $\modults$ y $\modults'$ dos \ultss fijos no bisimilares en caso contrario, basta 
     para demostrar que $\PKHiBisim \leq_p \KHiBisim$.
 \end{demostracion}
 
@@ -826,7 +827,7 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
     Dados $\modults$ y $\modults'$ dos \ultss, por \Cref{lema:bisim-existence} sabemos que existe 
     \KHilogic-bisimulación entre ellos si y sólo si $\universalbis = \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación.
 
-    Consideremos una reducción $f$ que mapee $(\modults,\modults')$ a $((\modults,w),(\modults',w'))$ con $w,w'$ nodos de los dominios de $\modults$ 
+    Consideremos una reducción $f$ que mapee $\tup{\modults,\modults'}$ a $\tup{(\modults,w),(\modults',w')}$ con $w,w'$ nodos de los dominios de $\modults$ 
     y $\modults'$ respectivamente que satisfagan $\V(w) = \V'(w')$, o en caso de no existir un par de nodos que satisfaga dicha condición tome cualquier 
     par de nodos $w,w'$ de cada dominio. Notemos que dicha reducción basta para demostrar que $\KHiBisim \leq_p \PKHiBisim$.
 \end{demostracion}
@@ -861,7 +862,7 @@ Luego, analizando las condiciones de la \Cref{def:bisim_redefinition} en las que
 la fórmula en cuestión.
 
 \begin{teorema}
-    Sean $(\model,w)$ y $(\model',w')$ dos \ultss punteados finitos tales que $\model,w \not\bisim \model',w'$, entonces existe una 
+    Sean $\model,w$ y $\model',w'$ dos \ultss punteados finitos tales que $\model,w \not\bisim \model',w'$, entonces existe una 
     \KHilogic-fórmula $\varphi$ de tamaño polinomial con respecto a $|\model|+|\model'|$ tal que $\model,w \models \varphi$ y 
     $\model',w' \not\models \varphi$.
 \end{teorema}
@@ -886,7 +887,7 @@ Más aún, analizando la definición de $\universalbis$, se puede ver que $\trut
 $\truthset{\model'}{\varphi_X} = \universalbis(X)$.
 
 \begin{demostracion}
-Sean $(\model,w)$ y $(\model',w')$ dos \ultss punteados finitos tales que $\model,w\not\bisim\model',w'$, con 
+Sean $\model,w$ y $\model',w'$ dos \ultss punteados finitos tales que $\model,w\not\bisim\model',w'$, con 
 $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ 
 y $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$. Como se mencionó anteriormente, la estrategia para construir la fórmula 
 será analizar qué condición de la \Cref{def:bisim_redefinition} no es satisfecha por $\universalbis$.

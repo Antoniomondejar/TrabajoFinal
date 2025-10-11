@@ -1,4 +1,4 @@
-\chapter{Contracción por Bisimulación}
+\chapter{Contracción por bisimulación}
 
 Como hemos mencionado a lo largo de este trabajo, la noción de bisimulación nos permite relacionar modelos lógicamente equivalentes a partir de 
 características estructurales entre sí. En el capítulo anterior, determinamos qué tan complejo es decidir si existe una bisimulación entre dos 
@@ -22,7 +22,7 @@ que, a su vez, es de tamaño mínimo entre todos los modelos bisimilares.
 Habiendo mencionado un poco la ruta de trabajo seguida para la lógica modal básica, intentaremos realizar un estudio similar para la lógica de `Knowing-How' basada en 
 incertidumbre.
 
-\section{Primera Propuesta de Contracción}
+\section{Primera propuesta de contracción}
 
 \begin{definicion}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults, y $Z \subseteq \W \times \W$ entonces decimos que
@@ -421,7 +421,7 @@ los planes que cada agente considera posible y su relación de indistinguibilida
 
 Este análisis es el que motiva una nueva propuesta de contracción.
 
-\section{Segunda Propuesta de Contracción}
+\section{Segunda propuesta de contracción}
 
 Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve 
 en la mayor medida posible sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
@@ -572,30 +572,30 @@ Un punto muy positivo de esta contracción es que existen algoritmos eficientes 
 el algoritmo de Paige y Tarjan presentado en \cite[`Partición Relacional más Gruesa']{Paige&TarjanContraction} tiene complejidad $\bigO(m*log(n))$ siendo $n$ la cantidad de nodos del dominio del modelo y 
 $m$ la cantidad de aristas del mismo.
 
-\section{Tercera Propuesta de Contracción}
+% \section{Tercera Propuesta de Contracción}
 
-Lo dejo escrito en palabras para recordar la idea intuitiva de la contracción.
+% Lo dejo escrito en palabras para recordar la idea intuitiva de la contracción.
 
-Se define una nueva $A_\modults$, en la cuál dos nodos $w, v$ están en la misma clase de equivalencia si y sólo si para todo sufijo de 
-$\sigma \in \pi$ con $\pi \in \S_i$ para algún $i \in \AGT$ se cumple que dicho sufijo es fuertemente ejecutable en ambos nodos o no lo 
-es en ninguno de los dos. Se puede ver que esto es una relación de equivalencia.
+% Se define una nueva $A_\modults$, en la cuál dos nodos $w, v$ están en la misma clase de equivalencia si y sólo si para todo sufijo de 
+% $\sigma \in \pi$ con $\pi \in \S_i$ para algún $i \in \AGT$ se cumple que dicho sufijo es fuertemente ejecutable en ambos nodos o no lo 
+% es en ninguno de los dos. Se puede ver que esto es una relación de equivalencia.
 
-Se puede demostrar también que esta relación de equivalencia incluye a la autobisimulación máxima en lógica modal básica (en parte demuestra 
-que es ``mejor o igual'' que la segunda propuesta).
+% Se puede demostrar también que esta relación de equivalencia incluye a la autobisimulación máxima en lógica modal básica (en parte demuestra 
+% que es ``mejor o igual'' que la segunda propuesta).
 
-Idea rápida de la demo:
-Sea $\modults$ un modelo de Kripke. Sean $w,v$ dos nodos en su dominio que pertenecen a la misma clase de equivalencia 
-de la autobisimulación máxima de lógica modal básica, y supongamos que existe un plan $\sigma$ que es fuertemente ejecutable en w pero no en v. Entonces, existe algún paso $j$ del 
-plan $\sigma$ en el cuál a partir de toda ejecución parcial de $\sigma[..j-1]$ desde $w$ se puede ejecutar la acción $\sigma[j]$ pero existe una 
-ejecución parcial de $\sigma[..j-1]$ desde $v$ en la cuál no es posible ejecutar la acción $\sigma[j]$.
+% Idea rápida de la demo:
+% Sea $\modults$ un modelo de Kripke. Sean $w,v$ dos nodos en su dominio que pertenecen a la misma clase de equivalencia 
+% de la autobisimulación máxima de lógica modal básica, y supongamos que existe un plan $\sigma$ que es fuertemente ejecutable en w pero no en v. Entonces, existe algún paso $j$ del 
+% plan $\sigma$ en el cuál a partir de toda ejecución parcial de $\sigma[..j-1]$ desde $w$ se puede ejecutar la acción $\sigma[j]$ pero existe una 
+% ejecución parcial de $\sigma[..j-1]$ desde $v$ en la cuál no es posible ejecutar la acción $\sigma[j]$.
 
-Luego, consideremos la fórmula $\Box_{\sigma[1]}...\Box_{\sigma[j-1]}\diamond_{\sigma[j]} \top$. Notemos que esta fórmula no se cumple en 
-$\modults,v$ pero si en $\modults,w$. Lo cuál es absurdo, pues $w$ y $v$ están en la misma clase de equivalencia por lo que satisfacen las 
-mismas fórmulas. Luego todo plan es fuertemente ejecutable en $w$ si y sólo si es fuertemente ejecutable en $v$, por lo que están en la 
-misma clase de equivalencia en la nueva $A_\modults$.
+% Luego, consideremos la fórmula $\Box_{\sigma[1]}...\Box_{\sigma[j-1]}\diamond_{\sigma[j]} \top$. Notemos que esta fórmula no se cumple en 
+% $\modults,v$ pero si en $\modults,w$. Lo cuál es absurdo, pues $w$ y $v$ están en la misma clase de equivalencia por lo que satisfacen las 
+% mismas fórmulas. Luego todo plan es fuertemente ejecutable en $w$ si y sólo si es fuertemente ejecutable en $v$, por lo que están en la 
+% misma clase de equivalencia en la nueva $A_\modults$.
 
-Se cocienta el dominio por esta nueva $A_\modults$ y las aristas se definen como en lógica modal básica, es decir, si $(w,v) \in \R_a$ 
-entonces $([w],[v]) \in \R'_a$.
+% Se cocienta el dominio por esta nueva $A_\modults$ y las aristas se definen como en lógica modal básica, es decir, si $(w,v) \in \R_a$ 
+% entonces $([w],[v]) \in \R'_a$.
 
 \section{Comparación entre las contracciones propuestas}
 
