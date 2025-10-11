@@ -858,7 +858,7 @@ existe una \KHilogic-fórmula de tamaño polinomial que los distingue. Más aún
 dicha fórmula.
 
 Notar que dados dos \ultss punteados no bisimilares, la relación $\universalbis$ \textbf{no} es una \KHilogic-bisimulación entre ellos. 
-Luego, analizando las condiciones de la \Cref{def:bisim_redefinition} en las que falla $\universalbis$, veremos que es posible construir 
+Luego, analizando las condiciones de la \Cref{def:bisim-redefinition} en las que falla $\universalbis$, veremos que es posible construir 
 la fórmula en cuestión.
 
 \begin{teorema}
@@ -890,12 +890,12 @@ $\truthset{\model'}{\varphi_X} = \universalbis(X)$.
 Sean $\model,w$ y $\model',w'$ dos \ultss punteados finitos tales que $\model,w\not\bisim\model',w'$, con 
 $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ 
 y $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$. Como se mencionó anteriormente, la estrategia para construir la fórmula 
-será analizar qué condición de la \Cref{def:bisim_redefinition} no es satisfecha por $\universalbis$.
+será analizar qué condición de la \Cref{def:bisim-redefinition} no es satisfecha por $\universalbis$.
 
 Primero, notar que si $(w,w') \not\in \universalbis$ entonces $\V(w) \neq \V'(w')$. Luego, $\varphi = \varphi_{[w]}$ cumple que 
 $\model,w \models \varphi$ y $\model',w'\not\models\varphi$.
 
-Ahora, consideremos las condiciones de la \Cref{def:bisim_redefinition} que podrían no ser satisfechas por $\universalbis$. Cabe destacar
+Ahora, consideremos las condiciones de la \Cref{def:bisim-redefinition} que podrían no ser satisfechas por $\universalbis$. Cabe destacar
 que por su definición, es claro que $\universalbis$ siempre satisface (Atom):
 \begin{itemize}
     \item (A-zig) Si $\universalbis$ no satisface (A-zig), entonces existe $v\in\W$ para el cuál no existe $v'\in\W'$ tal que $(v,v')\in\universalbis$.
