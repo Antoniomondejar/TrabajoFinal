@@ -1,26 +1,52 @@
 \chapter{Contracción por bisimulación}
 
-Como hemos mencionado a lo largo de este trabajo, la noción de bisimulación nos permite relacionar modelos lógicamente equivalentes a partir de 
-características estructurales entre sí. En el capítulo anterior, determinamos qué tan complejo es decidir si existe una bisimulación entre dos 
-modelos.
+% Como hemos mencionado a lo largo de este trabajo, la noción de bisimulación nos permite relacionar modelos lógicamente equivalentes a partir de 
+% características estructurales entre sí. En el capítulo anterior, determinamos qué tan complejo es decidir si existe una bisimulación entre dos 
+% modelos.
 
-Otra pregunta que surge a la hora de estudiar una lógica modal y su respectiva noción de bisimulación es:
-Dado un modelo, ¿Existe un procedimiento capaz de encontrar otro modelo que sea bisimilar?. Más aún, ¿Podría dicho procedimiento encontrar 
-un modelo de tamaño mínimo entre todos los modelos bisimilares al modelo original?.
+% Otra pregunta que surge a la hora de estudiar una lógica modal y su respectiva noción de bisimulación es:
+% Dado un modelo, ¿Existe un procedimiento capaz de encontrar otro modelo que sea bisimilar?. Más aún, ¿Podría dicho procedimiento encontrar 
+% un modelo de tamaño mínimo entre todos los modelos bisimilares al modelo original?.
 
-En la lógica modal básica la respuesta a esta pregunta es positiva, y al modelo encontrado se lo llama la contracción por bisimulación.
-Como se presenta en \cite[Capítulo 3]{HandbookModalLogic}, la contracción se define a partir del estudio de las autobisimulaciones del modelo. En particular,
-se demuestra que la unión de dos bisimulaciones es también una bisimulación, de allí se obtiene que existe una autobisimulación máxima de un modelo.
+Continuando con nuestro análisis de las propiedades computacionales de la noción de bisimulación propuesta, en este 
+capítulo estudiaremos la contracción por bisimulación para \KHilogic.
 
-Luego, se demuestra que dicha autobisimulación máxima es una relación de equivalencia, por lo que se puede definir un modelo cuyo dominio sea el cociente
-del dominio del modelo original con respecto a su autobisimulación máxima, donde cada punto representa una clase de equivalencia de dicha autobisimulación, y donde 
-dos clases de equivalencia se relacionan entre sí cuando existen dos puntos de dichas clases que se relacionaban en el modelo original.
+Un problema recurrente en la literatura de las lógicas modales y de las ciencias de la computación en general es el de la minimización de modelos. 
+Al considerar una cierta clase de modelos (ya sean autómatas, grafos dirigidos, etc.) y habiendo definido una noción de equivalencia 
+entre los mismos, el problema de minimización de modelos consiste en: encontrar un procedimiento que, a partir de un modelo, construya 
+otro de tamaño mínimo % o mínimo?
+que sea equivalente respecto a la noción previamente mencionada. Este problema resulta de gran interés computacional, ya que permite 
+obtener un modelo de menor tamaño que mantiene las propiedades estructurales de importancia; de esta forma es posible utilizar 
+el modelo obtenido para futuros cómputos. Más aún, la minimización de modelos permite alcanzar una comprensión más profunda y detallada
+de la noción de equivalencia considerada o, en caso de tratarse de una equivalencia lógica, del poder expresivo del 
+lenguaje formal en cuestión.
 
-Finalmente se concluye que dicha contracción satisface que cada punto del modelo original es bisimilar al punto que representa su clase de equivalencia, y 
-que, a su vez, es de tamaño mínimo entre todos los modelos bisimilares.
+Algunos ejemplos ilustrativos son: 
+la minimización de autómatas finitos determinísticos (DFA, por sus siglas en inglés), en la que dado 
+un DFA se desea encontrar otro de tamaño mínimo que acepte exactamente el mismo lenguaje regular \cite{automataTheoryHopcroft}; 
+otro ejemplo clásico es el de la lógica modal básica (\bml, por sus siglas en inglés), en el cual se obtiene una solución para el 
+problema a partir del estudio de la noción de bisimulación. Tomaremos este último ejemplo como punto de partida para introducir el 
+contexto en el que surgen nuestros resultados.
 
-Habiendo mencionado un poco la ruta de trabajo seguida para la lógica modal básica, intentaremos realizar un estudio similar para la lógica de `Knowing-How' basada en 
-incertidumbre.
+En \bml, como mencionamos, el problema de la minimización de modelos se aborda a través de la bisimulación. Así, surge la denominada 
+``contracción por bisimulación'' de un modelo.
+Como se presenta en \cite[Capítulo 3]{HandbookModalLogic}, la contracción por bisimulación de un modelo se define a partir del estudio de 
+sus autobisimulaciones. En particular, como para \bml la unión de dos bisimulaciones es también una bisimulación, se obtiene que existe 
+una autobisimulación máxima para cada modelo.
+
+Luego, al demostrar que la autobisimulación máxima de un modelo es una relación de equivalencia sobre su dominio, 
+es posible definir un nuevo modelo cuyo dominio sea el cociente dado por dicha relación de equivalencia. Así, cada nodo representará 
+una clase de equivalencia de la autobisimulación máxima, y dos clases de equivalencia se relacionarán entre sí cuando existan dos 
+nodos de dichas clases que se relacionan en el modelo original.
+
+Finalmente, en \cite{HandbookModalLogic} se establece que dicha contracción satisface que cada nodo del modelo original es bisimilar 
+al nodo que representa su clase de equivalencia y, a su vez, es de tamaño mínimo entre todos los modelos bisimilares.
+
+Por otro lado, en \cite{Paige&TarjanContraction} Paige y Tarjan presentan un algoritmo que permite encontrar la contracción por bisimulación de 
+un modelo finito en una cantidad $\bigO(m * \log (n))$ de pasos, siendo $n$ la cantidad de nodos del modelo y $m$ la cantidad de aristas 
+del mismo.
+
+Habiendo mencionado la ruta de trabajo seguida para \bml, realizaremos un estudio similar para \KHilogic.
 
 \section{Primera propuesta de contracción}
 
@@ -105,18 +131,18 @@ que caracteriza la autobisimulación máxima de un \ults.
     Luego queda demostrada la propiedad.
 \end{demostracion}
 
-Una primera observación que surge a partir de este teorema es que, a diferencia de lo mencionado sobre el caso de la lógica modal básica, 
+Una primera observación que surge a partir de este teorema es que, a diferencia de lo mencionado sobre el caso de \bml, 
 encontramos una forma de identificar la autobisimulación máxima de un modelo sin necesidad de demostrar que la unión de dos bisimulaciones es una bisimulación. 
 
 En particular, se demuestra que la partición de nodos de acuerdo a la función de valuación $\V$ siempre es una autobisimulación.
 
 Entonces sea $\modults$ un \ults, nos gustaría definir su contracción por bisimulación a partir de $A_\modults$, su autobisimulación máxima.
 
-Tomando un camino similar al de la lógica modal básica, una posible propuesta sería un modelo en el que se tenga como dominio al cociente 
+Tomando un camino similar al de \bml, una posible propuesta sería un modelo en el que se tenga como dominio al cociente 
 del dominio de $\modults$ con respecto a $A_\modults$ y se relacione a las clases de equivalencia $[w], [v] \in \rho_\modults$ siempre que 
 $w, v$ estén relacionados en $\modults$. Por otro lado, la relación de indistinguibilidad de cada agente y el conjunto de acciones de $\modults$ se conservarían.
 
-Sin embargo consideremos el siguiente modelo (\Cref{fig:1stproposaloriginal}):
+Sin embargo, consideremos el siguiente modelo (\Cref{fig:1stproposaloriginal}):
 
 \begin{figure}[h]
     \hspace{3.4cm}
@@ -181,11 +207,10 @@ $\modults',[w_1]$ no son bisimilares.
 
 Por lo que esta contracción por bisimulación no sería adecuada, ya que no produce un modelo bisimilar al modelo original.
 
-Otra posible propuesta sería restringir más la relación entre las puntos del modelo contraído. Es decir, relacionar las clases 
+Otra posible propuesta sería restringir más la relación entre los puntos del modelo contraído. Por ejemplo, relacionar las clases 
 $[w], [v] \in \rho_\modults$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ tal que $w'$ y $v'$ están relacionados en el modelo original.
 
 Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
-
 
 \begin{figure}[h]
     \hspace{2.6cm}
@@ -404,13 +429,13 @@ Luego, es deseable que la contracción propuesta sea razonable en términos comp
     tiempo polinomial. 
 
     Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo polinomial. Luego notemos que por 
-    \Cref{thm:model-checking-poly}, Model Checking está en $\Poly$ por lo que es claro que computar $\sexec(\sigma)$ y $\R_\sigma$
+    \Cref{thm:model-checking-poly}, model-checking está en $\Poly$ por lo que es claro que computar $\sexec(\sigma)$ y $\R_\sigma$
     para cada $\sigma$ es realizable en tiempo polinomial.
 
     Luego $\modults'$ es computable en tiempo polinomial.
 \end{demostracion}
 
-Hemos presentado una contracción por bisimulación para la lógica de `Knowing How' basada en incertidumbre y hemos demostrado que 
+Hemos presentado una contracción por bisimulación para \KHilogic y hemos demostrado que 
 la misma es adecuada, es decir, que produce un modelo bisimilar y que además es computable eficientemente.
 
 Sin embargo, algo que podemos notar a partir de la definición propuesta, es que el modelo que se encuentra difiere estructuralmente de 
@@ -433,12 +458,12 @@ debemos considerar otro dominio.
 
 Notemos que cada \ults de la forma $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ tiene naturalmente un modelo de Kripke asociado, 
 que sería el formado por $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$. Luego, una posible propuesta sería contraer dicho modelo de Kripke como en 
-Lógica Modal Básica y utilizarlo como contracción para `Knowing-How' conservando el conjunto de acciones básicas y la relación de indistinguibilidad 
-de planes de cada agente. 
+Lógica Modal Básica y utilizarlo como contracción para \KHilogic conservando el conjunto de acciones básicas y la relación de indistinguibilidad 
+de planes de cada agente.
 
 \begin{definicion}
     Supongamos $\ACT$ un conjunto de acciones no vacío enumerable.
-    Sea $\modults = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke. Sea $Z_\modults$ su autobisimulación máxima en Lógica Modal Básica (LMB) entonces definimos su contracción por LMB-bisimulación como $\modults_{LMB} = \tup{\W',\{\R'_a\}_{a\in\ACT},\V'}$ donde
+    Sea $\modults = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke. Sea $Z_\modults$ su autobisimulación máxima en \bml entonces definimos su contracción por \bml-bisimulación como $\modults_{\bml} = \tup{\W',\{\R'_a\}_{a\in\ACT},\V'}$ donde
     \begin{center}
         \begin{itemize}
             \item $\W' \eqdef \W /Z_\modults$
@@ -451,26 +476,26 @@ de planes de cada agente.
 Notar que en el contexto de esta sección, al escribir $[w]$ nos referiremos a la clase de equivalencia de $w$ en la relación de 
 equivalencia dada por $Z_\modults$.
 
-\begin{lema}\label{lema:LMB-R-lema}
-    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación.
+\begin{lema}\label{lema:bml-R-lema}
+    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{\bml} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por \bml-bisimulación.
     Si $([w],[v]) \in \R'_a$ entonces para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$
 \end{lema}
 
 \begin{demostracion}
-    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{LMB} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por LMB-bisimulación. Sea $([w],[v]) \in \R'_a$, veamos que para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$.
+    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\modults_{\bml} = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su contracción por \bml-bisimulación. Sea $([w],[v]) \in \R'_a$, veamos que para cada $w' \in [w]$ existe $v' \in [v]$ tal que $(w',v') \in \R_a$.
 
     Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Sea $w' \in [w]$, por estar ambos 
-    $w_0$ y $w'$ en $[w]$, existe una LMB-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que, por (zig) de $Z$, como 
+    $w_0$ y $w'$ en $[w]$, existe una \bml-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que, por (zig) de $Z$, como 
     $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
     $(v_0,v') \in Z$, es decir, $v' \in [v]$, que era lo que queríamos demostrar.
 \end{demostracion}
 
-Ahora, una vez presentada la contracción por LMB-bisimulación, demostraremos el siguiente teorema que extiende dicha contracción para 
-la lógica `Knowing How' basada en incertidumbre.
+Ahora, una vez presentada la contracción por \bml-bisimulación, demostraremos el siguiente teorema que extiende dicha contracción para 
+\KHilogic.
 
 \begin{teorema}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\modults_{LMB}$ 
-    la contracción por LMB-bisimulación del modelo de Kripke $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, 
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\modults_{\bml}$ 
+    la contracción por \bml-bisimulación del modelo de Kripke $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, 
     entonces $\tup{\modults,w}$ y $\tup{\modults',[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$ 
     siendo $\modults' = \tup{\W',\R',\cset{\S_i}_{i \in \AGT},\V',\ACT}$.
 \end{teorema}
@@ -480,7 +505,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
 \begin{demostracion}
     Queremos ver que $Z = \{(w,[w]) \mid w \in \W\}$ es una \KHilogic-bisimulación.
     
-    Por definición de la contracción por bisimulación en (LMB) se puede ver que se satisface (Atom). Luego, por definición de Z, es fácil ver que (A-zig) y (A-zag) son satisfechas. Demostremos entonces ($\khi$-zig) y ($\khi$-zag).
+    Por definición de la contracción por bisimulación en (\bml) se puede ver que se satisface (Atom). Luego, por definición de Z, es fácil ver que (A-zig) y (A-zag) son satisfechas. Demostremos entonces ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
         \item ($\khi$-zig). Sean $U, T \subseteq \W$ tales que $U \ultsExecAgi T$ y para cada $s \in \rho_\modults$ se cumple $s \subseteq U$ o 
@@ -503,7 +528,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
         con $1 \le k \le |\sigma|$ tal que $[w_1] \in Z(U)$, $([w_i], [w_{i+1}]) \in \R'_{\sigma[i]}$ y 
         $\R'_{\sigma[k]}([w_k]) = \emptyset$.
 
-        Como $[w_1] \in Z(U)$, existe $w_1' \in U$ tal que $w_1' \in [w_1]$. Luego notemos que aplicando sucesivamente el \Cref{lema:LMB-R-lema} 
+        Como $[w_1] \in Z(U)$, existe $w_1' \in U$ tal que $w_1' \in [w_1]$. Luego notemos que aplicando sucesivamente el \Cref{lema:bml-R-lema} 
         en todo el camino, existen $w_1',...w_k'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}') \in \R_{\sigma[i]}$.
 
         Pero veamos que esto nos dice que $\R_{\sigma[k]}(w_k') = \emptyset$. Pues, si existiera $v$ tal que 
@@ -516,7 +541,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
         $[w_1] \in Z(U)$, $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y $[w_{|\sigma|+1}] = [v]$.
 
         Como $[w_1] \in Z(U)$, entonces existe $w_1' \in U$ tal que $w_1'\in [w_1]$. Luego, notemos que aplicando sucesivamente el 
-        \Cref{lema:LMB-R-lema} sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$. 
+        \Cref{lema:bml-R-lema} sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$. 
         Como $\R_\pi(U) \subseteq T$ esto nos dice que $w'_{|\sigma|+1} \in T$. Por definición de 
         $T'$, $[w_{|\sigma|+1}] \in T'$. Finalmente, como $[v] = [w_{|\sigma|+1}]$ entonces $[v] \in T'$.
 
@@ -547,7 +572,7 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
         Notemos entonces que por la definición de $\R'$, $[w_1],...,[w_k]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, 
         que $[w_1] \in U'$, pues $w_1 \in Z^{-1}(U')$. Pero, como $\pi$ es fuertemente ejecutable en $U'$, entonces $\sigma$ también lo es, por lo que 
         existe $[v]$ tal que $([w_k],[v]) \in \R'_{\sigma[k]}$. Lo cuál nos lleva a un absurdo, pues si ese fuera el caso entonces por 
-        \Cref{lema:LMB-R-lema} tendríamos que existe $v' \in [v]$ tal que $(w_k,v') \in \R_{\sigma[k]}$ pero habíamos dicho que 
+        \Cref{lema:bml-R-lema} tendríamos que existe $v' \in [v]$ tal que $(w_k,v') \in \R_{\sigma[k]}$ pero habíamos dicho que 
         $\R_{\sigma[k]}(w_k) = \emptyset$.
 
         Esto nos dice que $\pi$ es fuertemente ejecutable para cada $w \in Z^{-1}(U')$.
@@ -568,8 +593,8 @@ Notar que en este teorema, al fijar $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},
     para cada $w \in \W$.
 \end{demostracion}
 
-Un punto muy positivo de esta contracción es que existen algoritmos eficientes que computan la contracción por LMB-bisimulación. En particular, 
-el algoritmo de Paige y Tarjan presentado en \cite[`Partición Relacional más Gruesa']{Paige&TarjanContraction} tiene complejidad $\bigO(m*log(n))$ siendo $n$ la cantidad de nodos del dominio del modelo y 
+Un punto muy positivo de esta contracción es que existen algoritmos eficientes que computan la contracción por \bml-bisimulación. En particular, 
+el algoritmo de Paige y Tarjan presentado en \cite[`Partición Relacional más Gruesa']{Paige&TarjanContraction} tiene complejidad $\bigO(m*\log(n))$ siendo $n$ la cantidad de nodos del dominio del modelo y 
 $m$ la cantidad de aristas del mismo.
 
 % \section{Tercera Propuesta de Contracción}
@@ -937,7 +962,7 @@ Luego, la segunda propuesta obtiene el siguiente modelo (\Cref{fig:3rd-example-2
 \end{figure}
 
 Notemos que en la segunda propuesta, los mundos etiquetados por la variable $q$ no pertenecen a la misma 
-clase de equivalencia de la máxima autobisimulación de la lógica modal básica debido a que $w_3$ tiene aristas 
+clase de equivalencia de la máxima autobisimulación de \bml debido a que $w_3$ tiene aristas 
 etiquetadas con las acciones $e, f$ mientras que $w_4$ no las tiene. Sin embargo, notemos que a partir de los planes  
 conocidos por el agente $i$, dados por la relación de indistinguibilidad $\S_i$, no es realmente relevante el hecho de que desde $w_4$ no 
 se puedan ejecutar las acciones $e, f$ dado que el agente $i$ no conoce planes donde dichas acciones sean ejecutadas. 
