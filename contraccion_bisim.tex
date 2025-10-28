@@ -11,7 +11,7 @@
 Continuando con nuestro análisis de las propiedades computacionales de la noción de bisimulación propuesta, en este 
 capítulo estudiaremos la contracción por bisimulación para \KHilogic.
 
-Un problema recurrente en la literatura de las lógicas modales y de las ciencias de la computación en general es el de la minimización de modelos. 
+Un problema recurrente en la literatura de las lógicas modales, y de las ciencias de la computación en general, es el de la minimización de modelos. 
 Al considerar una cierta clase de modelos (ya sean autómatas, grafos dirigidos, etc.) y habiendo definido una noción de equivalencia 
 entre los mismos, el problema de minimización de modelos consiste en: encontrar un procedimiento que, a partir de un modelo, construya 
 otro de tamaño mínimo % o mínimo?
@@ -135,24 +135,20 @@ que caracteriza la autobisimulación máxima de un \ults.
 
 Una primera observación que surge a partir de este teorema es que, a diferencia de lo mencionado para el caso de \bml, 
 encontramos una forma de identificar la autobisimulación máxima de un modelo sin necesidad de demostrar que la unión de 
-dos bisimulaciones es también una bisimulación. 
-
-En particular, se demuestra que la partición de nodos de acuerdo a la función de valuación $\V$ siempre es una autobisimulación.
-
-Entonces, sea $\modults$ un \ults nos gustaría definir su contracción por bisimulación a partir de $A_\modults$, 
+dos bisimulaciones es también una bisimulación. En particular, se demuestra que la partición de nodos de acuerdo a la función 
+de valuación $\V$ siempre es una autobisimulación. Entonces, sea $\modults$ un \ults nos gustaría definir su contracción por bisimulación a partir de $A_\modults$, 
 su autobisimulación máxima.
 
 Tomando un camino similar al de \bml, una posible propuesta para la contracción por bisimulación de un modelo $\model$ 
 es el \ults en el que se tiene como dominio a $\rho_\modults$ y 
 se relaciona a las clases de equivalencia $[w], [v] \in \rho_\modults$ siempre que $w, v$ están relacionados en $\modults$. 
 Por otro lado, la relación de indistinguibilidad sobre planes de cada agente $\S_i$ y el conjunto de acciones $\ACT$ de $\modults$ 
-se conservarían.
-
-Sin embargo, consideremos el siguiente ejemplo (\Cref{fig:1stproposaloriginal}):
+se conservarían. Sin embargo, consideremos el siguiente ejemplo (\Cref{fig:1stproposaloriginal}):
 
 \begin{figure}[h]
     \hspace{3.4cm}
     \vspace{0.1cm}
+    \begin{center}
     \begin{tikzpicture}
         \node[state] (p) {$p$};
         \node[state, below of=p, yshift=-1.5cm] (p2) {$p$};
@@ -166,61 +162,72 @@ Sin embargo, consideremos el siguiente ejemplo (\Cref{fig:1stproposaloriginal}):
         \path (p2) edge [bend right] node [above] {$b$} (q);
     \end{tikzpicture}
     \hspace{1cm}
-    \raisebox{1.8cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S_i = \left\{
-                \begin{array}{c}
-                    \{a\}, \{b\}
-                \end{array}
-            \right\}$
-        \end{minipage}
-    }
-    \caption{Representación gráfica de $\modults$}
+    \raisebox{1.45cm}{
+        \begin{tikzpicture}
+            \node[state] (p) {$p$};
+            \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+            
+            \node at ($(p)+(0,0.6)$) {$[w_1]$};
+            \node at ($(q)+(0,0.6)$) {$[w_3]$};
+    
+            \path (p) edge [bend left] node [above] {$a$} (q)
+                  (p) edge [bend right] node [above] {$b$} (q);
+        \end{tikzpicture}
+    }\\
+    \smallskip 
+    \end{center}
+    \qquad\qquad\qquad\qquad\qquad\qquad\qquad
+            $\begin{array}{ll}
+                
+                \S_{i} = &
+                    \left\{\{a\},
+                \{b\} \right\}
+            \end{array}$
+    \caption{$\modults$ a la izquierda y $\model'$, su contracción, a la derecha.}
     \label{fig:1stproposaloriginal}
 \end{figure}
 
-Con esta propuesta de contracción ($\modults'$), obtendríamos el modelo (\Cref{fig:1stproposalcontraction}):
+% Con esta propuesta de contracción ($\modults'$), obtendríamos el modelo (\Cref{fig:1stproposalcontraction}):
 
-\begin{figure}[h]
-    \hspace{3.2cm}
-    \vspace{0.8cm}
-    \begin{tikzpicture}
-        \node[state] (p) {$p$};
-        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+% \begin{figure}[h]
+%     \hspace{3.2cm}
+%     \vspace{0.8cm}
+%     \begin{tikzpicture}
+%         \node[state] (p) {$p$};
+%         \node[state, right of=p, xshift=1.5cm] (q) {$q$};
         
-        \node at ($(p)+(0,0.6)$) {$[w_1]$};
-        \node at ($(q)+(0,0.6)$) {$[w_3]$};
+%         \node at ($(p)+(0,0.6)$) {$[w_1]$};
+%         \node at ($(q)+(0,0.6)$) {$[w_3]$};
 
-        \path (p) edge [bend left] node [above] {$a$} (q)
-              (p) edge [bend right] node [above] {$b$} (q);
-    \end{tikzpicture}
-    \hspace{1cm}
-    \raisebox{0.4cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S'_i = \left\{
-                \begin{array}{c}
-                    \{a\}, \{b\}
-                \end{array}
-            \right\}$
-        \end{minipage}
-    }
-    \caption{Representación gráfica de $\modults'$}
-    \label{fig:1stproposalcontraction}
-\end{figure}
+%         \path (p) edge [bend left] node [above] {$a$} (q)
+%               (p) edge [bend right] node [above] {$b$} (q);
+%     \end{tikzpicture}
+%     \hspace{1cm}
+%     \raisebox{0.4cm}{
+%         \begin{minipage}{0.45\textwidth}
+%             $\S'_i = \left\{
+%                 \begin{array}{c}
+%                     \{a\}, \{b\}
+%                 \end{array}
+%             \right\}$
+%         \end{minipage}
+%     }
+%     \caption{Representación gráfica de $\modults'$}
+%     \label{fig:1stproposalcontraction}
+% \end{figure}
 
 Notemos que $\modults, w_1 \not\models \khi(p,q)$ pero $\modults', [w_1] \models \khi(p,q)$, luego $\modults,w_1$ y 
-$\modults',[w_1]$ no son bisimilares.
-
-Por lo que esta contracción por bisimulación no sería adecuada, ya que no produce un modelo bisimilar.
+$\modults',[w_1]$ no son bisimilares. Por lo que esta contracción por bisimulación no sería adecuada, ya que no produce 
+un modelo bisimilar.
 
 Otra posible propuesta sería restringir más la relación entre los puntos del modelo contraído. Por ejemplo, relacionar las clases 
-$[w], [v] \in \rho_\modults$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ tal que $w'$ y $v'$ están relacionados en el modelo original.
-
-Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
+$[w], [v] \in \rho_\modults$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ tal que $w'$ y $v'$ están relacionados en el modelo 
+original. Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
 
 \begin{figure}[h]
     \hspace{2.6cm}
     \vspace{0.2cm}
+    \begin{center}
     \begin{tikzpicture}
         \node[state] (p) {$p$};
         \node[state, right of=p, yshift=1cm, xshift=1.5cm] (q) {$q$};
@@ -237,62 +244,80 @@ Luego consideremos el siguiente modelo (\Cref{fig:2ndproposaloriginal}):
     \end{tikzpicture}
     \hspace{1cm}
     \raisebox{1.8cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S_i = \left\{
-                \begin{array}{c}
-                    \{ab\}
-                \end{array}
-            \right\}$
-        \end{minipage}
+        \begin{tikzpicture}
+            \node[state, yshift=-1cm] (p) {$p$};
+            \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+            \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+            
+            \node at ($(p)+(0,0.75)$) {$[w_1]$};
+            \node at ($(r)+(0,0.75)$) {$[w_4]$};
+            \node at ($(q)+(0,0.75)$) {$[w_2]$};
+
+            \path (p) edge [bend left] node [above] {$a$} (q);
+        \end{tikzpicture}
+        % \begin{minipage}{0.45\textwidth}
+        %     $\S_i = \left\{
+        %         \begin{array}{c}
+        %             \{ab\}
+        %         \end{array}
+        %     \right\}$
+        % \end{minipage}
     }
-    \caption{Representación gráfica de $\modults$}
+    \\
+    \end{center}
+    \smallskip
+    \qquad\qquad\qquad\qquad\qquad\qquad\qquad
+    $\begin{array}{ll}
+        
+        \S_{i} = &
+            \left\{\{ab\} \right\}
+    \end{array}$
+
+    \caption{$\modults$ a la izquierda y $\model'$, su contracción, a la derecha.}
     \label{fig:2ndproposaloriginal}
 \end{figure}
 
 
-Y su contracción por bisimulación con la propuesta mencionada (\Cref{fig:2ndproposalcontraction}):
+% Y su contracción por bisimulación con la propuesta mencionada (\Cref{fig:2ndproposalcontraction}):
 
 
-\begin{figure}[h]
-    \hspace{2.54cm}
-    \vspace{0.4cm}
-    \begin{tikzpicture}
-        \node[state, yshift=-1cm] (p) {$p$};
-        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
-        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+% \begin{figure}[h]
+%     \hspace{2.54cm}
+%     \vspace{0.4cm}
+%     \begin{tikzpicture}
+%         \node[state, yshift=-1cm] (p) {$p$};
+%         \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+%         \node[state, right of=p, xshift=3.5cm] (r) {$r$};
         
-        \node at ($(p)+(0,0.75)$) {$[w_1]$};
-        \node at ($(r)+(0,0.75)$) {$[w_4]$};
-        \node at ($(q)+(0,0.75)$) {$[w_2]$};
+%         \node at ($(p)+(0,0.75)$) {$[w_1]$};
+%         \node at ($(r)+(0,0.75)$) {$[w_4]$};
+%         \node at ($(q)+(0,0.75)$) {$[w_2]$};
 
-        \path (p) edge [bend left] node [above] {$a$} (q);
-    \end{tikzpicture}
-    \hspace{0.82cm}
-    \raisebox{0.14cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S'_i = \left\{
-                \begin{array}{c}
-                    \{ab\}
-                \end{array}
-            \right\}$
-        \end{minipage}
-    }
-    \caption{Representación gráfica de $\modults'$}
-    \label{fig:2ndproposalcontraction}
-\end{figure}
+%         \path (p) edge [bend left] node [above] {$a$} (q);
+%     \end{tikzpicture}
+%     \hspace{0.82cm}
+%     \raisebox{0.14cm}{
+%         \begin{minipage}{0.45\textwidth}
+%             $\S'_i = \left\{
+%                 \begin{array}{c}
+%                     \{ab\}
+%                 \end{array}
+%             \right\}$
+%         \end{minipage}
+%     }
+%     \caption{Representación gráfica de $\modults'$}
+%     \label{fig:2ndproposalcontraction}
+% \end{figure}
 
 Si analizamos ambos modelos, podemos notar que $\modults,w_1 \models \khi(p,r)$ pero $\modults',[w_1] \not\models \khi(p,r)$, luego 
-$\modults,w_1$ y $\modults',[w_1]$ no son bisimilares.
+$\modults,w_1$ y $\modults',[w_1]$ no son bisimilares. Por lo que esta propuesta tampoco es adecuada, ya que tampoco produce un modelo 
+bisimilar al modelo original.
 
-Por lo que esta propuesta tampoco es adecuada, ya que tampoco produce un modelo bisimilar al modelo original.
-
-Si analizamos ambos ejemplos presentados, podemos notar que la primera propuesta de contracción podría agregar caminos fuertemente ejecutables al modelo 
+A partir de los ejemplos presentados podemos notar que la primera propuesta de contracción podría agregar caminos fuertemente ejecutables al modelo 
 y la segunda podría eliminar caminos fuertemente ejecutables del modelo. Los fallos de ambas propuestas nos dan la idea de que no parece 
 existir una contracción directa, en la cual no se modifique la relación de indistinguibilidad sobre planes de cada agente y las acciones 
-atómicas consideradas por el modelo. 
-
-A partir de lo mencionado surge la siguiente propuesta de contracción, la cual modifica el conjunto de acciones y la relación de indistinguibilidad 
-sobre planes de cada agente.
+atómicas consideradas por el modelo. A partir de lo mencionado surge la siguiente propuesta de contracción, la cual modifica el 
+conjunto de acciones y la relación de indistinguibilidad sobre planes de cada agente.
 
 
 \begin{definicion}\label{def:1st-contraction}
@@ -418,9 +443,8 @@ siguiente teorema.
 
 
 Hemos demostrado entonces que la contracción propuesta es adecuada, es decir, que dado un \ults genera un \ults bisimilar a partir de su 
-autobisimulación máxima $A_\modults$.
-
-Luego, es deseable que sea razonable en términos computacionales. Con esto en mente, presentamos el siguiente resultado.
+autobisimulación máxima $A_\modults$. Luego, es deseable que sea razonable en términos computacionales. Con esto en mente, presentamos 
+el siguiente resultado.
 
 
 \begin{teorema}
@@ -437,13 +461,9 @@ Luego, es deseable que sea razonable en términos computacionales. Con esto en m
     tamaño está acotado por $\W * \W * \sum_{i}|\S_i|$, lo cuál es polinomial con respecto al tamaño de $\modults$.
 
     Una vez demostrado que el tamaño de $\modults'$ es polinomial con respecto al tamaño de $\modults$, basta con ver que cada componente 
-    es computable en tiempo polinomial. 
-
-    Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo polinomial. Luego notemos que por 
-    \Cref{thm:model-checking-poly}, model-checking está en $\Poly$ por lo que es claro que computar $\sexec^{\model}(\pi)$ y $\R_\pi$
-    para cada $\pi$ es realizable en tiempo polinomial.
-
-    Luego $\modults'$ es computable en tiempo polinomial.
+    es computable en tiempo polinomial. Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo 
+    polinomial. Luego notemos que por \Cref{thm:model-checking-poly}, model-checking está en $\Poly$ por lo que es claro que computar 
+    $\sexec^{\model}(\pi)$ y $\R_\pi$ para cada $\pi$ es realizable en tiempo polinomial. Luego $\modults'$ es computable en tiempo polinomial.
 \end{demostracion}
 
 Hemos presentado una contracción por bisimulación para \KHilogic la cuál es bisimilar a su modelo asociado y, además, 
@@ -453,19 +473,15 @@ Sin embargo, una observación que surge al analizar esta propuesta es que la con
 forma signicativa, con respecto al modelo original. 
 Naturalmente, al modificar el conjunto de acciones atómicas del modelo el entorno de habilidades de los agentes cambia por completo y, 
 junto con ello, el conjunto de planes conocido por cada agente cambia también. Más aún, en la contracción propuesta, los agentes 
-únicamente consideran planes de una única acción.
-
-Este análisis es el que motiva una nueva propuesta de contracción.
+únicamente consideran planes de una única acción. Este análisis es el que motiva una nueva propuesta de contracción.
 
 \section{Segunda propuesta de contracción}
 
 Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve 
 en la mayor medida posible sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
-indistinguibilidad de planes de cada agente.
-
-Si recordamos las primeras propuestas analizadas en la sección anterior, notamos que no logramos encontrar una propuestra adecuada a partir de 
-la autobisimulación máxima $A_\modults$ que no modifique las componentes mencionadas. Por lo que pareciera que para encontrar tal contracción 
-debemos considerar otro dominio.  
+indistinguibilidad de planes de cada agente. Si recordamos las primeras propuestas analizadas en la sección anterior, notamos que no 
+logramos encontrar una propuestra adecuada a partir de la autobisimulación máxima $A_\modults$ que no modifique las componentes 
+mencionadas. Por lo que pareciera que para encontrar tal contracción debemos considerar otro dominio.  
 
 Notemos que cada \ults de la forma $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ tiene naturalmente un modelo de Kripke asociado, 
 que sería el formado por $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$. Luego, una posible propuesta sería contraer dicho modelo de Kripke como en 
@@ -509,7 +525,7 @@ Estamos en condiciones de presentar la nueva propuesta de contracción por bisim
     $\model'=\tup{\W', \R', \cset{\S_i}_{i\in\AGT},\V',\ACT}$ su contracción por \KHilogic-bisimulación.
 \end{definicion}
 
-Análogamente a lo realizado para la contracción propuesta en la \Cref{def:1st-contraction}, demostraremos que esta nueva propuesta es 
+Análogo a lo realizado para la primera contracción propuesta, demostraremos que esta nueva propuesta también es 
 adecuada. 
 
 \begin{teorema}
@@ -554,10 +570,8 @@ adecuada.
         fuertemente ejecutable en $w_1' \in U$, lo cuál es absurdo, pues dijimos que $U \subseteq \sexec^{\model}(\pi)$. Lo que 
         demuestra que $Z(U) \subseteq \sexec^{\model'}(\pi)$.
 
-        Veamos ahora que $\R'_\pi(Z(U)) \subseteq T'$.
-
-        Sea $[v] \in \R'_\pi(Z(U))$, entonces existen $\sigma \in \pi$ y $[w_1], ..., [w_{|\sigma|+1}]$ tales que 
-        $[w_1] \in Z(U)$, $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y $[w_{|\sigma|+1}] = [v]$.
+        Veamos ahora que $\R'_\pi(Z(U)) \subseteq T'$. Sea $[v] \in \R'_\pi(Z(U))$, entonces existen $\sigma \in \pi$ y 
+        $[w_1], ..., [w_{|\sigma|+1}]$ tales que $[w_1] \in Z(U)$, $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y $[w_{|\sigma|+1}] = [v]$.
 
         Como $[w_1] \in Z(U)$, entonces existe $w_1' \in U$ tal que $w_1'\in [w_1]$. Luego, notemos que aplicando sucesivamente el 
         \Cref{lema:bml-R-lema} sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$.
@@ -644,13 +658,13 @@ consideración, esta segunda propuesta de contracción es adecuada y computable 
 \section{Comparación entre las contracciones propuestas}
 
 Presentaremos tres \ultss de ejemplo, con el objetivo de obtener un mejor entendimiento sobre el comportamiento de cada una de las 
-contracciones propuestas.
+contracciones propuestas. En este primer ejemplo, consideraremos el siguiente modelo $\modults_1$ (\Cref{fig:1st-ex-cont}):
 
-En este primer ejemplo, consideraremos el siguiente modelo $\modults_1$ (\Cref{fig:1st-example-contraction}):
-
-\begin{figure}[h]
-    \hspace{2.3cm}
-    \vspace{0.3cm}
+\begin{figure}[t]
+\begin{center}
+\begin{tabular}{ll}
+\hspace{1.2cm}
+\begin{minipage}{0.25\textwidth}
     \begin{tikzpicture}
         \node[state] (p) {$p$};
         \node[state, below of=p, yshift=-1cm] (p2) {$p$};
@@ -661,11 +675,11 @@ En este primer ejemplo, consideraremos el siguiente modelo $\modults_1$ (\Cref{f
 
         
         \node at ($(p)+(0,0.5)$) {$w_1$};
-        \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+        \node at ($(p2)+(0.05,-0.5)$) {$w_2$};
         \node at ($(q)+(0,0.5)$) {$w_3$};
-        \node at ($(q2)+(0.05,-0.6)$) {$w_4$};
+        \node at ($(q2)+(0.05,-0.5)$) {$w_4$};
         \node at ($(r)+(0,0.5)$) {$w_5$};
-        \node at ($(r2)+(0.05,-0.6)$) {$w_6$};
+        \node at ($(r2)+(0.05,-0.5)$) {$w_6$};
 
 
         \path (p) edge node [above] {$a$} (q)
@@ -676,92 +690,55 @@ En este primer ejemplo, consideraremos el siguiente modelo $\modults_1$ (\Cref{f
         \path (q2) edge node [above] {$c$} (r)
               (q2) edge [bend left=50] node [below] {$c$} (p2)
               (q2) edge node [above] {$b$} (r2);
-    \end{tikzpicture}
-    \hspace{1cm}
-    \raisebox{1.8cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S_i = \left\{
-                \begin{array}{c}
-                    \{ab\}, \{ac\}
-                \end{array}
-            \right\}$
-        \end{minipage}
-    }
-    \caption{Representación gráfica de $\modults_1$.}
-    \label{fig:1st-example-contraction}
-\end{figure}
-
-Ahora, analicemos cómo serían los modelos obtenidos por cada una de las contracciones propuestas en este 
-capítulo.
-
-El modelo obtenido por la primera propuesta es (\Cref{fig:1st-example-1st-contraction}):
-
-\begin{figure}[h]
-    \hspace{2.2cm}
-    \vspace{0.4cm}
-    \begin{tikzpicture}
+    \end{tikzpicture} 
+\end{minipage}
+    &
+    \hspace{2cm}
+    \begin{minipage}{0.5\textwidth}
+     \begin{tabular}{c}
+        \begin{tikzpicture}
         \node[state, yshift=-1cm] (p) {$p$};
         \node[state, right of=p, xshift=1.5cm] (q) {$q$};
         \node[state, right of=p, xshift=3.5cm] (r) {$r$};
         
-        \node at ($(p)+(0,-0.7)$) {$[w_1]$};
-        \node at ($(q)+(0,-0.7)$) {$[w_3]$};
-        \node at ($(r)+(0,-0.7)$) {$[w_5]$};
+        \node at ($(p)+(0,-0.5)$) {$[w_1]$};
+        \node at ($(q)+(0,-0.5)$) {$[w_3]$};
+        \node at ($(r)+(0,-0.5)$) {$[w_5]$};
 
         \path (p) edge [bend left=40] node [above] {$a_{ab}$} (r);
-    \end{tikzpicture}
-    \hspace{0.82cm}
-    \raisebox{0.8cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S'_i = \left\{
-                \begin{array}{c}
-                    \{a_{ab}\}, \{a_{ac}\}
-                \end{array}
-            \right\}$
-        \end{minipage}
-    }
-    \caption{Primera propuesta de contracción de $\modults_1$.}
-    \label{fig:1st-example-1st-contraction}
-\end{figure}
-
-Por otro lado, podemos notar que la segunda y tercera propuesta producen exactamente el mismo 
-modelo bisimilar a $\modults_1$, el cuál es (\Cref{fig:1st-example-2nd-3rd-contraction}):
-
-
-\begin{figure}[h]
-    \hspace{1.6cm}
-    \vspace{0.4cm}
-    \begin{tikzpicture}
-        \node[state, yshift=-1cm] (p) {$p$};
-        \node[state, right of=p, yshift = 1cm, xshift=1.5cm] (q) {$q$};
-        \node[state, below of=q, yshift = -1.4cm] (q2) {$q$};
+        \end{tikzpicture} \\
+     \phantom{text} \\
+     \begin{tikzpicture}
+    \node[state, yshift=-1cm] (p) {$p$};
+        \node[state, right of=p, yshift = 0.7cm, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift = -0.7cm] (q2) {$q$};
         \node[state, right of=p, xshift=3.5cm] (r) {$r$};
         
-        \node at ($(p)+(0,0.7)$) {$[w_1]$};
-        \node at ($(q)+(0,0.7)$) {$[w_3]$};
-        \node at ($(q2)+(0,-0.7)$) {$[w_4]$};
-        \node at ($(r)+(0,0.7)$) {$[w_5]$};
+        \node at ($(p)+(0,0.5)$) {$[w_1]$};
+        \node at ($(q)+(0,0.5)$) {$[w_3]$};
+        \node at ($(q2)+(0,-0.5)$) {$[w_4]$};
+        \node at ($(r)+(0,0.5)$) {$[w_5]$};
 
         \path (p) edge node [above] {$a$} (q)
               (p) edge node [above] {$a$} (q2);
         \path (q) edge node [above] {$b$} (r)
               (q2) edge node [above] {$b$} (r)
-              (q2) edge [bend right= 45, sloped] node [below] {$c$} (r)
-              (q2) edge [bend left=45, sloped] node [below] {$c$} (p);
-        
+              (q2) edge [bend right= 45] node [below] {$c$} (r)
+              (q2) edge [bend left=45] node [below] {$c$} (p);
     \end{tikzpicture}
-    \hspace{1.35cm}
-    \raisebox{1.85cm}{
-        \begin{minipage}{0.45\textwidth}
-            $\S'_i = \left\{
-                \begin{array}{c}
-                    \{ab\}, \{ac\}
-                \end{array}
-            \right\}$
-        \end{minipage}
-    }
-    \caption{Segunda y tercera propuesta de contracción de $\modults_1$.}
-    \label{fig:1st-example-2nd-3rd-contraction}
+     \end{tabular}
+     \end{minipage}
+     %    \begin{minipage}{0.45\textwidth}
+     %        $\S_i = \left\{
+     %            \begin{array}{c}
+     %                \{ab\}, \{ac\}
+     %            \end{array}
+     %        \right\}$
+     %    \end{minipage}
+     \end{tabular}
+    \caption{$\model$ (izquierda), 1ra propuesta (derecha arriba) y 2da propuesta (derecha abajo).}
+    \label{fig:1st-ex-cont}
+\end{center}
 \end{figure}
 
 Como se puede notar, para $\modults_1$ la primera propuesta de contracción produce un modelo de tamaño significativamente menor 
