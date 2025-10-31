@@ -1,5 +1,5 @@
-\chapter{Lógica de Knowing How basada en incertidumbre}
-En este capítulo, introduciremos un enfoque para modelar el concepto de ``saber cómo'', presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
+\chapter{Preliminares: Lógica de Knowing How basada en incertidumbre}
+En este capítulo introduciremos un enfoque para modelar el concepto de ``saber cómo'', presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
 lógica previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
 representado en Sistemas de Transición Etiquetado (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
@@ -98,12 +98,12 @@ dadas por la función de valuación $\V$ y las aristas entre dos nodos estarán 
     
     \begin{itemize}
         \item $\W = \{w_1, w_2, w_3, w_4\}$.
-        \item $\R = \{R_a, \R_b\}$ con $\R_a = \{(w_1,w_3), (w_1,w_4), (w_2,w_3)\}$ y $\R_b = \{(w_3,w_4)\}$.
+        \item $\R = \{\R_a, \R_b\}$ con $\R_a = \{(w_1,w_3), (w_1,w_4), (w_2,w_3)\}$ y $\R_b = \{(w_3,w_4)\}$.
         \item $\V = \{(w_1, \{p\}), (w_2, \{p\}), (w_3, \{q\}), (w_4, \{r\})\}$.
         \item $\ACT = \{a, b\}$.
     \end{itemize}
 
-    Su representación gráfica es (\Cref{fig:lts}):
+    Su representación gráfica es \Cref{fig:lts}:
     \begin{figure}[h]
         \centering
         \begin{tikzpicture}
@@ -150,7 +150,7 @@ entre planes de cada agente.
 
 \begin{ejemplo}\label{ejemplo:ults}
     Siguiendo el \Cref{ejemplo:lts} y considerando $\AGT = \{i\}$, la representación gráfica 
-    de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es (\Cref{fig:ults}):
+    de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es \Cref{fig:ults}:
     \begin{figure}[h]
         \hspace{2.3cm}
         \begin{tikzpicture}
@@ -391,7 +391,7 @@ Presentaremos ahora un ejemplo introducido en \cite{SaraviaPHD} con el objetivo 
 que se piden sobre una relación binaria para ser considerada una \KHilogic-bisimulación. 
 
 \begin{ejemplo}\label{ejemplo:bisim}
-    Sean $\modults$ y $\modults'$ dos \ults con $\AGT = \{i\}$, cuya representación gráfica está dada por (\Cref{fig:bisim}):
+    Sean $\modults$ y $\modults'$ dos \ults con $\AGT = \{i\}$, cuya representación gráfica está dada por la \Cref{fig:bisim}:
     \begin{figure}[h]
         \hspace*{1.65cm}
         \vspace{0.07cm}
