@@ -16,7 +16,7 @@ Al considerar una cierta clase de modelos (ya sean autómatas, grafos dirigidos,
 entre los mismos, el problema de minimización de modelos consiste en: encontrar un procedimiento que, a partir de un modelo, construya 
 otro de tamaño mínimo % o mínimo?
 que sea equivalente respecto a la noción previamente mencionada. Este problema resulta de gran interés computacional, ya que permite 
-obtener un modelo de menor tamaño que mantiene las propiedades estructurales de importancia; de esta forma es posible utilizar 
+obtener un modelo de menor tamaño que mantiene las propiedades estructurales de mayor importancia; de esta forma es posible utilizar 
 el modelo obtenido para futuros cómputos. Más aún, la minimización de modelos permite alcanzar una comprensión más profunda y detallada
 de la noción de equivalencia considerada o, en caso de tratarse de una equivalencia lógica, del poder expresivo del 
 lenguaje formal en cuestión.
@@ -39,13 +39,12 @@ es posible definir un nuevo modelo cuyo dominio sea el cociente dado por dicha r
 una clase de equivalencia de la autobisimulación máxima, y dos clases de equivalencia se relacionarán entre sí cuando existan dos 
 nodos de dichas clases que se relacionan en el modelo original.
 
-Finalmente, en \cite{HandbookModalLogic} se establece que dicha contracción satisface que cada nodo del modelo original es bisimilar 
-al nodo que representa su clase de equivalencia y, a su vez, es de tamaño mínimo entre todos los modelos bisimilares.
-
+Finalmente, en \cite{HandbookModalLogic} se establece que dicha contracción satisface que para cada nodo del modelo original su modelo 
+punteado asociado es bisimilar al modelo punteado asociado a su clase equivalencia y, a su vez, es de tamaño mínimo entre todos los modelos 
+bisimilares.
 Por otro lado, en \cite{Paige&TarjanContraction} Paige y Tarjan presentan un algoritmo que permite encontrar la contracción por bisimulación de 
 un modelo finito en una cantidad $\bigO(m * \log (n))$ de pasos, siendo $n$ la cantidad de nodos del modelo y $m$ la cantidad de aristas 
 del mismo.
-
 Habiendo mencionado la ruta de trabajo seguida para \bml, realizaremos un estudio similar para \KHilogic.
 
 \section{Primera propuesta de contracción}
@@ -91,7 +90,6 @@ que caracteriza la autobisimulación máxima de un \ults.
 
             Sean $U,T$ subconjuntos de $\W$ tales que $U \ultsExecAgi T$ y $U$ es tal que para cada $s \in \rho_\model$ se cumple que 
             $s \cap U = \emptyset$ o $s \subseteq U$, queremos encontrar $T' \subseteq \W$ que cumpla lo mencionado.
-            
             Demostremos por un lado que $U = A_\model(U)$:
             
             ($\subseteq$) Siguiendo el argumento usado en (A-Zig), es claro que para $w \in U$ se cumple que $w \in A_\model(U)$, 
@@ -99,14 +97,10 @@ que caracteriza la autobisimulación máxima de un \ults.
             
             ($\supseteq$) Sea $v \in A_\model(U)$, queremos ver que $v \in U$.
             Como $v \in A_\model(U)$, entonces existe $w \in U$ tal que $(w,v) \in A_\model$ y, por lo tanto, $v \in [w]$.
-            
-            Como $w \in U$ entonces $[w] \subseteq U$. Luego $v \in U$.
-
-            Entonces demostramos que $U = A_\model(U)$.
+            Como $w \in U$ entonces $[w] \subseteq U$. Luego $v \in U$. Entonces demostramos que $U = A_\model(U)$.
 
             Notemos que siendo $X \subseteq \W$ entonces $X \subseteq A_\model(X)$, pues como analizamos anteriormente 
             $(w,w) \in A_\model$ para cada $w \in \W$.
-
             Juntando lo mencionado, podemos afirmar que $T' = T$ cumple que:
 
              \begin{itemize}
@@ -124,10 +118,8 @@ que caracteriza la autobisimulación máxima de un \ults.
         
         Supongamos que no es cierto, es decir, existe $Z \subseteq \W \times \W$ autobisimulación de $\model$ tal que hay 
         $w,v \in \W$ que cumplen que $(w,v) \in Z$ y $(w,v) \notin A_\model$. 
-
         Como $Z$ es una autobisimulación entonces satisface (Atom), es decir, $\V(w) = \V(v)$. Pero notemos que por definición de 
         $A_\model$, $(w,v) \in A_\model$, lo cuál es absurdo, pues dijimos que $(w,v) \notin A_\model$.
-
         El absurdo vino de suponer que existe $Z$ una autobisimulación de $\model$ tal que $Z \nsubseteq A_\model$.    
     \end{itemize}
     Luego queda demostrada la propiedad.
@@ -136,8 +128,8 @@ que caracteriza la autobisimulación máxima de un \ults.
 Una primera observación que surge a partir de este teorema es que, a diferencia de lo mencionado para el caso de \bml, 
 encontramos una forma de identificar la autobisimulación máxima de un modelo sin necesidad de demostrar que la unión de 
 dos bisimulaciones es también una bisimulación. En particular, se demuestra que la partición de nodos de acuerdo a la función 
-de valuación $\V$ siempre es una autobisimulación. Entonces, sea $\model$ un \ults nos gustaría definir su contracción por bisimulación a partir de $A_\model$, 
-su autobisimulación máxima.
+de valuación $\V$ siempre es una autobisimulación. Sea $\model$ un \ults nos gustaría definir su contracción por bisimulación a 
+partir de $A_\model$, su autobisimulación máxima.
 
 Tomando un camino similar al de \bml, una posible propuesta para la contracción por bisimulación de un modelo $\model$ 
 es el \ults en el que se tiene como dominio a $\rho_\model$ y 
@@ -314,9 +306,9 @@ $\model,w_1$ y $\model',[w_1]$ no son bisimilares. Por lo que esta propuesta tam
 bisimilar al modelo original.
 
 A partir de los ejemplos presentados podemos notar que la primera propuesta de contracción podría agregar caminos fuertemente ejecutables al modelo 
-y la segunda podría eliminar caminos fuertemente ejecutables del modelo. Los fallos de ambas propuestas nos dan la idea de que no parece 
+y la segunda podría eliminar caminos fuertemente ejecutables del mismo. Los fallos de ambas propuestas nos dan la idea de que no parece 
 existir una contracción directa, en la cual no se modifique la relación de indistinguibilidad sobre planes de cada agente y las acciones 
-atómicas consideradas por el modelo. A partir de lo mencionado surge la siguiente propuesta de contracción, la cual modifica el 
+atómicas consideradas por el modelo. A partir de este análisis surge la siguiente propuesta de contracción, la cual modifica el 
 conjunto de acciones y la relación de indistinguibilidad sobre planes de cada agente.
 
 
@@ -352,11 +344,8 @@ siguiente teorema.
     para demostrar la propiedad.
 
     Dado que $\W$ es no vacío entonces es claro que $Z$ es no vacío también.
-
     Por otro lado, notemos que por la definición de $\V'$, $Z$ satisface (Atom).
-
     A su vez, por cómo definimos $Z$, es fácil ver que (A-zig) y (A-zag) son satisfechos.
-    
     Demostremos entonces que se satisfacen ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
@@ -375,25 +364,26 @@ siguiente teorema.
 
         Como $U \ultsExecAgi T$, existe $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$ y 
         $\R_\pi(U) \subseteq T$. 
-
-        Sabemos por la definición de $\fcont{\model}$ ocurre que $\{a_\pi\}\in\S'_i$. Demostraremos que $\{a_\pi\}$ 
+        Sabemos por la definición de $\fcont{\model}$ que $\{a_\pi\}\in\S'_i$. Demostraremos que $\{a_\pi\}$ 
         atestigua $Z(U) \ultsExecAgi T'$, es decir, que $Z(U) \subseteq \sexec^{\fcont{\model}}(a_\pi)$ y que además 
         $\R'_{a_\pi}(Z(U)) \subseteq T'$.
 
-        Sea $[w] \in Z(U)$, veamos que $[w] \in \sexec^{\fcont{\model}}(a_\pi)$. Primero notemos que como $[w] \in Z(U)$, 
+        Sea $[w] \in Z(U)$, veamos que $[w] \in \sexec^{\fcont{\model}}(a_\pi)$. Como $a_\pi$ es un plan de un único paso, para demostrar 
+        que es fuertemente ejecutable en $[w]$ basta con ver que existe alguna arista que sale de $[w]$ y tiene como etiqueta $a_\pi$.
+        Primero notemos que como $[w] \in Z(U)$, 
         entonces existe $w' \in [w]$ tal que $w' \in U$. Luego, por la hipótesis sobre $U$
         se cumple que $[w'] = [w] \subseteq U$. Pero veamos que como $U \subseteq \sexec^{\model}(\pi)$ entonces 
         $[w] \subseteq \sexec^{\model}(\pi)$, por lo que existe $v \in \W$ tal que $v \in \R_\pi(w')$. 
         Como $[w] \subseteq \sexec^{\model}(\pi)$ y $(w',v) \in \R_\pi$, entonces 
-        $([w],[v]) \in \R'_{a_\pi}$. Queda demostrado entonces que $Z(U) \subseteq \sexec^{\fcont{\model}}(a_\pi)$.
+        $([w],[v]) \in \R'_{a_\pi}$ y, por lo tanto, $[w] \in \sexec^{\fcont{\model}}(a_\pi)$. 
+        Queda demostrado entonces que $Z(U) \subseteq \sexec^{\fcont{\model}}(a_\pi)$.
         
         Demostraremos ahora que $\R'_{a_\pi}(Z(U)) \subseteq T'$.
-
         Sea $[v] \in \R'_{a_\pi}(Z(U))$, entonces existe $[w] \in Z(U)$ tal que $([w],[v]) \in \R'_{a_\pi}$. Notar que 
         como $[w] \in Z(U)$, entonces existe $w' \in [w]$ tal que $w' \in U$ y, por lo tanto, $[w'] = [w] \subseteq U$. 
         Si analizamos la definición de $\R'_{a_\pi}$, como $([w],[v]) \in \R'_{a_\pi}$ entonces existen $w'' \in [w]$ y $v'' \in [v]$ 
         tal que $(w'',v'') \in \R_\pi$. Como $w'' \in U$ y $\R_\pi(U) \subseteq T$, entonces se cumple que $v'' \in T$, lo que nos dice 
-        que $[v''] = [v] \in T'$, que era lo que queríamos demostrar. Luego $\R'_{a_\pi}(Z(U)) \subseteq T'$. 
+        que $[v''] = [v] \in T'$, que es lo que queríamos demostrar. Luego $\R'_{a_\pi}(Z(U)) \subseteq T'$. 
 
         Queda demostrado entonces que $Z$ satisface $\khi$-zig.
 
@@ -411,8 +401,7 @@ siguiente teorema.
     
         Como $U' \ultsExecAgi T'$, entonces existe $\{a_\pi\} \in \S_i'$ tal que $U' \subseteq \sexec^{\fcont{\model}}(a_\pi)$ 
         y $\R'_{a_\pi}(U') \subseteq T'$.
-
-        Luego, por como está definido $\model$, tenemos que $\pi \in \S_i$. 
+        Luego, por como está definido $\fcont{\model}$, tenemos que $\pi \in \S_i$. 
         Veamos entonces que $\pi$ atestigua $Z^{-1}(U') \ultsExecAgi T$, es decir, que 
         $Z^{-1}(U') \subseteq \sexec^{\model}(\pi)$ y, a su vez, que $\R_\pi(Z^{-1}(U')) \subseteq T$.
 
@@ -429,21 +418,22 @@ siguiente teorema.
         $Z^{-1}(U) \subseteq \sexec^{\model}(\pi)$, entonces también $[w] \subseteq \sexec^{\model}(\pi)$. 
         Por definición de $\R'$, como $(w,v) \in \R_\pi$ y 
         $[w] \subseteq \sexec^{\model}(\pi)$, entonces $([w],[v]) \in \R'_{a_\pi}$. Pero, recordemos que 
-        $\R'_{a_\pi} \subseteq T'$, lo que nos dice que $[v] \subseteq T'$. Luego, por definición de $T$, $v \in T$ que era lo que 
-        queríamos ver.
+        $\R'_{a_\pi} \subseteq T'$, lo que nos dice que $[v] \in T'$. Luego, por definición de $T$ tenemos que $v \in T$, que es 
+        lo que queríamos ver.
         % Pero, como $a_\sigma$ es fuertemente ejecutable en $[w]$ entonces existe $[v']$ tal que $([w],[v']) \in \R_{a_\sigma}$. 
         % Como existe dicha arista, por la definición de $\R'$, ocurre que $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$. 
         % Luego, como $\sigma$ es fuertemente ejecutable en todo nodo de $[w]$ y $(w,v) \in \R_\sigma$ entonces $([w],[v]) \in \R'_{a_\sigma}$. 
         % Luego, como $\R'_{\pi'}(U') \subseteq T'$, entonces $[v] \in T'$, lo que nos dice que $v \in T$ que era lo que queríamos demostrar.
 
-        Entonces, hemos demostrado que $Z$ satisface $\khi$-zag.
+        Finalmente, $Z$ satisface $\khi$-zag.
     \end{itemize}
-    Demostramos que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\model,w}$ y $\tup{\fcont{\model},[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
+    Luego, $Z$ es una \KHilogic-bisimulación. Esto nos dice que $\tup{\model,w}$ y $\tup{\fcont{\model},[w]}$ son 
+    $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{demostracion}
 
 
-Hemos demostrado entonces que la contracción propuesta es adecuada, es decir, que dado un \ults genera un \ults bisimilar a partir de su 
-autobisimulación máxima $A_\model$. Luego, es deseable que sea razonable en términos computacionales. Con esto en mente, presentamos 
+Hemos demostrado entonces que la contracción propuesta es adecuada, es decir, que dado un modelo produce otro bisimilar. 
+Luego, es deseable que sea razonable en términos computacionales. Con esto en mente, presentamos 
 el siguiente resultado.
 
 
@@ -456,41 +446,40 @@ el siguiente resultado.
     Veamos que el tamaño de $\fcont{\model}$ es polinomial con respecto al tamaño de $\model$. Es claro que $\rho_\model$ tiene tamaño 
     polinomial con respecto al tamaño de $\W$ y, lo mismo sucede con $\V'$. 
 
-    Luego notemos que $\ACT'$ tiene tamaño $\sum_{i} |\S_i|$, y cada $\S_i'$ tiene tamaño a lo sumo $|\S_i|$. Por último, notemos que 
+    Luego, notemos que $\ACT'$ tiene tamaño $\sum_{i} |\S_i|$, y cada $\S_i'$ tiene tamaño a lo sumo $|\S_i|$. Por último, notemos que 
     $\R'$ tiene a lo sumo una arista por cada tupla formada por dos nodos de $\W$ y un plan conocido por algún agente $i$, luego su 
     tamaño está acotado por $\W * \W * \sum_{i}|\S_i|$, lo cuál es polinomial con respecto al tamaño de $\model$.
 
     Una vez demostrado que el tamaño de $\fcont{\model}$ es polinomial con respecto al tamaño de $\model$, basta con ver que cada componente 
     es computable en tiempo polinomial. Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo 
-    polinomial. Luego notemos que por \Cref{thm:model-checking-poly}, model-checking está en $\Poly$ por lo que es claro que computar 
-    $\sexec^{\model}(\pi)$ y $\R_\pi$ para cada $\pi$ es realizable en tiempo polinomial. Luego $\fcont{\model}$ es computable en tiempo polinomial.
+    polinomial. Por otro lado, notemos que por \Cref{thm:model-checking-poly} model-checking para \KHilogic está en $\Poly$ por lo que 
+    computar $\sexec^{\model}(\pi)$ y $\R_\pi$ para cada $\pi$ es realizable en tiempo polinomial, lo que nos dice que computar $\R'$ 
+    también es realizable en tiempo polinomial. Finalmente, $\fcont{\model}$ es computable en tiempo polinomial.
 \end{demostracion}
 
-Hemos presentado una contracción por bisimulación para \KHilogic la cuál es bisimilar a su modelo asociado y, además, 
-es computable eficientemente.
-
-Sin embargo, una observación que surge al analizar esta propuesta es que la contracción definida difiere estructuralmente, de 
+Hemos presentado una contracción por bisimulación para \KHilogic la cuál produce un modelo bisimilar a su modelo asociado y, además, 
+es computable eficientemente. Sin embargo, una observación que surge al analizar esta propuesta es que la contracción definida difiere estructuralmente, en 
 forma signicativa, con respecto al modelo original. 
 Naturalmente, al modificar el conjunto de acciones atómicas del modelo el entorno de habilidades de los agentes cambia por completo y, 
 junto con ello, el conjunto de planes conocido por cada agente cambia también. Más aún, en la contracción propuesta, los agentes 
-únicamente consideran planes de una única acción. Este análisis es el que motiva una nueva propuesta de contracción.
+únicamente consideran planes de una sola acción. Este análisis es el que motiva una nueva propuesta de contracción.
 
 \section{Segunda propuesta de contracción}
 
-Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve 
-en la mayor medida posible sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
-indistinguibilidad de planes de cada agente. Si recordamos las primeras propuestas analizadas en la sección anterior, notamos que no 
+Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve,  
+en la mayor medida posible, sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
+indistinguibilidad sobre planes de cada agente. Recordando las primeras propuestas analizadas en la sección anterior, notemos que no 
 logramos encontrar una propuestra adecuada a partir de la autobisimulación máxima $A_\model$ que no modifique las componentes 
 mencionadas. Por lo que pareciera que para encontrar tal contracción debemos considerar otro dominio.  
 
-Notemos que cada \ults de la forma $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ tiene naturalmente un modelo de Kripke asociado, 
-que sería el formado por $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$. Luego, una posible propuesta sería contraer dicho modelo de Kripke como en 
-\bml y utilizar este modelo contraído para definir una nueva contracción por bisimulación para \KHilogic, la cual conservaría el 
-conjunto de acciones atómicas y la relación de indistinguibilidad sobre planes de cada agente.
+Notemos que cada \ults de la forma $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ tiene naturalmente un modelo de Kripke
+asociado, que sería el formado por $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$. Luego, una posible propuesta sería contraer dicho modelo de 
+Kripke como en \bml y utilizar este modelo contraído para definir una nueva contracción por bisimulación para \KHilogic, la cual 
+conservaría el conjunto de acciones atómicas y la relación de indistinguibilidad sobre planes de cada agente.
 
 \begin{definicion}
     Supongamos $\ACT$ un conjunto de acciones no vacío enumerable.
-    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke. Sea $Z^{\bml}_\model$ su autobisimulación máxima en \bml 
+    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke y sea $Z^{\bml}_\model$ su autobisimulación máxima en \bml 
     entonces definimos su contracción por \bml-bisimulación como $\model' = \tup{\W',\{\R'_a\}_{a\in\ACT},\V'}$ donde
     \begin{center}
         \begin{itemize}
@@ -510,22 +499,23 @@ equivalencia dada por $Z^{\bml}_\model$.
 \end{lema}
 
 \begin{demostracion}
-    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke, y sea $\model' = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su 
+    Sea $\model = \tup{\W,\{\R_a\}_{a\in\ACT},\V}$ un modelo de Kripke y sea $\model' = \tup{\W',\{\R_a'\}_{a\in\ACT},\V'}$ su 
     contracción por \bml-bisimulación. Sea $([w],[v]) \in \R'_a$, veamos que para cada $w' \in [w]$ existe $v' \in [v]$ tal que 
     $(w',v') \in \R_a$.
 
     Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Sea $w' \in [w]$, por estar ambos 
-    $w_0$ y $w'$ en $[w]$, existe una \bml-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que, por (zig) de $Z$, como 
+    $w_0$ y $w'$ en $[w]$, existe una \bml-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que por (zig) de $Z$, como 
     $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
-    $(v_0,v') \in Z$, es decir, $v' \in [v]$, que era lo que queríamos demostrar.
+    $(v_0,v') \in Z$, es decir, $v' \in [v]$, que es lo que queríamos demostrar.
 \end{demostracion}
 
 Estamos en condiciones de presentar la nueva propuesta de contracción por bisimulación para \KHilogic.
 
 \begin{definicion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y $\model'$
-    la contracción por \bml-bisimulación del modelo de Kripke $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, definimos 
-    $\model_\bml=\tup{\W', \R', \cset{\S_i}_{i\in\AGT},\V',\ACT}$ su contracción por \KHilogic-bisimulación.
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\model' = \tup{\W',\R',\V'}$
+    la contracción por \bml-bisimulación de $\tup{\W,\{\R_a\}_{a\in\ACT},\V}$, definimos la contracción por 
+    \KHilogic-bisimulación de $\model$ como 
+    $\model_\bml=\tup{\W', \R', \cset{\S_i}_{i\in\AGT},\V',\ACT}$.
 \end{definicion}
 
 Análogo a lo realizado para la primera contracción propuesta, demostraremos que esta nueva propuesta también es 
@@ -557,13 +547,11 @@ adecuada.
         $Z(U) \ultsExecAgi T'$.
 
         Como $U \ultsExecAgi T$, existe $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$ y, a su vez, $\R_\pi(U) \subseteq T$.
-
         Demostremos que $Z(U) \subseteq \sexec^{\model_\bml}(\pi)$ y que $\R'_\pi(Z(U)) \subseteq T'$.
 
         Supongamos que $Z(U) \not\subseteq\sexec^{\model_\bml}(\pi)$. Luego, existe $\sigma \in \pi$ y $[w_1],...,[w_k]$ 
         con $1 \le k \le |\sigma|$ tal que $[w_1] \in Z(U)$, $([w_i], [w_{i+1}]) \in \R'_{\sigma[i]}$ y 
         $\R'_{\sigma[k]}([w_k]) = \emptyset$.
-
         Como $[w_1] \in Z(U)$, existe $w_1' \in U$ tal que $w_1' \in [w_1]$. Luego notemos que aplicando sucesivamente el 
         \Cref{lema:bml-R-lema} en todo el camino, existen $w_1',...w_k'$ tales que $w_i' \in [w_i]$ y 
         $(w_i',w_{i+1}') \in \R_{\sigma[i]}$.
@@ -575,7 +563,6 @@ adecuada.
 
         Veamos ahora que $\R'_\pi(Z(U)) \subseteq T'$. Sea $[v] \in \R'_\pi(Z(U))$, entonces existen $\sigma \in \pi$ y 
         $[w_1], ..., [w_{|\sigma|+1}]$ tales que $[w_1] \in Z(U)$, $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y $[w_{|\sigma|+1}] = [v]$.
-
         Como $[w_1] \in Z(U)$, entonces existe $w_1' \in U$ tal que $w_1'\in [w_1]$. Luego, notemos que aplicando sucesivamente el 
         \Cref{lema:bml-R-lema} sobre el camino, existen $w_1',...,w_{|\sigma|+1}'$ tales que $w_i' \in [w_i]$ y $(w_i',w_{i+1}')\in \R_{\sigma[i]}$.
         Como $\R_\pi(U) \subseteq T$ esto nos dice que $w'_{|\sigma|+1} \in T$. Por definición de 
@@ -598,40 +585,35 @@ adecuada.
         $Z^{-1}(U') \ultsExecAgi T$.
 
         Como $U' \ultsExecAgi T'$, existe $\pi \in \S'_i$ tal que $U' \subseteq \sexec^{\model_\bml}(\pi)$ y, a su vez, 
-        $\R'_\pi(U') \subseteq T'$.
-
-        Veamos que $Z^{-1}(U') \subseteq \sexec^{\model}(\pi)$ y $\R_\pi(Z^{-1}(U')) \subseteq T$.
-
-        Supongamos que $Z^{-1}(U')\not\subseteq\sexec^{\model}(\pi)$. Luego, existe $\sigma \in \pi$ y $w_1,...,w_k$ con 
+        $\R'_\pi(U') \subseteq T'$. Veamos que $Z^{-1}(U') \subseteq \sexec^{\model}(\pi)$ y $\R_\pi(Z^{-1}(U')) \subseteq T$.
+        Supongamos que $Z^{-1}(U')\not\subseteq\sexec^{\model}(\pi)$. Luego, existen $\sigma \in \pi$ y $w_1,...,w_k$ con 
         $1 \le k \le |\sigma|$ tal que $w_1\in Z^{-1}(U')$, $(w_i,w_{i+1}) \in \R_{\sigma[i]}$ y $\R_{\sigma[k]}(w_k) = \emptyset$. 
 
         Notemos entonces que, por la definición de $\R'$, $[w_1],...,[w_k]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ y, a su vez, 
-        que $[w_1] \in U'$, pues $w_1 \in Z^{-1}(U')$. Pero, como $U'\subseteq\sexec^{\model_\bml}(\pi)$, entonces $U'\subseteq\sexec^{\model_\bml}(\sigma)$ 
-        también, por lo que existe $[v]$ tal que $([w_k],[v]) \in \R'_{\sigma[k]}$. 
+        que $[w_1] \in U'$, pues $w_1 \in Z^{-1}(U')$. Pero como $U'\subseteq\sexec^{\model_\bml}(\pi)$ entonces $U'\subseteq\sexec^{\model_\bml}(\sigma)$, 
+        por lo que existe $[v]$ tal que $([w_k],[v]) \in \R'_{\sigma[k]}$. 
         Lo cuál nos lleva a un absurdo, pues si ese fuera el caso entonces por \Cref{lema:bml-R-lema} tendríamos que existe 
         $v' \in [v]$ tal que $(w_k,v') \in \R_{\sigma[k]}$, pero habíamos dicho que $\R_{\sigma[k]}(w_k) = \emptyset$.
         Luego, demostramos que $Z^{-1}(U')\subseteq\sexec^{\model}(\pi)$.
 
         Veamos ahora que $\R_\pi(Z^{-1}(U')) \subseteq T$.
-
         Sea $v \in \R_\pi(Z^{-1}(U'))$, entonces existen $\sigma \in \pi$ y $w_1,...,w_{|\sigma|+1}$ tales que 
         $w_1 \in Z^{-1}(U')$, $(w_i,w_{i+1}) \in \R_{\sigma[i]}$ y $w_{|\sigma|+1} = v$. 
-
-        Por la definición de $\R'$, esto nos dice que $[w_1],...,[w_{|\sigma|+1}]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ 
-        y, a su vez, como $w_1 \in Z^{-1}(U')$ entonces $[w_1] \in U'$. Luego notemos que como $\R'_\pi(U') \subseteq T'$, tenemos que 
+        Por definición de $\R'$, esto nos dice que $[w_1],...,[w_{|\sigma|+1}]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ 
+        y, a su vez, como $w_1 \in Z^{-1}(U')$ entonces $[w_1] \in U'$. Luego, notemos que como $\R'_\pi(U') \subseteq T'$, tenemos que 
         $[w_{|\sigma|+1}] \in T'$, lo cuál implica que $w_{|\sigma|+1} \in T$. Como $v = w_{|\sigma|+1}$ entonces $v \in T$. 
 
-        Entonces demostramos que $Z^{-1}(U')\subseteq\sexec^{\model}(\pi)$ y que $\R'_\pi(Z^{-1}(U')) \subseteq T$. 
+        Demostramos que $Z^{-1}(U')\subseteq\sexec^{\model}(\pi)$ y que $\R'_\pi(Z^{-1}(U')) \subseteq T$. 
         Juntando ambos resultados, concluimos que $Z^{-1}(U') \ultsExecAgi T$, lo cuál demuestra ($\khi$-zag).
     \end{itemize}
-    Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego $\tup{\model,w}$ y $\tup{\model_\bml,[w]}$ son $\KHilogic$-bisimilares 
+    Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego, $\tup{\model,w}$ y $\tup{\model_\bml,[w]}$ son $\KHilogic$-bisimilares 
     para cada $w \in \W$.
 \end{demostracion}
 
 Como mencionamos al principio de este capítulo, en \cite{Paige&TarjanContraction} 
 Paige y Tarjan presentan un algoritmo para computar la contracción por \bml-bisimulación en $\bigO(m*\log(n))$, donde $n$ son la cantidad 
 de nodos del modelo y $m$ la cantidad de aristas del mismo. Teniendo esto en 
-consideración, esta segunda propuesta de contracción es adecuada y computable eficientemente.
+consideración, podemos concluir que esta segunda propuesta de contracción es adecuada y computable eficientemente.
 
 % \section{Tercera Propuesta de Contracción}
 
@@ -663,56 +645,55 @@ consideración, esta segunda propuesta de contracción es adecuada y computable 
 % Presentaremos tres \ultss de ejemplo, con el objetivo de obtener un mejor entendimiento sobre el comportamiento de cada una de las 
 % contracciones propuestas. En este primer ejemplo, consideraremos el siguiente modelo $\model_1$ (\Cref{fig:1st-ex-cont}):
 
-Hemos presentado dos propuestas de contracción por bisimulación para \KHilogic para las cuáles su resultado esperado de correctitud y 
+Hemos presentado dos propuestas de contracción por bisimulación para \KHilogic para las cuáles demostramos su resultado esperado de correctitud y 
 establecimos que son computables en tiempo polinomial. Para finalizar con este capítulo mencionaremos las principales características de 
-cada propuesta, las diferencias que presentan entre sí junto con un análisis de su comportamiento respecto a ciertos tipos de modelos. Por 
+cada propuesta y las diferencias que presentan entre sí junto con un análisis de su comportamiento respecto a ciertos tipos de modelos. Por 
 último, presentaremos dos ejemplos que permitirán obtener un mejor entendimiento de los puntos principales de cada propuesta.
 
 En cuanto a la primera propuesta de contracción presentada en la \Cref{def:1st-contraction} existen varios aspectos a analizar. En primer 
-lugar, como $Z_\model$ colapsa la mayor cantidad de estados de $\model$, el modelo obtenido $\fcont{\model}$ es minimal respecto a la cardinalidad. 
-Esto no es difícil de ver dado que en dicho modelo la función $\V$ es inyectiva, es decir, no hay dos estados etiquetados con el mismo 
+lugar, como $Z_\model$ colapsa la mayor cantidad posible de estados de $\model$, el modelo obtenido $\fcont{\model}$ es mínimo respecto a la cardinalidad. 
+Esto no es difícil de ver, dado que en dicho modelo la función $\V$ es inyectiva, es decir, no hay dos estados etiquetados con el mismo 
 conjunto de variables proposicionales. Por otro lado, si analizamos la relación de indistinguibilidad sobre planes de cada agente podemos 
-ver que a pesar de que la cantidad de clases de equivalencia conocidas por cada agente es la misma en el modelo contraído, cada una de 
+ver que, a pesar de que la cantidad de clases de equivalencia conocidas por cada agente es la misma en el modelo contraído, cada una de 
 estas clases de equivalencia es un ``singleton'' compuesto de un plan de largo 1; esto aporta información sobre el poder expresivo de 
-\KHilogic, pues el \Cref{thm:adequacy-1st-cont} establece que para cada \ults existe otro que es lógicamente equivalente en el que cada 
-agente sólo conoce planes de largo 1. 
+\KHilogic, pues el \Cref{thm:adequacy-1st-cont} establece que para cada \ults existe otro lógicamente equivalente en el que cada 
+agente únicamente conoce planes de largo 1.
 
 El punto negativo de esta propuesta es que la cantidad de aristas del modelo contraído puede ser mayor que la del modelo original. Este hecho 
-se debe a que en el modelo contraído dos estados se relacionan siempre que exista un plan conocido por un algún agente a partir del cual 
-se relacionaban en el modelo original y, naturalmente, el hecho de clausurar transitivamente la relación de accesibilidad de un \ults 
-su tamaño puede crecer significativamente. Luego, si existiera un agente que conoce un plan que relaciona una gran cantidad de nodos el  
-tamaño de la relación de accesibilidad de $\fcont{\model}$ sería mayor que el del modelo original. 
+se debe a que en el modelo contraído dos estados se relacionan siempre que exista un plan conocido por algún agente a partir del cual 
+se relacionaban en el modelo original y, naturalmente, al clausurar transitivamente la relación de accesibilidad de un \ults 
+su tamaño puede crecer en forma signicativa.
 
 Sin embargo, a pesar de aumentar la cantidad de aristas, el modelo contraído compacta la información de mayor relevancia del modelo original, 
 lo que resulta de gran utilidad para realizar tareas de model-checking. Notar que al considerar únicamente planes de longitud 
 1 la tarea de verificar si un plan es fuertemente ejecutable en un nodo se reduce a simplemente verificar si existe una arista con la etiqueta 
 de dicho plan. A su vez, $\fcont{\model}$ ahorra el procesamiento de los estados intermedios a la hora de ejecutar un plan conocido por un agente, 
-dado que los estados alcanzables por dicho plan se abstraen a aristas en esta contracción.
+dado que los estados alcanzables por dicho plan en el modelo original se abstraen a aristas en esta contracción.
 
-Continuando con la segunda propuesta de contracción, el primer detalle a considerar es que el modelo obtenido $\model_\bml$ no es minimal 
+Continuando con la segunda propuesta de contracción, el primer detalle a considerar es que el modelo obtenido $\model_\bml$ no es mínimo 
 con respecto a la cardinalidad. Esto puede verse armando un modelo de Kripke en el cuál existan dos estados etiquetados con el mismo conjunto 
 de variables proposicionales para los cuales existe una \bml-fórmula que los distingue, luego $Z^{\bml}_\model$ no relacionaría a dichos 
-nodos y, por lo tanto, colapsaría una menor cantidad de estados que $Z_\model$. Sin embargo, esta propuesta no deja de tener 
+nodos y, por lo tanto, colapsaría una menor cantidad de estados que $Z_\model$. Sin embargo, esta propuesta no deja de tener varios
 puntos de interes: en primer lugar, la cantidad de aristas de $\model_\bml$ es siempre menor o igual que las de $\model$, lo cual no está
 garantizado en nuestra primera propuesta; por otro lado, existen algoritmos sumamente eficientes con excelentes 
 implementaciones que computan $\model_\bml$, lo que resulta de gran utilidad ya que permite obtener a partir de pocos 
 recursos computacionales un modelo lógicamente equivalente y de menor tamaño.
 
-Esta propuesta de contracción a partir de la noción de bisimulación propia de \bml no es una estrategia que funcione en toda lógica 
+Más aún, esta propuesta de contracción a partir de la noción de bisimulación propia de \bml no es una estrategia que funcione en toda lógica 
 modal, por ejemplo en la lógica de sabotaje \cite{AucherBG18,ArecesFH15} una contracción análoga a la presentada para \KHilogic 
-no produce necesariamente un modelo lógicamente equivalente. Por lo que el \Cref{thm:adequacy-2nd-cont} es un resultado 
+no produce un modelo lógicamente equivalente en todos los casos. Por lo que el \Cref{thm:adequacy-2nd-cont} es un resultado 
 que refleja una interesante característica sobre el poder expresivo de \KHilogic.
 
-Presentaremos dos \ults junto con sus respectivas contracciones según cada propuesta, con el objetivo de fortalecer los argumentos 
-previamente introducidos en esta sección. En primera instancia, consideremos a $\model$ como el modelo a la izquierda en la 
+Presentaremos dos \ults junto con sus respectivas contracciones según cada propuesta con el objetivo de fortalecer los argumentos 
+introducidos en esta sección. En primera instancia, consideremos a $\model$ como el modelo a la izquierda en la 
 \Cref{fig:1st-ex-cont}, en el que $\S_i = \{\{ab\}, \{ac\}\}$. Su contracción por bisimulación a partir de la primera propuesta $\fcont{\model}$ 
 es el modelo de la \Cref{fig:1st-ex-cont} que se encuentra arriba a la derecha en el cual $\S'_i = \{\{a_{ab}\}, \{a_{ac}\} \}$, mientras 
 que su contracción a partir de la segunda propuesta $\model_\bml$ se encuentra abajo a la derecha en la misma figura. Es fácil notar 
-como la primera propuesta produce un modelo de menor tamaño. En particular, $\fcont{\model}$ tiene una menor cantidad de estados y de 
+que la primera propuesta produce un modelo de menor tamaño. En particular, $\fcont{\model}$ tiene una menor cantidad de estados y de 
 aristas que $\model_\bml$. Esto evidencia que $\model_\bml$ no logra minimizar la cardinalidad. 
 
 
-\begin{figure}[t]
+\begin{figure}[h]
     \begin{center}
         \begin{tabular}{ll}
             \hspace{1.2cm}
@@ -796,9 +777,11 @@ aristas que $\model_\bml$. Esto evidencia que $\model_\bml$ no logra minimizar l
 
 En segunda instancia, consideremos a $\model$ como el modelo a la izquierda en la \Cref{fig:2nd-ex-cont}, en el que $\S_i = \{ \{a\},\{ab\},\{ac\},
 \{ad\}, \{aba\}, \{aca\}, \{ada\}\}$. Su contracción por bisimulación a partir de la primera propuesta $\fcont{\model}$ es el modelo 
-de la \Cref{fig:2nd-ex-cont} en el cual $\S'_i = \{ \{a_a\},\{a_{ab}\},\{a_{ac}\},\{a_{ad}\},\{a_{aba}\},\{a_{aca}\},\{a_{ada}\}\}$, mientras 
-que su contracción a partir de la segunda propuesta $\model_\bml$ se encuentra abajo a la derecha en la misma figura. Este es un claro 
-ejemplo en el que la primera propuesta produce un modelo con una cantidad de aristas significativamente mayor a la del modelo original. 
+de la \Cref{fig:2nd-ex-cont} que se encuentra arriba a la derecha en el cual 
+$\S'_i = \{ \{a_a\},\{a_{ab}\},\{a_{ac}\},\{a_{ad}\},\{a_{aba}\},\{a_{aca}\},\{a_{ada}\}\}$, mientras 
+que su contracción a partir de la segunda propuesta $\model_\bml$ es el modelo que se encuentra abajo a la derecha en la misma figura. 
+Este es un claro ejemplo en el que la primera propuesta produce un modelo con una cantidad de aristas significativamente mayor a la del 
+modelo original. 
 Por otro lado, notemos que $Z^\bml_{\model} = Z_\model$, por lo que la segunda propuesta logra minimizar la cantidad de estados para 
 este \ults. 
 
@@ -807,7 +790,8 @@ este \ults.
 
 % Luego, consideremos el siguiente modelo $\model_2$ (\Cref{fig:2nd-example-contraction}):
 
-\begin{figure}[h]
+\begin{figure}[tb]
+    % \vspace{-5cm}
     \begin{center}
         \begin{tabular}{ll}
             \hspace{0.8cm}
@@ -888,9 +872,9 @@ este \ults.
 Conectando nuestras propuestas con el problema de minimización de modelos para \KHilogic podemos concluir que la primera propuesta logra 
 minimizar la cantidad de estados pero no consigue minimizar la suma del tamaño de cada componente del \ults. Por otro lado, la segunda 
 propuesta no consigue minimizar ninguna de las dos métricas mencionadas. Queda abierta la pregunta sobre la existencia de una propuesta 
-óptima que logre minimizar la suma del tamaño de cada componente. Aún así, ambas propuestas proveen buenas aproximaciones a la solución
-que no solo sirven en contextos de aplicaciones prácticas sino que también profundizan el entendimiento teórico del poder expresivo de 
-\KHilogic y de la clase de modelos \ultss. 
+óptima que logre minimizar la suma del tamaño de cada componente. Aún así, ambas propuestas proveen interesantes aproximaciones a la 
+solución que no solo sirven en contextos de aplicaciones prácticas sino que también profundizan el entendimiento teórico del poder 
+expresivo de \KHilogic y de la clase de modelos \ultss. 
 
 
 % Por otro lado, en este ejemplo nuevamente obtenemos el mismo modelo a partir de la segunda y tercera propuesta de 
