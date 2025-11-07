@@ -31,7 +31,6 @@ En primera instancia, si consideramos las distintas condiciones que se requieren
 exponencial de subconjuntos de los dominios de cada \ults. Sin embargo, una vez fijado un subconjunto sobre el que analizar el  
 comportamiento de la relación binaria en relación a ($\khi$-zig) o ($\khi$-zag), no es difícil notar que las demás condiciones 
 requeridas son verificables eficientemente.
-
 Este análisis nos permite establecer una cota superior sobre la complejidad computacional de $\CBisim$.
 
 \begin{lema}\label{lema:cbisim-in-conp}
@@ -114,108 +113,103 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
     algún $\tup{U,b}$ donde $U$ es un subconjunto del dominio de alguno de los \ults y $b$ es un 
     bit que nos indica de cuál dominio es subconjunto $U$.
 
+    \bm{$\Rightarrow)$} Queremos ver que siendo  
+    $\tup{\modults,\modults',Z} \not \in \CBisim$ entonces
+    existe $\tup{U,b}$ tal que la ejecución de \textsf{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,b}$) 
+    devuelve 1.
+    Como $\tup{\modults,\modults',Z} \not \in \CBisim$, entonces sabemos que $Z$ no es una \KHilogic-bisimulación.
+
+    Analicemos los posibles casos donde podría fallar $Z$:
+
     \begin{itemize}
-        \item ($\rightarrow$) Queremos ver que siendo  
-        $\tup{\modults,\modults',Z} \not \in \CBisim$ entonces
-        existe $\tup{U,b}$ tal que la ejecución de \textsf{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,b}$) 
-        devuelve 1.
+        \item (Atom) Si $Z$ no satisface (Atom) entonces el algoritmo lo identifica en la línea \ref{line:Atom} y devuelve 1, por lo 
+        que cualquier $\tup{U,b}$ sirve como contraejemplo.
+        \item (A-zig) Si $Z$ no satisface (A-zig) entonces el algoritmo lo identifica en la línea \ref{line:A-zig} y devuelve 1, 
+        por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
+        \item (A-zag) Similarmente, si $Z$ no satisface (A-zag) el algoritmo lo identifica en la línea \ref{line:A-zag} y,  
+        nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
+        \item ($\khi$-zig) Supongamos entonces que $Z$ no satisface ($\khi$-zig), luego existen $U, T \subseteq \W$ tal que
+        $U \ultsExecAgi T$ con $U$ que satisface que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$, 
+        y, a su vez, no existe $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y $T' \subseteq Z(T)$.
 
-        Como $\tup{\modults,\modults',Z} \not \in \CBisim$, entonces sabemos que $Z$ no es una \KHilogic-bisimulación.
+        Analicemos entonces la ejecución de \textsf{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,1}$).
 
-        Analicemos los posibles casos donde podría fallar $Z$:
+        Como $Z$ satisface (Atom), (A-zig) y (A-zag); y, a su vez, $U$ satisface que para cada $s \in \rho_\model$ se cumple 
+        que $s \cap U = \emptyset$ o $s \subseteq U$, entonces se ejecuta la instrucción de la línea \ref{line:not-simulates-exec} y 
+        el valor de retorno de \textsf{NotSimulates} determina el valor de retorno de \textsf{CounterexampleChecker}.
 
-        \begin{itemize}
-            \item (Atom) Si $Z$ no satisface (Atom) entonces el algoritmo lo identifica en la línea \ref{line:Atom} y devuelve 1, por lo 
-            que cualquier $\tup{U,b}$ sirve como contraejemplo.
-            \item (A-zig) Si $Z$ no satisface (A-zig) entonces el algoritmo lo identifica en la línea \ref{line:A-zig} y devuelve 1, 
-            por lo que cualquier $\tup{U,b}$ sirve como contraejemplo.
-            \item (A-zag) Similarmente, si $Z$ no satisface (A-zag) el algoritmo lo identifica en la línea \ref{line:A-zag} y,  
-            nuevamente, cualquier $\tup{U,b}$ nos sirve como contraejemplo.
-            \item ($\khi$-zig) Supongamos entonces que $Z$ no satisface ($\khi$-zig), luego existen $U, T \subseteq \W$ tal que
-            $U \ultsExecAgi T$ con $U$ que satisface que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$, 
-            y, a su vez, no existe $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y $T' \subseteq Z(T)$.
-
-            Analicemos entonces la ejecución de \textsf{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,1}$).
-
-            Como $Z$ satisface (Atom), (A-zig) y (A-zag); y, a su vez, $U$ satisface que para cada $s \in \rho_\model$ se cumple 
-            que $s \cap U = \emptyset$ o $s \subseteq U$, entonces se ejecuta la instrucción de la línea \ref{line:not-simulates-exec} y 
-            el valor de retorno de \textsf{NotSimulates} determina el valor de retorno de \textsf{CounterexampleChecker}.
-
-            Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq \sexec^{\model}(\pi)$ y, 
-            a su vez, $\R_\pi(U) \subseteq T$. 
-            
-            Esto nos dice que al considerar la ejecución de \textsf{NotSimulates}, cuando se itera sobre el plan $\pi$, el algoritmo 
-            ingresa al \textit{if} de la línea \ref{line:pi-se-in-U} e inicializa la variable \textit{foundWitness} en 0.
-
-            Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z(U) \not \subseteq \sexec^{\model'}(\pi')$ o que 
-            $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'\in\S'_i$ entonces 
-            el valor de \textit{foundWitness} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea \ref{line:did-not-find-witness}.
-
-            Sea $\pi' \in \S'_i$, supongamos entonces que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y veamos que 
-            $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$.
-
-            Notemos que como $Z(U) \subseteq \sexec^{\model'}(\pi')$, entonces $Z(U) \ultsExecAgi \R'_{\pi'}(Z(U))$. 
-            Como mencionamos que ($\khi$-zig) falla para este caso, entonces ocurre que 
-            $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$, pues en caso contrario $T' = \R'_{\pi'}(Z(U))$ serviría como 
-            testigo de ($\khi$-zig).
-
-            Pero, como $\R_\pi(U) \subseteq T$, entonces es claro que $Z(\R_\pi(U)) \subseteq Z(T)$. Luego como 
-            $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$ entonces también ocurre que $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, 
-            que era lo que queríamos ver.
-
-            Por lo que \textsf{NotSimulates} abandona el $for$ de la línea \ref{line:for-strat-in-m'} con la variable 
-            \textit{foundWitness} valiendo 0, luego devuelve 1 en la línea \ref{line:did-not-find-witness}.
-
-            Finalmente, \textsf{CounterexampleChecker}($\modults,\modults',Z,\tup{U,1}$) = 1.
-
-            \item ($\khi$-zag) Análogo al caso recién analizado, notando que la forma en la que se llama a \textsf{NotSimulates}
-            considera el caso ($\khi$-zag).
-        \end{itemize}
-
-        \item ($\leftarrow$) Queremos ver que si existe $\tup{U,b}$ tal que la ejecución de \textsf{CounterexampleChecker} a partir de 
-        $(\model,\model',Z,\tup{U,b})$ devuelve 1 entonces $\tup{\model,\model',Z} \not\in \CBisim$. 
-
-        Demostraremos este caso a partir de su contrarrecíproca. Luego, 
-        sea $\tup{\modults,\modults',Z} \in \CBisim$ queremos ver que para todo $\tup{U,b}$ la ejecución de \textsf{CounterexampleChecker} 
-        a partir de ($\modults,\modults',\tup{U,b}$) devuelve 0.
-
-        Sea entonces $\tup{U,b}$ veamos que la ejecución del algoritmo efectivamente devuelve 0.
-
-        Primero, notemos que como $\tup{\modults,\modults',Z} \in \CBisim$, entonces $Z$ es una bisimulación 
-        entre $\modults$ y $\modults'$.
-
-        Luego, viendo la ejecución de \textsf{CounterexampleChecker}, los chequeos de (Atom), (A-zig) y (A-zag) darán 1 como resultado.
+        Notemos que como $U \ultsExecAgi T$, entonces existe $\pi \in \S_i$, tal que $U \subseteq \sexec^{\model}(\pi)$ y, 
+        a su vez, $\R_\pi(U) \subseteq T$. 
         
-        Analicemos ahora qué sucede para cada posible valor de $b$:
+        Esto nos dice que al considerar la ejecución de \textsf{NotSimulates}, cuando se itera sobre el plan $\pi$, el algoritmo 
+        ingresa al \textit{if} de la línea \ref{line:pi-se-in-U} e inicializa la variable \textit{foundWitness} en 0.
 
-        \begin{itemize}
-            \item $b = 1$.
-                Primero, notemos que si $U$ no satisface que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ 
-                o $s \subseteq U$, entonces el algoritmo devuelve 0 en la línea \ref{line:khi-zig-check}.
+        Veamos entonces que para cada $\pi' \in \S_i'$ ocurre que $Z(U) \not \subseteq \sexec^{\model'}(\pi')$ o que 
+        $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, pues notar que si esto ocurre para cada $\pi'\in\S'_i$ entonces 
+        el valor de \textit{foundWitness} permanece en 0 y \textsf{NotSimulates} devuelve 1 en la línea \ref{line:did-not-find-witness}.
 
-                Supongamos entonces $U$ cumple con lo mencionado. Luego, se ejecuta \textsf{NotSimulates} en la línea \ref{line:not-simulates-exec}. 
-                
-                Sea $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$, 
-                entonces el algoritmo ingresa al \textit{if} de la línea \ref{line:pi-se-in-U} e inicializa \textit{foundWitness} en 0.
-                
-                Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $Z$ cumple ($\khi$-zig), existe 
-                $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq Z(\R_\pi(U))$.
-                
-                Como $Z(U) \ultsExecAgi T'$, entonces existe $\pi' \in \S_i'$ tal que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y 
-                $\R'_{\pi'}(Z(U)) \subseteq T'$.
-                
-                Pero como $T' \subseteq Z(\R_\pi(U))$, entonces $\R'_{\pi'}(Z(U)) \subseteq Z(\R_\pi(U))$, por lo que 
-                el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de \textit{foundWitness} a 1.
-                
-                Como este análisis vale para todo $\pi \in \S_i$, esto demuestra que \textsf{NotSimulates} finaliza su ejecución en la 
-                línea \ref{line:return-0} donde devuelve 0. Por lo que \textsf{CounterexampleChecker} devuelve 0 a partir de 
-                ($\modults,\modults',\tup{U,b}$).
-            \item $b = 0$.
-                Este caso es análogo al caso $b = 1$, con la diferencia de que hay que considerar el hecho de que 
-                $Z$ satisface ($\khi$-zag).
-        \end{itemize}
+        Sea $\pi' \in \S'_i$, supongamos entonces que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y veamos que 
+        $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$.
 
+        Notemos que como $Z(U) \subseteq \sexec^{\model'}(\pi')$, entonces $Z(U) \ultsExecAgi \R'_{\pi'}(Z(U))$. 
+        Como mencionamos que ($\khi$-zig) falla para este caso, entonces ocurre que 
+        $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$, pues en caso contrario $T' = \R'_{\pi'}(Z(U))$ serviría como 
+        testigo de ($\khi$-zig).
+
+        Pero, como $\R_\pi(U) \subseteq T$, entonces es claro que $Z(\R_\pi(U)) \subseteq Z(T)$. Luego como 
+        $\R'_{\pi'}(Z(U)) \not \subseteq Z(T)$ entonces también ocurre que $\R'_{\pi'}(Z(U)) \not \subseteq Z(\R_\pi(U))$, 
+        que era lo que queríamos ver.
+
+        Por lo que \textsf{NotSimulates} abandona el $for$ de la línea \ref{line:for-strat-in-m'} con la variable 
+        \textit{foundWitness} valiendo 0, luego devuelve 1 en la línea \ref{line:did-not-find-witness}.
+
+        Finalmente, \textsf{CounterexampleChecker}($\modults,\modults',Z,\tup{U,1}$) = 1.
+
+        \item ($\khi$-zag) Análogo al caso recién analizado, notando que la forma en la que se llama a \textsf{NotSimulates}
+        considera el caso ($\khi$-zag).
     \end{itemize}
+
+    \bm{$\Leftarrow)$} Queremos ver que si existe $\tup{U,b}$ tal que la ejecución de \textsf{CounterexampleChecker} a partir de 
+    $(\model,\model',Z,\tup{U,b})$ devuelve 1 entonces $\tup{\model,\model',Z} \not\in \CBisim$. 
+
+    Demostraremos este caso a partir de su contrarrecíproca. Luego, 
+    sea $\tup{\modults,\modults',Z} \in \CBisim$ queremos ver que para todo $\tup{U,b}$ la ejecución de \textsf{CounterexampleChecker} 
+    a partir de ($\modults,\modults',\tup{U,b}$) devuelve 0.
+    Sea entonces $\tup{U,b}$ veamos que la ejecución del algoritmo efectivamente devuelve 0.
+
+    Primero, notemos que como $\tup{\modults,\modults',Z} \in \CBisim$, entonces $Z$ es una bisimulación 
+    entre $\modults$ y $\modults'$.
+    Luego, viendo la ejecución de \textsf{CounterexampleChecker}, los chequeos de (Atom), (A-zig) y (A-zag) darán 1 como resultado.
+    
+    Analicemos ahora qué sucede para cada posible valor de $b$:
+
+    \begin{itemize}
+        \item $b = 1$.
+            Primero, notemos que si $U$ no satisface que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ 
+            o $s \subseteq U$, entonces el algoritmo devuelve 0 en la línea \ref{line:khi-zig-check}.
+
+            Supongamos entonces $U$ cumple con lo mencionado. Luego, se ejecuta \textsf{NotSimulates} en la línea \ref{line:not-simulates-exec}. 
+            
+            Sea $\pi \in \S_i$ tal que $U \subseteq \sexec^{\model}(\pi)$, 
+            entonces el algoritmo ingresa al \textit{if} de la línea \ref{line:pi-se-in-U} e inicializa \textit{foundWitness} en 0.
+            
+            Pero entonces tenemos que $U \ultsExecAgi \R_\pi(U)$, luego como $Z$ cumple ($\khi$-zig), existe 
+            $T' \subseteq \W'$ tal que $Z(U) \ultsExecAgi T'$ y, a su vez, $T' \subseteq Z(\R_\pi(U))$.
+            
+            Como $Z(U) \ultsExecAgi T'$, entonces existe $\pi' \in \S_i'$ tal que $Z(U) \subseteq \sexec^{\model'}(\pi')$ y 
+            $\R'_{\pi'}(Z(U)) \subseteq T'$.
+            
+            Pero como $T' \subseteq Z(\R_\pi(U))$, entonces $\R'_{\pi'}(Z(U)) \subseteq Z(\R_\pi(U))$, por lo que 
+            el algoritmo al iterar sobre el plan $\pi'$, actualiza el valor de \textit{foundWitness} a 1.
+            
+            Como este análisis vale para todo $\pi \in \S_i$, esto demuestra que \textsf{NotSimulates} finaliza su ejecución en la 
+            línea \ref{line:return-0} donde devuelve 0. Por lo que \textsf{CounterexampleChecker} devuelve 0 a partir de 
+            ($\modults,\modults',\tup{U,b}$).
+        \item $b = 0$.
+            Este caso es análogo al caso $b = 1$, con la diferencia de que hay que considerar el hecho de que 
+            $Z$ satisface ($\khi$-zag).
+    \end{itemize}
+
     Finalmente, $\CBisim \in \coNP$.
 \end{demostracion}
 
@@ -396,16 +390,13 @@ problemas en cuestión.
     que atestigua dicha situación \textbf{no} es aquella asignación que asigna \textit{false} a todas las variables proposicionales de $\varphi$. 
     Notar que esta consideración no quita generalidad, dado que no es difícil modificar el mapeo $f$ para considerar dicho caso y 
     mapear a $\varphi$ a dos \ultss que sean trivialmente no bisimilares.  
-
-    \begin{itemize}
     
-    \item $(\rightarrow)$ Sea $\varphi \in \DNFTAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ 
+    \bm{$\Rightarrow)$} Sea $\varphi \in \DNFTAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ 
     son las variables proposicionales que aparecen en $\varphi$, veamos que $\tup{\modults,\modults',Z} \in \CBisim$ con 
     $\tup{\model,\model',Z}$ construídos por el mapeo $f$.
 
     Es fácil ver que $Z$ satisface (Atom), pues ambos modelos utilizan la misma función de valuación $\V$. A su vez, 
     tanto (A-zig) como (A-zag) son claramente satisfechos por $Z$.
-
     Analicemos entonces ($\khi$-zig) y ($\khi$-zag).
 
     Primero, cabe resaltar que, por la definición de $Z$, para cada $X \subseteq \W$ se cumple que $X = Z(X)$.
@@ -413,7 +404,6 @@ problemas en cuestión.
     Notemos que cada plan disponible para el agente $agt$ en $\modults'$ está también disponible en $\modults$ y, más aún, 
     las aristas con las etiquetas que aparecen en dichos planes son exactamente las mismas en ambos modelos. Juntando lo recién 
     mencionado y el hecho de que $U = Z(U)$, es posible ver que Z satisface ($\khi$-zag).
-
     Luego, sólo basta ver que $Z$ satisface ($\khi$-zig).
 
     Sea $U, T \subseteq \W$ tal que $U$ satisface que  y $U \ultsExecAgagt T$, queremos ver que existe 
@@ -434,7 +424,6 @@ problemas en cuestión.
     si analizamos la definición de $\R$, ese plan puede ser fuertemente ejecutable sólo si $U \subseteq \{p_1,...,p_n\}$ 
     dado que son los únicos nodos que tienen aristas con etiqueta $test$. Así que solo necesitamos considerar los casos 
     donde $U \subseteq \{p_1,...,p_n\}$.
-
     Notemos que $\R_{test}(U) = U \cup \{e\}$, entonces necesariamente $U \cup \{e\} \subseteq T$.
 
     Consideremos ahora la asignación $\overrightarrow{a}$ que asigna \textit{true} a las variables en $U$ y \textit{false} a las variables 
@@ -444,7 +433,6 @@ problemas en cuestión.
 
     Como las variables que aparecen en forma negativa en $\varphi_j$ no están en $U$, entonces, analizando la definición de $\R$, 
     podemos ver que el plan $in_{\varphi_j}out_{\varphi_j}$ es fuertemente ejecutable en $U$. 
-    
     En particular, las aristas con etiqueta $in_{\varphi_j}$ llevarían de cada nodo de $U$ al nodo $\varphi_j$.
 
     Luego, notemos que las aristas con etiqueta $out_{\varphi_j}$ llevan del nodo $\varphi_j$ a las variables 
@@ -454,13 +442,12 @@ problemas en cuestión.
     es decir, $X = \R_{in_{\varphi_j}out_{\varphi_j}}(U) \subseteq U \cup \{e\} \subseteq T$. 
     Finalmente, $T' = X$ nos sirve para demostrar que $Z(U) \ultsExecAgagt T'$ y, a su vez, 
     $T' = X \subseteq U \cup \{e\} \subseteq T = Z(T)$.
-
     Lo cual demuestra que $Z$ satisface ($\khi$-zig). 
 
     Juntando los puntos mencionados, demostramos que $Z$ es una \KHilogic-bisimulación entre $\modults$ y $\modults'$, 
-    por lo que $\tup{\modults,\modults',Z} \in \CBisim$. 
+    por lo que $\tup{\modults,\modults',Z} \in \CBisim$. Así, concluímos la demostración de \bm{$\Rightarrow)$}.
 
-    \item ($\leftarrow$) Para demostrar este caso, veremos que siendo $\varphi \notin \DNFTAUT$, 
+    \bm{$\Leftarrow)$} Para demostrar este caso, veremos que siendo $\varphi \notin \DNFTAUT$, 
     donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ son las variables proposicionales que aparecen en $\varphi$, 
     entonces $\tup{\modults,\modults',Z} \notin \CBisim$.
 
@@ -484,7 +471,6 @@ problemas en cuestión.
     \end{multicols}
 
     Notemos que los planes que tiene a su disposición $Z(U) = U$ son de la forma $in_{\varphi_j}out_{\varphi_j}$.
-
     Sea entonces $\varphi_j$, analicemos qué sucede en relación al plan $in_{\varphi_j}out_{\varphi_j}$. 
     Un primer detalle a tener en cuenta es que como $\overrightarrow{a}$ hace falso a $\varphi_j$, entonces, 
     o bien ocurre que existe una variable en $U$ que aparece en forma negativa en $\varphi_j$, 
@@ -503,11 +489,9 @@ problemas en cuestión.
     
     Hemos analizado entonces todos los planes disponibles para el agente $agt$ en $\model'$ y ninguno permite encontrar un 
     $T'$ que cumpla con lo requerido, luego $Z$ no satisface ($\khi$-zig).
-
     Hemos demostrado entonces que $Z$ no es una \KHilogic-bisimulación.
-
-    Lo cual demuestra que $\tup{\modults,\modults',Z} \not \in \CBisim$.
-    \end{itemize}
+    Lo cual demuestra que $\tup{\modults,\modults',Z} \not \in \CBisim$, con lo que concluímos la demostración de \bm{$\Leftarrow)$} 
+    
     Finalmente, demostramos que $f$ es una reducción de Karp de $\DNFTAUT$ a $\KHiBisim$. Luego, $\DNFTAUT \leq_p \CBisim$.
 \end{demostracion}
 
@@ -602,7 +586,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
 
 \begin{demostracion}
 
-    Notar que la dirección ($\leftarrow$) es directa. Demostraremos entonces ($\rightarrow$).
+    Notar que la dirección \bm{$\Leftarrow)$} es directa. Demostraremos entonces \bm{$\Rightarrow)$}.
 
     Queremos ver que $\universalbis$ es una \KHilogic-bisimulación entre $\modults$ y $\modults'$,
     dado que existe $Z \subseteq \W \times \W'$, \KHilogic-bisimulación entre ellos.
@@ -611,7 +595,6 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
     por la definición de $\universalbis$, $Z \subseteq \universalbis$, pues $\universalbis$ contiene todos los pares de
     $\W \times \W'$ que satisfacen (Atom). Esto nos dice que $\universalbis$ satisface (A-zig) y (A-zag).
     A su vez, cómo mencionamos, $\universalbis$ contiene todos los pares que satisfacen (Atom).
-
     Demostremos entonces que $\universalbis$ cumple ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
@@ -653,7 +636,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
     
         \item ($\khi$-zag) Análogo a ($\khi$-zig).
     \end{itemize}
-    Queda demostrado que $\universalbis$ es una \KHilogic-bisimulación, lo que demuestra ($\rightarrow$).
+    Queda demostrado que $\universalbis$ es una \KHilogic-bisimulación, lo que demuestra \bm{$\Rightarrow)$}.
 \end{demostracion}
 
 Esta caracterización de la existencia de bisimulaciones entre \ultss
@@ -870,7 +853,6 @@ la fórmula en cuestión.
 Antes de continuar con la demostración, primero introduciremos una notación que nos será de utilidad para construir la fórmula deseada.
 
 Sean $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$ dos \ultss finitos.
-
 Consideremos $\PROP' = \{ p \in \PROP \mid $ existe $w\in\W $ tal que $p \in \V(w)$ o existe $ w'\in\W'$ tal que $p\in\V'(w')\}$. 
 Definimos para cada $s \in \rho_\model$ y $X \subseteq \W$:
 \begin{itemize}
@@ -882,7 +864,6 @@ Análogamente, se definen $\varphi_{s'}$ y $\varphi_{X'}$ para cada $s' \in \rho
 
 A partir de la definición de $\varphi_s$, no es díficil notar que $\truthset{\model}{\varphi_s} = s$. Por otro lado, para $X \subseteq \W$
 en el que para cada $s \in \rho_\model$ se cumple que $s \cap X = \emptyset$ o $s \subseteq X$, se da que $\truthset{\model}{\varphi_X} = X$.
-
 Más aún, analizando la definición de $\universalbis$, se puede ver que $\truthset{\model'}{\varphi_s} = \universalbis(s)$ y 
 $\truthset{\model'}{\varphi_X} = \universalbis(X)$.
 
@@ -894,13 +875,11 @@ será analizar qué condición de la \Cref{def:bisim-redefinition} no es satisfe
 
 Primero, notar que si $(w,w') \not\in \universalbis$ entonces $\V(w) \neq \V'(w')$. Luego, $\varphi = \varphi_{[w]}$ cumple que 
 $\model,w \models \varphi$ y $\model',w'\not\models\varphi$.
-
 Ahora, consideremos las condiciones de la \Cref{def:bisim-redefinition} que podrían no ser satisfechas por $\universalbis$. Cabe destacar
 que por su definición, es claro que $\universalbis$ siempre satisface (Atom):
 \begin{itemize}
     \item (A-zig) Si $\universalbis$ no satisface (A-zig), entonces existe $v\in\W$ para el cuál no existe $v'\in\W'$ tal que $(v,v')\in\universalbis$.
     Lo que nos dice que no existe $v'\in\W'$ tal que $\V(v) = \V'(v')$.
-    
     Luego, $\varphi = \E\varphi_{[v]}$ sirve para probar la propiedad deseada.
     \item ($\khi$-zig) Si $\universalbis$ no satisface ($\khi$-zig) entonces existen $U,T \subseteq \W$ tales que para cada $s\in\rho_\model$
     se cumple que $s \cap U = \emptyset$ o $s\subseteq U$ y $U \ultsExecAgi T$ para los cuáles no existe $T'\subseteq\W'$ tal que 

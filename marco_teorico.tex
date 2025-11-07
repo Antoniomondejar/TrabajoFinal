@@ -194,14 +194,14 @@ lo que toda una clase de equivalencia dentro de su relación de indistinguibilid
     Sea $\{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ una colección de relaciones binarias sobre $\W$. 
     Se define $\R_\epsilon \eqdef \{(w,w) \mid w \in \W\}$ y, para $\sigma \in \ACT^*$ y $a \in \ACT$, 
     $\R_{\sigma a} \eqdef \{(w,v) \in \W \times \W \mid$ existe $u \in \W$ tal que $(w,u) \in \R_\sigma$ y $(u,v) \in \R_a \}$. 
-    Luego sea $u \in \W$ y $\sigma \in \ACT^*$, se define $\R_\sigma(u) \eqdef \{v\in\W \mid (u,v) \in \R_\sigma\}$, y para $U\subseteq\W$ 
+    Luego, sea $w \in \W$ y $\sigma \in \ACT^*$, se define $\R_\sigma(w) \eqdef \{v\in\W \mid (w,v) \in \R_\sigma\}$, y para $U\subseteq\W$ 
     definimos $\R_\sigma(U) \eqdef \bigcup\limits_{u \in U} \R_\sigma(u)$.
 
-    Sea $\pi \subseteq \ACT^*$, $u \in \W$ y $U \subseteq \W$, se define
+    Sea $\pi \subseteq \ACT^*$, $w \in \W$ y $U \subseteq \W$, se define
     \[
         \R_\strategy \eqdef \bigcup_{\sigma \in \strategy} \R_{\sigma},
     \qquad
-        \R_{\strategy}(u) \eqdef \bigcup_{\sigma \in \strategy} \R_\sigma(u),
+        \R_{\strategy}(w) \eqdef \bigcup_{\sigma \in \strategy} \R_\sigma(w),
     \qquad
         \R_{\strategy}(U) \eqdef \bigcup_{u \in U} \R_{\strategy}(u).
     \]
@@ -223,7 +223,7 @@ lo que toda una clase de equivalencia dentro de su relación de indistinguibilid
 La idea presentada en \cite{ArecesFSV25,SaraviaPHD} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando exista un 
 conjunto de planes `adecuado' que pueda ejecutar desde cualquier estado en el que valga $\psi$ que lleve sólo a estados donde valga $\varphi$. 
 Entonces, una parte crucial es determinar qué se considerará un conjunto de planes `adecuado'. Como mencionamos en la presentación de este capítulo, y tomando 
-inspiración del campo de ``planning'' en Inteligencia Artificial (IA), surge la noción de ejecutabilidad fuerte.
+inspiración del campo de ``planning'' en Inteligencia Artificial, surge la noción de ejecutabilidad fuerte.
 
 \begin{definicion}[Ejecutabilidad Fuerte]
     Sea $\{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
@@ -309,11 +309,10 @@ si y sólo si $\truthset{\model}{\varphi} = \W$. La modalidad existencial, su du
 La bisimulación es una herramienta crucial a la hora de analizar el poder expresivo de una lógica o un lenguaje formal. 
 Informalmente, una bisimulación es una relación entre dos modelos que comparten ciertas características estructurales entre sí, las 
 cuáles logran capturar el comportamiento de los mismos con respecto a la lógica en cuestión. 
+Se introducirá aquí la definición de bisimulación para la lógica \KHilogic junto con algunos resultados deseables presentados 
+originalmente en \cite{ArecesFSV25,SaraviaPHD}.
 
-Se presentará aquí la definición de bisimulación para la lógica \KHilogic, junto con algunos resultados deseables presentados originalmente 
-en \cite{ArecesFSV25,SaraviaPHD}.
-
-Primero, introduciremos una notación que nos será útil.
+Primero, presentaremos una notación que nos será de utilidad.
 
 \begin{definicion}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults sobre $\PROP$ y $\AGT$.
@@ -343,16 +342,16 @@ Ahora, estamos en condiciones de presentar la noción de bisimulación para \KHi
 \begin{definicion}[\KHilogic-bisimulación]\label{def:bisimulation}
     Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Sea $Z \subseteq \W \times \W'$.
     \begin{itemize}
-        \item Sea $u \in W$ y $U \subseteq \W$, definimos
+        \item Sea $w \in W$ y $U \subseteq \W$, definimos
         \begin{nscenter}
             \begin{tabular}{@{}c@{}}
-                $Z(u) \eqdef \csetsc{u' \in \W'}{(u,u') \in Z}$, \qquad $Z(U) \eqdef \bigcup_{u \in U} Z(u)$.
+                $Z(w) \eqdef \csetsc{w' \in \W'}{(w,w') \in Z}$, \qquad $Z(U) \eqdef \bigcup_{u \in U} Z(u)$.
             \end{tabular}
         \end{nscenter}
-        \item Sea $u' \in \W'$ y $U' \subseteq \W'$, definimos
+        \item Sea $w' \in \W'$ y $U' \subseteq \W'$, definimos
         \begin{nscenter}
             \begin{tabular}{@{}c@{}}
-                $Z^{-1}(u') \eqdef \csetsc{u \in \W}{(u,u') \in Z}$, \qquad $Z^{-1}(U') \eqdef \bigcup_{u' \in U'} Z^{-1}(u')$.
+                $Z^{-1}(w') \eqdef \csetsc{w \in \W}{(w,w') \in Z}$, \qquad $Z^{-1}(U') \eqdef \bigcup_{u' \in U'} Z^{-1}(u')$.
             \end{tabular}
         \end{nscenter}
     \end{itemize}

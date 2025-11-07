@@ -169,26 +169,23 @@ toda relación binaria que satisface las nuevas condiciones ($\khi$-zig$^*$) y (
 presentadas en la \Cref{def:bisimulation}.
 
 \begin{lema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-bisimilitud]\label{lema:new-implies-old}
-    Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Si $Z \subseteq \W \times \W'$ es una \KHilogic-bisimulación$^*$ entonces $Z$ es una \KHilogic-bisimulación.
+    Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente. Si $Z \subseteq \W \times \W'$ 
+    es una \KHilogic-bisimulación$^*$ entonces $Z$ es una \KHilogic-bisimulación.
 \end{lema}
 
 \begin{demostracion}
     Queremos ver que $Z$ es una \KHilogic-bisimulación.
-
     Notemos que $Z$ satisface (Atom), (A-zig) y (A-zag) dado que es una \KHilogic-bisimulación$^*$. A su vez, por el mismo motivo, $Z$ 
     es no vacía.
-
     Veamos entonces que satisface ($\khi$-zig) y ($\khi$-zag).
-
     \begin{itemize}
         \item ($\khi$-zig) Sea $U \subseteq \W$ proposicionalmente definible y sea $T \subseteq \W$ tal que $U \ultsExecAgi T$, queremos ver que existe
         $T' \subseteq \W'$ tal que
-
         \begin{multicols}{2}
-            \begin{cond-bisim}
+            \begin{itemize}
                 \item $Z(U) \ultsExecAgi T'$, 
                 \item $T' \subseteq Z(T)$.
-            \end{cond-bisim}
+            \end{itemize}
         \end{multicols}
         Notemos que como $U$ es proposicionalmente definible entonces por \Cref{lema:propositionally-definable-lemma}, $U$ satisface que para cada $s \in \rho_\modults$ se cumple
         que $s \cap U = \emptyset$ o $s \subseteq U$.
@@ -230,7 +227,7 @@ Para lograr esto, primero fortaleceremos la propiedad dada en \Cref{lema:proposi
 \end{lema}
 
 \begin{demostracion}
-    Notar que la direccion ($\leftarrow$) está demostrada en \Cref{lema:propositionally-definable-lemma}. Entonces demostremos ($\rightarrow$).
+    Notar que la direccion \bm{$\Leftarrow)$} está demostrada en \Cref{lema:propositionally-definable-lemma}. Entonces demostremos \bm{$\Rightarrow)$}.
 
     Supongamos que para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$.
 
@@ -297,7 +294,7 @@ Luego, veamos como el fortalecimiento de la propiedad sobre los conjuntos propos
 \end{lema}
 
 \begin{demostracion}
-    Notar que la dirección ($\rightarrow$) está demostrada en \Cref{lema:new-implies-old}, entonces demostremos ($\leftarrow$).
+    Notar que la dirección \bm{$\Rightarrow)$} está demostrada en \Cref{lema:new-implies-old}, entonces demostremos \bm{$\Leftarrow)$}.
     
     Sea $Z$ una \KHilogic-bisimulación, veamos que es una \KHilogic-bisimulación$^*$.
 
@@ -310,10 +307,10 @@ Luego, veamos como el fortalecimiento de la propiedad sobre los conjuntos propos
         y sea $T \subseteq \W$ tal que $U \ultsExecAgi T$, queremos ver que existe $T' \subseteq \W'$ tal que
 
         \begin{multicols}{2}
-            \begin{cond-bisim}
+            \begin{itemize}
                 \item $Z(U) \ultsExecAgi T'$, 
                 \item $T' \subseteq Z(T)$.
-            \end{cond-bisim}
+            \end{itemize}
         \end{multicols}
 
         Notemos que como para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$ y $\modults \in $ \MFD entonces 
@@ -366,7 +363,6 @@ del \Cref{lema:propositionally-definable-lemma} no son válidas en el caso de \u
     $\model'=\tup{\mathcal{P}(\PROP),\R,\cset{\S'_i}_{i \in \AGT},\V,\ACT}$ donde $\ACT = \{a,b\}$, $\V(w) = w$, 
     $\S_i = \{\{a\}, \{b\}\}$, $\S'_i = \{\{a\}\}$, $\R_a = \mathcal{P}(\PROP) \times \mathcal{P}(\PROP)$ y $\R_b = \{(x,x)\}$ 
     siendo $x$ el elemento mencionado anteriormente. 
-    
     Notemos que en $\model$ se da que $\{x\} \ultsExecAgi \{x\}$ a través de $\{b\}$. Por otro lado, en $\model'$ no existe $\pi \in \S'_i$ que 
     atestigue $\{x\} \ultsExecAgi \{x\}$, pues el único elemento de $\S'_i$ es $\{a\}$ y $\R_a(x) = \mathcal{P}(\PROP) \not\subseteq \{x\}$.
 
