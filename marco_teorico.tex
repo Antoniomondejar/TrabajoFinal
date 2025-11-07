@@ -1,13 +1,13 @@
 \chapter{Preliminares: Lógica de Knowing How basada en incertidumbre}
-En este capítulo introduciremos un enfoque para modelar el concepto de ``saber cómo'', presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
+En este capítulo introduciremos un enfoque para modelar el concepto de \textit{saber cómo}, presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
 lógica previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
-representado en Sistemas de Transición Etiquetado (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
+representado en Sistemas de Transición Etiquetados (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
 su disposición en un determinado estado, sino que también por la composición de las mismas. A las composiciones de acciones las 
-llamaremos planes. Se considera que un plan es ``adecuado'' para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
-a partir de dicho estado se puede completar. En tal caso, diremos que el plan es ``fuertemente ejecutable'' en dicho estado.
+llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
+a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en dicho estado.
 
-La lógica de ``Knowing How'' basada en incertidumbre toma este enfoque como punto de partida. La principal motivación por la que 
+La lógica de \textit{Knowing How} basada en incertidumbre toma este enfoque como punto de partida. La principal motivación por la que 
 surge esta nueva propuesta es que la representación del conocimiento mencionada anteriormente supone que el agente cuenta con cierto nivel de omnisciencia, 
 pues se asume que un agente conoce todo plan que pueda inferirse de su \lts asociado y que, además, es capaz de distinguir qué plan es adecuado de entre 
 los que tiene a su disposición, en el sentido de que para todo par de planes es capaz de reconocer si provocan resultados diferentes.
@@ -31,7 +31,7 @@ pero cada uno tiene su propia interpretación de los efectos de las mismas, así
 Así, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
 relación de indistinguibilidad sobre planes para cada agente.
 
-Una vez hechas estas consideraciones, introduciremos la lógica de ``Knowing-How'' basada en incertidumbre (\KHilogic) definiendo 
+Una vez hechas estas consideraciones, introduciremos la lógica de \textit{Knowing How} basada en incertidumbre (\KHilogic) definiendo 
 su sintaxis y semántica, y su noción de bisimulación. Por último, mencionaremos algunos resultados relacionados a su complejidad 
 computacional con respecto a los problemas de model-checking y satisfacibilidad, con el objetivo de brindar una perspectiva completa acerca 
 del comportamiento computacional de la lógica.
@@ -66,9 +66,9 @@ Presentamos a continuación un ejemplo ilustrativo de las nociones mencionadas.
 
 \begin{ejemplo}
     Consideremos un robot moviendose en una grilla, el cuál tiene a su disposición la opción de moverse a cualquiera de sus 4 casilleros vecinos; es decir,
-    puede moverse a la izquierda ($`L'$), a la derecha ($`R'$), hacia arriba ($`U'$) o hacia abajo ($`D'$). En este contexto, el conjunto de acciones básicas 
+    puede moverse a la izquierda (`$L$'), a la derecha (`$R$'), hacia arriba (`$U$') o hacia abajo (`$D$'). En este contexto, el conjunto de acciones básicas 
     $\ACT$ estaría definido como $\ACT = \{L,R,U,D\}$, y $\ACT^*$ sería el conjunto de secuencias finitas sobre $\ACT$, el cuál representa los distintos 
-    caminos que el robot podría tomar en la grilla. Por ejemplo, $`LLLDRR'$ y $`UURRU'$ están en $\ACT^*$. 
+    caminos que el robot podría tomar en la grilla. Por ejemplo, `$LLLDRR$' y `$UURRU$' están en $\ACT^*$. 
 
     Luego, a partir de la definición dada, tenemos:
     \begin{itemize}
@@ -548,8 +548,8 @@ capítulo.
 A la hora de realizar un estudio computacional de una lógica, los dos problemas de decisión fundamentales a analizar son los de 
 verificación de modelos (model-checking) y satisfacibilidad ($\SAT$).
 
-El problema de model-checking se formula como "dado un modelo y una fórmula de la lógica, decidir si el modelo la satisface". Por otro lado, 
-$\SAT$ se formula como "dada una fórmula de la lógica, decidir si existe un modelo que la satisfaga". 
+El problema de model-checking se formula como ``dado un modelo y una fórmula de la lógica, decidir si el modelo la satisface''. Por otro lado, 
+$\SAT$ se formula como ``dada una fórmula de la lógica, decidir si existe un modelo que la satisfaga''. 
 
 Estos problemas han sido estudiados a lo largo de los años en numerosas lógicas y son centrales, no solo para la lógica computacional, sino que 
 también para la teoría de la complejidad computacional en general. 
@@ -562,7 +562,7 @@ model-checking es $\PSPACEComplete$ \cite[Capítulo 5, Sección 4]{Goldreich_200
 Una observación que surge a partir de estos resultados es que mientras mayor es el poder expresivo de la lógica, mayores son los recursos 
 computacionales que se necesitan para resolver ambos problemas.
 
-Metiéndonos de lleno en las lógicas de ``Knowing How'', en \cite{Demri_Fervari_2023} se demostró que para la lógica de ``Knowing How'' introducida 
+Metiéndonos de lleno en las lógicas de \textit{Knowing How}, en \cite{Demri_Fervari_2023} se demostró que para la lógica de \textit{Knowing How} introducida 
 en \cite{Wang15KH,Wang2018GoalDirectedKH} model-checking es $\PSPACEComplete$. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que 
 $\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía una cota inferior de su complejidad computacional.
 
@@ -578,5 +578,5 @@ sobre los problemas de decisión mencionados:
 \end{teorema}
 
 Lo que nos dice que ambos problemas son potencialmente más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a 
-su versión para la lógica de ``Knowing How'' previamente mencionada. En esta tesis intentaremos completar la perspectiva algorítmica y 
+su versión para la lógica de \textit{Knowing How} previamente mencionada. En esta tesis intentaremos completar la perspectiva algorítmica y 
 computacional de \KHilogic, analizando diferentes problemas relativos a la comparación de modelos mediante bisimulación para \KHilogic. 

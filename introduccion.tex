@@ -10,20 +10,32 @@ Un clásico ejemplo es la rama de la complejidad descriptiva, donde se buscan es
 de los problemas computacionales y la dificultad de expresar una propiedad en una determinada lógica. Un resultado que evidencia el enorme
 potencial de esta propuesta es el Teorema de Fagin \cite{Fagin}, el cual establece que los problemas computacionales para los que se pueden 
 verificar sus soluciones eficientemente (la clase \NP) son exactamente aquellos que pueden expresarse con una fórmula existencial de segundo 
-orden, lo que permite establecer cotas superiores de dificultad computacional sin la necesidad de encontrar un algoritmo. 
+orden, lo que permite establecer cotas superiores de dificultad computacional sin la necesidad de encontrar un algoritmo. Otros ejemplos 
+relacionados con áreas prácticas de la computación incluyen el uso de variaciones sintácticas de lógica de primer orden como 
+lenguajes de consulta de bases de datos y de herramientas de model-checking en verificación formal de sistemas.  
 
-Asímismo, un 
+También se ha explorado el uso de formalismos lógicos para modelar nociones más abstractas vinculadas al razonamiento y la información.  
+El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
+y razonar formalmente sobre el conocimiento de agentes. De esta forma podemos expresar propiedades tales como ``Juan sabe que está 
+lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no depende de si llueve o no llueve en Río Cuarto sino que 
+del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
+saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?
+
+La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. La idea es que dada la información actual 
+que posee un agente existe una cierta cantidad de mundos posibles que podrían representar el estado actual de los hechos. 
+Luego, un agente \textit{sabe} una propiedad si la misma es cierta en todos los mundos que considera que son posibles. 
+
+\bigskip
 
 
-En este trabajo contribuiremos novedosos aportes al estudio de la noción de bisimulación para 
-\KHilogic. En primera instancia, propondremos una nueva definición para este concepto con el objetivo de otorgarle una 
+En este trabajo contribuimos novedosos aportes al estudio de la noción de bisimulación para 
+\KHilogic. En primera instancia, proponemos una nueva definición para este concepto con el objetivo de otorgarle una 
 naturaleza más algorítmica y mejor alíneada con las nociones clásicas de bisimulación, las cuales únicamente consideran 
 características estructurales de los objetos matemáticos involucrados.
-Luego, estudiaremos problemas computacionales relacionados con esta noción. Por un lado, caracterizaremos la complejidad computacional de 
-determinar si una relación binaria es una \KHilogic-bisimulación y, haremos lo mismo para el problema de decidir la existencia de una 
-\KHilogic-bisimulación entre dos modelos. Más aún, estudiaremos el problema de la minimización de modelos para \KHilogic a partir de 
-la definición de contracciones por \KHilogic-bisimulación.
+Luego, estudiamos problemas computacionales relacionados con esta noción. Por un lado, caracterizamos la complejidad computacional de 
+determinar si una relación binaria es una \KHilogic-bisimulación y, a su vez, la complejidad computacional de determinar la existencia 
+de una \KHilogic-bisimulación entre dos modelos. Por último, encaramos el problema de la minimización de modelos para \KHilogic a partir 
+de la definición de contracciones por \KHilogic-bisimulación.
 Este análisis computacional no solo es realizado con el objetivo de determinar la factibilidad de este lenguaje formal en aplicaciones 
 prácticas sino que también para expandir el entendimiento a nivel conceptual de los objetos matemáticos 
-considerados y, de esta forma, fortalecer el argumento a favor del estudio de aspectos computacionales en ámbitos propios de la lógica 
-y la teoría de modelos.
+considerados y, de esta forma, fortalecer el argumento a favor del estudio de aspectos computacionales en ámbitos propios de la lógica.

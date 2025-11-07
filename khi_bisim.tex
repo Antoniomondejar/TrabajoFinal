@@ -43,7 +43,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
     $\tup{\model,\model',Z} \not\in \CBisim$ si y sólo si existe un certificado $x$ con $|x| \le p(|\modults|+|\modults'|+|Z|)$ 
     tal que $A(\modults,\modults',Z,x) = 1$. 
     
-    Esencialmente, a los $x$ los llamaremos ``contraejemplos'' y sólo nos interesarán los que sean de la forma $\tup{U,b}$ con $U$ un 
+    Esencialmente, a los $x$ los llamaremos \textit{contraejemplos} y sólo nos interesarán los que sean de la forma $\tup{U,b}$ con $U$ un 
     subconjunto del dominio de alguno de los modelos y $b$ un bit que nos indica de qué dominio es subconjunto $U$. 
     Intuitivamente, el algoritmo utilizará los contraejemplos $\tup{U,b}$ para verificar si la relación $Z$ recibida 
     satisface la condición ($\khi$-zig) sobre el conjunto $U$ cuando $b = 1$ y para verificar si la 
@@ -219,7 +219,7 @@ determinar si se da el caso de que el problema sea difícil para dicha clase ($\
 perspectiva más precisa de su dificultad intrínseca.
 
 Con ese objetivo en mente, introduciremos dos conceptos cruciales de la teoría de la complejidad computacional, los cuáles nos permitirán 
-establecer relaciones de ``dificultad computacional'' entre problemas de decisión.
+establecer relaciones de \textit{dificultad computacional} entre problemas de decisión.
 
 \begin{definicion}[Reducción de Karp]
     Sean $L, L'$ dos problemas de decisión y sea $f$ una función que mapea instancias de $L$ a instancias de $L'$.
@@ -284,8 +284,8 @@ Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontr
                      \{(\varphi_j,\{q_{j+n}\}) \mid j \in \{1,...,m\}\} \cup 
                      \{(e,\{q_{n+m+1}\})\}$ donde $q_1,...,q_{n+m+1} \in \PROP$ son $n+m+1$ variables proposicionales distintas.
     \end{itemize}
-    Notar que decimos que $p_i$ aparece en forma ``positiva'' en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$
-    A su vez, decimos que $p_i$ aparece en forma ``negativa'' en $\varphi_j$ si $\varphi_j = ...\wedge \neg p_i \wedge...$
+    Notar que decimos que $p_i$ aparece en forma \textit{positiva} en $\varphi_j$ si $\varphi_j = ... \wedge p_i \wedge...$
+    A su vez, decimos que $p_i$ aparece en forma \textit{negativa} en $\varphi_j$ si $\varphi_j = ...\wedge \neg p_i \wedge...$
 
     También, notemos que en este mapeo se considera un único agente (lo llamaremos $agt$) cuya relación de indistinguibilidad sobre 
     planes está dada por $\S \cup \{\{test\}\}$ en $\model$ y por $\S$ en $\model'$. Como cada clase de equivalencia está formada por un 
@@ -358,7 +358,7 @@ Presentaremos un ejemplo con el objetivo de esclarecer el mapeo introducido.
     definidas por $\R_{test}$ y la clase $\{test\}$ no es parte de la relación de indistinguibilidad del agente $agt$.
 \end{ejemplo}
 
-La motivación de este mapeo es utilizar los subconjuntos $U \subseteq \{p_1,...,p_n\}$ para ``codificar'' las posibles 
+La motivación de este mapeo es utilizar los subconjuntos $U \subseteq \{p_1,...,p_n\}$ para codificar las posibles 
 asignaciones a las variables proposicionales de $\varphi$. Pues sea $U \subseteq \{p_1,...,p_n\}$, podemos considerar que con $U$ estamos representando una asignación 
 $\overrightarrow{a}$ en la que asignamos \textit{true} a las variables dentro de $U$ y \textit{false} a las variables dentro de 
 $\{p_1,...,p_n\}\setminus U$. En particular, la intención es construir dos \ults de forma tal que al verificar la condición ($\khi$-zig) sobre $U$, estemos 
@@ -533,11 +533,11 @@ principio de esta sección: el de la comparación de modelos.
 \end{definicion}
 
 Una vez presentado el problema, un primer análisis intuitivo que surge acerca
-del mismo es que tiene una naturaleza, a priori, de ``búsqueda y verificación'', pues
+del mismo es que tiene una naturaleza, a priori, de \textit{búsqueda y verificación}, pues
 para decidir si existe una bisimulación entre dos \ultss, no parece haber una mejor
 opción que buscar una relación binaria candidata y verificar si efectivamente es una bisimulación. 
 
-A su vez, esta ``búsqueda y verificación'' parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
+A su vez, esta \textit{búsqueda y verificación} parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
 entre dos \ultss a considerar. Por otro lado, como estudiamos en la anterior sección, verificar que una relación binaria 
 candidata es una bisimulación es $\coNPComplete$. 
 
@@ -640,9 +640,9 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
 \end{demostracion}
 
 Esta caracterización de la existencia de bisimulaciones entre \ultss
-nos permite profundizar nuestro primer análisis. Ahora, podemos considerar a $\KHiBisim$ como un problema de ``verificación'', 
+nos permite profundizar nuestro primer análisis. Ahora, podemos considerar a $\KHiBisim$ como un problema de \textit{verificación}, 
 pues para decidir la existencia de una bisimulación solo basta con verificar que la relación $\universalbis$ sea una bisimulación, por lo 
-que la parte de ``búsqueda'' propia de este problema se trivializa.
+que la parte de \textit{búsqueda} propia de este problema se trivializa.
 
 Luego, teniendo en cuenta las consideraciones realizadas y lo analizado en relación a $\CBisim$ en la anterior sección, podemos extender los 
 resultados presentados a $\KHiBisim$.
