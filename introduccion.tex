@@ -17,23 +17,36 @@ lenguajes de consulta de bases de datos y de herramientas de model-checking en v
 También se ha explorado el uso de formalismos lógicos para modelar nociones más abstractas vinculadas al razonamiento y la información.  
 El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
 y razonar formalmente sobre el conocimiento de agentes. De esta forma podemos expresar propiedades tales como ``Juan sabe que está 
-lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no depende de si llueve o no llueve en Río Cuarto sino que 
+lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino que 
 del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
 saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?
 
-La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. La idea es que dada la información actual 
+La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. Dada la información actual 
 que posee un agente existe una cierta cantidad de mundos posibles que podrían representar el estado actual de los hechos. 
 Luego, un agente \textit{sabe} una propiedad si la misma es cierta en todos los mundos que considera que son posibles. 
+La representación matemática por excelencia de este concepto está dada por los Sistemas de Transición Etiquetada (LTS, por sus siglas en inglés) (o modelos de Kripke?),
+los cuales son grafos dirigidos en los que sus estados, etiquetados con un conjunto de variables proposicionales, representan los distintos 
+mundos posibles y una arista $(w,v)$ con etiqueta $i$ determina que en el mundo $w$ el agente $i$ considera posible al mundo $v$.
+De esta forma es posible representar numerosos sistemas de múltiples agentes interactuando entre sí: jugadores en una partida 
+de poker, usuarios interactuando en una red social, participantes de un debate, entre otros.
+
+Las propuestas clásicas de lógicas epistémicas consideran el conocimiento de los agentes en la forma de ``saber qué'' (\textit{knowing that}, \cite{Hintikka1962}), 
+concentrandose así en el estudio de propiedades como las que fueron mencionadas anteriormente. Sin embargo, en años recientes se han desarrollado 
+teorías y lenguajes formales en torno a otras formas de conocimiento. Algunos autores han estudiado la noción de ``saber si'' 
+(\textit{knowing whether}, \cite{KnowingWhether}), donde el conocimiento de los agentes está relacionado con su certeza en relación al 
+valor de verdad de una proposición; 
+otros la noción de ``saber por qué'' (\textit{knowing why}, \cite{KnowingWhy}), en la que se consideran las razones y justificaciones 
+del conocimiento. 
+
 
 \bigskip
-
 
 En este trabajo contribuimos novedosos aportes al estudio de la noción de bisimulación para 
 \KHilogic. En primera instancia, proponemos una nueva definición para este concepto con el objetivo de otorgarle una 
 naturaleza más algorítmica y mejor alíneada con las nociones clásicas de bisimulación, las cuales únicamente consideran 
 características estructurales de los objetos matemáticos involucrados.
-Luego, estudiamos problemas computacionales relacionados con esta noción. Por un lado, caracterizamos la complejidad computacional de 
-determinar si una relación binaria es una \KHilogic-bisimulación y, a su vez, la complejidad computacional de determinar la existencia 
+Luego, estudiamos problemas computacionales relacionados con esta noción. Por un lado, caracterizamos la complejidad de 
+determinar si una relación binaria es una \KHilogic-bisimulación y, por otro lado, la complejidad de determinar la existencia 
 de una \KHilogic-bisimulación entre dos modelos. Por último, encaramos el problema de la minimización de modelos para \KHilogic a partir 
 de la definición de contracciones por \KHilogic-bisimulación.
 Este análisis computacional no solo es realizado con el objetivo de determinar la factibilidad de este lenguaje formal en aplicaciones 

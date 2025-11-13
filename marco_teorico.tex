@@ -1,7 +1,7 @@
 \chapter{Preliminares: Lógica de Knowing How basada en incertidumbre}
 En este capítulo introduciremos un enfoque para modelar el concepto de \textit{saber cómo}, presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
 lógica previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
-representado en Sistemas de Transición Etiquetados (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
+representado en Sistemas de Transición Etiquetada (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
 su disposición en un determinado estado, sino que también por la composición de las mismas. A las composiciones de acciones las 
 llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
@@ -83,8 +83,8 @@ Presentamos a continuación un ejemplo ilustrativo de las nociones mencionadas.
 Procederemos a introducir los modelos que representarán las acciones que los agentes tienen a su disposición: 
 los sistemas de transición etiquetados.
 
-\begin{definicion}[Sistema de Transición Etiquetado]
-    Un \emph{Sistema de Transición Etiquetado (\lts, por sus siglas en inglés)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
+\begin{definicion}[Sistema de Transición Etiquetada]
+    Un \emph{Sistema de Transición Etiquetada (\lts, por sus siglas en inglés)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
     donde $\W$ es un conjunto no vacío de estados, $\R = \{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ es 
     una colección de relaciones binarias sobre $\W$, $\V : \W \to \mathcal{P}(\PROP)$ es una función de valuación y $\ACT$ es un 
     conjunto enumerable de nombres de acciones.
