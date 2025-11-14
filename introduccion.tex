@@ -5,6 +5,7 @@ con la búsqueda de un procedimiento para determinar mecánicamente la validez d
 hoy en día donde abunda el uso de métodos formales en áreas de verificación de software e inteligencia artificial, estas dos disciplinas 
 científicas no han dejado de nutrirse mutuamente.
 
+% \medskip
 Como se menciona en \cite{HalpernHIKVV01}, la lógica se ha sumergido exitosamente en numerosas áreas de las ciencias de la computación. 
 Un clásico ejemplo es la rama de la complejidad descriptiva, donde se buscan establecer relaciones entre la complejidad intrínseca 
 de los problemas computacionales y la dificultad de expresar una propiedad en una determinada lógica. Un resultado que evidencia el enorme
@@ -13,6 +14,7 @@ verificar sus soluciones eficientemente (la clase \NP) son exactamente aquellos 
 orden, lo que permite establecer cotas superiores de dificultad computacional sin la necesidad de encontrar un algoritmo. Otros ejemplos 
 relacionados con áreas prácticas de la computación incluyen el uso de variaciones sintácticas de lógica de primer orden como 
 lenguajes de consulta de bases de datos y de herramientas de model-checking en verificación formal de sistemas.  
+% \medskip
 
 También se ha explorado el uso de formalismos lógicos para modelar nociones más abstractas vinculadas al razonamiento y la información.  
 El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
@@ -20,6 +22,7 @@ y razonar formalmente sobre el conocimiento de agentes. De esta forma podemos ex
 lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino que 
 también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
 saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?
+% \medskip
 
 La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. Dada la información actual 
 que posee un agente existe una cierta cantidad de mundos posibles que podrían representar el estado actual de los hechos. 
@@ -29,6 +32,7 @@ los cuales son grafos dirigidos en los que sus estados, etiquetados con un conju
 mundos posibles y una arista $(w,v)$ con etiqueta $i$ determina que en el mundo $w$ el agente $i$ considera posible al mundo $v$.
 De esta forma es posible representar numerosos sistemas de múltiples agentes interactuando entre sí: jugadores en una partida 
 de poker, usuarios interactuando en una red social, participantes de un debate, entre otros.
+% \medskip
 
 Las propuestas clásicas de lógicas epistémicas consideran el conocimiento de los agentes en la forma de ``saber qué'' (\textit{knowing that}, \cite{Hintikka1962}), 
 concentrandose así en el estudio de propiedades como las que fueron mencionadas anteriormente. Sin embargo, en años recientes se han desarrollado 
@@ -43,6 +47,7 @@ el agente $i$ sabe cómo garantizar la propiedad $\varphi$ cuando se encuentra e
 $\psi$. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que conocen y a la forma en la que consiguen 
 combinarlas para alcanzar un determinado objetivo. Así es como esta noción provee las bases para la formalización de áreas 
 como \textit{automated planning}.
+% \medskip
 
 En \cite{Wang15KH,Wang2018GoalDirectedKH} se introduce el lenguaje formal \KHlogic con el objetivo de matematizar 
 las ideas presentadas en relación a la noción de ``saber cómo'' en el contexto de sistemas de un único agente. Como en las primeras 
@@ -53,20 +58,25 @@ se encuentra en el estado $w$ puede ejecutar la acción $a$ para terminar en el 
 cómo garantizar $\varphi$ dado que vale $\psi$ cuando exista un plan, una secuencia de acciones, \textit{adecuado} que al ser ejecutado a 
 partir de cualquier estado en el que valga $\psi$ lleve a estados donde vale $\varphi$. Una plan será \textit{adecuado} 
 cuando sea \textit{fuertemente ejecutable}, concepto que explicaremos en mayor detalle en los próximos capítulos.
+% \medskip
 
 Una observación sobre \KHlogic es que dado un \lts con las acciones conocidas junto con los cambios de estado que 
 estas producen, se considera que toda composición de acciones está dentro del espectro de habilidades del agente en cuestión. Luego, 
-la única forma en la que un agente \textbf{no} sabrá cómo lograr un objetivo será si no existe un plan que lo garantice. Sin embargo, podría 
+la única forma en la que un agente \textbf{no} sabrá cómo lograr un objetivo será que no exista un plan que lo garantice. Sin embargo, podría 
 darse el caso en el que el agente conozca las acciones de un \lts pero no sepa como componerlas para construir un plan adecuado. Más aún, 
 el agente podría ser consciente de la existencia de dos planes distintos pero no tener la capacidad de distinguir los efectos que estos 
 podrían provocar.
+% \medskip
 
-Así, surge la propuesta de \cite{ArecesFSV25} de una lógica de \textit{Knowing How} basada en la incertidumbre (\KHilogic) en la que la
-estrategia utilizada para abordar las consideraciones mencionadas es extender los \ltss con una relación de indistinguibilidad entre 
-planes; de esta forma la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones a 
-partir de los \ltss sino que también entra en consideración su percepción sobre las mismas y su capacidad de distinguir los distintos 
+Así surge la propuesta de \cite{ArecesFSV25} de una lógica de \textit{Knowing How} basada en la incertidumbre (\KHilogic), en la que la
+estrategia utilizada para abordar las consideraciones mencionadas es extender los \ltss con una relación de indistinguibilidad sobre 
+planes; de esta forma la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones y pasa a entrar en 
+consideración su percepción sobre las mismas y su capacidad de distinguir los distintos 
 resultados que estas podrían provocar. A su vez, esta propuesta permite la representación de sistemas de múltiples agentes, en donde 
 estos conviven en un mismo contexto en el que cada uno cuenta con su propia percepción.
+% \medskip
+
+
 
 % \bigskip
 
