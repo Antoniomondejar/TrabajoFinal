@@ -18,13 +18,13 @@ También se ha explorado el uso de formalismos lógicos para modelar nociones m�
 El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
 y razonar formalmente sobre el conocimiento de agentes. De esta forma podemos expresar propiedades tales como ``Juan sabe que está 
 lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino que 
-del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
+también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
 saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?
 
 La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. Dada la información actual 
 que posee un agente existe una cierta cantidad de mundos posibles que podrían representar el estado actual de los hechos. 
 Luego, un agente \textit{sabe} una propiedad si la misma es cierta en todos los mundos que considera que son posibles. 
-La representación matemática por excelencia de este concepto está dada por los Sistemas de Transición Etiquetada (LTS, por sus siglas en inglés) (o modelos de Kripke?),
+La representación matemática por excelencia de este concepto está dada por los Sistemas de Transición Etiquetada (\lts, por sus siglas en inglés) (o modelos de Kripke?),
 los cuales son grafos dirigidos en los que sus estados, etiquetados con un conjunto de variables proposicionales, representan los distintos 
 mundos posibles y una arista $(w,v)$ con etiqueta $i$ determina que en el mundo $w$ el agente $i$ considera posible al mundo $v$.
 De esta forma es posible representar numerosos sistemas de múltiples agentes interactuando entre sí: jugadores en una partida 
@@ -32,14 +32,43 @@ de poker, usuarios interactuando en una red social, participantes de un debate, 
 
 Las propuestas clásicas de lógicas epistémicas consideran el conocimiento de los agentes en la forma de ``saber qué'' (\textit{knowing that}, \cite{Hintikka1962}), 
 concentrandose así en el estudio de propiedades como las que fueron mencionadas anteriormente. Sin embargo, en años recientes se han desarrollado 
-teorías y lenguajes formales en torno a otras formas de conocimiento. Algunos autores han estudiado la noción de ``saber si'' 
+teorías y lenguajes formales en torno a otras formas del conocimiento. Algunos autores han estudiado la noción de ``saber si'' 
 (\textit{knowing whether}, \cite{KnowingWhether}), donde el conocimiento de los agentes está relacionado con su certeza en relación al 
 valor de verdad de una proposición; 
 otros la noción de ``saber por qué'' (\textit{knowing why}, \cite{KnowingWhy}), en la que se consideran las razones y justificaciones 
 del conocimiento. 
+Por último, la forma del conocimiento en la que nos concentraremos en este trabajo es la que se enfoca principalmente en las habilidades 
+de un agente: la noción de ``saber cómo'' (\textit{knowing how}, \cite{Wang15KH,ArecesFSV25}).  Esta nos permite formalizar expresiones como: 
+el agente $i$ sabe cómo garantizar la propiedad $\varphi$ cuando se encuentra en una situación en la que se da la propiedad 
+$\psi$. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que conocen y a la forma en la que consiguen 
+combinarlas para alcanzar un determinado objetivo. Así es como esta noción provee las bases para la formalización de áreas 
+como \textit{automated planning}.
 
+En \cite{Wang15KH,Wang2018GoalDirectedKH} se introduce el lenguaje formal \KHlogic con el objetivo de matematizar 
+las ideas presentadas en relación a la noción de ``saber cómo'' en el contexto de sistemas de un único agente. Como en las primeras 
+lógicas epistémicas, \KHlogic también se interpreta sobre \ltss. Sin embargo, en este contexto las aristas de los \ltss no representan la 
+indistinguibilidad del agente sobre los distintos mundos posibles sino que describen los cambios de estado que producen las acciones 
+que este puede ejecutar. De esta forma, una arista $(w,v)$ con etiqueta $a$ indica que cuando el agente 
+se encuentra en el estado $w$ puede ejecutar la acción $a$ para terminar en el estado $v$. Luego, dado un \lts el agente sabrá 
+cómo garantizar $\varphi$ dado que vale $\psi$ cuando exista un plan, una secuencia de acciones, \textit{adecuado} que al ser ejecutado a 
+partir de cualquier estado en el que valga $\psi$ lleve a estados donde vale $\varphi$. Una plan será \textit{adecuado} 
+cuando sea \textit{fuertemente ejecutable}, concepto que explicaremos en mayor detalle en los próximos capítulos.
 
-\bigskip
+Una observación sobre \KHlogic es que dado un \lts con las acciones conocidas junto con los cambios de estado que 
+estas producen, se considera que toda composición de acciones está dentro del espectro de habilidades del agente en cuestión. Luego, 
+la única forma en la que un agente \textbf{no} sabrá cómo lograr un objetivo será si no existe un plan que lo garantice. Sin embargo, podría 
+darse el caso en el que el agente conozca las acciones de un \lts pero no sepa como componerlas para construir un plan adecuado. Más aún, 
+el agente podría ser consciente de la existencia de dos planes distintos pero no tener la capacidad de distinguir los efectos que estos 
+podrían provocar.
+
+Así, surge la propuesta de \cite{ArecesFSV25} de una lógica de \textit{Knowing How} basada en la incertidumbre (\KHilogic) en la que la
+estrategia utilizada para abordar las consideraciones mencionadas es extender los \ltss con una relación de indistinguibilidad entre 
+planes; de esta forma la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones a 
+partir de los \ltss sino que también entra en consideración su percepción sobre las mismas y su capacidad de distinguir los distintos 
+resultados que estas podrían provocar. A su vez, esta propuesta permite la representación de sistemas de múltiples agentes, en donde 
+estos conviven en un mismo contexto en el que cada uno cuenta con su propia percepción.
+
+% \bigskip
 
 En este trabajo contribuimos novedosos aportes al estudio de la noción de bisimulación para 
 \KHilogic. En primera instancia, proponemos una nueva definición para este concepto con el objetivo de otorgarle una 
