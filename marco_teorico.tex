@@ -26,9 +26,9 @@ debe eventualmente abrir el horno para verificar si el proceso de horneado ya es
 
 Es así como estos ejemplos motivan una representación más general sobre el conocimiento de un agente, tomando en consideración no solo las habilidades con las que dispone sino 
 también su capacidad de distinguir diferentes planes. A su vez, esto permite una representación para múltiples agentes, en la que todos los agentes disponen de las mismas acciones 
-pero cada uno tiene su propia interpretación de los efectos de las mismas, así como su propia habilidad para distinguir distintos planes.
+pero cada uno tiene su propia interpretación de los efectos de las mismas, así como su propia habilidad para distinguir planes diferentes.
 
-Así, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
+Luego, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
 relación de indistinguibilidad sobre planes para cada agente.
 
 Una vez hechas estas consideraciones, introduciremos la lógica de \textit{Knowing How} basada en incertidumbre (\KHilogic) definiendo 
@@ -562,9 +562,9 @@ model-checking es $\PSPACEComplete$ \cite[Capítulo 5, Sección 4]{Goldreich_200
 Una observación que surge a partir de estos resultados es que mientras mayor es el poder expresivo de la lógica, mayores son los recursos 
 computacionales que se necesitan para resolver ambos problemas.
 
-Metiéndonos de lleno en las lógicas de \textit{Knowing How}, en \cite{Demri_Fervari_2023} se demostró que para la lógica de \textit{Knowing How} introducida 
-en \cite{Wang15KH,Wang2018GoalDirectedKH} model-checking es $\PSPACEComplete$. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que 
-$\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía una cota inferior de su complejidad computacional.
+Metiéndonos de lleno en las lógicas de \textit{Knowing How}, en \cite{Demri_Fervari_2023} se demostró que para \KHlogic model-checking 
+es $\PSPACEComplete$. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que $\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía 
+una cota inferior de su complejidad computacional.
 
 Para el caso de la lógica \KHilogic, que estudiaremos en esta tesis, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resultados 
 sobre los problemas de decisión mencionados:
@@ -578,5 +578,5 @@ sobre los problemas de decisión mencionados:
 \end{teorema}
 
 Lo que nos dice que ambos problemas son potencialmente más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a 
-su versión para la lógica de \textit{Knowing How} previamente mencionada. En esta tesis intentaremos completar la perspectiva algorítmica y 
+su versión para \KHlogic. En esta tesis intentaremos completar la perspectiva algorítmica y 
 computacional de \KHilogic, analizando diferentes problemas relativos a la comparación de modelos mediante bisimulación para \KHilogic. 
