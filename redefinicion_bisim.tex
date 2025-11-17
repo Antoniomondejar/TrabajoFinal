@@ -14,7 +14,7 @@ A su vez, a la hora de presentar una noción de bisimulación, es deseable que l
 que dada una relación binaria entre los dominios de dos modelos sea posible diseñar un procedimiento efectivo que verifique si dicha relación 
 es una bisimulación.
 
-Nuevamente, si analizamos la definicion presentada en la sección anterior, podemos notar que para verificar que una relación binaria es una bisimulación
+Nuevamente, si analizamos la definición presentada en la sección anterior, podemos notar que para verificar que una relación binaria es una bisimulación
 tenemos que explorar necesariamente los conjuntos proposicionalmente definibles de los dominios de cada modelo, lo cuál lleva consigo una cantidad 
 infinita de fórmulas proposicionales que analizar. Por este motivo, no parece una tarea sencilla encontrar un procedimiento efectivo que realice lo deseado.
 
@@ -108,8 +108,7 @@ Ahora estamos en condiciones de presentar una propiedad fundamental de los conju
     $s \subseteq U$, lo que queríamos demostrar.  
 \end{demostracion}
 
-A partir de esta propiedad, surge la nueva definición de bisimulación que proponemos para la lógica de `Knowing-How' basada en 
-incertidumbre.
+A partir de esta propiedad, surge la nueva definición de bisimulación que proponemos para \KHilogic.
 
 \begin{definicion}[\KHilogic-bisimulación$^*$]\label{def:bisim-redefinition}
     Sean $\modults$ y $\modults'$ dos \ultss, con dominios $\W$ y $\W'$ respectivamente.
@@ -200,7 +199,7 @@ presentadas en la \Cref{def:bisimulation}.
 
 Notemos como este lema nos permite demostrar el Teorema de Invarianza para nuestra nueva definición de bisimulación.
 
-\begin{teorema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-equivalencia]
+\begin{teorema}[\KHilogic-bisimilitud$^*$ implica \KHilogic-equivalencia]\label{thm:new-bisim-implies-equiv}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados, entonces
     \begin{center}
         $\modults,w \bisim^* \modults',w'$ implica $\modults,w \modequiv \modults',w'$.
@@ -315,13 +314,12 @@ Luego, veamos como el fortalecimiento de la propiedad sobre los conjuntos propos
 
         Notemos que como para cada $s \in \rho_\modults$ se cumple que $s \cap U = \emptyset$ o $s \subseteq U$ y $\modults \in $ \MFD entonces 
         por \Cref{lema:finite-propositionally-definable-lemma} tenemos que $U$ es proposicionalmente definible.
-    
         Luego como $Z$ satisface ($\khi$-zig) tenemos asegurada la existencia de dicho $T'$.
     
         \item ($\khi$-zag$^*$) Análogo a ($\khi$-zig$^*$). 
     \end{itemize}
 
-    Finalmente hemos demostrado que $Z$ es una \KHilogic-bisimulación$^*$.
+    Finalmente, hemos demostrado que $Z$ es una \KHilogic-bisimulación$^*$.
 \end{demostracion}
 
 Y como demostramos que en el caso finito ambas definiciones de bisimulación son equivalentes, estamos en condiciones de demostrar el teorema deseado. 
@@ -329,14 +327,17 @@ Y como demostramos que en el caso finito ambas definiciones de bisimulación son
 \begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud$^*$]\label{thm:new-bisim-finite-equiv}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tales que $\modults, \modults' \in$ \MFD, entonces
     \begin{center}
-        $\model,w \modequiv \model', w'$ implica $\model,w \bisim^* \model', w'$.
+        $\model,w \modequiv \model', w'$ si y sólo si $\model,w \bisim^* \model', w'$.
     \end{center}
 \end{teorema}
 
 \begin{demostracion}
+    Notar que la dirección \bm{$\Leftarrow)$} es un caso particular del \Cref{thm:new-bisim-implies-equiv}, por lo que nos concentraremos 
+    en demostrar \bm{$\Rightarrow)$}.
+
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados con $\modults, \modults' \in $ \MFD tales que $\model,w \modequiv \model', w'$, 
     entonces por \Cref{thm:finite-equivalence-implies-bisim} tenemos que $\model,w \bisim \model', w'$. 
-    Luego existe $Z$ \KHilogic-bisimulación tal que $(w,w') \in Z$.
+    Luego, existe $Z$ una \KHilogic-bisimulación tal que $(w,w') \in Z$.
 
     Por \Cref{lema:old-implies-new-finite} tenemos que $Z$ es una \KHilogic-bisimulación$^*$. Luego, como $(w,w') \in Z$ 
     entonces $\model,w \bisim^* \model', w'$.
@@ -374,12 +375,12 @@ del \Cref{lema:propositionally-definable-lemma} no son válidas en el caso de \u
 \end{ejemplo}
 
 
-Hemos presentado una nueva definición de bisimulación para \KHilogic, en la que sólo 
+Hemos presentado una nueva definición de bisimulación para \KHilogic en la que sólo 
 se consideran características estructurales de los modelos en cuestión. A su vez, demostramos las principales propiedades 
 que se esperan de la noción de bisimulación de una lógica modal, lo cuál sugiere que esta nueva definición es 
 adecuada.
 
-También, podemos notar que la definicion propuesta evita la necesidad de listar cada fórmula proposicional para verificar que una relación binaria
+También, podemos notar que la definición propuesta evita la necesidad de listar cada fórmula proposicional para verificar que una relación binaria
 es una bisimulación, lo cuál le aporta una naturaleza más procedural como mencionamos al principio del capítulo.
 
 Teniendo en cuenta lo estudiado en este capítulo, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.

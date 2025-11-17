@@ -43,10 +43,10 @@ y a $\AGT$ un conjunto finito no vacío de nombres de agentes.
 \begin{definicion}
     El lenguaje \KHilogic está compuesto por las fórmulas dadas por la gramática:
     \begin{center}
-        $\varphi ::= p \mid \neg \varphi \mid \varphi \vee \varphi \mid \varphi \wedge \varphi \mid \kh_i(\varphi,\varphi)$,
+        $\varphi ::= p \mid \neg \varphi \mid \varphi \vee \varphi \mid \kh_i(\varphi,\varphi)$,
     \end{center}
-    donde $p \in \PROP$ e $i \in \AGT$. Las constantes booleanas son definidas de la forma usual. Las fórmulas de la forma 
-    $\kh_i(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo lograr $\varphi$''.
+    donde $p \in \PROP$ e $i \in \AGT$. Las constantes y demás operadores booleanos son definidas de la forma usual. 
+    Las fórmulas de la forma $\kh_i(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo lograr $\varphi$''.
 \end{definicion}
 
 Formalizaremos matemáticamente algunos de los conceptos discutidos en la presentación de este capítulo. Como mencionamos, se 
@@ -214,16 +214,16 @@ lo que toda una clase de equivalencia dentro de su relación de indistinguibilid
         \item $\R_{ab}(w_1) = \{w_4\}$, \quad $\R_{ab}(w_3) = \emptyset$. 
         \item $\R_{a}(\{w_1,w_2\}) = \R_a(w_1) \cup \R_a(w_2) = \{w_3,w_4\} \cup \{w_3\} = \{w_3, w_4\}$.
         \item $\R_{\{ab,b\}} = \R_{ab} \cup \R_b = \{(w_1,w_4),(w_2,w_4),(w_3,w_4)\}$.
-        \item $\R_{\{ab,b\}}(w_1) = \R_{ab}(w_1) \cup \R_b(w_1) = \{w_3,w_4\} \cup \emptyset = \{w_3,w_4\}$.
-        \item $\R_{\{ab,b\}}(\{w_1,w_3\}) = \R_{\{ab,b\}}(w_1) \cup \R_{\{ab,b\}}(w_3) = \{w_3,w_4\} \cup \{w_4\} = \{w_3,w_4\}$.
+        \item $\R_{\{ab,b\}}(w_1) = \R_{ab}(w_1) \cup \R_b(w_1) = \{w_4\} \cup \emptyset = \{w_4\}$.
+        \item $\R_{\{ab,b\}}(\{w_1,w_3\}) = \R_{\{ab,b\}}(w_1) \cup \R_{\{ab,b\}}(w_3) = \{w_4\} \cup \{w_4\} = \{w_4\}$.
     \end{itemize}
 \end{ejemplo}
 
 
-La idea presentada en \cite{ArecesFSV25,SaraviaPHD} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando exista un 
-conjunto de planes `adecuado' que pueda ejecutar desde cualquier estado en el que valga $\psi$ que lleve sólo a estados donde valga $\varphi$. 
-Entonces, una parte crucial es determinar qué se considerará un conjunto de planes `adecuado'. Como mencionamos en la presentación de este capítulo, y tomando 
-inspiración del campo de ``planning'' en Inteligencia Artificial, surge la noción de ejecutabilidad fuerte.
+La idea presentada en \cite{ArecesFSV25,SaraviaPHD} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando existe un 
+conjunto de planes \textit{adecuado} que pueda ejecutar desde cualquier estado en el que valga $\psi$ que lleve sólo a estados donde valga $\varphi$. 
+Una parte crucial es determinar qué se considerará un conjunto de planes \textit{adecuado}. Como mencionamos en la presentación de este capítulo, y tomando 
+inspiración del campo de \textit{automated planning} en Inteligencia Artificial, surge la noción de ejecutabilidad fuerte.
 
 \begin{definicion}[Ejecutabilidad Fuerte]
     Sea $\{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
@@ -232,7 +232,8 @@ inspiración del campo de ``planning'' en Inteligencia Artificial, surge la noci
     $\sexec$ en $w\}$.
     
     Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
-    Por último, $\sexec^{\model}$($\pi$) $\eqdef \cap_{\sigma \in \pi}$ $\sexec^{\model}$($\sigma$) es el conjunto de estados en $\W$ donde $\pi$ es fuertemente ejecutable. 
+    Análogamente, definimos el conjunto $\sexec^{\model}$($\pi$) $\eqdef \cap_{\sigma \in \pi}$ $\sexec^{\model}$($\sigma$) que contiene los estados en los que 
+    $\pi$ es fuertemente ejecutable. 
 \end{definicion}
 
 Intuitivamente, ejecutabilidad fuerte sobre planes pide que cada ejecución parcial de un plan (incluyendo $\epsilon$) pueda ser completada, y, ejecutabilidad fuerte sobre
@@ -291,9 +292,10 @@ si y sólo si $\truthset{\model}{\varphi} = \W$. La modalidad existencial, su du
     Nuevamente, consideremos el \ults presentado en \Cref{ejemplo:ults}, y veamos que:
     \begin{itemize}
         \item $\modults,w_1 \models p$ pero $\modults,w_3 \not\models p$.
-        \item Notemos que $\sexec(\{ab,a\}) = \{w_2\}$ y $\sexec(\{b\}) = \{w_3\}$. 
-        Luego $\truthset{\modults}{p} = \{w_1,w_2\} \not\subseteq \sexec(\pi)$ para cada $\pi \in \S_i$.
-        Por lo que podemos afirmar que $\modults,w_1 \not\models \khi(p,q)$.
+        \item Notar que $\sexec(\{ab,a\}) = \{w_2\}$ y $\sexec(\{b\}) = \{w_3\}$. 
+        Luego $\truthset{\modults}{p} = \{w_1,w_2\} \not\subseteq \sexec(\pi)$ para cada $\pi \in \S_i$, pues $w_1\not\in\sexec(\{ab,a\})$ 
+        y $w_1\not\in\sexec(\{b\})$.
+        Por este motivo, podemos afirmar que $\modults,w_1 \not\models \khi(p,q)$.
         Más aún, $\modults,w_j \not\models \khi(p,q)$ para cada $j \in \{1,..,4\}$.
         \item Como mencionamos en el item anterior, $\sexec(\{b\}) = \{w_3\}$. Luego, podemos ver que 
         $\modults, w_1 \models \khi(q,r)$ y $\{b\} \in \S_i$ es su testigo. 
@@ -495,7 +497,7 @@ equivalencia entre modelos con respecto a \KHilogic.
     Dos \ultss punteados $\modults,w$ y $\modults',w'$ son \KHilogic-equivalentes ($\model, w \modequiv \model', w'$)
     si y sólo si, para cada $\varphi \in \KHilogic$,
     \begin{center}
-        $\model, w \models \varphi$ \quad si y sólo \quad $\model', w' \models \varphi$.
+        $\model, w \models \varphi$ \quad si y sólo si \quad $\model', w' \models \varphi$.
     \end{center} 
 \end{definicion}
 
@@ -521,7 +523,7 @@ de Hennessy-Milner, es decir, satisface la recíproca de \Cref{thm:bisim-implies
 \begin{definicion}\label{def:finite-ults}
     Se define la clase de \ultss finitos en su dominio (\textbf{FD}):
     \begin{center}
-        \MFD $\eqdef \{\modults \mid \modults = \tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es un \ults con $\W$ es finito$\}$
+        \MFD $\eqdef \{\modults \mid \modults = \tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es un \ults con $\W$ finito$\}$
     \end{center}
 
 \end{definicion}
@@ -530,7 +532,7 @@ de Hennessy-Milner, es decir, satisface la recíproca de \Cref{thm:bisim-implies
 \begin{teorema}[\KHilogic-equivalencia implica \KHilogic-bisimilitud]\label{thm:finite-equivalence-implies-bisim}
     Sean $\modults,w$ y $\modults',w'$ dos \ultss punteados tal que $\modults, \modults' \in$ \MFD, entonces
     \begin{center}
-        $\model,w \modequiv \model', w'$ implica $\model,w \bisim \model', w'$.
+        $\model,w \modequiv \model', w'$ si y sólo si $\model,w \bisim \model', w'$.
     \end{center}
 \end{teorema}
 

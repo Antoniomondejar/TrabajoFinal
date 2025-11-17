@@ -2,29 +2,62 @@
 
 \section{Conclusiones}
 
+En este trabajo contribuimos novedosos aportes al estudio de la noción de bisimulación de \KHilogic. En primer lugar, propusimos una nueva 
+definición para este concepto. Para ello, caracterizamos los conjuntos proposicionalmente definibles del dominio de un \ults, lo que nos 
+aportó una forma intuitiva de redefinir las cláusulas ($\khi$-zig) y ($\khi$-zag) de la definición presentada en \cite{ArecesFSV25,SaraviaPHD}.
+
+A su vez, esta caracterización nos permitió demostrar los resultados de correctitud esperados para esta noción y determinar que 
+el problema de definibilidad para \KHilogic está en la clase $\Poly$. Consideramos que nuestra propuesta es adecuada y se alinea mejor 
+con las nociones clásicas de bisimulación, dado que logra garantizar equivalencia lógica entre dos \ultss a partir del análisis de 
+características estructurales. Asimismo, la reformulación de las cláusulas mencionadas favorece al comportamiento computacional de la 
+noción de bisimulación de \KHilogic, pues evita la necesidad de listar cada fórmula proposicional para descubrir los conjuntos 
+proposicionalmente definibles del dominio de un \ults.
+
+Luego, estudiamos problemas computacionales relacionados con esta noción. En primer instancia determinamos que el problema de verificar 
+si una relación binaria es una \KHilogic-bisimulación (\CBisim) es \coNPComplete. Para establecer la pertenencia a la clase \coNP propusimos
+un algoritmo que verifica contraejemplos en tiempo polinomial y, para demostrar \textit{hardness} para \coNP, redujimos polinomialmente 
+\DNFTAUT a \CBisim. Por otra parte, extendimos este resultado al problema de determinar la existencia de una \KHilogic-bisimulación entre 
+dos \ultss (\KHiBisim) y, lo mismo hicimos para la versión punteada de este problema (\PKHiBisim). A su vez, mostramos cómo modificar el 
+algoritmo propuesto para \CBisim para que compute una fórmula de tamaño polinomial que distingue a los \ultss involucrados en caso 
+de detectarse que no son bisimilares.
+
+Finalmente, encaramos el problema de la minimización de modelos para \KHilogic. Siguiendo la estrategia utilizada para el caso de la 
+lógica modal básica, investigamos dos posibles soluciones a partir del estudio de contracciones por \KHilogic-bisimulación. La primera 
+de ellas surge del análisis de las autobisimulaciones. Particularmente, demostramos que la partición de los estados de un \ults a partir 
+de su función de valuación es su autobisimulación máxima. Luego, nuestra primera propuesta de contracción ($\fcont{\model}$) consiste en 
+cocientar el dominio del \ults con esta partición y abstraer los planes de mayor relevancia en el \ults a aristas en el modelo contraído. 
+Asimismo, demostramos que dado $\model$, un \ults, su contracción por \KHilogic-bisimulación $\fcont{\model}$ es computable en tiempo 
+poliniomial con respecto a su tamaño. En nuestra segunda propuesta ($\model_\bml$), utilizamos la contracción por \bml-bisimulación. Cada \ults tiene naturalmente un modelo de Kripke asociado, 
+por lo que la estrategia para este enfoque consistió en contraer las componentes asociadas a este modelo de Kripke según la noción de 
+bisimulación de \bml. 
+
+A su vez, demostramos que ambas contracciones son correctas (producen un \ults bisimilar) y que pueden ser computadas en tiempo 
+polinomial con respecto al tamaño del \ults. A pesar de que ninguna de las dos propuestas resulta en una solución cerrada para el problema 
+de la minimización de modelos, ambas proveen interesantes aproximaciones que pueden ser de utilidad en aplicaciones prácticas y que 
+contribuyen al entendimiento del poder expresivo de \KHilogic y la clase de modelos \ults.
 
 \section{Trabajo futuro}
 
-Los resultados obtenidos en este trabajo dejan las puertas abiertas a numerosas posibilidades dentro de la familia de lógicas de ``Knowing How''. 
-En primera instancia, se podría realizar un desarrollo similar alrededor de la noción de bisimulación de la lógica de ``Knowing How'' presentada 
-en \cite{Wang15KH,Wang2018GoalDirectedKH}. Consideramos que el estudiado realizado para \KHilogic es fácilmente adaptable a esta lógica; por lo que, siguiendo 
-una estrategia similar, se podría redefinir la noción de bisimulación para que considere características puramente estructurales entre los modelos, 
+Los resultados obtenidos en este trabajo dejan las puertas abiertas a numerosas posibilidades dentro de la familia de lógicas de \textit{Knowing How}. 
+En primera instancia, se podría realizar un desarrollo similar alrededor de la noción de bisimulación de la lógica de \textit{Knowing How} presentada 
+en \cite{Wang15KH,Wang2018GoalDirectedKH} (\KHlogic). Consideramos que el estudiado realizado para \KHilogic es fácilmente adaptable a \KHlogic. Siguiendo 
+la estructura de trabajo de esta tesis, se podría redefinir la noción de bisimulación de \KHlogic para que considere características puramente estructurales de los modelos involucrados, 
 logrando así darle una naturaleza más procedural. También, sería interesante analizar su versión de $\KHiBisim$ y proponer su contracción 
 por bisimulación, donde creemos que algunos lemas fundamentales estudiados en este trabajo también son adaptables a dicha lógica.
 
-Por otro lado, otro trabajo interesante sería el de implementar algunos de los algoritmos presentados en este trabajo. Particularmente, 
+Por otro lado, una tarea que surge naturalmente de este trabajo es la de implementar los algoritmos presentados. Particularmente, 
 la implementación de la contracción por bisimulación sería muy beneficiosa en un contexto en el que se requiera realizar muchas consultas del 
 estilo de model-checking sobre un \ults.
 
-Por último, a partir de los resultados estudiados en \cite{Demri_Fervari_2023} en relación a la lógica de ``Knowing How'' basada en incertidumbre, 
+Por último, a partir de los resultados estudiados en \cite{Demri_Fervari_2023} en relación a la lógica de \textit{Knowing How} basada en incertidumbre, 
 consideramos que es posible generalizar el resultado de complejidad del problema de $\KHiBisim$ para la lógica que se intepreta sobre $\regults$, los 
-cuáles son \ults en donde la relación de indistinguibilidad entre planes de cada agente está dada por un conjunto de autómatas finitos en lugar 
+cuáles son \ults en donde la relación de indistinguibilidad sobre planes de cada agente está dada por un conjunto de autómatas finitos en lugar 
 de conjuntos explícitos de planes. 
-Notar que a un nivel lógico o de teoría de modelos, la clase de modelos $\regults$ es una subclase de los modelos \ults (pues restringen las clases de equivalencia 
-a lenguajes regulares). Sin embargo, a nivel computacional los $\regults$ son más poderosos, dado que permiten representar de forma finita un conjunto 
+Notar que la clase de modelos $\regults$ es una subclase de los modelos \ults (pues restringen las clases de equivalencia 
+a lenguajes regulares). Sin embargo, a nivel computacional los $\regults$ son más poderosos. Estos permiten representar de forma finita un conjunto 
 posiblemente infinito de planes. En \cite{Demri_Fervari_2023}, se demuestra que dado un $\regults$ verificar si el lenguaje de un autómata 
 es fuertemente ejecutable en un nodo es realizable en tiempo polinomial. A su vez, se demuestra que dado un $\regults$ con $A$ un autómata dentro de la relación de indistinguibilidad de 
 un agente, es posible computar en tiempo polinomial $\R_{L(A)}(w)$ para $w$ en el dominio del $\regults$, siendo $L(A)$ el lenguaje aceptado 
-por el autómata $A$.
+por el autómata.
 A partir de estos resultados, conjeturamos que es posible adaptar lo estudiado sobre $\KHiBisim$ para demostrar que su versión para 
 esta lógica sobre $\regults$ también es $\coNPComplete$.
