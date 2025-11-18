@@ -1,13 +1,13 @@
 \chapter{Introducción}
 
 La lógica y las ciencias de la computación han estado en contacto y en constante desarrollo a lo largo de la historia. Desde los años 1930
-con la búsqueda de un procedimiento para determinar mecánicamente la validez de una sentencia matemática hasta 
+con la búsqueda de un procedimiento para determinar mecánicamente la validez de una sentencia matemática, hasta 
 hoy en día donde abunda el uso de métodos formales en áreas de verificación de software e inteligencia artificial, estas dos disciplinas 
 científicas no han dejado de nutrirse mutuamente.
 
 % \medskip
 Como se menciona en \cite{HalpernHIKVV01}, la lógica se ha sumergido exitosamente en numerosas áreas de las ciencias de la computación. 
-Un clásico ejemplo es la rama de la complejidad descriptiva, donde se buscan establecer relaciones entre la complejidad intrínseca 
+Un clásico ejemplo es la rama de la complejidad descriptiva, que busca establecer relaciones entre la complejidad intrínseca 
 de los problemas computacionales y la dificultad de expresar una propiedad en una determinada lógica. Un resultado que evidencia el enorme
 potencial de esta propuesta es el Teorema de Fagin \cite{Fagin}, el cual establece que los problemas computacionales para los que se pueden 
 verificar sus soluciones eficientemente (la clase \NP) son exactamente aquellos que pueden expresarse con una fórmula existencial de segundo 
@@ -19,7 +19,7 @@ lenguajes de consulta de bases de datos y de herramientas de model-checking en v
 También se ha explorado el uso de formalismos lógicos para modelar nociones más abstractas vinculadas al razonamiento y la información.  
 El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
 y razonar formalmente sobre el conocimiento de agentes. De esta forma, podemos expresar propiedades tales como ``Juan sabe que está 
-lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino que 
+lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino 
 también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
 saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?
 % \medskip
@@ -42,9 +42,9 @@ valor de verdad de una proposición;
 otros la noción de ``saber por qué'' (\textit{knowing why}, \cite{KnowingWhy}), en la que se consideran las razones y justificaciones 
 del conocimiento. 
 Por último, la forma del conocimiento en la que nos centramos durante todo este trabajo es la que se enfoca principalmente en las habilidades 
-de los agentes: la noción de ``saber cómo'' (\textit{knowing how}, \cite{Wang15KH,ArecesFSV25}). Esta nos permite formalizar expresiones como: 
-el agente $i$ sabe cómo garantizar la propiedad $\varphi$ cuando se encuentra en una situación en la que se da la propiedad 
-$\psi$. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que conocen y a la forma en la que consiguen 
+de los agentes: la noción de ``saber cómo'' (\textit{knowing how}, \cite{Wang15KH,ArecesFSV25}). Esta nos permite formalizar expresiones como 
+``el agente $i$ sabe cómo garantizar la propiedad $\varphi$ cuando se encuentra en una situación en la que se da la propiedad 
+$\psi$''. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que conocen y a la forma en la que consiguen 
 combinarlas para alcanzar un determinado objetivo. Por este motivo, esta noción provee las bases para la formalización de áreas 
 como \textit{automated planning} dentro del campo de la inteligencia artificial.
 % \medskip
@@ -64,7 +64,7 @@ Nótese que en el contexto de \KHlogic se asume que toda composición de accione
 habilidades del agente en cuestión. Por este motivo, la única situación en la que un agente no sabe cómo lograr un objetivo se da cuando no 
 existe un plan que lo garantice. Sin embargo, podría darse el caso en el que el agente conozca las acciones de un \lts pero no sepa 
 como componerlas para construir un plan adecuado. Más aún, el agente podría ser consciente de la existencia de dos planes distintos pero 
-no tener la capacidad de distinguir los efectos que estos podrían provocar.
+no tener la capacidad de distinguir los efectos que estos podrían provocar. Como ejemplo ilustrativo consideremos un agente que est
 % \medskip
 
 Así es como surge la propuesta de \cite{ArecesFSV25,SaraviaPHD} de una lógica de \textit{Knowing How} basada en la incertidumbre (\KHilogic), 

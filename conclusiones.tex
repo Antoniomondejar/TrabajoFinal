@@ -23,15 +23,17 @@ de detectarse que no son bisimilares.
 
 Finalmente, encaramos el problema de la minimización de modelos para \KHilogic. Siguiendo la estrategia utilizada para el caso de la 
 lógica modal básica, investigamos dos posibles soluciones a partir del estudio de contracciones por \KHilogic-bisimulación. La primera 
-de ellas surge del análisis de las autobisimulaciones. Particularmente, demostramos que la partición de los estados de un \ults a partir 
-de su función de valuación es su autobisimulación máxima. Luego, nuestra primera propuesta de contracción ($\fcont{\model}$) consiste en 
+de ellas surge del análisis de las autobisimulaciones. Particularmente, demostramos que la relación que colapsa los estados de un \ults a partir 
+de su función de valuación ($Z_\model$) es su autobisimulación máxima. Luego, nuestra primera propuesta de contracción ($\fcont{\model}$) consiste en 
 cocientar el dominio del \ults con esta partición y abstraer los planes de mayor relevancia en el \ults a aristas en el modelo contraído. 
-Asimismo, demostramos que dado $\model$, un \ults, su contracción por \KHilogic-bisimulación $\fcont{\model}$ es computable en tiempo 
-poliniomial con respecto a su tamaño. En nuestra segunda propuesta ($\model_\bml$), utilizamos la contracción por \bml-bisimulación. Cada \ults tiene naturalmente un modelo de Kripke asociado, 
-por lo que la estrategia para este enfoque consistió en contraer las componentes asociadas a este modelo de Kripke según la noción de 
-bisimulación de \bml. 
+Esta contracción minimiza la cantidad de estados del \ults; sin embargo, un punto negativo es que la cantidad de aristas puede aumentar.
 
-A su vez, demostramos que ambas contracciones son correctas (producen un \ults bisimilar) y que pueden ser computadas en tiempo 
+En nuestra segunda propuesta ($\model_\bml$), utilizamos la contracción por \bml-bisimulación. Cada \ults tiene naturalmente un modelo de Kripke asociado, 
+por lo que la estrategia para este enfoque consistió en contraer las componentes asociadas a este modelo de Kripke según la noción de 
+bisimulación de \bml. A pesar de no minimizar la cantidad de estados del \ults, la particular virtud de esta propuesta es que existen 
+numerosos algoritmos con excelente complejidad que computan la contracción por \bml-bisimulación.
+
+Demostramos que ambas contracciones son correctas (producen un \ults bisimilar) y que pueden ser computadas en tiempo 
 polinomial con respecto al tamaño del \ults. A pesar de que ninguna de las dos propuestas resulta en una solución cerrada para el problema 
 de la minimización de modelos, ambas proveen interesantes aproximaciones que pueden ser de utilidad en aplicaciones prácticas y que 
 contribuyen al entendimiento del poder expresivo de \KHilogic y la clase de modelos \ults.

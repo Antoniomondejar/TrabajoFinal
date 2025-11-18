@@ -135,7 +135,7 @@ Tomando un camino similar al de \bml, una posible propuesta para la contracción
 es el \ults en el que se tiene como dominio a $\rho_\model$ y 
 se relaciona a las clases de equivalencia $[w], [v] \in \rho_\model$ siempre que $w, v$ están relacionados en $\model$. 
 Por otro lado, la relación de indistinguibilidad sobre planes de cada agente $\S_i$ y el conjunto de acciones $\ACT$ de $\model$ 
-se conservarían. Sin embargo, consideremos el ejemplo presentado en la \Cref{fig:1stproposaloriginal}:
+se conservarían. Sin embargo, consideremos el ejemplo presentado en la \Cref{fig:1stproposaloriginal}.
 
 \begin{figure}[h]
     \hspace{3.4cm}
@@ -214,7 +214,7 @@ un modelo bisimilar.
 
 Otra posible propuesta sería restringir más la relación entre los puntos del modelo contraído. Por ejemplo, relacionar las clases 
 $[w], [v] \in \rho_\model$ cuando para cada $w' \in [w]$ existe $v' \in [v]$ tal que $w'$ y $v'$ están relacionados en el modelo 
-original. Sin embargo, veamos el ejemplo presentado en la \Cref{fig:2ndproposaloriginal}:
+original. Sin embargo, veamos el ejemplo presentado en la \Cref{fig:2ndproposaloriginal}.
 
 \begin{figure}[h]
     \hspace{2.6cm}
@@ -469,7 +469,7 @@ junto con ello, el conjunto de planes conocido por cada agente cambia también. 
 Como mencionamos en la sección anterior, queremos encontrar una contracción que produzca un modelo bisimilar al modelo original pero que conserve,  
 en la mayor medida posible, sus características estructurales. En particular, sería deseable que mantenga el conjunto de acciones básicas y la relación de 
 indistinguibilidad sobre planes de cada agente. Recordando las primeras propuestas analizadas en la sección anterior, notemos que no 
-logramos encontrar una propuestra adecuada a partir de la autobisimulación máxima $A_\model$ que no modifique las componentes 
+logramos encontrar una propuesta adecuada a partir de la autobisimulación máxima $A_\model$ que no modifique las componentes 
 mencionadas. Por lo que pareciera que para encontrar tal contracción debemos considerar otro dominio.  
 
 Notemos que cada \ults de la forma $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ tiene naturalmente un modelo de Kripke
@@ -504,8 +504,8 @@ equivalencia dada por $Z^{\bml}_\model$.
     $(w',v') \in \R_a$.
 
     Como $([w],[v]) \in \R'_a$ existen $w_0 \in [w]$ y $v_0 \in [v]$ tales que $(w_0,v_0)\in \R_a$. Sea $w' \in [w]$, por estar ambos 
-    $w_0$ y $w'$ en $[w]$, existe una \bml-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que por (zig) de $Z$, como 
-    $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
+    $w_0$ y $w'$ en $[w]$, existe una \bml-bisimulación $Z$ tal que $(w_0,w') \in Z$. Pero notemos que por (zig) de \bml-bisimulación, 
+    como $(w_0,v_0) \in \R_a$  entonces existe $v'$ tal que $(w',v') \in \R_a$ y, a su vez, 
     $(v_0,v') \in Z$, es decir, $v' \in [v]$, que es lo que queríamos demostrar.
 \end{demostracion}
 
@@ -530,7 +530,7 @@ adecuada.
 \begin{demostracion}
     Queremos ver que $Z = \{(w,[w]) \mid w \in \W\}$ es una \KHilogic-bisimulación.
     
-    Por definición de la contracción por bisimulación en (\bml) se puede ver que se satisface (Atom). 
+    Por definición de la contracción por bisimulación en \bml se puede ver que se satisface (Atom). 
     Luego, por definición de Z, es fácil ver que (A-zig) y (A-zag) son satisfechas. Demostremos entonces ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}

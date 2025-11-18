@@ -39,7 +39,19 @@
 % \usepackage[font=small,skip=0pt]{caption}
 
 %------------------------------------------------------------------------------------------------
+\newcommand{\blankpagewo}{
+  \clearpage
+  \thispagestyle{empty}
+  \null
+  \clearpage
+}
 
+\newcommand{\blankpagew}{
+  \clearpage
+  % \thispagestyle{empty}
+  \null
+  \clearpage
+}
 
 \usepackage{hyperref}
 
@@ -81,10 +93,18 @@
 
 
 \input{caratula}
+\blankpagewo
+
+\input{agradecimientos}
+\blankpagew
+
+\input{abstract}
+\blankpagew
 
 {\hypersetup{linkcolor=black}%
 \tableofcontents}
-\cleardoublepage
+% \blankpagew
+
 \input{introduccion}
 
 % \section{Marco Teórico: Lógica `Knowing How' Multi-Agente Basada en la Incertidumbre}
