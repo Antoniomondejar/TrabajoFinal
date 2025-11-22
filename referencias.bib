@@ -30,7 +30,7 @@
   pages     = {450--486},
 }
 @book{HandbookModalLogic,
-  author = {Blackburn, Patrick and Benthem, Johan F. A. K. van and Wolter, Frank},
+  author = {Blackburn, Patrick and Benthem, Johan van and Wolter, Frank},
   title = {Handbook of Modal Logic, Volume 3 (Studies in Logic and Practical Reasoning)},
   year = {2006},
   isbn = {0444516905},
@@ -120,7 +120,7 @@
 }
 
 @book{AroraB09,
-author = {Arora, S. and Barak, B.},
+author = {Arora, Sanjeev and Barak, Boaz},
 title = {Computational Complexity: A Modern Approach},
 year = {2009},
 isbn = {0521424267},
@@ -129,8 +129,8 @@ address = {USA},
 edition = {1st}
 }
 @article{GorankoP92,
-  author       = {V. Goranko and
-                  S. Passy},
+  author       = {Valentin Goranko and
+                  Solomon Passy},
   title        = {Using the Universal Modality: Gains and Questions},
   journal      = JLC,
   volume       = {2},
@@ -150,9 +150,9 @@ edition = {1st}
 }
 
 @article{ArecesFH15,
-  author       = {C. Areces and
-                  R. Fervari and
-                  G. Hoffmann},
+  author       = {Carlos Areces and
+                  Raul Fervari and
+                  Guillaume Hoffmann},
   title        = {Relation-changing modal operators},
   journal      =  IGPL,
   volume       = {23},
@@ -162,9 +162,9 @@ edition = {1st}
 }
 
 @article{AucherBG18,
-  author       = {G. Aucher and
-                  J. van Benthem and
-                  D. Grossi},
+  author       = {Guillaume Aucher and
+                  Johan van Benthem and
+                  Davide Grossi},
   title        = {Modal logics of sabotage revisited},
   journal      = JLC,
   volume       = {28},
@@ -215,21 +215,55 @@ doi = {10.1017/S1755020314000343}
 }
 
 @article{KnowingWhy,
-author = {Wang, Yanjing and Studer, Thomas},
-year = {2021},
-month = {02},
-pages = {},
-title = {A Logic of Knowing Why},
-volume = {198},
-journal = {ArXiv: https://arxiv.org/abs/1609.06405},
-doi = {10.1007/s11229-019-02104-0}
+	author = {Chao Xu and Yanjing Wang and Thomas Studer},
+	doi = {10.1007/s11229-019-02104-0},
+	journal = {Synthese},
+	number = {2},
+	pages = {1259--1285},
+	publisher = {Springer Verlag},
+	title = {A Logic of Knowing Why},
+	volume = {198},
+	year = {2021}
 }
+
 
 @book{Hintikka1962,
 	address = {Ithaca, NY, USA},
-	author = {Kaarlo Jaakko Juhani Hintikka},
+	author = {Kaarlo Jaakko and Juhani Hintikka},
 	editor = {},
 	publisher = {Cornell University Press},
 	title = {Knowledge and Belief: An Introduction to the Logic of the Two Notions},
 	year = {1962}
+}
+
+@article{Hennesy-Milner,
+author = {Hennessy, Matthew and Milner, Robin},
+title = {Algebraic laws for nondeterminism and concurrency},
+year = {1985},
+issue_date = {Jan. 1985},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {32},
+number = {1},
+issn = {0004-5411},
+url = {https://doi.org/10.1145/2455.2460},
+doi = {10.1145/2455.2460},
+abstract = {Since a nondeterministic and concurrent program may, in general, communicate repeatedly with its environment, its meaning cannot be presented naturally as an input/output function (as is often done in the denotational approach to semantics). In this paper, an alternative is put forth. First, a definition is given of what it is for two programs or program parts to be equivalent for all observers; then two program parts are said to be observation congruent if they are, in all program contexts, equivalent. The behavior of a program part, that is, its meaning, is defined to be its observation congruence class.The paper demonstrates, for a sequence of simple languages expressing finite (terminating) behaviors, that in each case observation congruence can be axiomatized algebraically. Moreover, with the addition of recursion and another simple extension, the algebraic language described here becomes a calculus for writing and specifying concurrent programs and for proving their properties.},
+journal = {J. ACM},
+month = jan,
+pages = {137–161},
+numpages = {25}
+}
+@article{Fernandez,
+title = {An implementation of an efficient algorithm for bisimulation equivalence},
+journal = {Science of Computer Programming},
+volume = {13},
+number = {2},
+pages = {219-236},
+year = {1990},
+issn = {0167-6423},
+doi = {https://doi.org/10.1016/0167-6423(90)90071-K},
+url = {https://www.sciencedirect.com/science/article/pii/016764239090071K},
+author = {Jean-Claude Fernandez},
+abstract = {We present an efficient algorithm for bisimulation equivalence. Generally, bisimulation equivalence can be tested in O(mn) for a labeled transition system with m transitions and n states. In order to come up with a more efficient algorithm, we establish a relationship between bisimulation equivalence and the relational coarsest partition problem, solved by Paige and Tarjan in O(m log n) time. Given an initial partition and a binary relation, the problem is to find the coarsest partition compatible with them. Computing bisimulation equivalence can be viewed both as an instance and as a generalization of this problem: an instance, because only the universal partition is considered as an initial partition and a generalization since we want to find a partition compatible with a family of binary relations instead of one single binary relation. We describe how we have adapted the Paige-Tarjan algorithm of complexity O(m log n) to minimize labeled transition systems modulo bisimulation equivalence. This algorithm has been implemented in C and is used in Aldébaran, a tool for the verification of concurrent systems.}
 }

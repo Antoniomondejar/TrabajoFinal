@@ -6,7 +6,7 @@ hoy en día donde abunda el uso de métodos formales en áreas de verificación 
 científicas no han dejado de nutrirse mutuamente.
 
 % \medskip
-Como se menciona en \cite{HalpernHIKVV01}, la lógica se ha sumergido exitosamente en numerosas áreas de las ciencias de la computación. 
+Como se menciona en \cite{HalpernHIKVV01}, la lógica ha resultado fundamental en numerosas áreas de las ciencias de la computación. 
 Un clásico ejemplo es la rama de la complejidad descriptiva, que busca establecer relaciones entre la complejidad intrínseca 
 de los problemas computacionales y la dificultad de expresar una propiedad en una determinada lógica. Un resultado que evidencia el enorme
 potencial de esta propuesta es el Teorema de Fagin \cite{Fagin}, el cual establece que los problemas computacionales para los que se pueden 
@@ -18,16 +18,18 @@ lenguajes de consulta de bases de datos y de herramientas de model-checking en v
 
 También se ha explorado el uso de formalismos lógicos para modelar nociones más abstractas vinculadas al razonamiento y la información.  
 El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
-y razonar formalmente sobre el conocimiento de agentes. De esta forma, podemos expresar propiedades tales como ``Juan sabe que está 
+y razonar formalmente sobre el conocimiento de agentes, los cuales modelan entidades autónomas que actúan e interactúan en un determinado escenario. 
+De esta forma, podemos expresar propiedades tales como ``Juan sabe que está 
 lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino 
 también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
-saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?
+saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?, las cuales son
+de interés en disciplinas como la planificación en inteligencia artificial o la teoría de la argumentación.
 % \medskip
 
 La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. Dada la información actual 
 que posee un agente existe una cierta cantidad de mundos posibles que podrían representar el estado actual de los hechos. 
 Luego, un agente \textit{sabe} una propiedad si la misma es cierta en todos los mundos que considera que son posibles. 
-La representación matemática por excelencia de este concepto está dada por los Sistemas de Transición Etiquetada (\lts, por sus siglas en inglés),
+La representación matemática por excelencia de este concepto está dada por los modelos relacionales (o de Kripke),
 los cuales son grafos dirigidos en los que sus estados, etiquetados con un conjunto de variables proposicionales, representan los distintos 
 mundos posibles y una arista $(w,v)$ con etiqueta $i$ determina que en el mundo $w$ el agente $i$ considera posible al mundo $v$.
 De esta forma, es posible representar numerosos sistemas de múltiples agentes interactuando entre sí: jugadores en una partida 
@@ -44,14 +46,16 @@ del conocimiento.
 Por último, la forma del conocimiento en la que nos centramos durante todo este trabajo es la que se enfoca principalmente en las habilidades 
 de los agentes: la noción de ``saber cómo'' (\textit{knowing how}, \cite{Wang15KH,ArecesFSV25}). Esta nos permite formalizar expresiones como 
 ``el agente $i$ sabe cómo garantizar la propiedad $\varphi$ cuando se encuentra en una situación en la que se da la propiedad 
-$\psi$''. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que conocen y a la forma en la que consiguen 
-combinarlas para alcanzar un determinado objetivo. Por este motivo, esta noción provee las bases para la formalización de áreas 
-como \textit{automated planning} dentro del campo de la inteligencia artificial.
+$\psi$''. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que los mismos consideran posibles (o dicho de otra 
+manera, que saben que tienen a su disposición), y a la forma en la que consiguen 
+combinarlas para alcanzar un determinado objetivo. Por este motivo, esta noción puede considerarse como una posibilidad a la hora de 
+formalizar problemas relacionados al razonamiento estratégico y la planificación automática.
 % \medskip
 
 En \cite{Wang15KH,Wang2018GoalDirectedKH} se introduce el lenguaje formal \KHlogic con el objetivo de matematizar 
 las ideas presentadas en relación a la noción de ``saber cómo'', en el contexto de sistemas de un único agente. Como en las primeras 
-lógicas epistémicas, \KHlogic también se interpreta sobre \ltss. Sin embargo, en este contexto las aristas de los \ltss no representan la 
+lógicas epistémicas, \KHlogic también se interpreta sobre modelos relacionales, vistos en este caso como sistemas de transición de estados 
+(\lts por sus siglas en inglés). Sin embargo, en este contexto las aristas de los \ltss no representan la 
 indistinguibilidad del agente sobre los distintos mundos posibles sino que describen los cambios de estado que producen las acciones 
 que este puede ejecutar. De esta forma, una arista $(w,v)$ con etiqueta $a$ indica que cuando el agente 
 se encuentra en el estado $w$ puede ejecutar la acción $a$ para terminar en el estado $v$. Luego, dado un \lts el agente sabe 
@@ -60,16 +64,16 @@ partir de cualquier estado en el que vale $\psi$, lleve únicamente a estados do
 cuando es \textit{fuertemente ejecutable}, concepto que explicaremos en mayor detalle en los próximos capítulos.
 % \medskip
 
-Nótese que en el contexto de \KHlogic se asume que toda composición de acciones está dentro del espectro de 
+Nótese que en el contexto de \KHlogic se asume, por ejemplo, que toda composición de acciones está dentro del espectro de 
 habilidades del agente en cuestión. Por este motivo, la única situación en la que un agente no sabe cómo lograr un objetivo se da cuando no 
-existe un plan que lo garantice. Sin embargo, podría darse el caso en el que el agente conozca las acciones de un \lts pero no sepa 
-como componerlas para construir un plan adecuado. Más aún, el agente podría ser consciente de la existencia de dos planes distintos pero 
-no tener la capacidad de distinguir los efectos que estos podrían provocar.
+existe un plan que lo garantice. Sin embargo, en un escenario más realista podría darse el caso en el que el agente conozca las acciones 
+de un \lts pero no sepa como componerlas para construir un plan adecuado. Más aún, el agente podría ser consciente de la existencia de 
+dos planes distintos pero no tener la capacidad de distinguir los efectos que estos podrían provocar.
 % \medskip
 
 Así es como surge la propuesta de \cite{ArecesFSV25,SaraviaPHD} de una lógica de \textit{Knowing How} basada en la incertidumbre (\KHilogic), 
 en la que la estrategia utilizada para abordar las consideraciones mencionadas es extender los \ltss con una relación de indistinguibilidad sobre 
-planes; de esta forma, la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones y pasa a tenerse en 
+planes. De esta forma, la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones y pasa a tenerse en 
 consideración su percepción sobre las mismas y su capacidad de distinguir los distintos 
 resultados que estas podrían provocar. A su vez, esta propuesta permite la representación de sistemas de múltiples agentes, en donde 
 todos actúan en un mismo contexto pero cada uno cuenta con su propia percepción.
@@ -80,7 +84,7 @@ encuentra presente en todo lenguaje formal: la equivalencia de modelos. Decimos 
 son equivalentes en relación a una lógica cuando satisfacen exactamente las mismas fórmulas. Luego, si la lógica nos permite 
 expresar propiedades relacionadas al \textit{comportamiento} de un modelo, dos modelos serán equivalentes cuando no puedan ser distinguidos 
 por este tipo de propiedades, es decir, cuando tengan el mismo \textit{comportamiento}. Un desafío que surge naturalmente a partir de este 
-concepto es el de caracterizar el poder expresivo de la lógica en cuestión, es decir, la capacidad que tiene para distinguir modelos diferentes. En 
+concepto es el de caracterizar esta noción de manera puramente semántica. En 
 este contexto es donde surgen nociones de equivalencia de modelos que consideran únicamente características estructurales de los mismos;
 evitando así la necesidad de objetos sintácticos, como lo son las fórmulas, para identificar modelos con el mismo comportamiento.
 
@@ -98,13 +102,14 @@ identificados unívocamente por una fórmula proposicional. Esto contradice la e
 requiere de la existencia de objetos sintácticos.
 % \bigskip
 
-En este trabajo contribuimos novedosos aportes al estudio de la noción de bisimulación de 
-\KHilogic. En primera instancia, proponemos una nueva definición para este concepto con el objetivo de otorgarle una 
-naturaleza más algorítmica y mejor alíneada con las bisimulaciones clásicas, las cuales únicamente consideran 
+En este trabajo contribuimos al estudio de la noción de bisimulación de \KHilogic desde un punto de vista computacional. 
+En primera instancia, proponemos una nueva definición para este concepto con el objetivo de otorgarle una 
+naturaleza más algorítmica y mejor alineada con las bisimulaciones clásicas, las cuales únicamente consideran 
 características estructurales de los objetos matemáticos involucrados.
 Luego, estudiamos problemas computacionales relacionados con esta noción. Por un lado, caracterizamos la complejidad de 
 determinar si una relación binaria es una \KHilogic-bisimulación y, por otro lado, la complejidad de determinar la existencia 
-de una \KHilogic-bisimulación entre dos modelos. Por último, encaramos el problema de la minimización de modelos para \KHilogic a partir 
+de una \KHilogic-bisimulación entre dos modelos. En particular, demostramos que los problemas mencionados son \coNPCompletes. Por último, 
+abordamos el problema de la minimización de modelos para \KHilogic a partir 
 de la definición de contracciones por \KHilogic-bisimulación.
 Este análisis computacional no solo es realizado con el objetivo de determinar la factibilidad de este lenguaje formal en aplicaciones 
 prácticas sino que también para expandir el entendimiento a nivel conceptual de los objetos matemáticos 

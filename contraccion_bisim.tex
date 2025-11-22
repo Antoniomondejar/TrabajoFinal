@@ -10,10 +10,9 @@
 
 Continuando con nuestro análisis de las propiedades computacionales de la noción de bisimulación propuesta, en este 
 capítulo estudiaremos la contracción por bisimulación para \KHilogic.
-
 Un problema recurrente en la literatura de las lógicas modales, y de las ciencias de la computación en general, es el de la minimización de modelos. 
 Al considerar una cierta clase de modelos (ya sean autómatas, grafos dirigidos, etc.) y habiendo definido una noción de equivalencia 
-entre los mismos, el problema de minimización de modelos consiste en: encontrar un procedimiento que, a partir de un modelo, construya 
+entre los mismos, el problema de minimización de modelos consiste en encontrar un procedimiento que, a partir de un modelo, construya 
 otro de tamaño mínimo % o mínimo?
 que sea equivalente respecto a la noción previamente mencionada. Este problema resulta de gran interés computacional, ya que permite 
 obtener un modelo de menor tamaño que mantiene las propiedades estructurales de mayor importancia; de esta forma es posible utilizar 
@@ -42,23 +41,22 @@ nodos de dichas clases que se relacionan en el modelo original.
 Finalmente, en \cite{HandbookModalLogic} se establece que dicha contracción satisface que para cada nodo del modelo original su modelo 
 punteado asociado es bisimilar al modelo punteado asociado a su clase equivalencia y, a su vez, es de tamaño mínimo entre todos los modelos 
 bisimilares.
-Por otro lado, en \cite{Paige&TarjanContraction} Paige y Tarjan presentan un algoritmo que permite encontrar la contracción por bisimulación de 
+Por otro lado, en \cite{Fernandez} se presenta un algoritmo que permite encontrar la contracción por bisimulación de 
 un modelo finito en una cantidad $\bigO(m * \log (n))$ de pasos, siendo $n$ la cantidad de nodos del modelo y $m$ la cantidad de aristas 
-del mismo.
+del mismo, basado en el algoritmo presentado por Paige y Tarjan en \cite{Paige&TarjanContraction} para computar la \textit{partición relacional 
+más gruesa}.
 Habiendo mencionado la ruta de trabajo seguida para \bml, realizaremos un estudio similar para \KHilogic.
 
 \section{Primera propuesta de contracción}
 
-En primera instancia, definiremos lo que es una autobisimulación para \KHilogic.
+En primera instancia, definiremos la noción de autobisimulación para \KHilogic.
 
 \begin{definicion}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults, y $Z \subseteq \W \times \W$ entonces decimos que
-    \begin{center}
-        $Z$ es una autobisimulación de $\model$ si y sólo si $Z$ es una \KHilogic-bisimulación        
-    \end{center}
+    $Z$ es una autobisimulación de $\model$ si y sólo si $Z$ es una \KHilogic-bisimulación        
 \end{definicion}
 
-Luego, recordando la definición de $A_\model$ y de $\rho_\model$ introducida en \ref{def:Am}, presentamos el siguiente teorema 
+Luego, recordando la definición de $A_\model$ y de $\rho_\model$ introducida en la \Cref{def:Am}, presentamos el siguiente teorema 
 que caracteriza la autobisimulación máxima de un \ults.
 
 \begin{teorema}
@@ -71,13 +69,13 @@ que caracteriza la autobisimulación máxima de un \ults.
 \end{teorema}
 
 \begin{demostracion}
-    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults, probaremos ambas propiedades por separado:
+    Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults, demostraremos ambas propiedades por separado:
 
     \begin{itemize}
-        \item Queremos ver que $A_\model$ es una autobisimulación de $\model$, para ello debemos verificar que:
+        \item Queremos ver que $A_\model$ es una autobisimulación de $\model$, para ello debemos verificar cada una de las condiciones:
         \begin{itemize}
             \item (Atom) Dado $(w,v) \in A_\model$, por definición de $A_\model$, se cumple que $\V(w) = \V(v)$.
-            \item (A-Zig) Notemos que $A_\model$ es una relación de equivalencia, luego para cada $w\in \W$ se cumple que $(w,w) \in A_\model$.
+            \item (A-zig) Notemos que $A_\model$ es una relación de equivalencia, luego para cada $w\in \W$ se cumple que $(w,w) \in A_\model$.
             \item (A-zag) Podemos utilizar el mismo argumento que en (A-zig) para demostrar este caso.
             \item ($\khi$-zig) Sea $U \subseteq \W$ tal que para cada $s \in \rho_\model$ se cumple que $s \cap U = \emptyset$ o 
             $s \subseteq U$, si $U \ultsExecAgi T$ para algún $T \subseteq \W$, entonces existe $T' \subseteq \W$ tal que
@@ -115,7 +113,6 @@ que caracteriza la autobisimulación máxima de un \ults.
         Luego $A_\model$ es una autobisimulación de $\model$.
         
         \item Queremos ver que dada $Z \subseteq \W \times \W$ autobisimulación de $\model$, entonces $Z \subseteq A_\model$.
-        
         Supongamos que no es cierto, es decir, existe $Z \subseteq \W \times \W$ autobisimulación de $\model$ tal que hay 
         $w,v \in \W$ que cumplen que $(w,v) \in Z$ y $(w,v) \notin A_\model$. 
         Como $Z$ es una autobisimulación entonces satisface (Atom), es decir, $\V(w) = \V(v)$. Pero notemos que por definición de 
@@ -329,7 +326,10 @@ conjunto de acciones y la relación de indistinguibilidad sobre planes de cada a
         \end{itemize}
     \end{center}
 \end{definicion}
-    
+
+Como la lógica no permite hablar explícitamente sobre los planes disponibles para un agente, es posible trabajar con abstracciones de los 
+mismos, motivo por el cuál esta propuesta tiene sentido.
+
 Una vez presentada la contracción nos gustaría asegurarnos que, efectivamente, construye un modelo bisimilar. Para ello demostraremos el 
 siguiente teorema.
 
@@ -457,7 +457,7 @@ el siguiente resultado.
     también es realizable en tiempo polinomial. Finalmente, $\fcont{\model}$ es computable en tiempo polinomial.
 \end{demostracion}
 
-Hemos presentado una contracción por bisimulación para \KHilogic la cuál produce un modelo bisimilar a su modelo asociado y, además, 
+Hemos presentado una contracción por bisimulación para \KHilogic que produce un modelo bisimilar a su modelo asociado y, además, 
 es computable eficientemente. Sin embargo, una observación que surge al analizar esta propuesta es que la contracción definida difiere estructuralmente, en 
 forma signicativa, con respecto al modelo original. 
 Naturalmente, al modificar el conjunto de acciones atómicas del modelo el entorno de habilidades de los agentes cambia por completo y, 
@@ -610,10 +610,9 @@ adecuada.
     para cada $w \in \W$.
 \end{demostracion}
 
-Como mencionamos al principio de este capítulo, en \cite{Paige&TarjanContraction} 
-Paige y Tarjan presentan un algoritmo para computar la contracción por \bml-bisimulación en $\bigO(m*\log(n))$, donde $n$ son la cantidad 
-de nodos del modelo y $m$ la cantidad de aristas del mismo. Teniendo esto en 
-consideración, podemos concluir que esta segunda propuesta de contracción es adecuada y computable eficientemente.
+Como mencionamos al principio de este capítulo, en \cite{Fernandez} se presenta un algoritmo para computar la contracción por 
+\bml-bisimulación en $\bigO(m*\log(n))$, donde $n$ son la cantidad de nodos del modelo y $m$ la cantidad de aristas del mismo. 
+Teniendo esto en consideración, podemos concluir que esta segunda propuesta de contracción es adecuada y computable eficientemente.
 
 % \section{Tercera Propuesta de Contracción}
 
@@ -676,7 +675,7 @@ de variables proposicionales para los cuales existe una \bml-fórmula que los di
 nodos y, por lo tanto, colapsaría una menor cantidad de estados que $Z_\model$. Sin embargo, esta propuesta no deja de tener varios
 puntos de interes: en primer lugar, la cantidad de aristas de $\model_\bml$ es siempre menor o igual que las de $\model$, lo cual no está
 garantizado en nuestra primera propuesta; por otro lado, existen algoritmos sumamente eficientes con excelentes 
-implementaciones que computan $\model_\bml$, lo que resulta de gran utilidad ya que permite obtener a partir de pocos 
+implementaciones que computan $\model_\bml$ \cite{Fernandez}, lo que resulta de gran utilidad ya que permite obtener a partir de pocos 
 recursos computacionales un modelo lógicamente equivalente y de menor tamaño.
 
 Más aún, esta propuesta de contracción a partir de la noción de bisimulación propia de \bml no es una estrategia que funcione en toda lógica 

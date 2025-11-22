@@ -2,7 +2,7 @@
 
 \section{Conclusiones}
 
-En este trabajo contribuimos novedosos aportes al estudio de la noción de bisimulación de \KHilogic. En primer lugar, propusimos una nueva 
+En este trabajo presentamos novedosos aportes al estudio de la noción de bisimulación de \KHilogic. En primer lugar, propusimos una nueva 
 definición para este concepto. Para ello, caracterizamos los conjuntos proposicionalmente definibles del dominio de un \ults, lo que nos 
 aportó una forma intuitiva de redefinir las cláusulas ($\khi$-zig) y ($\khi$-zag) de la definición presentada en \cite{ArecesFSV25,SaraviaPHD}.
 
@@ -21,7 +21,7 @@ dos \ultss (\KHiBisim) y, lo mismo hicimos para la versión punteada de este pro
 algoritmo propuesto para \CBisim para que compute una fórmula de tamaño polinomial que distingue a los \ultss involucrados en caso 
 de detectarse que no son bisimilares.
 
-Finalmente, encaramos el problema de la minimización de modelos para \KHilogic. Siguiendo la estrategia utilizada para el caso de la 
+Finalmente, abordamos el problema de la minimización de modelos para \KHilogic. Siguiendo la estrategia utilizada para el caso de la 
 lógica modal básica, investigamos dos posibles soluciones a partir del estudio de contracciones por \KHilogic-bisimulación. La primera 
 de ellas surge del análisis de las autobisimulaciones. Particularmente, demostramos que la relación que colapsa los estados de un \ults a partir 
 de su función de valuación ($Z_\model$) es su autobisimulación máxima. Luego, nuestra primera propuesta de contracción ($\fcont{\model}$) consiste en 
@@ -44,8 +44,9 @@ Los resultados obtenidos en este trabajo dejan las puertas abiertas a numerosas 
 En primera instancia, se podría realizar un desarrollo similar alrededor de la noción de bisimulación de la lógica de \textit{Knowing How} presentada 
 en \cite{Wang15KH,Wang2018GoalDirectedKH} (\KHlogic). Consideramos que el estudiado realizado para \KHilogic es fácilmente adaptable a \KHlogic. Siguiendo 
 la estructura de trabajo de esta tesis, se podría redefinir la noción de bisimulación de \KHlogic para que considere características puramente estructurales de los modelos involucrados, 
-logrando así darle una naturaleza más procedural. También, sería interesante analizar su versión de $\KHiBisim$ y proponer su contracción 
-por bisimulación, donde creemos que algunos lemas fundamentales estudiados en este trabajo también son adaptables a dicha lógica.
+logrando así darle una naturaleza más procedural. Además, conjeturamos que a partir de la adaptación de algunos lemas fundamentales estudiados 
+en este trabajo y los resultados de complejidad obtenidos en \cite{Demri_Fervari_2023}, es posible demostrar que tanto $\CBisim$ como 
+$\KHiBisim$ y $\PKHiBisim$ resultan $\PSPACECompletes$ para sus versiones en \KHlogic.  
 
 Por otro lado, una tarea que surge naturalmente de este trabajo es la de implementar los algoritmos presentados. Particularmente, 
 la implementación de la contracción por bisimulación sería muy beneficiosa en un contexto en el que se requiera realizar muchas consultas del 

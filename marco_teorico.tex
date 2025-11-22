@@ -1,9 +1,9 @@
 \chapter{Preliminares: Lógica de Knowing How basada en incertidumbre}
 En este capítulo introduciremos un enfoque para modelar el concepto de \textit{saber cómo}, presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
 lógica previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
-representado en Sistemas de Transición Etiquetada (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estados 
+representado en Sistemas de Transición Etiquetada (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estado 
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
-su disposición en un determinado estado, sino que también por la composición de las mismas. A las composiciones de acciones las 
+su disposición en un determinado estado, sino que también por la composición de las mismas. A las secuencias de acciones las 
 llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
 a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en dicho estado.
 
@@ -27,7 +27,6 @@ debe eventualmente abrir el horno para verificar si el proceso de horneado ya es
 Es así como estos ejemplos motivan una representación más general sobre el conocimiento de un agente, tomando en consideración no solo las habilidades con las que dispone sino 
 también su capacidad de distinguir diferentes planes. A su vez, esto permite una representación para múltiples agentes, en la que todos los agentes disponen de las mismas acciones 
 pero cada uno tiene su propia interpretación de los efectos de las mismas, así como su propia habilidad para distinguir planes diferentes.
-
 Luego, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
 relación de indistinguibilidad sobre planes para cada agente.
 
@@ -45,7 +44,7 @@ y a $\AGT$ un conjunto finito no vacío de nombres de agentes.
     \begin{center}
         $\varphi ::= p \mid \neg \varphi \mid \varphi \vee \varphi \mid \kh_i(\varphi,\varphi)$,
     \end{center}
-    donde $p \in \PROP$ e $i \in \AGT$. Las constantes y demás operadores booleanos son definidas de la forma usual. 
+    donde $p \in \PROP$ e $i \in \AGT$. Las constantes y demás operadores Booleanos son definidas de la forma usual. 
     Las fórmulas de la forma $\kh_i(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo lograr $\varphi$''.
 \end{definicion}
 
@@ -103,7 +102,7 @@ dadas por la función de valuación $\V$ y las aristas entre dos nodos estarán 
         \item $\ACT = \{a, b\}$.
     \end{itemize}
 
-    Su representación gráfica es \Cref{fig:lts}:
+    Su representación gráfica se introduce en \Cref{fig:lts}.
     \begin{figure}[h]
         \centering
         \begin{tikzpicture}
@@ -150,7 +149,7 @@ entre planes de cada agente.
 
 \begin{ejemplo}\label{ejemplo:ults}
     Siguiendo el \Cref{ejemplo:lts} y considerando $\AGT = \{i\}$, la representación gráfica 
-    de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ es \Cref{fig:ults}:
+    de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ se introduce en \Cref{fig:ults}.
     \begin{figure}[h]
         \hspace{2.3cm}
         \begin{tikzpicture}
@@ -274,7 +273,7 @@ Ahora, estamos en condiciones de presentar la relación de satisfacibilidad que 
                                                        \end{minipage}
     \end{tabular}
     \end{nscenter}
-    donde $\truthset{\modults}{\varphi} \eqdef \{w \in \W \mid \modults,w \models \varphi\}$. El conjunto de planes $\pi$ en la claúsula semántica de $\khi(\psi,\varphi)$ es llamado
+    donde $\truthset{\modults}{\chi} \eqdef \{w \in \W \mid \modults,w \models \chi\}$. El conjunto de planes $\pi$ en la claúsula semántica de $\khi(\psi,\varphi)$ es llamado
     el testigo de $\khi(\psi,\varphi)$ en $\modults$.
 \end{definicion}
 
@@ -484,7 +483,6 @@ que se piden sobre una relación binaria para ser considerada una \KHilogic-bisi
     
     Realizando un análisis similar sobre los conjuntos proposicionalmente definibles del dominio de $\modults'$, se puede ver que $Z$ también 
     satisface ($\khi$-zag).
-    
     Por lo que podemos concluir que $Z$ es una \KHilogic-bisimulación. Más aún, analizando los elementos de $Z$, podemos decir que 
     $\modults,w_j \bisim \modults',w_j'$ para cada $1 \leq j \leq 4$. 
 \end{ejemplo}
@@ -516,7 +514,7 @@ a partir de propiedades puramente estructurales de los mismos.
 
 En \cite[Sección 2]{FervariVQW21} se presenta un contraejemplo que atestigua que la recíproca del \Cref{thm:bisim-implies-equivalence} 
 no es cierta para cualquier par de modelos. Un problema ampliamente estudiado en la literatura de las lógicas modales es el de analizar 
-en qué clases de modelos vale la recíproca del teorema. Dichas clases son conocidas como clases de Hennessy-Milner.
+en qué clases de modelos vale la recíproca del teorema. Dichas clases son conocidas como clases de Hennessy-Milner \cite{Hennesy-Milner}.
 En \cite{ArecesFSV25,SaraviaPHD}, se demuestra que la clase de \ults finitos (en el sentido de que tienen dominios finitos) es una clase 
 de Hennessy-Milner, es decir, satisface la recíproca de \Cref{thm:bisim-implies-equivalence}.
 
@@ -546,16 +544,13 @@ procedimiento estará decidiendo a la vez equivalencia lógica entre los \ultss 
 A lo largo de este trabajo, analizaremos la complejidad computacional de problemas relacionados con la noción de bisimulación. 
 Por ello, vale la pena mencionar algunos resultados estudiados en \cite{ArecesFSV25,SaraviaPHD} referentes a la lógica presentada en este 
 capítulo. 
-
 A la hora de realizar un estudio computacional de una lógica, los dos problemas de decisión fundamentales a analizar son los de 
 verificación de modelos (model-checking) y satisfacibilidad ($\SAT$).
-
 El problema de model-checking se formula como ``dado un modelo y una fórmula de la lógica, decidir si el modelo la satisface''. Por otro lado, 
 $\SAT$ se formula como ``dada una fórmula de la lógica, decidir si existe un modelo que la satisfaga''. 
 
 Estos problemas han sido estudiados a lo largo de los años en numerosas lógicas y son centrales, no solo para la lógica computacional, sino que 
 también para la teoría de la complejidad computacional en general. 
-
 Para la lógica proposicional, el problema de model-checking está en la clase $\Poly$, mientras que $\SAT$ es $\NPComplete$ 
 \cite[Capítulo 2, Sección 3]{Goldreich_2008}. Por otro lado, en la lógica modal básica tenemos que model-checking también 
 está en $\Poly$ pero $\SAT$ es $\PSPACEComplete$ \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
@@ -579,6 +574,6 @@ sobre los problemas de decisión mencionados:
     $\SAT$ para \KHilogic es $\NPComplete$.
 \end{teorema}
 
-Lo que nos dice que ambos problemas son potencialmente más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a 
+Los teoremas enunciados nos dicen que ambos problemas son potencialmente más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a 
 su versión para \KHlogic. En esta tesis intentaremos completar la perspectiva algorítmica y 
 computacional de \KHilogic, analizando diferentes problemas relativos a la comparación de modelos mediante bisimulación para \KHilogic. 
