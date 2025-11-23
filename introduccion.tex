@@ -79,8 +79,11 @@ resultados que estas podrían provocar. A su vez, esta propuesta permite la repr
 todos actúan en un mismo contexto pero cada uno cuenta con su propia percepción.
 % \medskip
 
-Una vez presentado el contexto lógico en el que se desarrolla este trabajo, introduciremos un concepto crucial que se 
-encuentra presente en todo lenguaje formal: la equivalencia de modelos. Decimos que dos modelos 
+El estudio sistemático de propiedades de la lógica \KHilogic ya fue realizado en \cite{ArecesFSV25,SaraviaPHD}, así como también una 
+justificación exhaustiva de las decisiones tomadas a la hora de diseñarla. Entre las propiedades investigadas, aparece un análisis de su 
+poder expresivo. En general, el poder expresivo de una lógica se mide en términos de su capacidad para distinguir modelos con diferentes 
+características estructurales. En este contexto, se vuelve necesario definir una noción de equivalencia de 
+modelos para determinar hasta qué punto la lógica en cuestión considera a dos modelos iguales. Decimos que dos modelos 
 son equivalentes en relación a una lógica cuando satisfacen exactamente las mismas fórmulas. Luego, si la lógica nos permite 
 expresar propiedades relacionadas al \textit{comportamiento} de un modelo, dos modelos serán equivalentes cuando no puedan ser distinguidos 
 por este tipo de propiedades, es decir, cuando tengan el mismo \textit{comportamiento}. Un desafío que surge naturalmente a partir de este 
@@ -105,12 +108,43 @@ requiere de la existencia de objetos sintácticos.
 En este trabajo contribuimos al estudio de la noción de bisimulación de \KHilogic desde un punto de vista computacional. 
 En primera instancia, proponemos una nueva definición para este concepto con el objetivo de otorgarle una 
 naturaleza más algorítmica y mejor alineada con las bisimulaciones clásicas, las cuales únicamente consideran 
-características estructurales de los objetos matemáticos involucrados.
+características estructurales de los objetos matemáticos involucrados. Además, demostramos que nuestra propuesta satisface las propiedades 
+esperadas de correctitud.
 Luego, estudiamos problemas computacionales relacionados con esta noción. Por un lado, caracterizamos la complejidad de 
-determinar si una relación binaria es una \KHilogic-bisimulación y, por otro lado, la complejidad de determinar la existencia 
-de una \KHilogic-bisimulación entre dos modelos. En particular, demostramos que los problemas mencionados son \coNPCompletes. Por último, 
+determinar si una relación binaria es una bisimulación y, por otro lado, la complejidad de decidir la existencia 
+de una bisimulación entre dos modelos. En particular, demostramos que los problemas mencionados son \coNPCompletes. Por último, 
 abordamos el problema de la minimización de modelos para \KHilogic a partir 
-de la definición de contracciones por \KHilogic-bisimulación.
+de la definición de contracciones por bisimulación.
 Este análisis computacional no solo es realizado con el objetivo de determinar la factibilidad de este lenguaje formal en aplicaciones 
 prácticas sino que también para expandir el entendimiento a nivel conceptual de los objetos matemáticos 
 considerados y, de esta manera, fortalecer el argumento a favor del estudio de aspectos computacionales en ámbitos propios de la lógica.
+
+\bigskip\bigskip
+\ssparagraph{\Large{Estructura del Trabajo}}
+\bigskip
+
+En el \Cref{ch:marco-teorico} presentamos la Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic) introducida en \cite{ArecesFSV25,SaraviaPHD}. 
+Primero, introducimos su sintaxis y semántica; para ello presentamos la gramática que define las fórmulas que la componen y, luego, 
+los modelos sobre los que se interpreta junto con algunas convenciones notacionales. A continuación, presentamos la noción de bisimulación 
+definida para esta lógica junto con sus principales propiedades y ejemplos de modelos bisimilares. Finalmente, terminamos 
+el capítulo mencionando algunos de los principales resultados referidos a la complejidad computacional de \KHilogic.
+
+En el \Cref{ch:redef-bisim} proponemos una nueva definición de bisimulación para \KHilogic. En primer lugar, caracterizamos los 
+conjuntos proposicionalmente definibles del dominio de un modelo a partir de su función de valuación, lo que nos permite establecer una correspondencia 
+con la anterior definición de bisimulación y, de esta manera, demostrar el Teorema de Invarianza por Bisimulación para la nueva definición.  
+Luego, fortalecemos la caracterización de los conjuntos proposicionalmente definibles para la clase de modelos con dominio finito, lo que 
+nos permite demostrar que esta clase satisface la propiedad Hennessy-Milner con respecto a la nueva definición. A su vez, a partir de este 
+fortalecimiento determinamos que el problema de definibilidad para \KHilogic está en la clase de complejidad \Poly.
+
+En el \Cref{ch:khi-bisim} estudiamos problemas computacionales relacionados con la noción de bisimulación. En primera instancia, demostramos 
+que el problema de determinar si una relación binaria es una bisimulación es \coNPComplete. Para ello, presentamos un algoritmo eficiente de 
+verificación de certificados que decide su complemento y, a su vez, reducimos polinomialmente el problema de decidir si una fórmula 
+proposicional en forma disyuntiva normal es una tautología. Luego, extendemos este resultado al problema de decidir la existencia de una 
+bisimulación entre dos modelos y a la versión punteada del mismo. Por último, presentamos una forma de modificar el algoritmo propuesto 
+en este capítulo para que sea capaz de computar una fórmula de tamaño polinomial que distingue a los modelos recibidos por input en caso de 
+no ser bisimilares. 
+
+En el \Cref{ch:contraccion} abordamos el problema de minimización de modelos para \KHilogic. 
+
+En el \Cref{ch:conclusiones} presentamos algunas conclusiones generales junto con una recapitulación de lo estudiado a lo largo del trabajo.
+También, mencionamos posibles líneas de investigación a futuro que surgen naturalmente de los resultados obtenidos en esta tesis.
