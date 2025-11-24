@@ -22,7 +22,7 @@ y razonar formalmente sobre el conocimiento de agentes, los cuales modelan entid
 De esta forma, podemos expresar propiedades tales como ``Juan sabe que está 
 lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino 
 también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
-saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?, las cuales son
+saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?, las cuales resultan
 de interés en disciplinas como la planificación en inteligencia artificial o la teoría de la argumentación.
 % \medskip
 
@@ -48,7 +48,7 @@ de los agentes: la noción de ``saber cómo'' (\textit{knowing how}, \cite{Wang1
 ``el agente $i$ sabe cómo garantizar la propiedad $\varphi$ cuando se encuentra en una situación en la que se da la propiedad 
 $\psi$''. En esta propuesta, las habilidades de los agentes están sujetas a las acciones que los mismos consideran posibles (o dicho de otra 
 manera, que saben que tienen a su disposición), y a la forma en la que consiguen 
-combinarlas para alcanzar un determinado objetivo. Por este motivo, esta noción puede considerarse como una posibilidad a la hora de 
+combinarlas para alcanzar un determinado objetivo. Por este motivo, esta noción es considerada a la hora de 
 formalizar problemas relacionados al razonamiento estratégico y la planificación automática.
 % \medskip
 
@@ -66,7 +66,7 @@ cuando es \textit{fuertemente ejecutable}, concepto que explicaremos en mayor de
 
 Nótese que en el contexto de \KHlogic se asume, por ejemplo, que toda composición de acciones está dentro del espectro de 
 habilidades del agente en cuestión. Por este motivo, la única situación en la que un agente no sabe cómo lograr un objetivo se da cuando no 
-existe un plan que lo garantice. Sin embargo, en un escenario más realista podría darse el caso en el que el agente conozca las acciones 
+existe un plan que lo garantice. Sin embargo, en un escenario más realista, podría darse el caso en el que el agente conozca las acciones 
 de un \lts pero no sepa como componerlas para construir un plan adecuado. Más aún, el agente podría ser consciente de la existencia de 
 dos planes distintos pero no tener la capacidad de distinguir los efectos que estos podrían provocar.
 % \medskip
@@ -95,7 +95,12 @@ Para el caso de los lenguajes modales, la noción de \textit{bisimulación}\cite
 tiene su propia definición, la mayoría comparte la misma idea general: una bisimulación es una relación binaria entre 
 los dominios de dos \ltss en la que dos estados se relacionan sólo si satisfacen ciertas condiciones relacionadas a la 
 estructura de los \ltss en cuestión. Por su lado, las condiciones requeridas en cada definición de bisimulación se eligen con el objetivo 
-principal de garantizar que todo par de \ltss bisimilares es también un par de \ltss lógicamente equivalentes.
+principal de garantizar que todo par de \ltss bisimilares es también un par de \ltss lógicamente equivalentes. En contextos de aplicación 
+práctica de las lógicas modales, como la verificación de software, ciertos problemas computacionales relacionados con esta noción 
+se tornan cruciales. En particular, al utilizar \ltss para representar sistemas de computación, problemas como el de verificar si dos 
+\ltss son bisimilares o el de minimizar un \lts (encontrar el \lts de tamaño mínimo que sea lógicamente equivalente) permiten determinar 
+cuando dos sistemas satisfacen las mismas propiedades y obtener 
+una representación de tamaño mínimo de un sistema que mantiene las características estructurales de mayor relevancia.  
 
 La noción de bisimulación para \KHlogic se presenta en \cite{FervariVQW21}. Posteriormente, en \cite{ArecesFSV25,SaraviaPHD} se 
 extiende esta definición para \KHilogic donde se considera la relación de indistinguibilidad entre planes de los agentes introducida 
@@ -120,13 +125,13 @@ prácticas sino que también para expandir el entendimiento a nivel conceptual d
 considerados y, de esta manera, fortalecer el argumento a favor del estudio de aspectos computacionales en ámbitos propios de la lógica.
 
 \bigskip\bigskip
-\ssparagraph{\Large{Estructura del Trabajo}}
+\ssparagraph{\Large{Estructura del trabajo}}
 \bigskip
 
-En el \Cref{ch:marco-teorico} presentamos la Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic) introducida en \cite{ArecesFSV25,SaraviaPHD}. 
-Primero, introducimos su sintaxis y semántica; para ello presentamos la gramática que define las fórmulas que la componen y, luego, 
+En el \Cref{ch:marco-teorico} presentamos la Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic). 
+Primero, introducimos su sintaxis y semántica; para ello presentamos la gramática que define las fórmulas que la componen y 
 los modelos sobre los que se interpreta junto con algunas convenciones notacionales. A continuación, presentamos la noción de bisimulación 
-definida para esta lógica junto con sus principales propiedades y ejemplos de modelos bisimilares. Finalmente, terminamos 
+definida para esta lógica junto con sus principales propiedades. Finalmente, terminamos 
 el capítulo mencionando algunos de los principales resultados referidos a la complejidad computacional de \KHilogic.
 
 En el \Cref{ch:redef-bisim} proponemos una nueva definición de bisimulación para \KHilogic. En primer lugar, caracterizamos los 
@@ -144,7 +149,11 @@ bisimulación entre dos modelos y a la versión punteada del mismo. Por último,
 en este capítulo para que sea capaz de computar una fórmula de tamaño polinomial que distingue a los modelos recibidos por input en caso de 
 no ser bisimilares. 
 
-En el \Cref{ch:contraccion} abordamos el problema de minimización de modelos para \KHilogic. 
+En el \Cref{ch:contraccion} abordamos el problema de minimización de modelos para \KHilogic, para el cual presentamos dos propuestas de 
+contracción por bisimulación. La primera de ellas surge de la caracterización de la máxima autobisimulación de un modelo y, la segunda 
+se construye a partir de la contracción por bisimulación clásica de la Lógica Modal Básica. Para ambas propuestas demostramos los 
+resultados esperados de correctitud y establecemos que son computables en tiempo polinomial. Por último, terminamos este capítulo con 
+un análisis sobre las características de cada propuesta junto ejemplos que evidencian la naturaleza de ambas.
 
 En el \Cref{ch:conclusiones} presentamos algunas conclusiones generales junto con una recapitulación de lo estudiado a lo largo del trabajo.
 También, mencionamos posibles líneas de investigación a futuro que surgen naturalmente de los resultados obtenidos en esta tesis.
