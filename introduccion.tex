@@ -21,7 +21,7 @@ El ejemplo que constituye las bases teóricas en las que surge este trabajo es e
 y razonar formalmente sobre el conocimiento de agentes, los cuales modelan entidades autónomas que actúan e interactúan en un determinado escenario. 
 De esta forma, podemos expresar propiedades tales como ``Juan sabe que está 
 lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino 
-también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el analisis de preguntas como: ¿Qué necesita 
+también del conocimiento de Juan acerca del hecho. Así, las lógicas epistémicas proveen una base para el análisis de preguntas como: ¿Qué necesita 
 saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca de los demás agentes para convencerlos de un argumento?, las cuales resultan
 de interés en disciplinas como la planificación en inteligencia artificial o la teoría de la argumentación.
 % \medskip
@@ -33,7 +33,7 @@ La representación matemática por excelencia de este concepto está dada por lo
 los cuales son grafos dirigidos en los que sus estados, etiquetados con un conjunto de variables proposicionales, representan los distintos 
 mundos posibles y una arista $(w,v)$ con etiqueta $i$ determina que en el mundo $w$ el agente $i$ considera posible al mundo $v$.
 De esta forma, es posible representar numerosos sistemas de múltiples agentes interactuando entre sí: jugadores en una partida 
-de poker, usuarios comunicándose en una red social, participantes de un debate, entre otros.
+de póker, usuarios comunicándose en una red social, participantes de un debate, entre otros.
 % \medskip
 
 Las propuestas clásicas de lógicas epistémicas consideran el conocimiento de los agentes en la forma de ``saber qué'' (\textit{knowing that}, \cite{Hintikka1962}), 
@@ -67,11 +67,11 @@ cuando es \textit{fuertemente ejecutable}, concepto que explicaremos en mayor de
 Nótese que en el contexto de \KHlogic se asume, por ejemplo, que toda composición de acciones está dentro del espectro de 
 habilidades del agente en cuestión. Por este motivo, la única situación en la que un agente no sabe cómo lograr un objetivo se da cuando no 
 existe un plan que lo garantice. Sin embargo, en un escenario más realista, podría darse el caso en el que el agente conozca las acciones 
-de un \lts pero no sepa como componerlas para construir un plan adecuado. Más aún, el agente podría ser consciente de la existencia de 
-dos planes distintos pero no tener la capacidad de distinguir los efectos que estos podrían provocar.
+de un \lts pero no sepa cómo componerlas para construir un plan adecuado. Más aún, el agente podría ser consciente de la existencia de 
+dos planes distintos pero no tener la capacidad de distinguir los efectos que estos provocan.
 % \medskip
 
-Así es como surge la propuesta de \cite{ArecesFSV25,SaraviaPHD} de una lógica de \textit{Knowing How} basada en la incertidumbre (\KHilogic), 
+Así es como surge la propuesta de \cite{ArecesFSV25,SaraviaPHD} de la Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic), 
 en la que la estrategia utilizada para abordar las consideraciones mencionadas es extender los \ltss con una relación de indistinguibilidad sobre 
 planes. De esta forma, la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones y pasa a tenerse en 
 consideración su percepción sobre las mismas y su capacidad de distinguir los distintos 
@@ -87,8 +87,8 @@ modelos para determinar hasta qué punto la lógica en cuestión considera a dos
 son equivalentes en relación a una lógica cuando satisfacen exactamente las mismas fórmulas. Luego, si la lógica nos permite 
 expresar propiedades relacionadas al \textit{comportamiento} de un modelo, dos modelos serán equivalentes cuando no puedan ser distinguidos 
 por este tipo de propiedades, es decir, cuando tengan el mismo \textit{comportamiento}. Un desafío que surge naturalmente a partir de este 
-concepto es el de caracterizar esta noción de manera puramente semántica. En 
-este contexto es donde surgen nociones de equivalencia de modelos que consideran únicamente características estructurales de los mismos;
+concepto es el de caracterizar esta noción de manera puramente semántica. Así es como 
+surgen nociones de equivalencia de modelos que consideran únicamente características estructurales de los mismos;
 evitando así la necesidad de objetos sintácticos, como lo son las fórmulas, para identificar modelos con el mismo comportamiento.
 
 Para el caso de los lenguajes modales, la noción de \textit{bisimulación}\cite[Capítulo 3]{HandbookModalLogic} viene a servir este propósito. A pesar de que cada lógica modal 
@@ -96,14 +96,14 @@ tiene su propia definición, la mayoría comparte la misma idea general: una bis
 los dominios de dos \ltss en la que dos estados se relacionan sólo si satisfacen ciertas condiciones relacionadas a la 
 estructura de los \ltss en cuestión. Por su lado, las condiciones requeridas en cada definición de bisimulación se eligen con el objetivo 
 principal de garantizar que todo par de \ltss bisimilares es también un par de \ltss lógicamente equivalentes. En contextos de aplicación 
-práctica de las lógicas modales, como la verificación de software, ciertos problemas computacionales relacionados con esta noción 
+práctica de las lógicas modales, como la verificación de software, ciertos problemas computacionales relacionados con la noción de bisimulación 
 se tornan cruciales. En particular, al utilizar \ltss para representar sistemas de computación, problemas como el de verificar si dos 
 \ltss son bisimilares o el de minimizar un \lts (encontrar el \lts de tamaño mínimo que sea lógicamente equivalente) permiten determinar 
 cuando dos sistemas satisfacen las mismas propiedades y obtener 
-una representación de tamaño mínimo de un sistema que mantiene las características estructurales de mayor relevancia.  
+una representación de tamaño mínimo de un sistema que mantenga las características estructurales de mayor relevancia.  
 
 La noción de bisimulación para \KHlogic se presenta en \cite{FervariVQW21}. Posteriormente, en \cite{ArecesFSV25,SaraviaPHD} se 
-extiende esta definición para \KHilogic donde se considera la relación de indistinguibilidad entre planes de los agentes introducida 
+extiende esta definición para \KHilogic donde se considera la relación de indistinguibilidad sobre planes de los agentes introducida 
 en el contexto de este lenguaje formal. Una observación que surge a partir de las definiciones propuestas para ambas lógicas es que 
 establecen condiciones sobre los conjuntos \textit{proposicionalmente definibles} de los \ltss involucrados, los cuáles son conjuntos 
 identificados unívocamente por una fórmula proposicional. Esto contradice la esencia puramente estructural de las bisimulaciones, pues 

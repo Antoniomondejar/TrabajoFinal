@@ -1,13 +1,13 @@
-\chapter{Preliminares: Lógica de Knowing How basada en incertidumbre}\label{ch:marco-teorico}
+\chapter{Preliminares: Lógica de Knowing How Basada en la Incertidumbre}\label{ch:marco-teorico}
 En este capítulo introduciremos un enfoque para modelar el concepto de \textit{saber cómo}, presentado en \cite{ArecesFSV25,SaraviaPHD}, el cuál surge a partir de la 
-lógica previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
+lógica \KHlogic previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
 representado en Sistemas de Transición Etiquetada (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estado 
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
 su disposición en un determinado estado, sino que también por la composición de las mismas. A las secuencias de acciones las 
 llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
 a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en dicho estado.
 
-La lógica de \textit{Knowing How} basada en incertidumbre toma este enfoque como punto de partida. La principal motivación por la que 
+La Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic) toma este enfoque como punto de partida. La principal motivación por la que 
 surge esta nueva propuesta es que la representación del conocimiento mencionada anteriormente supone que el agente cuenta con cierto nivel de omnisciencia, 
 pues se asume que un agente conoce todo plan que pueda inferirse de su \lts asociado y que, además, es capaz de distinguir qué plan es adecuado de entre 
 los que tiene a su disposición, en el sentido de que para todo par de planes es capaz de reconocer si provocan resultados diferentes.
@@ -30,7 +30,7 @@ pero cada uno tiene su propia interpretación de los efectos de las mismas, así
 Luego, la estrategia utilizada en \cite{ArecesFSV25,SaraviaPHD} consiste en fijar un conjunto de agentes $\AGT$ y dotar a los \lts con una 
 relación de indistinguibilidad sobre planes para cada agente.
 
-Una vez hechas estas consideraciones, introduciremos la lógica de \textit{Knowing How} basada en incertidumbre (\KHilogic) definiendo 
+Una vez hechas estas consideraciones, introduciremos \KHilogic definiendo 
 su sintaxis y semántica, y su noción de bisimulación. Por último, mencionaremos algunos resultados relacionados a su complejidad 
 computacional con respecto a los problemas de model-checking y satisfacibilidad, con el objetivo de brindar una perspectiva completa acerca 
 del comportamiento computacional de la lógica.
@@ -552,7 +552,7 @@ $\SAT$ se formula como ``dada una fórmula de la lógica, decidir si existe un m
 Estos problemas han sido estudiados a lo largo de los años en numerosas lógicas y son centrales, no solo para la lógica computacional, sino que 
 también para la teoría de la complejidad computacional en general. 
 Para la lógica proposicional, el problema de model-checking está en la clase $\Poly$, mientras que $\SAT$ es $\NPComplete$ 
-\cite[Capítulo 2, Sección 3]{Goldreich_2008}. Por otro lado, en la lógica modal básica tenemos que model-checking también 
+\cite[Capítulo 2, Sección 3]{Goldreich_2008}. Por otro lado, en la Lógica Modal Básica tenemos que model-checking también 
 está en $\Poly$ pero $\SAT$ es $\PSPACEComplete$ \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
 model-checking es $\PSPACEComplete$ \cite[Capítulo 5, Sección 4]{Goldreich_2008} y $\SAT$ es indecidible. 
 
