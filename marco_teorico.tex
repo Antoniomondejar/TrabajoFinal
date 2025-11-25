@@ -3,7 +3,7 @@ En este capítulo introduciremos un enfoque para modelar el concepto de \textit{
 lógica \KHlogic previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
 representado en Sistemas de Transición Etiquetada (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estado 
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
-su disposición en un determinado estado, sino que también por la composición de las mismas. A las secuencias de acciones las 
+su disposición en un determinado estado, sino que también por las posibles composiciones de las mismas. A las secuencias de acciones las 
 llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
 a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en dicho estado.
 
@@ -19,7 +19,7 @@ el agente podría no tener noción de cuáles son los efectos de utilizar un mé
 diferentes. En este caso, podríamos considerar que el agente no sabe cómo hacer una torta, pues en los casos en los que selecciona el método correcto obtiene 
 un buen resultado y en los demás casos no. 
 
-Incluso, podríamos considerar más situaciones en las que la indistinguibilidad del agente no sea únicamente sobre acciones sino que sobre planes en su totalidad. Por ejemplo, 
+Incluso, podríamos considerar otras situaciones en las que la indistinguibilidad del agente no sea únicamente sobre acciones sino que sobre planes en su totalidad. Por ejemplo, 
 el agente sabe la diferencia entre añadir leche y añadir harina a la mezcla, pero podría darse el caso en el que no sepa distinguir cuál es el orden adecuado en el que 
 realizar ambas acciones. Incluso, podría ocurrir que el agente no sepa distinguir planes de distinta longitud, por ejemplo, en el proceso de horneado de la torta el agente 
 debe eventualmente abrir el horno para verificar si el proceso de horneado ya está completo, pero hacerlo con demasiada frecuencia podría afectar al resultado de la torta.
@@ -44,13 +44,13 @@ y a $\AGT$ un conjunto finito no vacío de nombres de agentes.
     \begin{center}
         $\varphi ::= p \mid \neg \varphi \mid \varphi \vee \varphi \mid \kh_i(\varphi,\varphi)$,
     \end{center}
-    donde $p \in \PROP$ e $i \in \AGT$. Las constantes y demás operadores Booleanos son definidas de la forma usual. 
+    donde $p \in \PROP$ e $i \in \AGT$. Las constantes y demás operadores Booleanos son definidos de la forma usual. 
     Las fórmulas de la forma $\kh_i(\psi, \varphi)$ deben ser leídas como ``cuando vale $\psi$, el agente $i$ sabe cómo lograr $\varphi$''.
 \end{definicion}
 
 Formalizaremos matemáticamente algunos de los conceptos discutidos en la presentación de este capítulo. Como mencionamos, se 
-utilizarán secuencias de acciones, o planes, para representar las habilidades de los agentes, que determinarán el conocimiento de los mismos. 
-Las fórmulas de \KHilogic se interpretarán sobre sistemas de transición etiquetados extendidos con una familia de relaciones de 
+utilizarán secuencias de acciones, o planes, para representar las habilidades de los agentes. 
+Las fórmulas de \KHilogic se interpretarán sobre sistemas de transición etiquetada extendidos con una familia de relaciones de 
 indistinguibilidad entre planes.
 
 \begin{definicion}[Acciones y planes]
@@ -66,8 +66,8 @@ Presentamos a continuación un ejemplo ilustrativo de las nociones mencionadas.
 \begin{ejemplo}
     Consideremos un robot moviendose en una grilla, el cuál tiene a su disposición la opción de moverse a cualquiera de sus 4 casilleros vecinos; es decir,
     puede moverse a la izquierda (`$L$'), a la derecha (`$R$'), hacia arriba (`$U$') o hacia abajo (`$D$'). En este contexto, el conjunto de acciones básicas 
-    $\ACT$ estaría definido como $\ACT = \{L,R,U,D\}$, y $\ACT^*$ sería el conjunto de secuencias finitas sobre $\ACT$, el cuál representa los distintos 
-    caminos que el robot podría tomar en la grilla. Por ejemplo, `$LLLDRR$' y `$UURRU$' están en $\ACT^*$. 
+    $\ACT$ estaría definido como $\ACT = \{L,R,U,D\}$, y $\ACT^*$ sería el conjunto de secuencias finitas sobre $\ACT$, el cuál está computesto por 
+    los distintos caminos que el robot podría tomar en la grilla. Por ejemplo, `$LLLDRR$' y `$UURRU$' están en $\ACT^*$. 
 
     Luego, a partir de la definición dada, tenemos:
     \begin{itemize}
@@ -80,7 +80,7 @@ Presentamos a continuación un ejemplo ilustrativo de las nociones mencionadas.
 \end{ejemplo}
 
 Procederemos a introducir los modelos que representarán las acciones que los agentes tienen a su disposición: 
-los sistemas de transición etiquetados.
+los sistemas de transición etiquetada.
 
 \begin{definicion}[Sistema de Transición Etiquetada]
     Un \emph{Sistema de Transición Etiquetada (\lts, por sus siglas en inglés)} sobre $\PROP$ es una tupla $\modlts = \tup{\W, \R, \V, \ACT}$ 
@@ -90,7 +90,7 @@ los sistemas de transición etiquetados.
 \end{definicion}
 
 Gráficamente, un \lts se representa como un grafo dirigido etiquetado, donde los nodos serán los elementos de $\W$, cada uno marcado con las variables proposicionales 
-dadas por la función de valuación $\V$ y las aristas entre dos nodos estarán dadas por los pares de $\R_a$ para cada $a \in \ACT$.
+dadas por la función de valuación $\V$, y las aristas entre dos nodos estarán dadas por los pares de $\R_a$ para cada $a \in \ACT$.
 
 \begin{ejemplo}\label{ejemplo:lts}
     Sea $\modlts = \tup{\W, \R, \V, \ACT}$ un \lts con:
@@ -102,7 +102,7 @@ dadas por la función de valuación $\V$ y las aristas entre dos nodos estarán 
         \item $\ACT = \{a, b\}$.
     \end{itemize}
 
-    Su representación gráfica se introduce en \Cref{fig:lts}.
+    Su representación gráfica se introduce en la \Cref{fig:lts}.
     \begin{figure}[h]
         \centering
         \begin{tikzpicture}
@@ -127,7 +127,7 @@ dadas por la función de valuación $\V$ y las aristas entre dos nodos estarán 
 
 \end{ejemplo}
 
-Como mencionamos, en \cite{ArecesFSV25,SaraviaPHD} se extienden los \lts con una noción de indistinguibilidad epistémica entre planes.
+Como mencionamos, en \cite{ArecesFSV25,SaraviaPHD} se extienden los \lts con una noción de indistinguibilidad epistémica sobre planes.
 
 \begin{definicion}[\lts basado en incertidumbre]
     Un \emph{\lts basado en incertidumbre} (\ults) sobre $\PROP$ y $\AGT$ es una tupla $\model = \tup{\W,\R,\sim,\V,\ACT}$ 
@@ -139,7 +139,7 @@ Como mencionamos, en \cite{ArecesFSV25,SaraviaPHD} se extienden los \lts con una
 Notar que para cada agente $i \in \AGT$, $P_i$ representará los planes que el agente tiene a su disposición. 
 Luego $\sim_i$ será una relación de equivalencia sobre $P_i$, donde dos planes estarán relacionados cuando un agente no sepa distinguirlos.
 
-Sea $\model = \tup{\W,\R,\sim,\V,\ACT}$ un \ults y sea $i \in \AGT$, para un plan $\sigma \in P_i$, sea $[\sigma]_i$ su clase de 
+Sea $\model = \tup{\W,\R,\sim,\V,\ACT}$ un \ults y sea $i \in \AGT$, para un plan $\sigma \in P_i$, $[\sigma]_i$ será su clase de 
 equivalencia en $\sim_i$. Notar que hay una correspondencia uno-a-uno entre cada $\sim_i$ y la partición de $P_i$ en sus correspondientes 
 clases de equivalencia $\S_i = \{[\sigma]_i \mid \sigma \in P_i\}$. Por lo tanto, de ahora en adelante nos referiremos a los \ults como
 una tupla $\tup{\W,\R,\{\S_i\}_{i \in \AGT},\V,\ACT}$.
@@ -149,7 +149,7 @@ entre planes de cada agente.
 
 \begin{ejemplo}\label{ejemplo:ults}
     Siguiendo el \Cref{ejemplo:lts} y considerando $\AGT = \{i\}$, la representación gráfica 
-    de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ se introduce en \Cref{fig:ults}.
+    de $\model=\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ se introduce en la \Cref{fig:ults}.
     \begin{figure}[h]
         \hspace{2.3cm}
         \begin{tikzpicture}
@@ -207,7 +207,7 @@ lo que toda una clase de equivalencia dentro de su relación de indistinguibilid
 \end{definicion}
 
 \begin{ejemplo}
-    Siguiendo con el \ults presentado en \Cref{ejemplo:ults}, tenemos:
+    Siguiendo con el \ults presentado en el \Cref{ejemplo:ults}, tenemos:
     \begin{itemize}
         \item $\R_{ab} = \{(w_1,w_4), (w_2, w_4)\}$.
         \item $\R_{ab}(w_1) = \{w_4\}$, \quad $\R_{ab}(w_3) = \emptyset$. 
@@ -221,8 +221,8 @@ lo que toda una clase de equivalencia dentro de su relación de indistinguibilid
 
 La idea presentada en \cite{ArecesFSV25,SaraviaPHD} consiste en que un agente sabe cómo lograr que valga $\varphi$ dado que vale $\psi$ cuando existe un 
 conjunto de planes \textit{adecuado} que pueda ejecutar desde cualquier estado en el que valga $\psi$ que lleve sólo a estados donde valga $\varphi$. 
-Una parte crucial es determinar qué se considerará un conjunto de planes \textit{adecuado}. Como mencionamos en la presentación de este capítulo, y tomando 
-inspiración del campo de \textit{automated planning} en Inteligencia Artificial, surge la noción de ejecutabilidad fuerte.
+Una parte crucial es determinar qué se considera un conjunto de planes \textit{adecuado}. Como mencionamos en la presentación de este capítulo, y tomando 
+inspiración del campo de planificación automática en inteligencia artificial, surge la noción de ejecutabilidad fuerte.
 
 \begin{definicion}[Ejecutabilidad Fuerte]
     Sea $\{\R_a \subseteq \W \times \W \mid a \in \ACT\}$ una colección de relaciones binarias. Un plan $\sigma \in \ACT^*$
@@ -230,7 +230,7 @@ inspiración del campo de \textit{automated planning} en Inteligencia Artificial
     implica $\R_{\sigma[k+1]}(v) \neq \emptyset$. Se define el conjunto $\sexec^{\model}$($\sigma$) $\eqdef \{w \in \W \mid \sigma$ es 
     $\sexec$ en $w\}$.
     
-    Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $u \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $u$.
+    Un conjunto de planes $\pi \subseteq \ACT^*$ es fuertemente ejecutable en un estado $w \in \W$ si y sólo si cada $\sigma \in \pi$ es fuertemente ejecutable en $w$.
     Análogamente, definimos el conjunto $\sexec^{\model}$($\pi$) $\eqdef \cap_{\sigma \in \pi}$ $\sexec^{\model}$($\sigma$) que contiene los estados en los que 
     $\pi$ es fuertemente ejecutable. 
 \end{definicion}
@@ -240,7 +240,7 @@ clases de planes pide que cada plan de la clase sea fuertemente ejecutable. Cuan
 y escribiremos simplemente $\sexec(\sigma)$ y $\sexec(\pi)$. 
 
 \begin{ejemplo}
-    Si consideramos el \ults presentado en \Cref{ejemplo:ults} entonces tenemos que:
+    Si consideramos el \ults presentado en el \Cref{ejemplo:ults} entonces tenemos que:
     \begin{itemize}
         \item $\sexec(a) = \{w_1,w_2\}$.
         \item $\sexec(ab) = \{w_2\}$.
@@ -288,7 +288,7 @@ si y sólo si $\truthset{\model}{\varphi} = \W$. La modalidad existencial, su du
 
 
 \begin{ejemplo}
-    Nuevamente, consideremos el \ults presentado en \Cref{ejemplo:ults}, y veamos que:
+    Nuevamente, consideremos el \ults presentado en el \Cref{ejemplo:ults}, y veamos que:
     \begin{itemize}
         \item $\modults,w_1 \models p$ pero $\modults,w_3 \not\models p$.
         \item Notar que $\sexec(\{ab,a\}) = \{w_2\}$ y $\sexec(\{b\}) = \{w_3\}$. 
@@ -299,7 +299,6 @@ si y sólo si $\truthset{\model}{\varphi} = \W$. La modalidad existencial, su du
         \item Como mencionamos en el item anterior, $\sexec(\{b\}) = \{w_3\}$. Luego, podemos ver que 
         $\modults, w_1 \models \khi(q,r)$ y $\{b\} \in \S_i$ es su testigo. 
         Pues, $\truthset{\modults}{q} = \{w_3\} \subseteq \sexec(\{b\})$ y $\R_b(w_3) = \{w_4\} \subseteq \truthset{\modults}{r}$.         
-
         A su vez, por la globalidad de $\khi$, ocurre que $\modults,w_j \models \khi(q,r)$ para cada $j \in \{1,...,4\}$.
     \end{itemize}
 \end{ejemplo}
@@ -308,7 +307,7 @@ si y sólo si $\truthset{\model}{\varphi} = \W$. La modalidad existencial, su du
 \section{Bisimulación}
 
 La bisimulación es una herramienta crucial a la hora de analizar el poder expresivo de una lógica o un lenguaje formal. 
-Informalmente, una bisimulación es una relación entre dos modelos que comparten ciertas características estructurales entre sí, las 
+Informalmente, una bisimulación es una relación entre los dominios de dos modelos que comparten ciertas características estructurales entre sí, las 
 cuáles logran capturar el comportamiento de los mismos con respecto a la lógica en cuestión. 
 Se introducirá aquí la definición de bisimulación para la lógica \KHilogic junto con algunos resultados deseables presentados 
 originalmente en \cite{ArecesFSV25,SaraviaPHD}.
@@ -453,7 +452,7 @@ que se piden sobre una relación binaria para ser considerada una \KHilogic-bisi
 
     $\modults$ está representado por el \ults con nodos $\{w_1,w_2,w_3,w_4\}$, mientras que $\modults'$ está representado 
     por el \ults con nodos $\{w_1',w_2',w_3',w_4'\}$. A su vez, $\S_i$ y $\S'_i$ son sus respectivas relaciones de indistinguibilidad 
-    entre planes del agente $i$.
+    sobre planes del agente $i$.
 
     Consideremos la relación binaria $Z = \{(w_j, w_j') \mid 1 \leq j \leq 4\}$, la cuál está representada gráficamente con las líneas 
     punteadas. Es posible ver que $Z$ satisface (Atom), (A-zig) y (A-zag). Analicemos como se comporta $Z$ con respecto a ($\khi$-zig), para ello 
@@ -509,7 +508,7 @@ Usualmente nos referimos a este resultado como el Teorema de Invarianza por Bisi
     \end{center}
 \end{teorema}
 
-Este teorema caracteriza a la bisimulación como una noción que permite relacionar modelos \KHilogic-equivalentes, es decir, que la lógica no tiene una fórmula con la cuál distinguirlos,
+Este teorema caracteriza a la bisimulación como una noción que permite relacionar modelos \KHilogic-equivalentes, es decir, que la lógica no consigue distinguir,
 a partir de propiedades puramente estructurales de los mismos.
 
 En \cite[Sección 2]{FervariVQW21} se presenta un contraejemplo que atestigua que la recíproca del \Cref{thm:bisim-implies-equivalence} 
