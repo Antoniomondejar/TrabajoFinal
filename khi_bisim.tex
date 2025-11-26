@@ -5,8 +5,8 @@ es deseable que la misma tenga una naturaleza puramente estructural, lo cuál re
 definir, de una manera más natural, un procedimiento que dados dos modelos y una relación binaria entre sus dominios pueda decidir 
 si dicha relación es una bisimulación.
 
-Esta naturaleza estructural para verificar si una relación entre los dominios de dos modelos es una bisimulación,
-también nos permite encontrar un procedimiento efectivo que decida si existe una bisimulación entre dos modelos. 
+Esta naturaleza estructural que facilita verificar si una relación entre los dominios de dos modelos es una bisimulación,
+también nos permite encontrar un procedimiento efectivo que decida si existe una bisimulación entre dos modelos.
 Dicho problema de decisión es usualmente conocido en la literatura de las lógicas modales como comparación de modelos.
 
 En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados. Cabe destacar que en los resultados presentados 
@@ -110,7 +110,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
     Ahora, queremos ver que $\tup{\modults,\modults',Z} \not\in \CBisim$ si y sólo si
     la ejecución de \textsc{CounterexampleChecker} a partir de ($\modults,\modults',Z,\tup{U,b}$) devuelve 1 para 
     algún $\tup{U,b}$ donde $U$ es un subconjunto del dominio de alguno de los \ults y $b$ es un 
-    bit que nos indica de cuál dominio es subconjunto $U$.
+    bit que nos indica de qué dominio es subconjunto $U$.
 
     \bm{$\Rightarrow)$} Queremos ver que siendo  
     $\tup{\modults,\modults',Z} \not \in \CBisim$ entonces
@@ -230,9 +230,9 @@ establecer relaciones de \textit{dificultad computacional} entre problemas de de
 Intuitivamente, $L \leq_p L'$ nos dice que si obtenemos un algoritmo que decida $L'$ entonces podemos obtener naturalmente un algoritmo 
 que decida $L$ con un costo computacional extra a lo sumo polinomial. 
 
-Luego, para continuar con la tarea de demostrar \textit{hardness} para $\coNP$, queremos ver que para cada $L \in \coNP$ entonces ocurre que 
+Luego, para continuar con la tarea de demostrar \textit{hardness} para $\coNP$, queremos ver que para cada $L \in \coNP$ ocurre que 
 $L \leq_p \CBisim$. Dado que la relación $\leq_p$ es transitiva, basta con encontrar un problema $H$ que sea $\coNPHard$ y ver que 
-$H \leq_p \CBisim$. Este análisis motiva el estudio del siguiente problema computacional:
+$H \leq_p \CBisim$. Este análisis motiva el estudio del siguiente problema computacional.
 
 \begin{definicion}
     Definimos el problema de decidir si una fórmula proposicional $\varphi$ en forma disyuntiva normal es una tautología como:
@@ -250,7 +250,7 @@ Una vez presentado este problema, enunciamos el siguiente resultado (ver \cite{A
 Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontrar una reducción de Karp de $\DNFTAUT$ a $\CBisim$.
 
 \begin{definicion}\label{def:karp-reduction}
-    Definimos $f : \DNFTAUT \rightarrow \CBisim$ como el siguiente mapeo de instancias de $\DNFTAUT$ a instancias de $\CBisim$:
+    Definimos $f : \DNFTAUT \rightarrow \CBisim$ como el siguiente mapeo de instancias de $\DNFTAUT$ a instancias de $\CBisim$.
     % \begin{center}
 
     Sea $\varphi = \varphi_1 \vee ... \vee \varphi_m$ una fórmula proposicional en forma disyuntiva normal en la cuál aparecen las variables 
@@ -352,7 +352,7 @@ La motivación de este mapeo es utilizar los subconjuntos $U \subseteq \{p_1,...
 asignaciones a las variables proposicionales de $\varphi$. Pues sea $U \subseteq \{p_1,...,p_n\}$, podemos considerar que con $U$ estamos representando una asignación 
 $\overrightarrow{a}$ en la que asignamos \textit{true} a las variables dentro de $U$ y \textit{false} a las variables dentro de 
 $\{p_1,...,p_n\}\setminus U$. En particular, la intención es construir dos \ults de forma tal que al verificar la condición ($\khi$-zig) sobre $U$, estemos 
-verificando a la vez el valor obtenido por la evaluación de $\varphi$ en $\overrightarrow{a}$.
+verificando a la vez el valor obtenido por la evaluación de $\varphi$ en la asignación $\overrightarrow{a}$ asociada a $U$.
 
 Luego, la idea es que $\varphi$ evaluará a \textit{true} en la asignación $\overrightarrow{a}$ siempre que exista un término $\varphi_j$ que permita 
 que a partir del plan $in_{\varphi_j}out_{\varphi_j}$ desde $\model'$ se pueda imitar el comportamiento del plan $test$ en $\model$ al 
@@ -377,9 +377,10 @@ problemas en cuestión.
     si $\tup{\modults,\modults',Z} \in \CBisim$, con $\tup{\model,\model',Z}$ definidos como en la \Cref{def:karp-reduction}.
 
     Por una cuestión de simplicidad y para garantizar correctitud, consideraremos que si $\varphi \not\in \DNFTAUT$ entonces la asignación 
-    que atestigua dicha situación \textbf{no} es aquella asignación que asigna \textit{false} a todas las variables proposicionales de $\varphi$. 
-    Notar que esta consideración no quita generalidad, dado que no es difícil modificar el mapeo $f$ para considerar dicho caso y 
-    mapear a $\varphi$ a dos \ultss que sean trivialmente no bisimilares.  
+    que atestigua dicha situación \textbf{no} es aquella que asigna \textit{false} a todas las variables proposicionales de $\varphi$. 
+    Notar que esta consideración no quita generalidad, dado que no es difícil modificar el mapeo $f$ para que en dicho caso se 
+    mapee $\varphi$ a dos \ultss que sean trivialmente no bisimilares. Más aún, verificar si se da esa situación es realizable en 
+    tiempo polinomial debido a que model-checking para lógica proposicional está en \Poly.
     
     \bm{$\Rightarrow)$} Sea $\varphi \in \DNFTAUT$, donde $\varphi = \varphi_1 \vee ... \vee \varphi_m$ y $p_1,...,p_n$ 
     son las variables proposicionales que aparecen en $\varphi$, veamos que $\tup{\modults,\modults',Z} \in \CBisim$ con 
@@ -428,8 +429,8 @@ problemas en cuestión.
     las variables positivas que aparecen en $\varphi_j$ son un subconjunto, posiblemente vacío, de $U$.
     Entonces necesariamente de $\varphi_j$ las aristas con etiqueta $out_{\varphi_j}$ van a un conjunto $X \subseteq U \cup \{e\}$, 
     es decir, $X = \R_{in_{\varphi_j}out_{\varphi_j}}(U) \subseteq U \cup \{e\} \subseteq T$. 
-    Finalmente, $T' = X$ nos sirve para demostrar que $Z(U) \ultsExecAgagt T'$ y, a su vez, 
-    $T' = X \subseteq U \cup \{e\} \subseteq T = Z(T)$.
+    Finalmente, $T' = X$ satisface que $Z(U) \ultsExecAgagt T'$ y, a su vez, 
+    $T' \subseteq U \cup \{e\} \subseteq T = Z(T)$.
     Lo cual demuestra que $Z$ satisface ($\khi$-zig). 
 
     Juntando los puntos mencionados, demostramos que $Z$ es una \KHilogic-bisimulación entre $\modults$ y $\modults'$, 
@@ -488,11 +489,10 @@ A partir de este lema obtenemos de forma directa el resultado deseado.
 \end{corolario}
 
 \begin{demostracion}
-    Este corolario es consecuencia directa de \Cref{thm:dnftaut-conp-complete} y \Cref{lema:dnf-leqp-cbisim}.
+    Este corolario es consecuencia directa del \Cref{thm:dnftaut-conp-complete} y del \Cref{lema:dnf-leqp-cbisim}.
 \end{demostracion}
 
 Finalmente, hemos establecido una cota inferior para la complejidad computacional de $\CBisim$. 
-
 Juntando los resultados presentados en esta sección, hemos encontrado un lugar preciso donde colocar a $\CBisim$ 
 dentro de la teoría de la complejidad computacional. Finalizamos la sección 
 con el teorema que captura esta idea.
@@ -502,7 +502,7 @@ con el teorema que captura esta idea.
 \end{teorema}
 
 \begin{demostracion}
-    Este teorema es consecuencia directa de los resultados presentados en \Cref{lema:cbisim-in-conp} y \Cref{col:cbisim-conphard}. 
+    Este teorema es consecuencia directa de los resultados presentados en el \Cref{lema:cbisim-in-conp} y en el \Cref{col:cbisim-conphard}. 
 \end{demostracion}
 
 \section{Comparación de modelos}
@@ -558,7 +558,7 @@ lema:
     Sean $\modults$ y $\modults'$ dos \ultss tales que 
     $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y 
     $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$.
-    Entonces, existe $Z \subseteq \W \times \W'$ \KHilogic-bisimulación entre ellos si y sólo si
+    Entonces, existe $Z \subseteq \W \times \W'$ una \KHilogic-bisimulación entre ellos si y sólo si
 
     \begin{center}
         $\universalbis = \{(w,w') \in \W \times \W' \mid \V(w) = \V'(w')\}$
@@ -572,8 +572,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
 \begin{demostracion}
 
     Notar que la dirección \bm{$\Leftarrow)$} es directa. Demostraremos entonces \bm{$\Rightarrow)$}.
-
-    Queremos ver que $\universalbis$ es una \KHilogic-bisimulación entre $\modults$ y $\modults'$,
+    Queremos ver que $\universalbis$ es una \KHilogic-bisimulación entre $\modults$ y $\modults'$
     dado que existe $Z \subseteq \W \times \W'$, \KHilogic-bisimulación entre ellos.
     Notemos que como $Z$ es una bisimulación, entonces cumple (Atom). Luego, notemos que
     por la definición de $\universalbis$, $Z \subseteq \universalbis$, pues $\universalbis$ contiene todos los pares de
@@ -582,8 +581,9 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
     Demostremos entonces que $\universalbis$ cumple ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
-        \item ($\khi$-zig) Sean $U,T \subseteq \W$ tales que para cada $s \in \rho_{\modults}$ se cumple que $s \subseteq U$ 
-        o $s \cap U = \emptyset$, y $U \ultsExecAgi T$ queremos ver que existe $T' \subseteq \W'$ tal que:
+        \item ($\khi$-zig) Sean $U \subseteq \W$ tal que para cada $s \in \rho_{\modults}$ se cumple que 
+        $s \cap U = \emptyset$ o $s \subseteq U$, y sea $T\subseteq\W$ tal que $U \ultsExecAgi T$ queremos ver que existe 
+        $T' \subseteq \W'$ tal que:
     
         \begin{multicols}{2}
             \begin{itemize}
@@ -613,7 +613,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
         $w' \in Z(U)$.
     
         Lo cual demuestra que $Z(U) = \universalbis(U)$. Por lo que $\universalbis(U) \ultsExecAgi T''$. Finalmente, concluimos 
-        que $\universalbis$ cumple ($\khi$-zig).
+        que $\universalbis$ satisface ($\khi$-zig).
 
         \item ($\khi$-zag) Análogo a ($\khi$-zig).
     \end{itemize}
@@ -623,7 +623,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
 Esta caracterización de la existencia de bisimulaciones entre \ultss
 nos permite profundizar nuestro primer análisis. Ahora, podemos considerar a $\KHiBisim$ como un problema de \textit{verificación}, 
 pues para decidir la existencia de una bisimulación solo basta con verificar que la relación $\universalbis$ sea una bisimulación, por lo 
-que la parte de \textit{búsqueda} propia de este problema se trivializa.
+que la parte de \textit{búsqueda} de este problema se trivializa.
 
 Luego, teniendo en cuenta las consideraciones realizadas y lo analizado en relación a $\CBisim$ en la anterior sección, podemos extender los 
 resultados presentados a $\KHiBisim$.
@@ -634,7 +634,7 @@ A partir del \Cref{lema:cbisim-in-conp}, obtenemos la pertenencia a $\coNP$ de $
 \end{lema}
 
 \begin{demostracion}
-    Por \Cref{lema:bisim-existence}, sabemos que basta con verificar que $\universalbis$ sea una \KHilogic-bisimulación para decidir existencia. 
+    Por el \Cref{lema:bisim-existence}, sabemos que basta con verificar que $\universalbis$ sea una \KHilogic-bisimulación para decidir existencia. 
     Analizando el \Cref{alg:counter-example-checker}, introducido para demostrar la pertenencia a $\coNP$ de $\CBisim$, notamos que 
     basta con modificarlo para que en lugar de recibir una relación binaria $Z$ por input simplemente compute la relación $\universalbis$ y de esta 
     forma decida $\KHiBisim$.
@@ -652,21 +652,21 @@ Por otro lado, veamos como el mapeo presentado en la \Cref{def:karp-reduction}, 
     $\DNFTAUT \leq_p \KHiBisim$. 
 
     Esto se debe al hecho de que los modelos construidos en la \Cref{def:karp-reduction} sólo cuentan con una única posible bisimulación, 
-    que es $Z$, la relación binaria presentada en esa misma definición. Luego, la demostración de \Cref{lema:dnf-leqp-cbisim} aplica también 
+    que es la relación binaria presentada en esa misma definición. Luego, la demostración del \Cref{lema:dnf-leqp-cbisim} aplica también 
     a este caso debido a que la existencia de una \KHilogic-bisimulación entre los modelos construídos por la reducción está exactamente 
     caracterizada por el hecho de que la relación binaria $Z$, construída por la misma reducción, sea efectivamente una bisimulación.
 
-    Luego, como $\DNFTAUT \leq_p \KHiBisim$, por \Cref{thm:dnftaut-conp-complete} obtenemos que $\KHiBisim$ es $\coNPHard$.
+    Finalmente, como $\DNFTAUT \leq_p \KHiBisim$, por el \Cref{thm:dnftaut-conp-complete} obtenemos que $\KHiBisim$ es $\coNPHard$.
 \end{demostracion}
 
-Finalmente, juntando ambos lemas, conseguimos el siguiente resultado de complejidad computacional para $\KHiBisim$.
+Juntando ambos lemas, conseguimos el siguiente resultado de complejidad computacional para $\KHiBisim$.
 
 \begin{teorema}\label{thm:khibisim-conpcomplete}
     $\KHiBisim$ es $\coNPComplete$.
 \end{teorema}
 
 \begin{demostracion}
-    El teorema es consecuencia directa de \Cref{lema:khibisim-in-conp} y \Cref{lema:khi-bisim-conphard}.
+    El teorema es consecuencia directa del \Cref{lema:khibisim-in-conp} y del \Cref{lema:khi-bisim-conphard}.
 \end{demostracion}
 
 
@@ -772,12 +772,12 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 \end{lema}
 
 \begin{demostracion}
-    Dados $\modults,w$ y $\modults',w'$ dos \ultss punteados, por \Cref{lema:bisim-existence} sabemos que existe 
+    Dados $\modults,w$ y $\modults',w'$ dos \ultss punteados, por el \Cref{lema:bisim-existence} sabemos que existe 
     \KHilogic-bisimulación entre $\modults$ y $\modults'$ si y sólo si $\universalbis = \{(v,v') \mid \V(v) = \V'(v')\}$ es una 
     \KHilogic-bisimulación. 
     
     Luego una reducción $f$ que mapee $\tup{(\modults,w),(\modults',w')}$ a $\tup{\modults,\modults'}$ en el caso que $\V(w) = \V'(w')$ 
-    y a $\tup{\modults,\modults'}$ con $\modults$ y $\modults'$ dos \ultss fijos no bisimilares en caso contrario, basta 
+    y a $\tup{\modults*,\modults*'}$ con $\modults*$ y $\modults*'$ dos \ultss fijos no bisimilares en caso contrario, es suficiente 
     para demostrar que $\PKHiBisim \leq_p \KHiBisim$.
 \end{demostracion}
 
@@ -786,12 +786,12 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 \end{lema}
 
 \begin{demostracion}
-    Dados $\modults$ y $\modults'$ dos \ultss, por \Cref{lema:bisim-existence} sabemos que existe 
+    Dados $\modults$ y $\modults'$ dos \ultss, por el \Cref{lema:bisim-existence} sabemos que existe 
     \KHilogic-bisimulación entre ellos si y sólo si $\universalbis = \{(v,v') \mid \V(v) = \V'(v')\}$ es una \KHilogic-bisimulación.
 
     Consideremos una reducción $f$ que mapee $\tup{\modults,\modults'}$ a $\tup{(\modults,w),(\modults',w')}$ con $w,w'$ nodos de los dominios de $\modults$ 
     y $\modults'$ respectivamente que satisfagan $\V(w) = \V'(w')$, o en caso de no existir un par de nodos que satisfaga dicha condición tome cualquier 
-    par de nodos $w,w'$ de cada dominio. Notemos que dicha reducción basta para demostrar que $\KHiBisim \leq_p \PKHiBisim$.
+    par de nodos $w,w'$ de cada dominio. Es posible ver que dicha reducción es suficiente para demostrar que $\KHiBisim \leq_p \PKHiBisim$.
 \end{demostracion}
 
 \begin{teorema}
@@ -799,24 +799,25 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 \end{teorema}
 
 \begin{demostracion}
-    Por \Cref{lema:pointed-to-general}, tenemos que $\PKHiBisim \leq_p \KHiBisim$. Luego, como $\KHiBisim \in \coNP$ se puede ver que 
+    Por el \Cref{lema:pointed-to-general}, tenemos que $\PKHiBisim \leq_p \KHiBisim$. Luego, como $\KHiBisim \in \coNP$ se puede ver que 
     $\PKHiBisim \in \coNP$, pues basta con dar un algoritmo que ejecute la reducción de Karp de $\PKHiBisim$ a $\KHiBisim$ y luego ejecute 
     el algoritmo que decide $\KHiBisim$.
 
 
-    Por \Cref{thm:khibisim-conpcomplete}, sabemos que $\KHiBisim$ es $\coNPComplete$. Luego, por \Cref{lema:general-to-pointed}, tenemos que 
-    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es $\coNPHard$. Juntando ambos argumentos, concluímos que $\PKHiBisim$ es $\coNPComplete$.
+    Por el \Cref{thm:khibisim-conpcomplete}, sabemos que $\KHiBisim$ es $\coNPComplete$. Luego, por el \Cref{lema:general-to-pointed}, tenemos que 
+    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es $\coNPHard$. Finalmente, concluímos que $\PKHiBisim$ es $\coNPComplete$.
 \end{demostracion}
 
 
 Hemos demostrado entonces que $\PKHiBisim$ es $\coNPComplete$.
-Notemos que por \Cref{thm:new-bisim-finite-equiv}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ y 
-$\modults,w \modequiv \modults',w'$. Luego, al caracterizar la complejidad computacional de $\PKHiBisim$, también hemos caracterizado 
+Notemos que por el \Cref{thm:new-bisim-finite-equiv}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ y 
+$\modults,w \modequiv \modults',w'$, pues algorítmicamente siempre trabajamos con \ultss finitos. Luego, al caracterizar la complejidad 
+computacional de $\PKHiBisim$, también hemos caracterizado 
 la complejidad computacional del problema de decidir si dos \ultss punteados satisfacen exactamente las mismas \KHilogic-fórmulas.
 
 Para terminar este capítulo, presentaremos un resultado que establece que para cada par de \ultss punteados finitos que no son bisimilares 
-existe una \KHilogic-fórmula de tamaño polinomial que los distingue. Más aún, mencionaremos cómo \textsc{CounterexampleChecker} permite construir 
-dicha fórmula.
+existe una \KHilogic-fórmula de tamaño polinomial que los distingue. Más aún, explicaremos cómo modificar \textsc{CounterexampleChecker} 
+para que compute dicha fórmula en caso de existir.
 
 Notar que dados dos \ultss punteados no bisimilares, la relación $\universalbis$ \textbf{no} es una \KHilogic-bisimulación entre ellos. 
 Luego, analizando las condiciones de la \Cref{def:bisim-redefinition} en las que falla $\universalbis$, veremos que es posible construir 
@@ -828,7 +829,7 @@ la fórmula en cuestión.
     $\model',w' \not\models \varphi$.
 \end{teorema}
 
-Antes de continuar con la demostración, primero introduciremos una notación que nos será de utilidad para construir la fórmula deseada.
+Antes de continuar con la demostración, introduciremos una notación que nos será de utilidad para construir la fórmula deseada.
 
 Sean $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ y $\model'=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$ dos \ultss finitos.
 Consideremos $\PROP' = \{ p \in \PROP \mid $ existe $w\in\W $ tal que $p \in \V(w)$ o existe $ w'\in\W'$ tal que $p\in\V'(w')\}$. 
@@ -843,7 +844,7 @@ Análogamente, se definen $\varphi_{s'}$ y $\varphi_{X'}$ para cada $s' \in \rho
 A partir de la definición de $\varphi_s$, no es díficil notar que $\truthset{\model}{\varphi_s} = s$. Por otro lado, para $X \subseteq \W$
 en el que para cada $s \in \rho_\model$ se cumple que $s \cap X = \emptyset$ o $s \subseteq X$, se da que $\truthset{\model}{\varphi_X} = X$.
 Más aún, analizando la definición de $\universalbis$, se puede ver que $\truthset{\model'}{\varphi_s} = \universalbis(s)$ y 
-$\truthset{\model'}{\varphi_X} = \universalbis(X)$.
+$\truthset{\model'}{\varphi_X} = \universalbis(X)$ para $X$ que satisface la condición recién mencionada.
 
 \begin{demostracion}
 Sean $\model,w$ y $\model',w'$ dos \ultss punteados finitos tales que $\model,w\not\bisim\model',w'$, con 
@@ -858,9 +859,9 @@ que por su definición, es claro que $\universalbis$ siempre satisface (Atom):
 \begin{itemize}
     \item (A-zig) Si $\universalbis$ no satisface (A-zig), entonces existe $v\in\W$ para el cuál no existe $v'\in\W'$ tal que $(v,v')\in\universalbis$.
     Lo que nos dice que no existe $v'\in\W'$ tal que $\V(v) = \V'(v')$.
-    Luego, $\varphi = \E\varphi_{[v]}$ sirve para probar la propiedad deseada.
+    Luego, $\varphi = \E\varphi_{[v]}$ sirve para demostrar la propiedad deseada.
     \item ($\khi$-zig) Si $\universalbis$ no satisface ($\khi$-zig) entonces existen $U,T \subseteq \W$ tales que para cada $s\in\rho_\model$
-    se cumple que $s \cap U = \emptyset$ o $s\subseteq U$ y $U \ultsExecAgi T$ para los cuáles no existe $T'\subseteq\W'$ tal que 
+    se cumple que $s \cap U = \emptyset$ o $s\subseteq U$, y $U \ultsExecAgi T$ para los cuáles no existe $T'\subseteq\W'$ tal que 
     \begin{multicols}{2}
         \begin{itemize}
             \item $\universalbis(U) \ultsExecAgi T'$, 
@@ -883,7 +884,9 @@ que por su definición, es claro que $\universalbis$ siempre satisface (Atom):
     Demostremos ahora que $\universalbis(T^+) \subseteq \universalbis(T)$. Sea $v'\in\universalbis(T^+)$, existe $v\in T^+$ tal que $(v,v')\in\universalbis$
     y, por lo tanto, $\V(v) = \V'(v')$.
     Pero, veamos que como $v\in T^+$, entonces existe $u\in T$ tal que $v \in [u]$, por lo que $\V(v) = \V(u)$. Luego, tenemos que 
-    $\V(u) = \V'(v')$, por lo que $(u,v') \in \universalbis$. Con lo que podemos concluir que $v' \in \universalbis(T)$.
+    $\V(u) = \V'(v')$, por lo que $(u,v') \in \universalbis$. Con lo que podemos concluir que $v' \in \universalbis(T)$ y, consecuentemente, 
+    $\universalbis(T^+) \subseteq \universalbis(T)$.
+
     Pero notemos entonces que $\universalbis(U) \ultsExecAgi \universalbis(T^+)$ y $\universalbis(T^+) \subseteq \universalbis(T)$. Luego, 
     tomando $T' = \universalbis(T^+)$ encontramos un $T'$ que atestigua que la condición ($\khi$-zig) es satisfecha para los conjuntos 
     $U$ y $T$. 
@@ -902,5 +905,5 @@ Por otro lado, si la ejecución de \textsc{NotSimulates} devuelve 1, es posible 
 como input y el conjunto $T$ definido en la línea \ref{line:T-reachable-states-counterexcheck} para el cuál no se encontró un testigo, 
 siguiendo la estrategia presentada para los casos ($\khi$-zig)/($\khi$-zag) en la demostración del teorema. 
 
-De esta manera, además de estudiar las propiedades computacionales de la lógica, obtenemos una nueva aplicación de nuestros métodos a 
-la hora de detectar las diferencias entre dos modelos de manera sintáctica.
+De esta manera, además de estudiar las propiedades computacionales de la lógica, obtenemos una nueva aplicación de nuestros métodos para
+distinguir dos modelos de forma sintáctica.
