@@ -2,7 +2,7 @@
 
 La noción de bisimulación de una lógica modal nos permite relacionar dos modelos a partir de características estructurales 
 que comparten entre sí, con las que se logra garantizar la equivalencia lógica entre ellos. En ese sentido, consideramos que la 
-bisimulación modela la idea de equivalencia en cuanto al comportamiento de ambos modelos respecto a una lógica en particular, lo cuál nos brinda
+bisimulación modela la idea de equivalencia en cuanto al comportamiento de ambos modelos respecto a una lógica en particular, lo cual nos brinda
 una caracterización de la expresividad de la misma.
 
 Si analizamos la noción presentada en la \Cref{def:bisimulation}, podemos notar que ($\khi$-zig) y ($\khi$-zag) establecen condiciones 
@@ -14,7 +14,7 @@ A su vez, a la hora de presentar una noción de bisimulación, es deseable que l
 que dada una relación binaria entre los dominios de dos modelos sea posible diseñar un procedimiento efectivo que verifique si dicha relación 
 es una bisimulación.
 Nuevamente, si analizamos la definición presentada en el capítulo anterior, podemos notar que para verificar que una relación binaria es una bisimulación
-tenemos que explorar necesariamente los conjuntos proposicionalmente definibles de los dominios de cada modelo, lo cuál lleva consigo una cantidad 
+tenemos que explorar necesariamente los conjuntos proposicionalmente definibles de los dominios de cada modelo, lo cual lleva consigo una cantidad 
 infinita de fórmulas proposicionales que analizar. Por este motivo, no parece una tarea sencilla encontrar un procedimiento efectivo que realice lo deseado.
 
 Es así como surge la motivación de este capítulo. Propondremos una nueva definición de bisimulación para la lógica presentada, modificando las condiciones
@@ -70,7 +70,7 @@ La primera de ellas establece que, naturalmente, la valuación de un modelo dete
     
 \end{demostracion}
 
-Definiremos ahora para cada modelo, una relación de equivalencia sobre su dominio, la cuál particiona a los nodos de acuerdo
+Definiremos ahora para cada modelo, una relación de equivalencia sobre su dominio, la cual particiona a los nodos de acuerdo
 a su función de valuación.
 
 \begin{definicion}\label{def:Am}
@@ -153,7 +153,7 @@ Presentamos entonces la nueva definición de bisimulación que proponemos para \
     $s \subseteq U$ o $s \cap U = \emptyset$. 
     
     Se puede ver que los subconjuntos que cumplen esa condición son exactamente los subconjuntos 
-    proposicionalmente definibles, para los cuáles ya realizamos un análisis en el ejemplo previamente mencionado. 
+    proposicionalmente definibles, para los cuales ya realizamos un análisis en el ejemplo previamente mencionado. 
     Por lo que podemos afirmar que $Z$ satisface ($\khi$-zig$^*$).
     A su vez, podemos realizar un análisis similar para demostrar que $Z$ satisface ($\khi$-zag$^*$). 
     Luego, $Z$ es una \KHilogic-bisimulación$^*$. Más aún, podemos decir que $\modults,w_j \bisim^* \modults',w_j'$ con $1 \leq j \leq 4$.
@@ -269,7 +269,7 @@ De este lema obtenemos un corolario sobre el problema de determinar si un subcon
     a determinar si $U$ es proposicionalmente definible.
 
     Luego, por el \Cref{lema:finite-propositionally-definable-lemma}, basta con dar un algoritmo que compute $\rho_\modults$ y 
-    para cada $s \in \rho_\modults$ chequee que $s \subseteq U$ o $s \cap U = \emptyset$. No es díficil observar que esto 
+    para cada $s \in \rho_\modults$ chequee que $s \subseteq U$ o $s \cap U = \emptyset$. No es difícil observar que esto 
     puede realizarse en tiempo polinomial con respecto al tamaño de $\modults$.
 \end{demostracion}
 
@@ -365,10 +365,10 @@ del \Cref{lema:propositionally-definable-lemma} no son válidas en el caso de \u
 
 Hemos presentado una nueva definición de bisimulación para \KHilogic en la que sólo 
 se consideran características estructurales de los modelos en cuestión. A su vez, demostramos las principales propiedades 
-que se esperan de la noción de bisimulación de una lógica modal, lo cuál sugiere que esta nueva definición es 
+que se esperan de la noción de bisimulación de una lógica modal, lo cual sugiere que esta nueva definición es 
 adecuada.
 También, podemos notar que la definición propuesta evita la necesidad de listar cada fórmula proposicional para verificar que una relación binaria
-es una bisimulación, lo cuál le aporta una naturaleza más procedural como mencionamos al principio del capítulo.
+es una bisimulación, lo cual le aporta una naturaleza más procedural como mencionamos al principio del capítulo.
 
 Teniendo en cuenta lo estudiado en este capítulo, utilizaremos la nueva definición de bisimulación a lo largo de este trabajo.
 Por una cuestión de simplicidad, descartaremos los $*$ cuando hablemos de una \KHilogic-bisimulación$^*$ y 

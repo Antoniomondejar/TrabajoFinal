@@ -1,7 +1,7 @@
 \chapter{Estudio computacional de \KHilogic-bisimulación}\label{ch:khi-bisim}
 
 Como mencionamos en el anterior capítulo, a la hora de definir una noción de bisimulación para una lógica modal, 
-es deseable que la misma tenga una naturaleza puramente estructural, lo cuál resulta de gran importancia a la hora de 
+es deseable que la misma tenga una naturaleza puramente estructural, lo cual resulta de gran importancia a la hora de 
 definir, de una manera más natural, un procedimiento que dados dos modelos y una relación binaria entre sus dominios pueda decidir 
 si dicha relación es una bisimulación.
 
@@ -10,7 +10,7 @@ también nos permite encontrar un procedimiento efectivo que decida si existe un
 Dicho problema de decisión es usualmente conocido en la literatura de las lógicas modales como comparación de modelos.
 
 En este capítulo, estudiaremos la complejidad computacional de los problemas mencionados. Cabe destacar que en los resultados presentados 
-nos referiremos siempre a \ultss finitos, es decir, \ultss en los cuáles cada una de sus componentes tiene tamaño finito.
+nos referiremos siempre a \ultss finitos, es decir, \ultss en los cuales cada una de sus componentes tiene tamaño finito.
 
 \section{Verificación de bisimulaciones}
 
@@ -208,7 +208,7 @@ Sin embargo, a la hora de determinar que un problema se encuentra en una clase d
 determinar si se da el caso de que el problema sea difícil para dicha clase ($\coNPHard$). De esta forma, obtendríamos una 
 perspectiva más precisa de su dificultad intrínseca.
 
-Con ese objetivo en mente, introduciremos dos conceptos cruciales de la teoría de la complejidad computacional, los cuáles nos permitirán 
+Con ese objetivo en mente, introduciremos dos conceptos cruciales de la teoría de la complejidad computacional, los cuales nos permitirán 
 establecer relaciones de \textit{dificultad computacional} entre problemas de decisión.
 
 \begin{definicion}[Reducción de Karp]
@@ -253,7 +253,7 @@ Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontr
     Definimos $f : \DNFTAUT \rightarrow \CBisim$ como el siguiente mapeo de instancias de $\DNFTAUT$ a instancias de $\CBisim$.
     % \begin{center}
 
-    Sea $\varphi = \varphi_1 \vee ... \vee \varphi_m$ una fórmula proposicional en forma disyuntiva normal en la cuál aparecen las variables 
+    Sea $\varphi = \varphi_1 \vee ... \vee \varphi_m$ una fórmula proposicional en forma disyuntiva normal en la cual aparecen las variables 
     proposicionales $p_1,...,p_n$, definimos $f(\varphi) = \tup{\model,\model',Z}$ donde:
     % \end{center}\textsc{}
     \begin{itemize}
@@ -577,7 +577,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
     Notemos que como $Z$ es una bisimulación, entonces cumple (Atom). Luego, notemos que
     por la definición de $\universalbis$, $Z \subseteq \universalbis$, pues $\universalbis$ contiene todos los pares de
     $\W \times \W'$ que satisfacen (Atom). Esto nos dice que $\universalbis$ satisface (A-zig) y (A-zag).
-    A su vez, cómo mencionamos, $\universalbis$ contiene todos los pares que satisfacen (Atom).
+    A su vez, como mencionamos, $\universalbis$ contiene todos los pares que satisfacen (Atom).
     Demostremos entonces que $\universalbis$ cumple ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
@@ -607,7 +607,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
         entonces $Z(U) \subseteq \universalbis(U)$. Luego, solo queda demostrar que $\universalbis(U) \subseteq Z(U)$.
     
         Sea $w' \in \universalbis(U)$, entonces existe $w \in U$ tal que $(w,w') \in \universalbis$, por lo que $\V(w) = \V'(w')$. 
-        Como $Z$ cumple (A-zag), existe $v \in \W$ tal que $(v,w') \in Z$, y cómo $Z$ cumple 
+        Como $Z$ cumple (A-zag), existe $v \in \W$ tal que $(v,w') \in Z$, y como $Z$ cumple 
         (Atom) entonces $\V(v) = \V'(w')$. Luego $\V(w) = \V(v)$, lo que nos dice que $v \in [w]$.    
         Como $w \in U$, entonces $[w] \subseteq U$, por lo que $v \in U$. Luego, notar que como $(v,w') \in Z$, entonces
         $w' \in Z(U)$.
@@ -764,7 +764,7 @@ En esta sección estudiaremos otro problema que surge naturalmente de $\KHiBisim
 dos \ultss punteados, decidir si $\modults,w \bisim \modults',w'$. Notar que, esto no es otra cosa que decidir si existe una 
 \KHilogic-bisimulación entre $\modults$ y $\modults'$ que contenga al par $(w,w')$. Nos referiremos a este problema como $\PKHiBisim$.
 
-Demostraremos la equivalencia via reducción de Karp entre $\KHiBisim$ y $\PKHiBisim$, es decir, demostraremos que 
+Demostraremos equivalencia vía reducción de Karp entre $\KHiBisim$ y $\PKHiBisim$, es decir, demostraremos que 
 $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego podremos concluir que $\PKHiBisim$ es $\coNPComplete$.
 
 \begin{lema}\label{lema:pointed-to-general}
@@ -841,7 +841,7 @@ Definimos para cada $s \in \rho_\model$ y $X \subseteq \W$:
 \end{itemize}
 Análogamente, se definen $\varphi_{s'}$ y $\varphi_{X'}$ para cada $s' \in \rho_{\model'}$ y $X' \subseteq \W'$.
 
-A partir de la definición de $\varphi_s$, no es díficil notar que $\truthset{\model}{\varphi_s} = s$. Por otro lado, para $X \subseteq \W$
+A partir de la definición de $\varphi_s$, no es difícil notar que $\truthset{\model}{\varphi_s} = s$. Por otro lado, para $X \subseteq \W$
 en el que para cada $s \in \rho_\model$ se cumple que $s \cap X = \emptyset$ o $s \subseteq X$, se da que $\truthset{\model}{\varphi_X} = X$.
 Más aún, analizando la definición de $\universalbis$, se puede ver que $\truthset{\model'}{\varphi_s} = \universalbis(s)$ y 
 $\truthset{\model'}{\varphi_X} = \universalbis(X)$ para $X$ que satisface la condición recién mencionada.
@@ -857,11 +857,11 @@ $\model,w \models \varphi$ y $\model',w'\not\models\varphi$.
 Ahora, consideremos las condiciones de la \Cref{def:bisim-redefinition} que podrían no ser satisfechas por $\universalbis$. Cabe destacar
 que por su definición, es claro que $\universalbis$ siempre satisface (Atom):
 \begin{itemize}
-    \item (A-zig) Si $\universalbis$ no satisface (A-zig), entonces existe $v\in\W$ para el cuál no existe $v'\in\W'$ tal que $(v,v')\in\universalbis$.
+    \item (A-zig) Si $\universalbis$ no satisface (A-zig), entonces existe $v\in\W$ para el cual no existe $v'\in\W'$ tal que $(v,v')\in\universalbis$.
     Lo que nos dice que no existe $v'\in\W'$ tal que $\V(v) = \V'(v')$.
     Luego, $\varphi = \E\varphi_{[v]}$ sirve para demostrar la propiedad deseada.
     \item ($\khi$-zig) Si $\universalbis$ no satisface ($\khi$-zig) entonces existen $U,T \subseteq \W$ tales que para cada $s\in\rho_\model$
-    se cumple que $s \cap U = \emptyset$ o $s\subseteq U$, y $U \ultsExecAgi T$ para los cuáles no existe $T'\subseteq\W'$ tal que 
+    se cumple que $s \cap U = \emptyset$ o $s\subseteq U$, y $U \ultsExecAgi T$ para los cuales no existe $T'\subseteq\W'$ tal que 
     \begin{multicols}{2}
         \begin{itemize}
             \item $\universalbis(U) \ultsExecAgi T'$, 
@@ -901,7 +901,7 @@ las fórmulas propuestas en caso de detectar que los \ultss punteados recibidos 
 si falla alguno de los chequeos de las líneas \ref{line:A-zig} o \ref{line:A-zag} es posible construir la fórmula presentada en la 
 demostración para los casos (A-zig)/(A-zag) almacenando el elemento para el cual falla dicha condición. 
 Por otro lado, si la ejecución de \textsc{NotSimulates} devuelve 1, es posible construir la fórmula a partir del conjunto $U$ recibido 
-como input y el conjunto $T$ definido en la línea \ref{line:T-reachable-states-counterexcheck} para el cuál no se encontró un testigo, 
+como input y el conjunto $T$ definido en la línea \ref{line:T-reachable-states-counterexcheck} para el cual no se encontró un testigo, 
 siguiendo la estrategia presentada para los casos ($\khi$-zig)/($\khi$-zag) en la demostración del teorema. 
 
 De esta manera, además de estudiar las propiedades computacionales de la lógica, obtenemos una nueva aplicación de nuestros métodos para

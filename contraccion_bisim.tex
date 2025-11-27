@@ -114,7 +114,7 @@ que caracteriza la autobisimulación máxima de un \ults.
         Supongamos que no es cierto, es decir, existe $Z \subseteq \W \times \W$ autobisimulación de $\model$ tal que hay 
         $w,v \in \W$ que cumplen que $(w,v) \in Z$ y $(w,v) \notin A_\model$. 
         Como $Z$ es una autobisimulación entonces satisface (Atom), es decir, $\V(w) = \V(v)$. Pero notemos que por definición de 
-        $A_\model$, $(w,v) \in A_\model$, lo cuál es absurdo, pues dijimos que $(w,v) \notin A_\model$.
+        $A_\model$, $(w,v) \in A_\model$, lo cual es absurdo, pues dijimos que $(w,v) \notin A_\model$.
         El absurdo vino de suponer que existe $Z$ una autobisimulación de $\model$ tal que $Z \nsubseteq A_\model$.    
     \end{itemize}
     Finalmente, queda demostrada la propiedad.
@@ -326,7 +326,7 @@ componentes mencionadas.
 \end{definicion}
 
 Como la lógica no permite hablar explícitamente sobre los planes disponibles para un agente, es posible trabajar con abstracciones de los 
-mismos, motivo por el cuál esta propuesta tiene sentido.
+mismos, motivo por el cual esta propuesta tiene sentido.
 
 Una vez presentada la contracción nos gustaría asegurarnos que, efectivamente, construye un modelo bisimilar. Para ello demostraremos el 
 siguiente teorema.
@@ -445,7 +445,7 @@ el siguiente resultado.
 
     Luego, notemos que $\ACT'$ tiene tamaño $\sum_{i} |\S_i|$, y cada $\S_i'$ tiene tamaño a lo sumo $|\S_i|$. Por último, notemos que 
     $\R'$ tiene a lo sumo una arista por cada tupla formada por dos nodos de $\W$ y un plan conocido por algún agente $i$, luego su 
-    tamaño está acotado por $\W * \W * \sum_{i}|\S_i|$, lo cuál es polinomial con respecto al tamaño de $\model$.
+    tamaño está acotado por $\W * \W * \sum_{i}|\S_i|$, lo cual es polinomial con respecto al tamaño de $\model$.
 
     Una vez demostrado que el tamaño de $\fcont{\model}$ es polinomial con respecto al tamaño de $\model$, basta con ver que cada componente 
     es computable en tiempo polinomial. Es claro que las componentes $\W'$, $\{\S_i'\}$, $\V'$ y $\ACT'$ son computables en tiempo 
@@ -555,7 +555,7 @@ adecuada.
 
         Pero esto nos dice que $\R_{\sigma[k]}(w_k') = \emptyset$. Pues, si existiera $v$ tal que 
         $(w_k',v) \in \R_{\sigma[k]}$ entonces ocurriría que $([w_k],[v]) \in \R'_{\sigma[k]}$. Luego $\sigma \in \pi$ no es 
-        fuertemente ejecutable en $w_1' \in U$, lo cuál es una contradicción, pues dijimos que $U \subseteq \sexec^{\model}(\pi)$. Lo que 
+        fuertemente ejecutable en $w_1' \in U$, lo cual es una contradicción, pues dijimos que $U \subseteq \sexec^{\model}(\pi)$. Lo que 
         demuestra que $Z(U) \subseteq \sexec^{\model_\bml}(\pi)$.
 
         Veamos ahora que $\R'_\pi(Z(U)) \subseteq T'$. Sea $[v] \in \R'_\pi(Z(U))$, entonces existen $\sigma \in \pi$ y 
@@ -566,7 +566,7 @@ adecuada.
         $T'$, $[w_{|\sigma|+1}] \in T'$. Finalmente, como $[v] = [w_{|\sigma|+1}]$ entonces $[v] \in T'$.
 
         Luego, demostramos que $Z(U)\subseteq\sexec^{\model_\bml}(\pi)$ y que $\R'_\pi(Z(U)) \subseteq T'$. 
-        Juntando ambos resultados, concluimos que $Z(U) \ultsExecAgi T'$, lo cuál demuestra ($\khi$-zig).
+        Juntando ambos resultados, concluimos que $Z(U) \ultsExecAgi T'$, lo cual demuestra ($\khi$-zig).
 
        \item ($\khi$-zag) Sean $U', T' \subseteq \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s \in \rho_{\model_\bml}$ se cumple 
        $s \subseteq U'$ o $s \cap U' = \emptyset$. Queremos ver que existe $T \subseteq \W$ tal que
@@ -598,10 +598,10 @@ adecuada.
         $w_1 \in Z^{-1}(U')$, $(w_i,w_{i+1}) \in \R_{\sigma[i]}$ y $w_{|\sigma|+1} = v$. 
         Por definición de $\R'$, esto nos dice que $[w_1],...,[w_{|\sigma|+1}]$ cumple que $([w_i],[w_{i+1}]) \in \R'_{\sigma[i]}$ 
         y, a su vez, como $w_1 \in Z^{-1}(U')$ entonces $[w_1] \in U'$. Luego, notemos que como $\R'_\pi(U') \subseteq T'$, tenemos que 
-        $[w_{|\sigma|+1}] \in T'$, lo cuál implica que $w_{|\sigma|+1} \in T$. Como $v = w_{|\sigma|+1}$ entonces $v \in T$. 
+        $[w_{|\sigma|+1}] \in T'$, lo cual implica que $w_{|\sigma|+1} \in T$. Como $v = w_{|\sigma|+1}$ entonces $v \in T$. 
 
         Demostramos que $Z^{-1}(U')\subseteq\sexec^{\model}(\pi)$ y que $\R'_\pi(Z^{-1}(U')) \subseteq T$. 
-        Juntando ambos resultados, concluimos que $Z^{-1}(U') \ultsExecAgi T$, lo cuál demuestra ($\khi$-zag).
+        Juntando ambos resultados, concluimos que $Z^{-1}(U') \ultsExecAgi T$, lo cual demuestra ($\khi$-zag).
     \end{itemize}
     Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego, $\tup{\model,w}$ y $\tup{\model_\bml,[w]}$ son $\KHilogic$-bisimilares 
     para cada $w \in \W$.
@@ -641,7 +641,7 @@ Teniendo esto en consideración, podemos concluir que esta segunda propuesta de 
 % Presentaremos tres \ultss de ejemplo, con el objetivo de obtener un mejor entendimiento sobre el comportamiento de cada una de las 
 % contracciones propuestas. En este primer ejemplo, consideraremos el siguiente modelo $\model_1$ (\Cref{fig:1st-ex-cont}):
 
-Hemos presentado dos propuestas de contracción por bisimulación para \KHilogic para las cuáles demostramos su resultado esperado de correctitud y 
+Hemos presentado dos propuestas de contracción por bisimulación para \KHilogic para las cuales demostramos su resultado esperado de correctitud y 
 establecimos que son computables en tiempo polinomial. Para finalizar con este capítulo mencionaremos las principales características de 
 cada propuesta y las diferencias que presentan entre sí junto con un análisis de su comportamiento respecto a ciertos tipos de modelos. Por 
 último, presentaremos dos ejemplos que permitirán obtener un mejor entendimiento de los puntos principales de cada propuesta.
@@ -667,7 +667,7 @@ de dicho plan. A su vez, $\fcont{\model}$ ahorra el procesamiento de los estados
 dado que los estados alcanzables por dicho plan en el modelo original se abstraen a aristas en esta contracción.
 
 Continuando con la segunda propuesta de contracción, el primer detalle a considerar es que el modelo obtenido $\model_\bml$ no es mínimo 
-con respecto a la cardinalidad. Esto puede verse armando un modelo de Kripke en el cuál existan dos estados etiquetados con el mismo conjunto 
+con respecto a la cardinalidad. Esto puede verse armando un modelo de Kripke en el cual existan dos estados etiquetados con el mismo conjunto 
 de variables proposicionales para los cuales existe una \bml-fórmula que los distingue, luego $Z^{\bml}_\model$ no relacionaría a dichos 
 nodos y, por lo tanto, colapsaría una menor cantidad de estados que $Z_\model$. Sin embargo, esta propuesta no deja de tener varios
 puntos dignos de interes: en primer lugar, la cantidad de aristas de $\model_\bml$ es siempre menor o igual que las de $\model$, lo cual no está
