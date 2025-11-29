@@ -205,7 +205,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
 
 Como mencionamos, este lema nos permite establecer una cota superior sobre la complejidad computacional de $\CBisim$. 
 Sin embargo, a la hora de determinar que un problema se encuentra en una clase de complejidad tal como $\coNP$, también es deseable 
-determinar si se da el caso de que el problema sea difícil para dicha clase ($\coNPHard$). De esta forma, obtendríamos una 
+determinar si se da el caso de que el problema sea difícil para dicha clase (\coNPHard). De esta forma, obtendríamos una 
 perspectiva más precisa de su dificultad intrínseca.
 
 Con ese objetivo en mente, introduciremos dos conceptos cruciales de la teoría de la complejidad computacional, los cuales nos permitirán 
@@ -231,7 +231,7 @@ Intuitivamente, $L \leq_p L'$ nos dice que si obtenemos un algoritmo que decida 
 que decida $L$ con un costo computacional extra a lo sumo polinomial. 
 
 Luego, para continuar con la tarea de demostrar \textit{hardness} para $\coNP$, queremos ver que para cada $L \in \coNP$ ocurre que 
-$L \leq_p \CBisim$. Dado que la relación $\leq_p$ es transitiva, basta con encontrar un problema $H$ que sea $\coNPHard$ y ver que 
+$L \leq_p \CBisim$. Dado que la relación $\leq_p$ es transitiva, basta con encontrar un problema $H$ que sea \coNPHard y ver que 
 $H \leq_p \CBisim$. Este análisis motiva el estudio del siguiente problema computacional.
 
 \begin{definicion}
@@ -244,7 +244,7 @@ $H \leq_p \CBisim$. Este análisis motiva el estudio del siguiente problema comp
 Una vez presentado este problema, enunciamos el siguiente resultado (ver \cite{AroraB09}) que justifica su estudio en este trabajo.
 
 \begin{teorema}\label{thm:dnftaut-conp-complete}
-    $\DNFTAUT$ es $\coNPComplete$.
+    $\DNFTAUT$ es \coNPComplete.%$\coNPComplete$.
 \end{teorema}
 
 Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontrar una reducción de Karp de $\DNFTAUT$ a $\CBisim$.
@@ -485,7 +485,7 @@ problemas en cuestión.
 A partir de este lema obtenemos de forma directa el resultado deseado.
 
 \begin{corolario}\label{col:cbisim-conphard}
-    $\CBisim$ es $\coNPHard$.
+    $\CBisim$ es \coNPHard.
 \end{corolario}
 
 \begin{demostracion}
@@ -498,7 +498,7 @@ dentro de la teoría de la complejidad computacional. Finalizamos la sección
 con el teorema que captura esta idea.
 
 \begin{teorema}
-    $\CBisim$ es $\coNPComplete$.
+    $\CBisim$ es \coNPComplete.
 \end{teorema}
 
 \begin{demostracion}
@@ -525,7 +525,7 @@ opción que buscar una relación binaria candidata y verificar si efectivamente 
 
 A su vez, esta \textit{búsqueda y verificación} parece ser costosa, pues hay una cantidad exponencial de relaciones binarias
 entre dos \ultss a considerar. Por otro lado, como estudiamos en la anterior sección, verificar que una relación binaria 
-candidata es una bisimulación es $\coNPComplete$. 
+candidata es una bisimulación es \coNPComplete. 
 
 Una primera aproximación que surge de estas consideraciones es que $\KHiBisim \in \NP^{\coNP}$. Pues, basta con dar una 
 algoritmo polinomial que verifique si una relación candidata es una bisimulación utilizando como oráculo el algoritmo que decide 
@@ -630,7 +630,7 @@ resultados presentados a $\KHiBisim$.
 A partir del \Cref{lema:cbisim-in-conp}, obtenemos la pertenencia a $\coNP$ de $\KHiBisim$.
 
 \begin{lema}\label{lema:khibisim-in-conp}
-    $\KHiBisim \in \coNP$ 
+    $\KHiBisim \in \coNP$.
 \end{lema}
 
 \begin{demostracion}
@@ -643,7 +643,7 @@ A partir del \Cref{lema:cbisim-in-conp}, obtenemos la pertenencia a $\coNP$ de $
 Por otro lado, veamos como el mapeo presentado en la \Cref{def:karp-reduction}, nos permite demostrar \textit{hardness} para $\coNP$.
 
 \begin{lema}\label{lema:khi-bisim-conphard}
-    $\KHiBisim$ es $\coNPHard$.
+    $\KHiBisim$ es \coNPHard.
 \end{lema}
 
 \begin{demostracion}
@@ -656,13 +656,13 @@ Por otro lado, veamos como el mapeo presentado en la \Cref{def:karp-reduction}, 
     a este caso debido a que la existencia de una \KHilogic-bisimulación entre los modelos construídos por la reducción está exactamente 
     caracterizada por el hecho de que la relación binaria $Z$, construída por la misma reducción, sea efectivamente una bisimulación.
 
-    Finalmente, como $\DNFTAUT \leq_p \KHiBisim$, por el \Cref{thm:dnftaut-conp-complete} obtenemos que $\KHiBisim$ es $\coNPHard$.
+    Finalmente, como $\DNFTAUT \leq_p \KHiBisim$, por el \Cref{thm:dnftaut-conp-complete} obtenemos que $\KHiBisim$ es \coNPHard.
 \end{demostracion}
 
 Juntando ambos lemas, conseguimos el siguiente resultado de complejidad computacional para $\KHiBisim$.
 
 \begin{teorema}\label{thm:khibisim-conpcomplete}
-    $\KHiBisim$ es $\coNPComplete$.
+    $\KHiBisim$ es \coNPComplete.%$\coNPComplete$.
 \end{teorema}
 
 \begin{demostracion}
@@ -765,7 +765,7 @@ dos \ultss punteados, decidir si $\modults,w \bisim \modults',w'$. Notar que, es
 \KHilogic-bisimulación entre $\modults$ y $\modults'$ que contenga al par $(w,w')$. Nos referiremos a este problema como $\PKHiBisim$.
 
 Demostraremos equivalencia vía reducción de Karp entre $\KHiBisim$ y $\PKHiBisim$, es decir, demostraremos que 
-$\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego podremos concluir que $\PKHiBisim$ es $\coNPComplete$.
+$\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego podremos concluir que $\PKHiBisim$ es \coNPComplete.
 
 \begin{lema}\label{lema:pointed-to-general}
     $\PKHiBisim \leq_p \KHiBisim$
@@ -795,7 +795,7 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
 \end{demostracion}
 
 \begin{teorema}
-    $\PKHiBisim$ es $\coNPComplete$.
+    $\PKHiBisim$ es \coNPComplete.%$\coNPComplete$.
 \end{teorema}
 
 \begin{demostracion}
@@ -804,12 +804,12 @@ $\PKHiBisim \leq_p \KHiBisim$ y $\KHiBisim \leq_p \PKHiBisim$, con lo que luego 
     el algoritmo que decide $\KHiBisim$.
 
 
-    Por el \Cref{thm:khibisim-conpcomplete}, sabemos que $\KHiBisim$ es $\coNPComplete$. Luego, por el \Cref{lema:general-to-pointed}, tenemos que 
-    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es $\coNPHard$. Finalmente, concluímos que $\PKHiBisim$ es $\coNPComplete$.
+    Por el \Cref{thm:khibisim-conpcomplete}, sabemos que $\KHiBisim$ es \coNPComplete. Luego, por el \Cref{lema:general-to-pointed}, tenemos que 
+    $\KHiBisim \leq_p \PKHiBisim$, lo que nos dice que $\PKHiBisim$ es \coNPHard. Finalmente, concluímos que $\PKHiBisim$ es \coNPComplete.
 \end{demostracion}
 
 
-Hemos demostrado entonces que $\PKHiBisim$ es $\coNPComplete$.
+Hemos demostrado entonces que $\PKHiBisim$ es \coNPComplete.
 Notemos que por el \Cref{thm:new-bisim-finite-equiv}, sabemos que es equivalente decidir $\modults,w \bisim \modults',w'$ y 
 $\modults,w \modequiv \modults',w'$, pues algorítmicamente siempre trabajamos con \ultss finitos. Luego, al caracterizar la complejidad 
 computacional de $\PKHiBisim$, también hemos caracterizado 

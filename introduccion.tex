@@ -17,7 +17,8 @@ lenguajes de consulta de bases de datos y de herramientas de model-checking en v
 % \medskip
 
 También se ha explorado el uso de formalismos lógicos para modelar nociones más abstractas vinculadas al razonamiento y la información.  
-El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas. Estas permiten representar 
+El ejemplo que constituye las bases teóricas en las que surge este trabajo es el de las lógicas epistémicas \cite{Hintikka1962,HandbookEpistemicLogic}. 
+Estas permiten representar 
 y razonar formalmente sobre el conocimiento de agentes, los cuales modelan entidades autónomas que actúan e interactúan en un determinado escenario. 
 De esta forma, podemos expresar propiedades tales como ``Juan sabe que está 
 lloviendo en Río Cuarto'', en la que el valor de verdad de la propiedad no solo depende de si efectivamente llueve en Río Cuarto sino 
@@ -26,9 +27,10 @@ saber un robot para cumplir un objetivo? ¿Qué necesita saber un agente acerca 
 de interés en disciplinas como la planificación en inteligencia artificial o la teoría de la argumentación.
 % \medskip
 
-La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles}. Dada la información actual 
+La semántica para este tipo de lógicas está basada en la noción de \textit{mundos posibles} \cite{Kripke-possible-worlds}. 
+Dada la información actual 
 que posee un agente existe una cierta cantidad de mundos posibles que podrían representar el estado actual de los hechos. 
-Luego, un agente \textit{sabe} una propiedad si la misma es cierta en todos los mundos que considera que son posibles. 
+Luego, un agente \textit{sabe} que una propiedad vale en un mundo, si la misma es cierta en todos los mundos que considera que son posibles. 
 La representación matemática por excelencia de este concepto está dada por los modelos relacionales (o de Kripke),
 los cuales son grafos dirigidos en los que sus estados, etiquetados con un conjunto de variables proposicionales, representan los distintos 
 mundos posibles y una arista $(w,v)$ con etiqueta $i$ determina que en el mundo $w$ el agente $i$ considera posible al mundo $v$.
@@ -36,7 +38,7 @@ De esta forma, es posible representar numerosos sistemas de múltiples agentes i
 de póker, usuarios comunicándose en una red social, participantes de un debate, entre otros.
 % \medskip
 
-Las propuestas clásicas de lógicas epistémicas consideran el conocimiento de los agentes en la forma de ``saber qué'' (\textit{knowing that}, \cite{Hintikka1962}), 
+Las propuestas clásicas de lógicas epistémicas consideran el conocimiento de los agentes en la forma de ``saber qué'' (\textit{knowing that}, \cite{Hintikka1962,HandbookEpistemicLogic}), 
 concentrandose así en el estudio de propiedades como las que fueron mencionadas anteriormente. Sin embargo, en años recientes se han desarrollado 
 teorías y lenguajes formales en torno a otras formas del conocimiento. Algunos autores han estudiado la noción de ``saber si'' 
 (\textit{knowing whether}, \cite{KnowingWhether}), donde el conocimiento de los agentes está relacionado con su certeza en relación al 
@@ -71,7 +73,7 @@ de un \lts pero no sepa cómo componerlas para construir un plan adecuado. Más 
 dos planes distintos pero no tener la capacidad de distinguir los efectos que estos provocan.
 % \medskip
 
-Así es como surge la propuesta de \cite{ArecesFSV25,SaraviaPHD} de la Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic), 
+Así es como surge la propuesta de \cite{ArecesFSV25,SaraviaPHD} de una Lógica de \textit{Knowing How} Basada en Incertidumbre (\KHilogic), 
 en la que la estrategia utilizada para abordar las consideraciones mencionadas es extender los \ltss con una relación de indistinguibilidad sobre 
 planes. De esta forma, la habilidad del agente deja de depender únicamente de las posibles composiciones de acciones y pasa a tenerse en 
 consideración su percepción sobre las mismas y su capacidad de distinguir los distintos 
@@ -128,7 +130,7 @@ considerados y, de esta manera, fortalecer el argumento a favor del estudio de a
 \ssparagraph{\Large{Estructura del trabajo}}
 \bigskip
 
-En el \Cref{ch:marco-teorico} presentamos la Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic). 
+En el \Cref{ch:marco-teorico} presentamos la Lógica de \textit{Knowing How} Basada en Incertidumbre (\KHilogic). 
 Primero, introducimos su sintaxis y semántica; para ello presentamos la gramática que define las fórmulas que la componen y 
 los modelos sobre los que se interpreta junto con algunas convenciones notacionales. A continuación, presentamos la noción de bisimulación 
 definida para esta lógica junto con sus principales propiedades. Finalmente, terminamos 
@@ -153,7 +155,7 @@ En el \Cref{ch:contraccion} abordamos el problema de minimización de modelos pa
 contracción por bisimulación. La primera de ellas surge de la caracterización de la máxima autobisimulación de un modelo y, la segunda 
 se construye a partir de la contracción por bisimulación clásica de la Lógica Modal Básica. Para ambas propuestas demostramos los 
 resultados esperados de correctitud y establecemos que son computables en tiempo polinomial. Por último, terminamos este capítulo con 
-un análisis sobre las características de cada propuesta junto ejemplos que evidencian la naturaleza de ambas.
+un análisis sobre las características de cada propuesta junto a ejemplos que evidencian la naturaleza de ambas.
 
 En el \Cref{ch:conclusiones} presentamos algunas conclusiones generales junto con una recapitulación de lo estudiado a lo largo del trabajo.
 También, mencionamos posibles líneas de investigación a futuro que surgen naturalmente de los resultados obtenidos en esta tesis.

@@ -1,4 +1,4 @@
-\chapter{Preliminares: Lógica de Knowing How Basada en la Incertidumbre}\label{ch:marco-teorico}
+\chapter{Preliminares: Lógica de Knowing How Basada en Incertidumbre}\label{ch:marco-teorico}
 En este capítulo introduciremos un enfoque para modelar el concepto de \textit{saber cómo}, presentado en \cite{ArecesFSV25,SaraviaPHD}, el cual surge a partir de la 
 lógica \KHlogic previamente introducida en \cite{Wang15KH, Wang2018GoalDirectedKH}. En esta primera propuesta, el conocimiento de un agente está 
 representado en Sistemas de Transición Etiquetada (\lts por sus siglas en inglés), donde las transiciones etiquetadas representan los cambios de estado 
@@ -7,7 +7,7 @@ su disposición en un determinado estado, sino que también por las posibles com
 llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
 a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en dicho estado.
 
-La Lógica de \textit{Knowing How} Basada en la Incertidumbre (\KHilogic) toma este enfoque como punto de partida. La principal motivación por la que 
+La Lógica de \textit{Knowing How} Basada en Incertidumbre (\KHilogic) toma este enfoque como punto de partida. La principal motivación por la que 
 surge esta nueva propuesta es que la representación del conocimiento mencionada anteriormente supone que el agente cuenta con cierto nivel de omnisciencia, 
 pues se asume que un agente conoce todo plan que pueda inferirse de su \lts asociado y que, además, es capaz de distinguir qué plan es adecuado de entre 
 los que tiene a su disposición, en el sentido de que para todo par de planes es capaz de reconocer si provocan resultados diferentes.
@@ -544,33 +544,33 @@ A lo largo de este trabajo, analizaremos la complejidad computacional de problem
 Por ello, vale la pena mencionar algunos resultados estudiados en \cite{ArecesFSV25,SaraviaPHD} referentes a la lógica presentada en este 
 capítulo. 
 A la hora de realizar un estudio computacional de una lógica, los dos problemas de decisión fundamentales a analizar son los de 
-verificación de modelos (model-checking) y satisfacibilidad ($\SAT$).
+verificación de modelos (model-checking) y satisfacibilidad (\SAT).
 El problema de model-checking se formula como ``dado un modelo y una fórmula de la lógica, decidir si el modelo la satisface''. Por otro lado, 
-$\SAT$ se formula como ``dada una fórmula de la lógica, decidir si existe un modelo que la satisfaga''. 
+\SAT se formula como ``dada una fórmula de la lógica, decidir si existe un modelo que la satisfaga''. 
 
 Estos problemas han sido estudiados a lo largo de los años en numerosas lógicas y son centrales, no solo para la lógica computacional, sino que 
 también para la teoría de la complejidad computacional en general. 
-Para la lógica proposicional, el problema de model-checking está en la clase $\Poly$, mientras que $\SAT$ es $\NPComplete$ 
+Para la lógica proposicional, el problema de model-checking está en la clase \Poly, mientras que \SAT es \NPComplete 
 \cite[Capítulo 2, Sección 3]{Goldreich_2008}. Por otro lado, en la Lógica Modal Básica tenemos que model-checking también 
-está en $\Poly$ pero $\SAT$ es $\PSPACEComplete$ \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
-model-checking es $\PSPACEComplete$ \cite[Capítulo 5, Sección 4]{Goldreich_2008} y $\SAT$ es indecidible. 
+está en \Poly pero \SAT es \PSPACEComplete \cite[Capítulo 4]{HandbookModalLogic}. En la lógica de primer orden, el problema de 
+model-checking es \PSPACEComplete \cite[Capítulo 5, Sección 4]{Goldreich_2008} y \SAT es indecidible. 
 
 Una observación que surge a partir de estos resultados es que mientras mayor es el poder expresivo de la lógica, mayores son los recursos 
 computacionales que se necesitan para resolver ambos problemas.
 
 Metiéndonos de lleno en las lógicas de \textit{Knowing How}, en \cite{Demri_Fervari_2023} se demostró que para \KHlogic model-checking 
-es $\PSPACEComplete$. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que $\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía 
+es \PSPACEComplete. Por otro lado, en \cite{SAT_Upper_Bound} se demostró que $\SAT \in \NP^{\NP}$, aunque no se ha encontrado todavía 
 una cota inferior de su complejidad computacional.
 
 Para el caso de la lógica \KHilogic, que estudiaremos en esta tesis, en \cite{ArecesFSV25,SaraviaPHD} se obtienen los siguientes resultados 
 sobre los problemas de decisión mencionados:
 
 \begin{teorema}\label{thm:model-checking-poly}
-    El problema de model-checking para \KHilogic está en $\Poly$.
+    El problema de model-checking para \KHilogic está en \Poly.
 \end{teorema}
 
 \begin{teorema}
-    $\SAT$ para \KHilogic es $\NPComplete$.
+    $\SAT$ para \KHilogic es \NPComplete.
 \end{teorema}
 
 Los teoremas enunciados nos dicen que ambos problemas son potencialmente más fáciles, computacionalmente hablando, en su versión para \KHilogic con respecto a 

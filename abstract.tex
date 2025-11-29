@@ -1,21 +1,45 @@
-\textbf{Resumen:}\hspace{0.2em} La equivalencia de modelos es un concepto crucial a la hora de entender el poder expresivo de un lenguaje 
-formal. En el contexto de las lógicas modales, la noción de bisimulación surge para caracterizar esta capacidad descriptiva a partir 
-de propiedades estructurales de los modelos considerados. 
-% Dos modelos serán bisimilares cuando sepan imitarse mutuamente en relación a cierto comportamiento relevante para la lógica en cuestión.
-En este trabajo investigamos aspectos computacionales de la noción de bisimulación para una lógica epistémica que busca modelar 
-el concepto de ``saber cómo'' (Lógica de \textit{Knowing How} Basada en la Incertidumbre). 
+% La equivalencia de modelos es un concepto crucial a la hora de entender el poder expresivo de un lenguaje 
+% formal. En el contexto de las lógicas modales, la noción de bisimulación surge para caracterizar esta capacidad descriptiva a partir 
+% de propiedades estructurales de los modelos considerados. 
+% % Dos modelos serán bisimilares cuando sepan imitarse mutuamente en relación a cierto comportamiento relevante para la lógica en cuestión.
+% En este trabajo investigamos aspectos computacionales de la noción de bisimulación para una lógica epistémica que busca modelar 
+% el concepto de ``saber cómo'' (Lógica de \textit{Knowing How} Basada en la Incertidumbre). 
 
+% En primer lugar, proponemos una nueva definición de bisimulación con el objetivo de otorgarle una naturaleza algorítmica y una mejor 
+% alineación con las nociones clásicas. Además, demostramos que nuestra propuesta satisface las propiedades esperadas de 
+% correctitud.
+
+% Luego, estudiamos problemas computacionales asociados a esta noción. Determinamos que el problema de verificar 
+% si una relación binaria es una bisimulación es \coNPComplete. A continuación, extendemos este resultado al problema de decidir la existencia de 
+% una bisimulación entre dos modelos y a la versión punteada del mismo.
+
+% Finalmente, abordamos el problema de la minimización de modelos a partir de la definición de contracciones por bisimulación. Presentamos 
+% dos propuestas de contracción: la primera basada en el estudio de la máxima autobisimulación y la segunda formulada a partir de la propuesta 
+% clásica de la Lógica Modal Básica. También, mostramos que ambas contracciones son computables en tiempo polinomial.
+\textbf{Resumen:}\hspace{0.2em} 
+La equivalencia de modelos es un concepto crucial a la hora de
+entender el poder expresivo de un lenguaje formal. En el contexto de las lógicas
+modales, la noción de bisimulación surge para caracterizar esta capacidad descriptiva
+a partir de propiedades estructurales de los modelos considerados. Esto permite, por ejemplo, utilizar bisimulaciones para encontrar 
+descripciones minimales, indistinguibles desde el punto de vista de la lógica, de ciertos escenarios.
+
+En este trabajo investigamos aspectos computacionales de la noción de bisimulación para una lógica epistémica que busca modelar el 
+“saber cómo”, a la que nos referimos como una Lógica de \textit{Knowing How} Basada en Incertidumbre. Esta terminología se 
+debe a que el conocimiento de los agentes está sujeto a su incertidumbre sobre los efectos que producen los planes de los que disponen.
+% Nos referiremos a la misma como una Lógica de Knowing How Basada en Incertidumbre, ya que el conocimiento 
+% de los agentes está sujeto a su incertidumbre sobre los planes que tienen a disposición. 
 En primer lugar, proponemos una nueva definición de bisimulación con el objetivo de otorgarle una naturaleza algorítmica y una mejor 
-alineación con las nociones clásicas. Además, demostramos que nuestra propuesta satisface las propiedades esperadas de 
-correctitud.
+alineación con las nociones
+clásicas. Además, demostramos que nuestra propuesta es adecuada, en el sentido de que captura la expresividad de la lógica en cuestión. 
 
-Luego, estudiamos problemas computacionales asociados a esta noción. Determinamos que el problema de verificar 
-si una relación binaria es una bisimulación es \coNPComplete. A continuación, extendemos este resultado al problema de decidir la existencia de 
-una bisimulación entre dos modelos y a la versión punteada del mismo.
-
-Finalmente, abordamos el problema de la minimización de modelos a partir de la definición de contracciones por bisimulación. Presentamos 
-dos propuestas de contracción: la primera basada en el estudio de la máxima autobisimulación y la segunda formulada a partir de la propuesta 
-clásica de la Lógica Modal Básica. También, mostramos que ambas contracciones son computables en tiempo polinomial.
+Luego, estudiamos problemas computacionales asociados a esta noción. Primero, determinamos que el problema de verificar si una relación 
+binaria es una bisimulación es
+\coNPComplete. A continuación, extendemos este resultado al problema de decidir la
+existencia de una bisimulación entre dos modelos y a la versión punteada del mismo.
+Finalmente, abordamos el problema de la minimización de modelos a partir de
+la definición de contracciones por bisimulación. Presentamos dos propuestas de contracción: la primera basada en el estudio de la 
+máxima autobisimulación y la segunda formulada a partir de la propuesta clásica de la Lógica Modal Básica. También,
+mostramos que ambas contracciones son computables en tiempo polinomial.
 
 \medskip
 
@@ -23,21 +47,39 @@ clásica de la Lógica Modal Básica. También, mostramos que ambas contraccione
 
 \blankpagew
 
-\textbf{Abstract:}\hspace{0.2em} Model equivalence is a crucial concept for understanding the expressive power of a formal language. In the context of 
-modal logics, the notion of bisimulation arises to characterize this descriptive capacity by analyzing structural properties of the 
-models considered. In this work, we investigate computational aspects of bisimulation for an epistemic logic that models the 
-concept of ``knowing how'' (Uncertainty-Based \textit{Knowing How} Logic).
+% Model equivalence is a crucial concept for understanding the expressive power of a formal language. In the context of 
+% modal logics, the notion of bisimulation arises to characterize this descriptive capacity by analyzing structural properties of the 
+% models considered. In this work, we investigate computational aspects of bisimulation for an epistemic logic that models the 
+% concept of ``knowing how'' (Uncertainty-Based \textit{Knowing How} Logic).
 
-First, we propose a new definition of bisimulation with the aim of providing it with an algorithmic nature and a better alignment with 
-the classical notions. Moreover, we prove that our proposal satisfies the expected adequacy properties.
+% First, we propose a new definition of bisimulation with the aim of providing it with an algorithmic nature and a better alignment with 
+% the classical notions. Moreover, we prove that our proposal satisfies the expected adequacy properties.
 
-Then, we study computational problems related to this notion. We determine that the problem of verifying whether a binary relation is 
-a bisimulation is \coNPCompleteEng. Next, we extend this result to the problem of deciding whether there exists a bisimulation between two 
-models and to the pointed version of this problem.
+% Then, we study computational problems related to this notion. We determine that the problem of verifying whether a binary relation is 
+% a bisimulation is \coNPCompleteEng. Next, we extend this result to the problem of deciding whether there exists a bisimulation between two 
+% models and to the pointed version of this problem.
 
-Finally, we address the problem of model minimization by defining bisimulation contractions. We present two contraction proposals: 
-the first one based on the study of the maximal autobisimulation, and the second one built on the classical proposal of 
-Basic Modal Logic. In addition, we show that both contractions can be computed in polynomial time.
+% Finally, we address the problem of model minimization by defining bisimulation contractions. We present two contraction proposals: 
+% the first one based on the study of the maximal autobisimulation, and the second one built on the classical proposal of 
+% Basic Modal Logic. In addition, we show that both contractions can be computed in polynomial time.
+\textbf{Abstract:}\hspace{0.2em} 
+Model equivalence is a crucial concept for understanding the expressive power of a formal language. 
+In modal logic, bisimulation plays a central role in characterizing this expressive capacity by analyzing the structural properties 
+of the models under consideration. For instance, it enables us to find minimal (but yet equivalent from the logic's point 
+of view) representations of certain scenarios.
+
+In this work, we investigate computational aspects of bisimulation for an epistemic logic that captures the notion of “knowing how”, 
+to which we refer as an Uncertainty-Based \textit{Knowing How} Logic. The latter terminology comes from the fact that the knowledge of an agent 
+is subject to her uncertainty about the effects of the plans she has at her disposal. We begin by proposing a new definition of 
+bisimulation aimed at giving the concept an algorithmic nature and achieving a better alignment with classical notions. We also 
+show that our definition satisfies the expected adequacy properties, in the sense that it captures the distinctive expressivity 
+features of the logic we consider. 
+
+We then study several computational problems related to this notion. In particular, we establish that verifying whether a 
+given binary relation is a bisimulation is \coNPCompleteEng. We extend this result to the problem of deciding whether there exists a 
+bisimulation between two models, including its pointed variant. Finally, we examine model minimization through the lens of bisimulation 
+contractions. We present two contraction methods: one based on the maximal autobisimulation and another inspired by the classical 
+contraction for Basic Modal Logic. Moreover, we show that both contractions can be computed in polynomial time.
 
 \medskip
 
