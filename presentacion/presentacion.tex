@@ -1,0 +1,487 @@
+% \pdfminorversion=4
+\documentclass{beamer}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{courier}
+\usepackage{array}
+\usepackage{bold-extra}
+\usepackage{minted}
+\usepackage[thicklines]{cancel}
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+\usepackage{amsthm}
+\xdefinecolor{dianablue}{rgb}{0.18,0.24,0.31}
+\xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
+\xdefinecolor{darkgreen}{rgb}{0,0.5,0}
+\xdefinecolor{darkgrey}{rgb}{0.35,0.35,0.35}
+\xdefinecolor{darkorange}{rgb}{0.8,0.5,0}
+\xdefinecolor{darkred}{rgb}{0.7,0,0}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\input{macros.sty}
+
+
+\mode<presentation>
+{
+  \usetheme{default}
+  \usecolortheme{default}
+  \usefonttheme{default}
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  \setbeamertemplate{footline}[frame number]  % or "page number"
+  \setbeamercolor{frametitle}{fg=dianablue}
+  \setbeamercolor{footline}{fg=black}
+  \setbeamercolor{title}{fg=dianablue}
+  \setbeamercolor{block title}{fg=dianablue}
+  % \setbeamercolor{proposition title}{fg=blue}
+  % \setbeamercolor{definition title}{fg=teal}
+  % \setbeamercolor{corollary title}{fg=purple}
+} 
+
+
+
+% \usepackage[thmmarks]{ntheorem}
+% \usepackage{amsmath}
+% \usepackage{multicol}
+
+
+% % \newtheorem{teorema}{Teorema}[chapter]
+% % \newtheorem{proposicion}{Proposición}[chapter]
+% % \newtheorem{corolario}{Corolario}[chapter]
+% % \newtheorem{lema}{Lema}[chapter]
+% % \newtheorem{hecho}{Hecho}[chapter]
+
+
+
+% %------------------------------------------------
+
+% % defining the format for definitions, examples, fact and others. Same symbol at the end, but header and font different
+% \theoremheaderfont{\normalfont\bfseries}
+% \theorembodyfont{\normalfont}
+% \theoremsymbol{\ensuremath{\dashv}}
+
+% % \newtheorem{definicion}{Definición}[chapter]
+% % \newtheorem{ejemplo}{Ejemplo}[chapter]
+% % \newtheorem{nota}{Nota}[chapter]
+
+% %------------------------------------------------
+
+% % defining the format for proofs
+% \theoremstyle{nonumberplain}
+% \theoremheaderfont{\itshape}
+% \theorembodyfont{\normalfont}
+% \theoremsymbol{\ensuremath{\blacksquare}}
+
+% \newtheorem{demostracion}{Demostración.}
+
+
+
+% \newcommand{\bigO}{\mathcal{O}}
+% \newcommand{\zm}{Z_\mathcal{M}}
+% \newtheorem{teorema}{Teorema}
+% \newtheorem{proposicion}{Proposición}
+% \newtheorem{definicion}{Definición}
+% \newtheorem{corolario}{Corolario}
+
+
+
+
+\title[yyyy-mm-dd-DESCRIPTION]{Aspectos Computacionales de Bisimulaciones para una Lógica de Knowing How}
+\author{Antonio Mondejar}
+\institute{Facultad de Matemática, Astronomía, Física y Computación}
+\date{19 de Diciembre de 2025}
+
+\usetikzlibrary{shapes.callouts}
+
+\begin{document}
+
+% \logo{\pgfputat{\pgfxy(0.11, 7.4)}{\pgfbox[right,base]{\tikz{\filldraw[fill=dianablue, draw=none] (0 cm, 0 cm) rectangle (50 cm, 1 cm);}\mbox{\hspace{-5 cm}\includegraphics[height=2 cm]{Logo_FAMAF_blanco.png}}}}}
+
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.1cm,dp=0cm]{}
+    \begin{tikzpicture}[remember picture,overlay]
+      % Blue bar
+      \fill[dianablue] (0,0) rectangle (\paperwidth,1.1cm);
+
+      % Logo anchored and adjustable
+      \node[anchor=east] at (\paperwidth-0.1cm,0.625cm) 
+        {\includegraphics[height=1.85cm]{Logo_FAMAF_blanco.png}};
+    \end{tikzpicture}
+  \end{beamercolorbox}
+}
+% \setbeamertemplate{headline}{
+%   \begin{tikzpicture}[remember picture,overlay]
+%     % Blue bar
+%     \fill[dianablue] (current page.north west) rectangle
+%          ([yshift=-1.1cm]current page.north east);
+
+%     % Logo
+%     \node[anchor=north east] at ([yshift=-0.2cm]current page.north east)
+%       {\includegraphics[height=1.8cm]{Logo_FAMAF_blanco.png}};
+%   \end{tikzpicture}
+% }
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% \logo{\pgfputat{\pgfxy(0.11, 7.4)}{\pgfbox[right,base]{\tikz{\filldraw[fill=dianablue, draw=none] (0 cm, 0 cm) rectangle (50 cm, 1 cm);}\mbox{\hspace{-8 cm}\includegraphics[height=1 cm]{Logo_FAMAF_blanco.png}\includegraphics[height=1 cm]{Logo_FAMAF_blanco.png}}}}}
+
+% Uncomment these lines for an automatically generated outline.
+% \begin{frame}{Outline}
+%  \tableofcontents
+% \end{frame}
+
+% START START START START START START START START START START START START START
+
+\begin{frame}
+  \frametitle{Motivación}
+Los grafos son utilizados para modelar numerosos escenarios:\pause
+\begin{itemize}
+  \item Bases de datos.\pause
+  \item Mapas de ciudades/países.\pause
+  \item Sistemas de computación.\pause
+  \item Usuarios de una red social.
+\end{itemize}
+
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{Motivación}\pause
+
+  \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \node[state] (u1) {\textsf{Arg}};
+            \node[state, below of=u1, yshift=-1cm] (u2) {\textsf{Arg}};
+            \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Arg}};
+            \node[state, right of=u1, xshift=1.5cm] (u4) {\textsf{Chi}};
+            \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Chi}};
+            \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Chi}};
+
+            
+
+            \node at ($(u1)+(0,0.5)$) {$u_1$};
+            \node at ($(u2)+(0,0.5)$) {$u_2$};
+            \node at ($(u3)+(0,0.5)$) {$u_3$};
+            \node at ($(u4)+(0,0.5)$) {$u_4$};
+            \node at ($(u5)+(0,0.5)$) {$u_5$};
+            \node at ($(u6)+(0,0.5)$) {$u_6$};
+
+            \path (u1) edge [<->] node [above] {} (u4)
+                       edge [<->] node [above] {} (u5);
+                      %  edge [<->] node [above] {} (u6);
+
+            \path (u2) edge [<->] node [above] {} (u4)
+                       edge [<->] node [above] {} (u5)
+                       edge [<->] node [above] {} (u6);
+            
+            \path (u3) edge [<->] node [above] {} (u5)
+                       edge [<->] node [above] {} (u6);
+                      %  edge [<->] node [above] {} (u6);
+
+
+            % \path (p) edge [-] node [above] {$a$} (q)
+            %           edge [-][bend left] node [above] {$a$} (r);
+            % \path (p2) edge node [above] {$a$} (q);
+            % \path (q) edge node [above] {$b$} (r);
+        \end{tikzpicture}        % \label{fig:lts}
+    \end{figure}\pause
+
+    \begin{itemize}
+      \item ¿Soy amigo de algún usuario con nacionalidad X?.
+    \end{itemize} 
+
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{Motivación}\pause
+
+   \begin{figure}
+  \centering
+
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  % --- FIRST GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {\textsf{Arg}};
+            \node[state, below of=u1, yshift=-1cm] (u2) {\textsf{Arg}};
+            \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Arg}};
+            \node[state, right of=u1, xshift=1.5cm] (u4) {\textsf{Chi}};
+            \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Chi}};
+            \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Chi}};
+
+            
+
+            \node at ($(u1)+(0,0.5)$) {$u_1$};
+            \node at ($(u2)+(0,0.5)$) {$u_2$};
+            \node at ($(u3)+(0,0.5)$) {$u_3$};
+            \node at ($(u4)+(0,0.5)$) {$u_4$};
+            \node at ($(u5)+(0,0.5)$) {$u_5$};
+            \node at ($(u6)+(0,0.5)$) {$u_6$};
+
+            \path (u1) edge [<->] node [above] {} (u4)
+                       edge [<->] node [above] {} (u5);
+                      %  edge [<->] node [above] {} (u6);
+
+            \path (u2) edge [<->] node [above] {} (u4)
+                       edge [<->] node [above] {} (u5)
+                       edge [<->] node [above] {} (u6);
+            
+            \path (u3) edge [<->] node [above] {} (u5)
+                       edge [<->] node [above] {} (u6);
+  \end{tikzpicture}\pause
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  % --- SECOND GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {\textsf{Arg}};
+            % \node[state, right of=u1, yshift=-1cm] (u2) {\textsf{Arg}};
+            % \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Arg}};
+            \node[state, right of=u1, xshift=1.5cm] (u2) {\textsf{Chi}};
+            % \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Chi}};
+            % \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Chi}};
+
+            
+
+            \node at ($(u1)+(0,0.6)$) {$u_1'$};
+            \node at ($(u2)+(0,0.6)$) {$u_2'$};
+            % \node at ($(u3)+(0,0.5)$) {$u_3$};
+            % \node at ($(u4)+(0,0.5)$) {$u_4$};
+            % \node at ($(u5)+(0,0.5)$) {$u_5$};
+            % \node at ($(u6)+(0,0.5)$) {$u_6$};
+
+            \path (u1) edge [<->] node [above] {} (u2);
+                      %  edge [<->] node [above] {} (u5);
+                      %  edge [<->] node [above] {} (u6);
+
+            % \path (u2) edge [<->] node [above] {} (u4)
+            %            edge [<->] node [above] {} (u5)
+            %            edge [<->] node [above] {} (u6);
+            
+            % \path (u3) edge [<->] node [above] {} (u5)
+            %            edge [<->] node [above] {} (u6);
+  \end{tikzpicture}
+  \end{minipage}
+
+  \end{figure}
+
+\end{frame}
+
+% =========================================================================================================== %
+
+
+\begin{frame}
+  \frametitle{Motivación}\pause
+
+  \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \node[state] (u1) {\textsf{Nole}};
+            \node[state, below of=u1, yshift=-1cm] (u2) {\textsf{Roger}};
+            \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Jannik}};
+            \node[state, right of=u1, xshift=1.5cm] (u4) {\textsf{Andy}};
+            \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Charly}};
+            \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Rafa}};
+
+            
+
+            \node at ($(u1)+(0,0.5)$) {$u_1$};
+            \node at ($(u2)+(0,0.5)$) {$u_2$};
+            \node at ($(u3)+(0,0.5)$) {$u_3$};
+            \node at ($(u4)+(0,0.5)$) {$u_4$};
+            \node at ($(u5)+(0,0.5)$) {$u_5$};
+            \node at ($(u6)+(0,0.5)$) {$u_6$};
+
+            \path (u1) edge [<->] node [above] {} (u4)
+                       edge [<->] node [above] {} (u5)
+                      %  edge [<->] node [above] {} (u6)
+                       edge [<->][bend right = 50] node [above] {} (u3)
+                       edge [<->][bend right = 32] node [above] {} (u2);
+
+            \path (u2) edge [<->] node [above] {} (u4)
+                       edge [<->][bend right = 30] node [above] {} (u3)
+                       edge [<->] node [above] {} (u5)
+                       edge [<->] node [above] {} (u6);
+            
+            \path (u3) edge [<->] node [above] {} (u5)
+                       edge [<->] node [above] {} (u6);
+            
+            \path (u4) edge [<->][bend left=32] node [above] {} (u5)
+                       edge [<->][bend left=50] node [above] {} (u6);
+                      %  edge [<->] node [above] {} (u6);
+            \path (u5) edge [<->][bend left=32] node [above] {} (u6);
+
+            % \path (p) edge [-] node [above] {$a$} (q)
+            %           edge [-][bend left] node [above] {$a$} (r);
+            % \path (p2) edge node [above] {$a$} (q);
+            % \path (q) edge node [above] {$b$} (r);
+        \end{tikzpicture}        % \label{fig:lts}
+    \end{figure}\pause
+    \begin{itemize}
+    \item ¿Existe alguna cadena de amistades que me conecte con X?. 
+    \end{itemize}
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{Motivación}\pause
+
+  \begin{figure}
+  \centering
+
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  % --- FIRST GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {\textsf{Nole}};
+    \node[state, below of=u1, yshift=-1cm] (u2) {\textsf{Roger}};
+    \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Jannik}};
+    \node[state, right of=u1, xshift=1.5cm] (u4) {\textsf{Andy}};
+    \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Charly}};
+    \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Rafa}};
+
+    
+
+    \node at ($(u1)+(0,0.5)$) {$u_1$};
+    \node at ($(u2)+(0,0.5)$) {$u_2$};
+    \node at ($(u3)+(0,0.5)$) {$u_3$};
+    \node at ($(u4)+(0,0.5)$) {$u_4$};
+    \node at ($(u5)+(0,0.5)$) {$u_5$};
+    \node at ($(u6)+(0,0.5)$) {$u_6$};
+
+    \path (u1) edge [<->] node [above] {} (u4)
+                edge [<->] node [above] {} (u5)
+              %  edge [<->] node [above] {} (u6)
+                edge [<->][bend right = 50] node [above] {} (u3)
+                edge [<->][bend right = 32] node [above] {} (u2);
+
+    \path (u2) edge [<->] node [above] {} (u4)
+                edge [<->][bend right = 30] node [above] {} (u3)
+                edge [<->] node [above] {} (u5)
+                edge [<->] node [above] {} (u6);
+    
+    \path (u3) edge [<->] node [above] {} (u5)
+                edge [<->] node [above] {} (u6);
+    
+    \path (u4) edge [<->][bend left=32] node [above] {} (u5)
+                edge [<->][bend left=50] node [above] {} (u6);
+              %  edge [<->] node [above] {} (u6);
+    \path (u5) edge [<->][bend left=32] node [above] {} (u6);
+  \end{tikzpicture}\pause
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  % --- SECOND GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {\textsf{Nole}};
+    \node[state, below of=u1, yshift=-1cm] (u2) {\textsf{Roger}};
+    \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Jannik}};
+    \node[state, right of=u1, xshift=1.5cm] (u4) {\textsf{Andy}};
+    \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Charly}};
+    \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Rafa}};
+
+    
+
+    \node at ($(u1)+(0,0.6)$) {$u_1'$};
+    \node at ($(u2)+(0,0.6)$) {$u_2'$};
+    \node at ($(u3)+(0,0.6)$) {$u_3'$};
+    \node at ($(u4)+(0,0.6)$) {$u_4'$};
+    \node at ($(u5)+(0,0.6)$) {$u_5'$};
+    \node at ($(u6)+(0,0.6)$) {$u_6'$};
+
+    \path (u1) edge [<->] node [above] {} (u4);
+              %   edge [<->] node [above] {} (u5)
+              % %  edge [<->] node [above] {} (u6)
+              %   edge [<->][bend right = 50] node [above] {} (u3)
+              %   edge [<->][bend right = 32] node [above] {} (u2);
+
+    \path (u2)  edge [<->][bend right = 30] node [above] {} (u3)
+                edge [<->] node [above] {} (u5);
+                % edge [<->] node [above] {} (u6);
+    
+    \path (u3) edge [<->] node [above] {} (u6);
+                % edge [<->] node [above] {} (u6);
+    
+    \path (u4) edge [<->][bend left=32] node [above] {} (u5);
+                % edge [<->][bend left=50] node [above] {} (u6);
+              %  edge [<->] node [above] {} (u6);
+    % \path (u5) edge [<->][bend left=32] node [above] {} (u6);
+  \end{tikzpicture}
+  \end{minipage}
+
+  \end{figure}
+
+    % \begin{itemize}
+    % \item ¿Existe alguna cadena de amistades que me conecte con X?. 
+    % \end{itemize}
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{Motivación}\pause
+
+    
+    \begin{itemize}
+      \item Lógicas modales.\pause
+      \begin{itemize}
+        \item Familia de lenguajes formales que permiten matematizar este tipo de preguntas.\pause
+        \item Distintos modos de verdad: posibilidad, necesidad/universalidad, obligaciones, etc.\pause
+        \item Modelos de Kripke.\pause
+      \end{itemize}
+      \item Equivalencia lógica.\pause
+      \begin{itemize}
+        \item Determina el poder expresivo de una lógica.\pause
+        \item Utilidad en aplicaciones prácticas de las lógicas modales.
+      \end{itemize}
+
+    \end{itemize}
+    
+\end{frame}
+
+
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{¿Knowing How?}\pause
+
+    \begin{itemize}
+      \item Lógicas epistémicas: lógicas modales que buscan representar y razonar sobre el conocimiento de agentes.\pause
+      \begin{itemize}
+        \item Usualmente modelan el ``saber qué''.
+        \item \textit{Juan sabe que está lloviendo en Río Cuarto}.\pause
+      \end{itemize}
+      \item Existen lógicas que estudian otras formas del conocimiento:\pause
+      \begin{itemize}
+        \item ``saber si''.\pause
+        \item ``saber por qué''.\pause
+        \item {\color{darkorange}{``saber cómo''}.}
+      \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{Lógica de Knowing How Basada en Incertidumbre}\pause
+
+\end{frame}
+
+
+% =========================================================================================================== %
+
+
+\end{document}
