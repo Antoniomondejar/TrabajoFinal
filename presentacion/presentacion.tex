@@ -8,8 +8,9 @@
 \usepackage{array}
 \usepackage{bold-extra}
 \usepackage{minted}
-\usepackage[thicklines]{cancel}
+% \usepackage[thicklines]{cancel}
 \usepackage{fancyvrb}
+\usepackage{xspace}
 \usepackage{xcolor}
 \usepackage{amsthm}
 \xdefinecolor{dianablue}{rgb}{0.18,0.24,0.31}
@@ -28,6 +29,8 @@
   \usetheme{default}
   \usecolortheme{default}
   \usefonttheme{default}
+  \setbeamerfont{block title}{series=\bfseries}
+  \setbeamertemplate{blocks}[rounded][shadow=true]
   \setbeamertemplate{navigation symbols}{}
   \setbeamertemplate{caption}[numbered]
   \setbeamertemplate{footline}[frame number]  % or "page number"
@@ -38,8 +41,9 @@
   % \setbeamercolor{proposition title}{fg=blue}
   % \setbeamercolor{definition title}{fg=teal}
   % \setbeamercolor{corollary title}{fg=purple}
-} 
-
+  } 
+  
+% \useblocktheme{rounded}
 
 
 % \usepackage[thmmarks]{ntheorem}
@@ -476,12 +480,176 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 % =========================================================================================================== %
 
 \begin{frame}
-  \frametitle{Lógica de Knowing How Basada en Incertidumbre}\pause
+  \frametitle{Lógica de Knowing How Basada en Incertidumbre (\KHilogic)}\pause
+
+  \begin{itemize}
+  \item Conjunto de agentes: personas, robots, computadoras en sistemas distribuídos, etc. \pause
+  \item \textbf{Incertidumbre}: considera la incapacidad de un agente para distinguir planes. \pause
+  \item Propiedades referidas a las habilidades de los agentes. \pause
+  \item Un agente sabe cómo lograr un objetivo a partir de una condición inicial. \pause Conoce un 
+  plan \textit{adecuado} que garantiza esta situación. \pause
+    \begin{itemize}
+      \item ¿Cómo se representa el conocimiento de los agentes?
+      \item ¿Qué consideramos \textit{adecuado}?
+    \end{itemize}
+
+  \end{itemize}
 
 \end{frame}
 
 
 % =========================================================================================================== %
 
+\begin{frame}
+  \frametitle{\lts basado en incertidumbre (\ults)}\pause
+  \begin{figure}[h]
+        % \hspace{2.3cm}
+        \vspace{-0.5cm}
+        \begin{tikzpicture}
+            \node[state] (phor) {$\textsf{Pq.Hor}$};
+            \node[state, right of=phor, xshift=1.8cm] (gue) {$\textsf{Guemes}$};
+            \node[state, below of=gue, yshift=-1.6cm, xshift=0.4cm] (cuniv) {$\textsf{C.Univ}$};
+            \node[state, right of=gue, yshift=-1cm, xshift=1.8cm] (cen) {$\textsf{Centro}$};
+            \node[state, right of=cen, xshift=1.8cm] (cof) {$\textsf{Cofico}$};
+            \node[state, right of=cof, xshift=1.8cm] (acba) {$\textsf{Alta Cba}$};
+            
+            % \node at ($(p)+(0,0.5)$) {$w_1$};
+            % \node at ($(r)+(0,0.5)$) {$w_4$};
+            % \node at ($(q)+(0,0.5)$) {$w_3$};
+            % \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+            
+            \path (phor) edge [bend right=12] node [below] {\tiny$30^v$} (gue);
+
+            \path (gue) edge [bend right=12] node [below] {\tiny$30^v$} (cen)
+                        edge [bend right=12] node [above] {\tiny$30^i$} (phor);
+            
+            \path (cen) edge [bend right=12] node [above] {\tiny$30^i$} (gue)
+                        edge [bend right=12] node [above] {\tiny$18^i$} (cuniv)
+                        edge [bend right=12] node [below] {\tiny{$18^v$, $30^v$}} (cof);
+            
+            \path (cof) edge [bend right=12] node [above] {\tiny{$18^i$, $30^i$}} (cen)
+                        edge [bend right=12] node [below] {\tiny{$18^v$, $30^v$}} (acba);
+            
+            \path (acba) edge [bend right=12] node [above] {\tiny{$18^i$, $30^i$}} (cof);
+
+            \path (cuniv) edge [bend right=12] node [below] {\tiny{$18^v$}} (cen);
+                        % edge [bend left] node [above] {$a$} (r);
+            % \path (p2) edge node [above] {$a$} (q);
+            % \path (q) edge node [above] {$b$} (r);
+        \end{tikzpicture}\pause
+        \\
+        \vspace{0.5cm}
+        % \hspace{1cm}
+        % \raisebox{1.8cm}{
+            % \begin{minipage}{0.45\textwidth}
+                \scriptsize$\S_{\textsf{Pedro}} = \left\{
+                    \begin{array}{c}
+                        \{30^{i}30^{i},30^{v}30^{v}\}, \{18^{i}\}
+                    \end{array}
+                \right\}$ \\[0.1cm]\pause
+                $\S_{\textsf{Ana}} = \left\{
+                    \begin{array}{c}
+                        \{30^{i}30^{i}\}, \{30^v30^v\}, \{18^{v}\}
+                    \end{array}
+                \right\}$
+            % \end{minipage}
+        % }
+        % \caption{Representación gráfica de $\modults$}
+        % \label{fig:ults}
+    \end{figure}\pause
+% \vspace{0.1cm}
+    ¿El agente X sabe cómo llegar a Parque Horizonte dado que está en el Centro?
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{\lts basado en incertidumbre (\ults)}
+
+  Sea $\PROP$ un conjunto contable de simbolos proposicionales y $\AGT$ un conjunto finito de nombres de agentes.\pause
+  
+  \begin{block}{\textbf{Definición}}
+    Un \lts basado en incertidumbre (\ults) es una tupla $\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ donde \pause
+    \begin{itemize}
+      \item $\W$ es un conjunto contable no vacío de estados\pause
+      \item $\R$ es una colección de relaciones binarias $\{\R_a \subseteq \W\times\W\}$ donde $a\in\ACT$\pause
+      \item $\S_i$ es una \orange{partición} sobre un conjunto no vacío de planes\pause
+      \item $\V : \W \to \mathcal{P}(\PROP)$\pause
+      \item $\ACT$ es un conjunto no vacío de nombres de acciones
+    \end{itemize}
+  \end{block}
+
+
+\end{frame}
+
+
+% =========================================================================================================== %
+
+\begin{frame}
+    \frametitle{Ejecutabilidad Fuerte}
+    Los planes deben ser a \orange{prueba de fallas}: cada ejecución parcial debe poder completarse. \pause
+    
+    \renewcommand{\arraystretch}{1.6}
+    \begin{ctabular}{cc}
+    \begin{tabular}{@{\ \ \ \ \ \ \ }c}
+        \begin{tikzpicture}
+    \node [state, label = {[label-state]left:$w_1$}] (w1) {};
+    \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {};
+    \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {};
+    \node [state, label = {[label-state]below:$w_4$}, below right = 0.5em and 3em of w1] (w4) {};
+    
+    \path (w1) edge node [label-edge, pos = 0.35, above] {$a$} (w2)
+                edge node [label-edge, pos = 0.35, below] {$a$} (w4)
+            (w2) edge node [label-edge, above] {$b$} (w3);
+        \end{tikzpicture}
+    \end{tabular}
+    &
+    \begin{tabular}{l}
+      \footnotesize  $ab$ no es fuertemente ejecutable en $w_1$
+    \end{tabular}
+    \end{ctabular}\pause
+    \vspace{-0.2cm}
+    \begin{block}{\textbf{Definición}}
+      Un plan $\sigma$ es fuertemente ejecutable (FE) en un estado $w$ si y sólo si cada ejecución parcial de $\sigma$ a partir de $w$ 
+      puede ser completada.
+    \end{block}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+    \frametitle{Sintáxis y semántica}\pause
+    \begin{small}
+        \begin{block}{Definición (\KHilogic sobre \ults)}
+            Las fórmulas de $\KHilogic$ están dadas por la gramática
+            \[
+                \varphi ::= p \mid \neg\varphi \mid \varphi\vee\varphi \mid \khi(\varphi,\varphi),
+            \]
+            donde $p \in \PROP$ e $i \in \AGT$. \pause $\khi(\psi,\varphi)$ debe ser leído como \orange{``el agente $i$ sabe cómo lograr $\varphi$ dado $\psi$''.} \pause
+            \\ 
+        \medskip
+        $\modults,w \models \khi(\psi,\varphi)$ si y sólo si existe \orange{un conjunto de planes} $\strategy \in \S_i$ tal que:
+
+        \begin{quote}
+            \begin{enumerate}
+            \item cada plan en $\strategy$ es FE en cada estado donde vale $\psi$ y
+            \item desde los estados en los que vale $\psi$, cada plan en $\strategy$ termina su ejecución en un estado donde vale $\varphi$.
+            \end{enumerate}
+        \end{quote}
+        \end{block}
+
+        % \pause
+
+        % \begin{block}{Property:}
+        %     Define $\orange{\A\varphi} := \bigvee_{i\in\AGT}\khi(\neg\varphi,\bot)$, we have:
+        %     \begin{nscenter}
+        %         $\model,w\models\A\varphi \mbox{ iff for all $v$, } \model,v\models\varphi;$
+        %     \end{nscenter}
+        %     i.e., $\A$ is the standard \orange{universal} modality (and its dual: $\E\varphi:=\neg\A\neg\varphi$).
+        % \end{block}
+
+    \end{small}
+
+\end{frame}
 
 \end{document}
