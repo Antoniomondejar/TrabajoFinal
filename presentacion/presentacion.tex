@@ -486,8 +486,8 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
   \item Conjunto de agentes: personas, robots, computadoras en sistemas distribuídos, etc. \pause
   \item \textbf{Incertidumbre}: considera la incapacidad de un agente para distinguir planes. \pause
   \item Propiedades referidas a las habilidades de los agentes. \pause
-  \item Un agente sabe cómo lograr un objetivo a partir de una condición inicial. \pause Conoce un 
-  plan \textit{adecuado} que garantiza esta situación. \pause
+  \item Un agente sabe cómo lograr un objetivo a partir de una condición inicial. \pause Dispone de un 
+  plan \textit{adecuado} que lo garantice. \pause
     \begin{itemize}
       \item ¿Cómo se representa el conocimiento de los agentes?
       \item ¿Qué consideramos \textit{adecuado}?
@@ -589,10 +589,12 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     \frametitle{Ejecutabilidad Fuerte}
     Los planes deben ser a \orange{prueba de fallas}: cada ejecución parcial debe poder completarse. \pause
     
+    \vspace{-0.2cm}
     \renewcommand{\arraystretch}{1.6}
     \begin{ctabular}{cc}
-    \begin{tabular}{@{\ \ \ \ \ \ \ }c}
+      \begin{tabular}{@{\ \ \ \ \ \ \ }c}
         \begin{tikzpicture}
+          \hspace{-0.5cm}
     \node [state, label = {[label-state]left:$w_1$}] (w1) {};
     \node [state, label = {[label-state]above:$w_2$}, above right = 0.5em and 3em of w1] (w2) {};
     \node [state, label = {[label-state]above:$w_3$}, right = 3em of w2] (w3) {};
@@ -605,10 +607,11 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     \end{tabular}
     &
     \begin{tabular}{l}
+      \hspace{-0.9cm}
       \footnotesize  $ab$ no es fuertemente ejecutable en $w_1$
     \end{tabular}
     \end{ctabular}\pause
-    \vspace{-0.2cm}
+    \vspace{-0.5cm}
     \begin{block}{\textbf{Definición}}
       Un plan $\sigma$ es fuertemente ejecutable (FE) en un estado $w$ si y sólo si cada ejecución parcial de $\sigma$ a partir de $w$ 
       puede ser completada.
@@ -651,5 +654,94 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     \end{small}
 
 \end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Bisimulación}\pause
+  \begin{itemize}
+    \item La noción de bisimulación surge para caracterizar la equivalencia lógica.\pause
+    \item Una bisimulación es una relación binaria entre los dominios de dos modelos.\pause
+    \begin{itemize}
+      \item Cada par de estados de una bisimulación satisface propiedades relacionadas con las características de los modelos.
+      \item Dos estados relacionados satisfacen exactamente las mismas fórmulas.
+    \end{itemize}\pause
+    \item Cada lógica modal tiene su propia definición.
+  \end{itemize}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Bisimulación}\pause
+  \begin{footnotesize}
+    
+    \begin{block}{\textbf{Definición (\KHilogic-bisimulación)}}
+      Sean $\model, \model'$ dos \ultss, una relación binaria $Z \subseteq \W\times\W'$ es una \orange{\KHilogic-bisimulación} entre $\model$ y $\model'$ si y sólo si\pause
+  \begin{description}
+    \item[(Atom)] $\V(w) = \V'(w')$ para cada $(w,w')\in Z$. \pause
+    \item[($\khi$-zig):] para cada $U \subseteq \W$ \emph{proposicionalmente} definible, si $U \ultsExecAgi T$ para $T \subseteq \W$, existe $T' \subseteq \W'$ tal que: 
+    1) $Z(U) \ultsExecAgi T'$ y
+    2) $T' \subseteq Z(T)$. \pause
+    
+    \item[($\khi$-zag):] % analogous to \textbf{$\khi$-Zig}.
+    para cada $U' \subseteq \W'$ \emph{proposicionalmente} definible, si $U' \ultsExecAgi T'$ para $T' \subseteq \W'$, existe $T \subseteq \W$ tal que: 
+    1) $Z^{-1}(U') \ultsExecAgi T$ y
+    2) $T \subseteq Z^{-1}(T')$. \pause
+    
+    \item[($\A$-zig):] para cada $w\in\W$ existe $w'\in\W'$ tal que $(w,w')\in Z$. \pause
+    
+    \item[($\A$-zag):] para cada $w'\in\W'$ existe $w\in\W$ tal que $(w,w')\in Z$.
+  \end{description}
+\end{block}
+\end{footnotesize}
+\end{frame}
+
+%=============================================================
+
+% \begin{theorem}[\gray{Areces et al. 2021}]
+% \label{th:adequacy}
+% Let $\model,s$ and $\model',s'$ be two \ultss. $\model,s\bisim\model',s'$ implies $\model,s\models\varphi$ iff $\model',s'\models\varphi$, for all $\KHilogic$-formulas $\varphi$. Moreover, if $\model$ and $\model'$ are finite domain, the converse also holds.
+% \end{theorem}
+
+\begin{frame}
+  \frametitle{Bisimulación}\pause
+  \vspace{-0.2cm}
+  \begin{small}
+    
+    \begin{teorema}[\gray{Areces et al. 2021}]
+      Sean $\model$ y $\model'$ dos \ultss. Si existe $Z$ una \KHilogic-bisimulación entre ellos tal que $(w,w')\in Z$, entonces 
+      para cada \KHilogic-fórmula $\varphi$ se cumple que $\model,w \models \varphi$ si y sólo si $\model',w'\models\varphi$. Si ambos \ultss tienen 
+      dominio finito entonces también vale la recíproca. 
+    \end{teorema}\pause
+  \end{small}
+  
+  \vspace{0.15cm}
+
+  Esta definición cuenta con algunos aspectos dignos de ser cuestionados. \pause
+  \vspace{0.1cm}
+  \begin{footnotesize}
+    
+    \begin{description}
+      \item[($\khi$-zig):] para cada $U \subseteq \W$ \red{\emph{proposicionalmente} definible}, si $U \ultsExecAgi T$ para $T \subseteq \W$, existe $T' \subseteq \W'$ tal que: 
+      1) $Z(U) \ultsExecAgi T'$ y
+      2) $T' \subseteq Z(T)$.
+      
+      \item[($\khi$-zag):] % analogous to \textbf{$\khi$-Zig}.
+    para cada $U' \subseteq \W'$ \red{\emph{proposicionalmente} definible}, si $U' \ultsExecAgi T'$ para $T' \subseteq \W'$, existe $T \subseteq \W$ tal que: 
+    1) $Z^{-1}(U') \ultsExecAgi T$ y
+    2) $T \subseteq Z^{-1}(T')$. 
+  \end{description}
+\end{footnotesize}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Redefiniendo \KHilogic-bisimulación}
+\end{frame}
+
+
+%=============================================================
 
 \end{document}
