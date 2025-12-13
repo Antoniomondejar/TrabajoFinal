@@ -13,6 +13,7 @@
 \usepackage{xspace}
 \usepackage{xcolor}
 \usepackage{amsthm}
+\setlength{\parskip}{6pt}     % space between paragraphs
 \xdefinecolor{dianablue}{rgb}{0.18,0.24,0.31}
 \xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
 \xdefinecolor{darkgreen}{rgb}{0,0.5,0}
@@ -677,21 +678,21 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
   \begin{footnotesize}
     
     \begin{block}{\textbf{Definición (\KHilogic-bisimulación)}}
-      Sean $\model, \model'$ dos \ultss, una relación binaria $Z \subseteq \W\times\W'$ es una \orange{\KHilogic-bisimulación} entre $\model$ y $\model'$ si y sólo si\pause
+      Sean $\model, \model'$ dos \ultss, una relación binaria $Z \subseteq \W\times\W'$ es una \orange{\KHilogic-bisimulación} entre $\model$ y $\model'$ si y sólo si se cumplen:\pause
   \begin{description}
-    \item[(Atom)] $\V(w) = \V'(w')$ para cada $(w,w')\in Z$. \pause
-    \item[($\khi$-zig):] para cada $U \subseteq \W$ \emph{proposicionalmente} definible, si $U \ultsExecAgi T$ para $T \subseteq \W$, existe $T' \subseteq \W'$ tal que: 
+    \item[(Atom)] $\V(w) = \V'(w')$ para todo $(w,w')\in Z$. \pause
+    \item[($\khi$-zig):] para todo $U \subseteq \W$ \emph{proposicionalmente} definible, si $U \ultsExecAgi T$ para $T \subseteq \W$, existe $T' \subseteq \W'$ tal que: 
     1) $Z(U) \ultsExecAgi T'$ y
     2) $T' \subseteq Z(T)$. \pause
     
     \item[($\khi$-zag):] % analogous to \textbf{$\khi$-Zig}.
-    para cada $U' \subseteq \W'$ \emph{proposicionalmente} definible, si $U' \ultsExecAgi T'$ para $T' \subseteq \W'$, existe $T \subseteq \W$ tal que: 
+    para todo $U' \subseteq \W'$ \emph{proposicionalmente} definible, si $U' \ultsExecAgi T'$ para $T' \subseteq \W'$, existe $T \subseteq \W$ tal que: 
     1) $Z^{-1}(U') \ultsExecAgi T$ y
     2) $T \subseteq Z^{-1}(T')$. \pause
     
-    \item[($\A$-zig):] para cada $w\in\W$ existe $w'\in\W'$ tal que $(w,w')\in Z$. \pause
+    \item[($\A$-zig):] para todo $w\in\W$ existe $w'\in\W'$ tal que $(w,w')\in Z$. \pause
     
-    \item[($\A$-zag):] para cada $w'\in\W'$ existe $w\in\W$ tal que $(w,w')\in Z$.
+    \item[($\A$-zag):] para todo $w'\in\W'$ existe $w\in\W$ tal que $(w,w')\in Z$.
   \end{description}
 \end{block}
 \end{footnotesize}
@@ -706,22 +707,22 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
 \begin{frame}
   \frametitle{Bisimulación}\pause
-  \vspace{-0.2cm}
+  % \vspace{-0.2cm}
   \begin{small}
     
     \begin{teorema}[\gray{Areces et al. 2021}]
-      Sean $\model$ y $\model'$ dos \ultss. Si existe $Z$ una \KHilogic-bisimulación entre ellos tal que $(w,w')\in Z$, entonces 
+      Sean $\model$ y $\model'$ dos \ultss. Si existe una \KHilogic-bisimulación $Z$ entre ellos tal que $(w,w')\in Z$, entonces 
       para cada \KHilogic-fórmula $\varphi$ se cumple que $\model,w \models \varphi$ si y sólo si $\model',w'\models\varphi$. Si ambos \ultss tienen 
       dominio finito entonces también vale la recíproca. 
     \end{teorema}\pause
   \end{small}
   
-  \vspace{0.15cm}
+  % \vspace{0.15cm}
 
-  Esta definición cuenta con algunos aspectos dignos de ser cuestionados. \pause
-  \vspace{0.1cm}
+  \small Esta definición cuenta con algunos aspectos dignos de cuestionamiento. \pause
+  % \vspace{0.1cm}
+  
   \begin{footnotesize}
-    
     \begin{description}
       \item[($\khi$-zig):] para cada $U \subseteq \W$ \red{\emph{proposicionalmente} definible}, si $U \ultsExecAgi T$ para $T \subseteq \W$, existe $T' \subseteq \W'$ tal que: 
       1) $Z(U) \ultsExecAgi T'$ y
@@ -737,10 +738,112 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
 %=============================================================
 
-\begin{frame}
-  \frametitle{Redefiniendo \KHilogic-bisimulación}
+\begin{frame}{Redefiniendo \KHilogic-bisimulación}
+    Con el objetivo de abordar los problemas mencionados, proponemos una nueva definición de bisimulación para \KHilogic. \pause
+
+    % First, we characterize the propositionally definable sets of an \ults.
+
+    % First, we will define a way of grouping the nodes of an \ults by only considering their valuation function $\V$.\pause
+
+    Primero, introducimos una forma de agrupar los nodos de un \ults de acuerdo a su función de valuación $\V$. \pause
+
+    % \vspace{3mm}
+
+    \begin{block}{\textbf{Definición}}
+        \begin{small}
+          Sea $\model$ un \ults, definimos:
+        \begin{itemize}
+            \item $A_{\model}\eqdef\set{(w,v) \subseteq \W\times\W\mid \V(w)=\V(v)}$.\pause
+            \item $\rho_{\model}\eqdef\set{[w]\mid w\in\W}$, donde $[w] = \{v\in\W\mid(w,v)\in A_\model\}$.
+        \end{itemize}
+        \end{small}
+    \end{block}
 \end{frame}
 
+%=============================================================
+
+\begin{frame}{Redefiniendo \KHilogic-bisimulación}
+    Luego, caracterizamos los conjuntos proposicionalmente definibles del dominio de un \ults. \pause
+
+    % \vspace{5mm}
+
+
+    \begin{lema}
+        \begin{small}
+        % Let $\model=\tup{\W,\ACT,\R,\Unc,\V}$ be an \ults, and let $P\subseteq \W$ be a propositionally definable set. Then, for all $[s]\in\qpart{\model}$, either $[s]\cap P =\emptyset$ or $[s]\subseteq P$. 
+        % If $\model$ is finite domain, then the converse also holds.
+        Sea $\model$ un \ults, y sea $U \subseteq \W$ un conjunto proposicionalmente definible. Entonces, para todo $s\in\rho_\model$ se cumple que $s \cap U = \emptyset$ o $s\subseteq U$.
+        Si $\model$ tiene dominio finito entonces también vale la recíproca. 
+      \end{small}
+    \end{lema} \pause
+
+    Este lema motiva nuestra reformulación de las cláusulas ($\khi$-zig) y ($\khi$-zag).
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Redefiniendo \KHilogic-bisimulación}
+
+    \begin{footnotesize}
+    \begin{block}{\textbf{Definición (\KHilogic-bisimulation$^*$)}}\pause
+        Sean $\model, \model'$ dos \ultss, una relación binaria $Z \subseteq \W\times\W'$ es una \orange{\KHilogic-bisimulación$^*$} entre $\model$ y $\model'$ 
+        si y sólo si se cumplen \textbf{(Atom)}, \textbf{(A-zig)}, \textbf{(A-zag)} y:\pause
+        \begin{description} 
+            \item[($\khi$-zig$^*$):] 
+            para todo $U\subseteq\W$ tal que {\color{darkgreen}{para cada $s\in\rho_{\model}$ se cumple que  
+            $s\cap U =\emptyset$ o $s\subseteq U$}}, 
+            si $U \ultsExecAgi T$ para $T \subseteq \W$, entonces existe $T' \subseteq \W'$ tal que: 
+                1) $Z(U) \ultsExecAgi T'$ y
+                2) $T' \subseteq Z(T)$.\pause
+                
+            \item[($\khi$-zag$^*$):] para todo $U'\subseteq\W'$ tal que {\color{darkgreen}para cada $s'\in\rho_{\model'}$ se cumple que 
+            $s'\cap U' =\emptyset$ or $s'\subseteq U'$},
+            si $U' \ultsExecAgi T'$ para $T' \subseteq \W'$, entonces existe $T \subseteq \W$ tal que: 
+                1) $Z^{-1}(U') \ultsExecAgi T$ y
+                2) $T \subseteq Z^{-1}(T')$.
+        \end{description}
+    \end{block}
+\end{footnotesize}
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}{Redefiniendo \KHilogic-bisimulación}
+
+    % Now, we would want our new definition to satisfy the previously introduced adequacy results. \pause
+
+    \begin{lema}
+      \begin{small}
+        % If a relation $Z$ is an \KHilogic-bisimulation$^*$ between two \ults 
+        % $\model$ and $\model'$, then it is an $\KHilogic$-bisimulation between them. 
+        % If $\model$ and $\model'$ are finite domain, then the converse also holds.
+        Si una relación $Z$ es una \KHilogic-bisimulación$^*$ entre $\model$ y $\model'$, entonces también es una \KHilogic-bisimulación entre ellos.
+        Si $\model$ y $\model'$ tienen dominio finito también vale la recíproca.
+      \end{small}  
+    \end{lema}\pause
+
+%     An important observation is that in the infinite case the converse does \red{not} hold.
+
+%     This can be proven with a cardinality argument.
+% \end{frame}
+
+% %=============================================================
+
+% \begin{frame}{Redefiniendo \KHilogic-bisimulación}
+    % As a consequence of that lemma, we can now prove the corresponding results for our new definition. \pause 
+    Como consecuencia de este lema, podemos demostrar los resultados esperados de correctitud.\pause
+    
+    \begin{teorema}
+    \begin{small}
+      Sean $\model$ y $\model'$ dos \ultss. Si existe una \KHilogic-bisimulación$^*$ $Z$ entre ellos tal que $(w,w')\in Z$, entonces 
+      para cada \KHilogic-fórmula $\varphi$ se cumple que $\model,w \models \varphi$ si y sólo si $\model',w'\models\varphi$. Si ambos \ultss tienen 
+      dominio finito entonces también vale la recíproca.     \end{small}
+    \end{teorema}
+
+    % This theorem supports our belief that this proposal is adequate. 
+
+\end{frame}
 
 %=============================================================
 
