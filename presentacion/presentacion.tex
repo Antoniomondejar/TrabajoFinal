@@ -548,14 +548,14 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
         % \hspace{1cm}
         % \raisebox{1.8cm}{
             % \begin{minipage}{0.45\textwidth}
-                \scriptsize$\S_{\textsf{Pedro}} = \left\{
+                \scriptsize$\S_{\textsf{Ana}} = \left\{
                     \begin{array}{c}
-                        \{30^{i}30^{i},30^{v}30^{v}\}, \{18^{i}\}
+                        \{30^{i}30^{i}\}, \{18^{i}\}
                     \end{array}
                 \right\}$ \\[0.1cm]\pause
-                $\S_{\textsf{Ana}} = \left\{
+                $\S_{\textsf{Pedro}} = \left\{
                     \begin{array}{c}
-                        \{30^{i}30^{i}\}, \{30^v30^v\}, \{18^{v}\}
+                        \{30^{i}30^{i},30^v30^v\}, \{18^{i}, 18^{v}\}
                     \end{array}
                 \right\}$
             % \end{minipage}
@@ -874,7 +874,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 %=============================================================
 
 \begin{frame}
-  \frametitle{Estudio computacional de \KHilogic-bisimulación}\pause
+  \frametitle{Estudio computacional de \KHilogic-bisimulación}
 
   Primero, determinamos la complejidad computacional del subproblema de ``verificación''.\pause
 
@@ -1120,9 +1120,23 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 %=============================================================
 
 \begin{frame}
-  \frametitle{Contracción por \KHilogic-bisimulación}
+  \frametitle{Contracción por \KHilogic-bisimulación}\pause
+  \begin{itemize}
+    \item Minimización de modelos: dado un modelo, encontrar el modelo de tamaño mínimo que sea lógicamente equivalente.\pause
+    \item En el contexto de las lógicas modales:\pause
+        \begin{itemize}
+          \item Para cada nodo del modelo original debe existir uno lógicamente equivalente.
+          \item Se aborda a partir del estudio de las autobisimulaciones de un modelo.
+        \end{itemize}
+  \end{itemize}
 \end{frame}
 
+%=============================================================
+
+\begin{frame}
+  \frametitle{Contracción por \KHilogic-bisimulación}
+   
+\end{frame}
 
 %=============================================================
 
