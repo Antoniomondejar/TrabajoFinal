@@ -490,7 +490,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
   \begin{itemize}
   \item Conjunto de agentes: personas, robots, computadoras en sistemas distribuídos, etc. \pause
-  \item \textbf{Incertidumbre}: considera la incapacidad de un agente para distinguir planes. \pause
+  \item Incertidumbre: considera la incapacidad de un agente para distinguir planes. \pause
   \item Propiedades referidas a las habilidades de los agentes. \pause
   \item Un agente sabe cómo lograr un objetivo a partir de una condición inicial. \pause Dispone de un 
   plan \textit{adecuado} que lo garantice. \pause
@@ -575,13 +575,13 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
   Sea $\PROP$ un conjunto contable de simbolos proposicionales y $\AGT$ un conjunto finito de nombres de agentes.\pause
   
   \begin{block}{\textbf{Definición}}
-    Un \lts basado en incertidumbre (\ults) es una tupla $\tup{\W,\R,\{\S_i\}_{i\in\AGT},\V,\ACT}$ donde \pause
+    Un \orange{\lts basado en incertidumbre (\ults)} es una tupla $\tup{\W,\ACT,\R,\{\S_i\}_{i\in\AGT},\V}$ donde \pause
     \begin{itemize}
-      \item $\W$ es un conjunto contable no vacío de estados\pause
-      \item $\R$ es una colección de relaciones binarias $\{\R_a \subseteq \W\times\W\}$ donde $a\in\ACT$\pause
-      \item $\S_i$ es una \orange{partición} sobre un conjunto no vacío de planes\pause
-      \item $\V : \W \to \mathcal{P}(\PROP)$\pause
-      \item $\ACT$ es un conjunto no vacío de nombres de acciones
+      \item $\W$ es un conjunto contable no vacío de estados.\pause
+      \item $\ACT$ es un conjunto no vacío de nombres de acciones.\pause
+      \item $\R$ es una colección de relaciones binarias $\{\R_a \subseteq \W\times\W\}$ donde $a\in\ACT$.\pause
+      \item $\S_i$ es una \orange{partición} sobre un conjunto no vacío de planes.\pause
+      \item $\V : \W \to \mathcal{P}(\PROP)$.
     \end{itemize}
   \end{block}
 
@@ -619,7 +619,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     \end{ctabular}\pause
     \vspace{-0.5cm}
     \begin{block}{\textbf{Definición}}
-      Un plan $\sigma$ es fuertemente ejecutable (FE) en un estado $w$ si y sólo si cada ejecución parcial de $\sigma$ a partir de $w$ 
+      Un plan $\sigma$ es \orange{fuertemente ejecutable (FE)} en un estado $w$ si y sólo si cada ejecución parcial de $\sigma$ a partir de $w$ 
       puede ser completada.
     \end{block}
 \end{frame}
@@ -1034,7 +1034,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
                          \left\{\{in_{\varphi_1}out_{\varphi_1}\},
                         \{in_{\varphi_2}out_{\varphi_2}\},
                         \{in_{\varphi_3}out_{\varphi_3}\},
-                        \{test\} \right\}\\
+                        \{test\} \right\}\\[0.2cm]
                         \S'_{agt} = & 
                         \left\{\{in_{\varphi_1}out_{\varphi_1}\},
                         \{in_{\varphi_2}out_{\varphi_2}\},
@@ -1135,10 +1135,223 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
 \begin{frame}
   \frametitle{Contracción por \KHilogic-bisimulación}
-   
+  En primer lugar, caracterizamos la máxima autobisimulación de un \ults.\pause
+  
+  \begin{small}
+    \begin{teorema}
+      Sea $\model$ un \ults, $A_\model$ es una autobisimulación de $\model$. Más aún, sea $Z$ una autobisimulación de $\model$, entonces 
+      $Z \subseteq A_\model$.
+    \end{teorema}\pause
+  \end{small}
+
+  Luego, definimos la contracción por bisimulación de un modelo $\model$ cocientando su dominio a partir de $A_\model$.
+
 \end{frame}
 
 %=============================================================
+
+\begin{frame}
+  \frametitle{Contracción por \KHilogic-bisimulación}
+  \begin{footnotesize}  
+    \begin{block}{\textbf{Definición}}
+      Sea $\model$ un \ults. Se define su \orange{contracción por \KHilogic-bisimulación}, 
+      $\fcont{\model}=\tup{\W',\ACT',\R',\cset{\S_i'}_{i \in \AGT},\V'}$ donde \pause
+      \begin{center}
+        \begin{itemize}
+          \item $\W' \eqdef \rho_\model$\pause
+          \item $\ACT' \eqdef \{a_\pi \mid \pi\in \S_i$ para algún $i \in \AGT \}$\pause
+          \item $\R' \eqdef \{\R'_{a_\pi} \subseteq \W' \times \W' \mid a_\pi \in \ACT'\}$ donde $([w],[v]) \in \R'_{a_\pi}$ si y sólo si
+          \begin{enumerate}
+            \item Existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v')\in \R_\pi$
+            \item Cada plan en $\pi$ es FE en cada nodo de $[w]$
+          \end{enumerate}\pause
+          \item $\S_i' \eqdef \{ \{a_\pi\} \mid \pi \in \S_i \}$\pause
+          \item $\V'([w]) \eqdef \V(w)$
+        \end{itemize}
+      \end{center}    
+    \end{block}
+  \end{footnotesize}
+\end{frame}
+
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Contracción por \KHilogic-bisimulación}
+  Demostramos que esta contracción garantiza equivalencia lógica y es computable eficientemente.\pause
+
+  \begin{small}
+    \begin{teorema}
+      Sea $\model$ un \ults y sea $\fcont{\model}$ su contracción por \KHilogic-bisimulación, entonces existe $Z$ una \KHilogic-bisimulación 
+      tal que $(w,[w])\in Z$ para cada $w\in\W$. Más aún, si $\model$ es finito entonces $\fcont{\model}$ es computable 
+      en tiempo polinomial.
+    \end{teorema}
+  \end{small}
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Contracción por \KHilogic-bisimulación}
+
+  Presentamos una segunda propuesta de contracción basada en la propuesta clásica de la Lógica Modal Básica ($\bml$).\pause
+
+  \begin{footnotesize}
+    \begin{block}{\textbf{Definición}}
+      Sea $\model$ un \ults y sea $\model' = \tup{\W',\R',\V'}$
+      la contracción por $\bml$-bisimulación de $\tup{\W,\R,\V}$, definimos la \orange{contracción por 
+      \KHilogic-bisimulación} de $\model$ como 
+      $\model_{\bml}=\tup{\W', \R', \cset{\S_i}_{i\in\AGT},\V',\ACT}$.
+    \end{block}\pause
+  \end{footnotesize}
+
+  Análogamente, demostramos que esta propuesta también garantiza equivalencia lógica.\pause
+
+  \begin{small}
+    \begin{teorema}
+    Sea $\model$ un \ults y sea $\model_{\bml}$ su contracción por \KHilogic-bisimulación, entonces existe $Z$ una \KHilogic-bisimulación 
+    tal que $(w,[w])\in Z$ para cada $w\in\W$.
+    \end{teorema}
+  \end{small}
+\end{frame}
+
+%=============================================================
+\begin{frame}
+  \frametitle{Contracción por \KHilogic-bisimulación}
+\begin{footnotesize}
+  
+  \begin{figure}[h]
+    \begin{center}
+        \begin{tabular}{ll}
+          % \hspace{1.2cm}
+          \begin{minipage}{0.25\textwidth}
+            \begin{tikzpicture}
+                    \node[state] (p) {$p$};
+        \node[state, below of=p, yshift=-1cm] (p2) {$p$};
+        \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+        \node[state, below of=q, yshift=-1cm] (q2) {$q$};
+        \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+        \node[state, right of=p2, xshift=3.5cm] (r2) {$r$};
+        
+        
+        \node at ($(p)+(0,0.5)$) {$w_1$};
+        \node at ($(p2)+(0.05,-0.5)$) {$w_2$};
+        \node at ($(q)+(0,0.5)$) {$w_3$};
+        \node at ($(q2)+(0.05,-0.5)$) {$w_4$};
+        \node at ($(r)+(0,0.5)$) {$w_5$};
+        \node at ($(r2)+(0.05,-0.5)$) {$w_6$};
+        
+        
+        \path (p) edge node [above] {$a$} (q)
+        (p) edge node [above] {$a$} (q2);
+        \path (p2) edge node [below] {$a$} (q)
+        (p2) edge node [below] {$a$} (q2);       
+        \path (q) edge node [above] {$b$} (r);
+        \path (q2) edge node [above] {$c$} (r)
+        (q2) edge [bend left=50] node [below] {$c$} (p2)
+        (q2) edge node [above] {$b$} (r2);
+      \end{tikzpicture}
+    \end{minipage}
+    % &
+    \hspace{2cm}
+    \begin{minipage}{0.5\textwidth}
+      \begin{tabular}{c}
+        \vspace{-0.2cm}
+        \begin{tikzpicture}
+          \node[state, yshift=-1cm] (p) {$p$};
+          \node[state, right of=p, xshift=1.5cm] (q) {$q$};
+          \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+          
+          \node at ($(p)+(0,-0.5)$) {$[w_1]$};
+          \node at ($(q)+(0,-0.5)$) {$[w_3]$};
+            \node at ($(r)+(0,-0.5)$) {$[w_5]$};
+            
+            \path (p) edge [bend left=40] node [above] {$a_{ab}$} (r);
+          \end{tikzpicture} \\
+        \phantom{text} \\
+        \begin{tikzpicture}
+          \node[state, yshift=-1cm] (p) {$p$};
+          \node[state, right of=p, yshift = 0.7cm, xshift=1.5cm] (q) {$q$};
+          \node[state, below of=q, yshift = -0.7cm] (q2) {$q$};
+          \node[state, right of=p, xshift=3.5cm] (r) {$r$};
+          
+          \node at ($(p)+(0,0.5)$) {$[w_1]$};
+          \node at ($(q)+(0,0.5)$) {$[w_3]$};
+          \node at ($(q2)+(0,-0.5)$) {$[w_4]$};
+          \node at ($(r)+(0,0.5)$) {$[w_5]$};
+          
+          \path (p) edge node [above] {$a$} (q)
+          (p) edge node [above] {$a$} (q2);
+            \path (q) edge node [above] {$b$} (r)
+            (q2) edge node [above] {$b$} (r)
+            (q2) edge [bend right= 45] node [below] {$c$} (r)
+            (q2) edge [bend left=45] node [below] {$c$} (p);
+          \end{tikzpicture}
+        \end{tabular}
+      \end{minipage}
+      %    \begin{minipage}{0.45\textwidth}
+      %        $\S_i = \left\{
+    %            \begin{array}{c}
+    %                \{ab\}, \{ac\}
+    %            \end{array}
+    %        \right\}$
+    %    \end{minipage}
+  \end{tabular}
+% \caption{$\model$ (izquierda), $\fcont{\model}$ (derecha arriba) y $\model_\bml$ (derecha abajo).}
+% \label{fig:1st-ex-cont}
+\end{center}
+\end{figure}
+\vspace{-0.7cm}
+\begin{center}
+ $\S_i = \left\{ \{ab\}, \{ac\}  \right\}$, $\S_i' = \left\{ \{a_{ab}\}, \{a_{ac}\} \right\}$ \\[0.3cm]
+ $\model$ (izquierda), $\fcont{\model}$ (derecha arriba) y $\model_\bml$ (derecha abajo).
+\end{center}
+\end{footnotesize}
+
+
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Conclusiones}
+  \begin{itemize}
+    \item Introdujimos una nueva definición para \KHilogic-bisimulación, la cual solo considera características estructurales 
+    de los \ultss involucrados.\pause
+    \item Establecimos que tanto verificar como decidir existencia de una bisimulación entre dos \ultss es $\coNPComplete$. A su vez, 
+    extendimos este resultado al caso punteado de este problema.\pause
+    \item Abordamos el problema de la minimización de modelos, para el cual propusimos dos contracciones por \KHilogic-bisimulación las 
+    cuales son computables eficientemente.
+  \end{itemize}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Trabajo futuro}
+  \begin{itemize}
+    \item Adaptar el estudio realizado en esta tesis a la lógica de Knowing How presentada por Wang en 2018:\pause
+    \begin{itemize}
+      \item Reformular su definición de bisimulación para que solo considere características estructurales de los modelos.
+      \item Estudiar la complejidad computacional de su versión de $\KHiBisim$, el cual conjeturamos que es $\PSPACE$-completo.\pause
+    \end{itemize}
+    \item Implementar la contracción por \KHilogic-bisimulación propuesta y analizar su utilidad en un contexto de 
+    consultas de model-checking.
+    % \item Abordamos el problema de minimización de modelos, para el cual propusimos dos contracciones por \KHilogic-bisimulación las 
+    % cuales son computables eficientemente.
+  \end{itemize}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \begin{huge}
+    \begin{center}
+      \color{dianablue}\textbf{¡MUCHAS GRACIAS!}
+    \end{center}
+  \end{huge}
+\end{frame}
 
 
 \end{document}
