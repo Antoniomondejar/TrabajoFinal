@@ -486,7 +486,7 @@
 % =========================================================================================================== %
 
 \begin{frame}
-  \frametitle{¿Knowing How?}\pause
+  \frametitle{Lógica epistémica basada en habilidades}\pause
   \begin{figure}[h]
         % \hspace{2.3cm}
         \vspace{-0.5cm}
@@ -543,7 +543,7 @@
         % \label{fig:ults}
     \end{figure}\pause
 % \vspace{0.1cm}
-    ¿El agente X sabe cómo llegar a Parque Horizonte dado que está en el Centro?
+    ¿Ana/Pedro sabe cómo llegar a Parque Horizonte dado que está en el Centro?
 \end{frame}
 
 % =========================================================================================================== %
@@ -721,7 +721,10 @@
         % \label{fig:ults}
     \end{figure}\pause
 % \vspace{0.1cm}
-  \small $\kh_{Ana}$(Centro,Pq.Hor) vale pero $\kh_{Pedro}$(Centro,Pq.Hor) no.
+    \begin{itemize}
+      \item \small $\kh_{Ana}$(Centro,Pq.Hor) {\color{darkgreen}es cierto}. \pause
+      \item \small $\kh_{Pedro}$(Centro,Pq.Hor) \red{no es cierto}.
+    \end{itemize}
 \end{frame}
 
 % =========================================================================================================== %
@@ -1393,30 +1396,29 @@
 
       
 
-      \node[state, yshift=-1cm] (p) {$p$};
+      \onslide<2->{\node[state, yshift=-1cm] (p) {$p$};
           \node[state, right of=p, xshift=1.5cm] (q) {$q$};
           \node[state, right of=p, xshift=3.5cm] (r) {$r$};
-          
           \node at ($(p)+(0,-0.5)$) {$[w_1]$};
           \node at ($(q)+(0,-0.5)$) {$[w_3]$};
-            \node at ($(r)+(0,-0.5)$) {$[w_5]$};
-            
-            \path (p) edge [bend left=40] node [above] {$a_{ab}$} (r);
+          \node at ($(r)+(0,-0.5)$) {$[w_5]$};
+          }
+            \onslide<3->>{\path (p) edge [bend left=40] node [above] {$a_{ab}$} (r);}
   \end{tikzpicture}
   \end{minipage}
   \end{figure}
   \hspace{0.5cm}
-  $\S_{i} = \left\{
+  \onslide<1->{$\S_{i} = \left\{
                     \begin{array}{c}
                         \{ab\},\{ac\}
                     \end{array}
-                \right\}$
+                \right\}$}
                 \hspace{2.4cm}
-                $\S'_{i} = \left\{
+                \onslide<4->{$\S'_{i} = \left\{
                     \begin{array}{c}
                         \{a_{ab}\}, \{a_{ac}\}
                     \end{array}
-                \right\}$
+                \right\}$}
 
 \end{frame}
 
@@ -1458,7 +1460,7 @@
     \item Presentamos un contraejemplo para demostrar que las definiciones de bisimulación no son equivalentes en el caso infinito.\pause
     \item En el contexto de $\KHiBisim$, mencionamos cómo modificar el algoritmo presentado para que compute una fórmula de tamaño polinomial que 
     distingue a los \ultss.\pause
-    \item Introducimos una segunda propuesta de contracción por \KHilogic-bisimulación, la cual está basada en la contracción clásica de 
+    \item Introdujimos una segunda propuesta de contracción por \KHilogic-bisimulación, la cual está basada en la contracción clásica de 
     la Lógica Modal Básica.
   \end{itemize}
 \end{frame}
