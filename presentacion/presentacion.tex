@@ -146,17 +146,17 @@
 
 % START START START START START START START START START START START START START
 
-\begin{frame}
-  \frametitle{Motivación}
-Los grafos son utilizados para modelar numerosos escenarios:\pause
-\begin{itemize}
-  \item Bases de datos.\pause
-  \item Mapas de ciudades/países.\pause
-  \item Sistemas de computación.\pause
-  \item Usuarios de una red social.
-\end{itemize}
+% \begin{frame}
+%   \frametitle{Motivación}
+% Los grafos son utilizados para modelar numerosos escenarios:\pause
+% \begin{itemize}
+%   \item Bases de datos.\pause
+%   \item Mapas de ciudades/países.\pause
+%   \item Sistemas de computación.\pause
+%   \item Usuarios de una red social.
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 % =========================================================================================================== %
 
@@ -203,7 +203,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     \end{figure}\pause
 
     \begin{itemize}
-      \item ¿Soy amigo de algún usuario con nacionalidad X?.
+      \item ¿Cada argentino es amigo de algún chileno?.
     \end{itemize} 
 
 \end{frame}
@@ -337,7 +337,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
         \end{tikzpicture}        % \label{fig:lts}
     \end{figure}\pause
     \begin{itemize}
-    \item ¿Existe alguna cadena de amistades que me conecte con X?. 
+    \item ¿Existe alguna cadena de amistades que conecte a X con Y?. 
     \end{itemize}
 \end{frame}
 
@@ -448,7 +448,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
       \begin{itemize}
         \item Familia de lenguajes formales que permiten matematizar este tipo de preguntas.\pause
         \item Distintos modos de verdad: posibilidad, necesidad/universalidad, obligaciones, etc.\pause
-        \item Modelos de Kripke.\pause
+        \item Lógicas epistémicas.\pause
       \end{itemize}
       \item Equivalencia lógica.\pause
       \begin{itemize}
@@ -464,50 +464,29 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
 % =========================================================================================================== %
 
+% \begin{frame}
+%   \frametitle{¿Knowing How?}\pause
+
+%     \begin{itemize}
+%       \item Lógicas epistémicas: lógicas modales que buscan representar y razonar sobre el conocimiento de agentes.\pause
+%       \begin{itemize}
+%         \item Usualmente modelan el ``saber qué''.
+%         \item \textit{Juan sabe que está lloviendo en Río Cuarto}.\pause
+%       \end{itemize}
+%       \item Existen lógicas que estudian otras formas del conocimiento:\pause
+%       \begin{itemize}
+%         \item ``saber si''.\pause
+%         \item ``saber por qué''.\pause
+%         \item {\color{darkorange}{``saber cómo''}.}
+%       \end{itemize}
+%     \end{itemize}
+    
+% \end{frame}
+
+% =========================================================================================================== %
+
 \begin{frame}
   \frametitle{¿Knowing How?}\pause
-
-    \begin{itemize}
-      \item Lógicas epistémicas: lógicas modales que buscan representar y razonar sobre el conocimiento de agentes.\pause
-      \begin{itemize}
-        \item Usualmente modelan el ``saber qué''.
-        \item \textit{Juan sabe que está lloviendo en Río Cuarto}.\pause
-      \end{itemize}
-      \item Existen lógicas que estudian otras formas del conocimiento:\pause
-      \begin{itemize}
-        \item ``saber si''.\pause
-        \item ``saber por qué''.\pause
-        \item {\color{darkorange}{``saber cómo''}.}
-      \end{itemize}
-    \end{itemize}
-    
-\end{frame}
-
-% =========================================================================================================== %
-
-\begin{frame}
-  \frametitle{Lógica de Knowing How Basada en Incertidumbre (\KHilogic)}\pause
-
-  \begin{itemize}
-  \item Conjunto de agentes: personas, robots, computadoras en sistemas distribuídos, etc. \pause
-  \item Incertidumbre: considera la incapacidad de un agente para distinguir planes. \pause
-  \item Propiedades referidas a las habilidades de los agentes. \pause
-  \item Un agente sabe cómo lograr un objetivo a partir de una condición inicial. \pause Dispone de un 
-  plan \textit{adecuado} que lo garantice. \pause
-    \begin{itemize}
-      \item ¿Cómo se representa el conocimiento de los agentes?
-      \item ¿Qué consideramos \textit{adecuado}?
-    \end{itemize}
-
-  \end{itemize}
-
-\end{frame}
-
-
-% =========================================================================================================== %
-
-\begin{frame}
-  \frametitle{\lts basado en incertidumbre (\ults)}\pause
   \begin{figure}[h]
         % \hspace{2.3cm}
         \vspace{-0.5cm}
@@ -570,6 +549,27 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 % =========================================================================================================== %
 
 \begin{frame}
+  \frametitle{Lógica de Knowing How Basada en Incertidumbre (\KHilogic)}\pause
+
+  \begin{itemize}
+  \item Conjunto de agentes: personas, robots, computadoras en sistemas distribuídos, etc. \pause
+  \item Incertidumbre: considera la incapacidad de un agente para distinguir planes. \pause
+  \item Propiedades referidas a las habilidades de los agentes. \pause
+  \item Un agente sabe cómo lograr un objetivo a partir de una condición inicial. \pause Dispone de un 
+  plan \textit{adecuado} que lo garantice. \pause
+    \begin{itemize}
+      \item ¿Cómo se representa el conocimiento de los agentes?
+      \item ¿Qué consideramos \textit{adecuado}?
+    \end{itemize}
+
+  \end{itemize}
+
+\end{frame}
+
+
+% =========================================================================================================== %
+
+\begin{frame}
   \frametitle{\lts basado en incertidumbre (\ults)}
 
   Sea $\PROP$ un conjunto contable de simbolos proposicionales y $\AGT$ un conjunto finito de nombres de agentes.\pause
@@ -627,7 +627,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 %=============================================================
 
 \begin{frame}
-    \frametitle{Sintáxis y semántica}\pause
+    \frametitle{Sintaxis y semántica}\pause
     \begin{small}
         \begin{block}{Definición (\KHilogic sobre \ults)}
             Las fórmulas de $\KHilogic$ están dadas por la gramática
@@ -662,6 +662,146 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 \end{frame}
 
 %=============================================================
+
+\begin{frame}
+  \frametitle{Sintaxis y semántica}
+  \begin{figure}[h]
+        % \hspace{2.3cm}
+        \vspace{-0.5cm}
+        \begin{tikzpicture}
+            \node[state] (phor) {$\textsf{Pq.Hor}$};
+            \node[state, right of=phor, xshift=1.8cm] (gue) {$\textsf{Guemes}$};
+            \node[state, below of=gue, yshift=-1.6cm, xshift=0.4cm] (cuniv) {$\textsf{C.Univ}$};
+            \node[state, right of=gue, yshift=-1cm, xshift=1.8cm] (cen) {$\textsf{Centro}$};
+            \node[state, right of=cen, xshift=1.8cm] (cof) {$\textsf{Cofico}$};
+            \node[state, right of=cof, xshift=1.8cm] (acba) {$\textsf{Alta Cba}$};
+            
+            % \node at ($(p)+(0,0.5)$) {$w_1$};
+            % \node at ($(r)+(0,0.5)$) {$w_4$};
+            % \node at ($(q)+(0,0.5)$) {$w_3$};
+            % \node at ($(p2)+(0.05,-0.6)$) {$w_2$};
+            
+            \path (phor) edge [bend right=12] node [below] {\tiny$30^v$} (gue);
+
+            \path (gue) edge [bend right=12] node [below] {\tiny$30^v$} (cen)
+                        edge [bend right=12] node [above] {\tiny$30^i$} (phor);
+            
+            \path (cen) edge [bend right=12] node [above] {\tiny$30^i$} (gue)
+                        edge [bend right=12] node [above] {\tiny$18^i$} (cuniv)
+                        edge [bend right=12] node [below] {\tiny{$18^v$, $30^v$}} (cof);
+            
+            \path (cof) edge [bend right=12] node [above] {\tiny{$18^i$, $30^i$}} (cen)
+                        edge [bend right=12] node [below] {\tiny{$18^v$, $30^v$}} (acba);
+            
+            \path (acba) edge [bend right=12] node [above] {\tiny{$18^i$, $30^i$}} (cof);
+
+            \path (cuniv) edge [bend right=12] node [below] {\tiny{$18^v$}} (cen);
+                        % edge [bend left] node [above] {$a$} (r);
+            % \path (p2) edge node [above] {$a$} (q);
+            % \path (q) edge node [above] {$b$} (r);
+        \end{tikzpicture}
+        \\
+        \vspace{0.5cm}
+        % \hspace{1cm}
+        % \raisebox{1.8cm}{
+            % \begin{minipage}{0.45\textwidth}
+                \scriptsize$\S_{\textsf{Ana}} = \left\{
+                    \begin{array}{c}
+                        \{30^{i}30^{i}\}, \{18^{i}\}
+                    \end{array}
+                \right\}$ \\[0.1cm]
+                $\S_{\textsf{Pedro}} = \left\{
+                    \begin{array}{c}
+                        \{30^{i}30^{i},30^v30^v\}, \{18^{i}, 18^{v}\}
+                    \end{array}
+                \right\}$
+            % \end{minipage}
+        % }
+        % \caption{Representación gráfica de $\modults$}
+        % \label{fig:ults}
+    \end{figure}\pause
+% \vspace{0.1cm}
+  \small $\kh_{Ana}$(Centro,Pq.Hor) vale pero $\kh_{Pedro}$(Centro,Pq.Hor) no.
+\end{frame}
+
+% =========================================================================================================== %
+
+
+\begin{frame}
+  \frametitle{Comparando modelos}
+
+  \begin{figure}
+  \centering
+
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  % --- FIRST GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {p};
+            \node[state, right of=u1, xshift=1.5cm] (u2) {p};
+
+            
+
+            \node at ($(u1)+(0,0.5)$) {$u_1$};
+            \node at ($(u2)+(0,0.5)$) {$u_2$};
+
+            \path (u1) edge [bend left] node [above] {a} (u2);
+                      %  edge [<->] node [above] {} (u6);
+
+            \path (u2) edge [bend left] node [above] {a} (u1);
+            
+  \end{tikzpicture}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  \vspace{-1cm}
+  % --- SECOND GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {p};
+      % \node[state, right of=u1, yshift=-1cm] (u2) {\textsf{Arg}};
+      % \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Arg}};
+      % \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Chi}};
+      % \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Chi}};
+
+      
+
+      \node at ($(u1)+(0,0.6)$) {$u_1'$};
+      % \node at ($(u3)+(0,0.5)$) {$u_3$};
+      % \node at ($(u4)+(0,0.5)$) {$u_4$};
+      % \node at ($(u5)+(0,0.5)$) {$u_5$};
+      % \node at ($(u6)+(0,0.5)$) {$u_6$};
+
+      \path (u1) edge [loop] node [above] {b} (u1);
+                %  edge [<->] node [above] {} (u5);
+                %  edge [<->] node [above] {} (u6);
+
+      % \path (u2) edge [<->] node [above] {} (u4)
+      %            edge [<->] node [above] {} (u5)
+      %            edge [<->] node [above] {} (u6);
+      
+      % \path (u3) edge [<->] node [above] {} (u5)
+      %            edge [<->] node [above] {} (u6);
+  \end{tikzpicture}
+  \end{minipage}
+  \end{figure}
+  \hspace{0.9cm}
+  $\S_{i} = \left\{
+                    \begin{array}{c}
+                        \{aa,a\}
+                    \end{array}
+                \right\}$
+                \hspace{3.3cm}
+                $\S'_{i} = \left\{
+                    \begin{array}{c}
+                        \{b\}
+                    \end{array}
+                \right\}$
+
+\end{frame}
+
+% =========================================================================================================== %
+
 
 \begin{frame}
   \frametitle{Bisimulación}\pause
@@ -716,7 +856,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
   \begin{small}
     
     \begin{teorema}[\gray{Areces et al. 2021}]
-      Sean $\model$ y $\model'$ dos \ultss. Si existe una \KHilogic-bisimulación $Z$ entre ellos tal que $(w,w')\in Z$, entonces 
+      Sean $\model$ y $\model'$ dos \ultss. Si existe una bisimulación $Z$ entre ellos tal que $(w,w')\in Z$, entonces 
       para cada \KHilogic-fórmula $\varphi$ se cumple que $\model,w \models \varphi$ si y sólo si $\model',w'\models\varphi$. Si ambos \ultss tienen 
       dominio finito entonces también vale la recíproca. 
     \end{teorema}\pause
@@ -823,7 +963,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
         % If a relation $Z$ is an \KHilogic-bisimulation$^*$ between two \ults 
         % $\model$ and $\model'$, then it is an $\KHilogic$-bisimulation between them. 
         % If $\model$ and $\model'$ are finite domain, then the converse also holds.
-        Si una relación $Z$ es una \KHilogic-bisimulación$^*$ entre $\model$ y $\model'$, entonces también es una \KHilogic-bisimulación entre ellos.
+        Si una relación $Z$ es una bisimulación$^*$ entre $\model$ y $\model'$, entonces también es una bisimulación entre ellos.
         Si $\model$ y $\model'$ tienen dominio finito también vale la recíproca.
       \end{small}  
     \end{lema}\pause
@@ -841,7 +981,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     
     \begin{teorema}
     \begin{small}
-      Sean $\model$ y $\model'$ dos \ultss. Si existe una \KHilogic-bisimulación$^*$ $Z$ entre ellos tal que $(w,w')\in Z$, entonces 
+      Sean $\model$ y $\model'$ dos \ultss. Si existe una bisimulación$^*$ $Z$ entre ellos tal que $(w,w')\in Z$, entonces 
       para cada \KHilogic-fórmula $\varphi$ se cumple que $\model,w \models \varphi$ si y sólo si $\model',w'\models\varphi$. Si ambos \ultss tienen 
       dominio finito entonces también vale la recíproca.     \end{small}
     \end{teorema}
@@ -857,7 +997,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
   Una vez presentada la nueva definición de bisimulación, caracterizamos la complejidad computacional de problemas relacionados con esta noción.\pause
 
-  En primera instancia, estudiamos el problema de determinar la existencia de una \KHilogic-bisimulación 
+  En primera instancia, estudiamos el problema de determinar la existencia de una bisimulación 
   entre dos \ultss.\pause
 
   \begin{small}
@@ -977,7 +1117,7 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
     \end{block}\pause
   \end{small}
 
-  Reduciremos polinomialmente $\DNFTAUT$ a $\CBisim$.
+  Reducimos polinomialmente $\DNFTAUT$ a $\CBisim$.
 \end{frame}
 
 %=============================================================
@@ -1073,49 +1213,49 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
 \begin{frame}
   \frametitle{Estudio computacional de \KHilogic-bisimulación}
-    Estudiamos la complejidad computacional de la ``verificación''. \pause La ``búsqueda'' parece costosa,  existe una cantidad exponencial 
+    Estudiamos la complejidad de ``verificación''. \pause La ``búsqueda'' parece costosa: cantidad exponencial 
     de relaciones binarias a considerar.\pause 
 
     % \vspace{5mm}
 
     % Determinamos que existe una relación binaria particular que es suficiente para decidir existencia.\pause
-    \begin{small}
+    \begin{footnotesize}
       
       \begin{lema}\label{lema:bisim-existence}
         Sean $\model$ y $\model'$ dos \ultss.
-        Entonces, existe $Z \subseteq \W \times \W'$ una \KHilogic-bisimulación entre ellos si y sólo si  
+        Entonces, existe $Z \subseteq \W \times \W'$ una bisimulación entre ellos si y sólo si  
         \begin{center}
           $\universalbis = \{(w,w') \in \W \times \W' \mid \V(w) = \V'(w')\}$
         \end{center}
-        es una \KHilogic-bisimulación entre $\model$ y $\model'$.
+        es una bisimulación entre $\model$ y $\model'$.
       \end{lema}\pause
+    \end{footnotesize}
+
+    Decidir existencia de una bisimulación se reduce a verificar que $\universalbis$ es una bisimulación.\pause
+
+    \begin{small}
+      \begin{teorema}
+        $\KHiBisim$ es $\coNPComplete$.
+      \end{teorema}
     \end{small}
-
-    Como consecuencia de este lema, decidir la existencia de una bisimulación se reduce a verificar si $\universalbis$ es una bisimulación.
-
     % Juntando ambos lemas, obtenemos el resultado deseado de complejidad.\pause
   \end{frame}
 
-\begin{frame}
-  \frametitle{Estudio computacional de \KHilogic-bisimulación}
-  % \vspace{5mm}
-  \begin{small}
-    \begin{teorema}
-      $\KHiBisim$ es $\coNPComplete$.
-    \end{teorema}\pause
-  \end{small}
+% \begin{frame}
+%   \frametitle{Estudio computacional de \KHilogic-bisimulación}
+%   % \vspace{5mm}
   
-  También, a partir de los resultados obtenidos podemos extender este teorema a la versión punteada del problema.\pause
+%   También, a partir de los resultados obtenidos podemos extender este teorema a la versión punteada del problema.\pause
 
-  \begin{small}  
-    \begin{teorema}
-      $\PKHiBisim$ es $\coNPComplete$, donde 
-      \begin{center}
-        $\PKHiBisim$ $\eqdef \set{\tup{(\model,w),(\model',w')} \mid$ existe una bisimulación entre $\model$ y $\model'$ que contiene al par $(w,w')}$.
-      \end{center} 
-      \end{teorema}
-  \end{small}
-\end{frame}
+%   \begin{small}  
+%     \begin{teorema}
+%       $\PKHiBisim$ es $\coNPComplete$, donde 
+%       \begin{center}
+%         $\PKHiBisim$ $\eqdef \set{\tup{(\model,w),(\model',w')} \mid$ existe una bisimulación entre $\model$ y $\model'$ que contiene al par $(w,w')}$.
+%       \end{center} 
+%       \end{teorema}
+%   \end{small}
+% \end{frame}
 
 %=============================================================
 
@@ -1150,84 +1290,70 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
 
 %=============================================================
 
-\begin{frame}
-  \frametitle{Contracción por \KHilogic-bisimulación}
-  \begin{footnotesize}  
-    \begin{block}{\textbf{Definición}}
-      Sea $\model$ un \ults. Se define su \orange{contracción por \KHilogic-bisimulación}, 
-      $\fcont{\model}=\tup{\W',\ACT',\R',\cset{\S_i'}_{i \in \AGT},\V'}$ donde \pause
-      \begin{center}
-        \begin{itemize}
-          \item $\W' \eqdef \rho_\model$\pause
-          \item $\ACT' \eqdef \{a_\pi \mid \pi\in \S_i$ para algún $i \in \AGT \}$\pause
-          \item $\R' \eqdef \{\R'_{a_\pi} \subseteq \W' \times \W' \mid a_\pi \in \ACT'\}$ donde $([w],[v]) \in \R'_{a_\pi}$ si y sólo si
-          \begin{enumerate}
-            \item Existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v')\in \R_\pi$
-            \item Cada plan en $\pi$ es FE en cada nodo de $[w]$
-          \end{enumerate}\pause
-          \item $\S_i' \eqdef \{ \{a_\pi\} \mid \pi \in \S_i \}$\pause
-          \item $\V'([w]) \eqdef \V(w)$
-        \end{itemize}
-      \end{center}    
-    \end{block}
-  \end{footnotesize}
-\end{frame}
+% \begin{frame}
+%   \frametitle{Contracción por \KHilogic-bisimulación}
+%   \begin{footnotesize}  
+%     \begin{block}{\textbf{Definición}}
+%       Sea $\model$ un \ults. Se define su \orange{contracción por \KHilogic-bisimulación}, 
+%       $\fcont{\model}=\tup{\W',\ACT',\R',\cset{\S_i'}_{i \in \AGT},\V'}$ donde \pause
+%       \begin{center}
+%         \begin{itemize}
+%           \item $\W' \eqdef \rho_\model$\pause
+%           \item $\ACT' \eqdef \{a_\pi \mid \pi\in \S_i$ para algún $i \in \AGT \}$\pause
+%           \item $\R' \eqdef \{\R'_{a_\pi} \subseteq \W' \times \W' \mid a_\pi \in \ACT'\}$ donde $([w],[v]) \in \R'_{a_\pi}$ si y sólo si
+%           \begin{enumerate}
+%             \item Existen $w' \in [w]$ y $v' \in [v]$ tal que $(w',v')\in \R_\pi$
+%             \item Cada plan en $\pi$ es FE en cada nodo de $[w]$
+%           \end{enumerate}\pause
+%           \item $\S_i' \eqdef \{ \{a_\pi\} \mid \pi \in \S_i \}$\pause
+%           \item $\V'([w]) \eqdef \V(w)$
+%         \end{itemize}
+%       \end{center}    
+%     \end{block}
+%   \end{footnotesize}
+% \end{frame}
 
 
 %=============================================================
 
-\begin{frame}
-  \frametitle{Contracción por \KHilogic-bisimulación}
-  Demostramos que esta contracción garantiza equivalencia lógica y es computable eficientemente.\pause
 
-  \begin{small}
-    \begin{teorema}
-      Sea $\model$ un \ults y sea $\fcont{\model}$ su contracción por \KHilogic-bisimulación, entonces existe $Z$ una \KHilogic-bisimulación 
-      tal que $(w,[w])\in Z$ para cada $w\in\W$. Más aún, si $\model$ es finito entonces $\fcont{\model}$ es computable 
-      en tiempo polinomial.
-    \end{teorema}
-  \end{small}
+% \begin{frame}
+%   \frametitle{Contracción por \KHilogic-bisimulación}
 
-\end{frame}
+%   Presentamos una segunda propuesta de contracción basada en la propuesta clásica de la Lógica Modal Básica ($\bml$).\pause
 
-%=============================================================
+%   \begin{footnotesize}
+%     \begin{block}{\textbf{Definición}}
+%       Sea $\model$ un \ults y sea $\model' = \tup{\W',\R',\V'}$
+%       la contracción por $\bml$-bisimulación de $\tup{\W,\R,\V}$, definimos la \orange{contracción por 
+%       \KHilogic-bisimulación} de $\model$ como 
+%       $\model_{\bml}=\tup{\W', \R', \cset{\S_i}_{i\in\AGT},\V',\ACT}$.
+%     \end{block}\pause
+%   \end{footnotesize}
 
-\begin{frame}
-  \frametitle{Contracción por \KHilogic-bisimulación}
+%   Análogamente, demostramos que esta propuesta también garantiza equivalencia lógica.\pause
 
-  Presentamos una segunda propuesta de contracción basada en la propuesta clásica de la Lógica Modal Básica ($\bml$).\pause
-
-  \begin{footnotesize}
-    \begin{block}{\textbf{Definición}}
-      Sea $\model$ un \ults y sea $\model' = \tup{\W',\R',\V'}$
-      la contracción por $\bml$-bisimulación de $\tup{\W,\R,\V}$, definimos la \orange{contracción por 
-      \KHilogic-bisimulación} de $\model$ como 
-      $\model_{\bml}=\tup{\W', \R', \cset{\S_i}_{i\in\AGT},\V',\ACT}$.
-    \end{block}\pause
-  \end{footnotesize}
-
-  Análogamente, demostramos que esta propuesta también garantiza equivalencia lógica.\pause
-
-  \begin{small}
-    \begin{teorema}
-    Sea $\model$ un \ults y sea $\model_{\bml}$ su contracción por \KHilogic-bisimulación, entonces existe $Z$ una \KHilogic-bisimulación 
-    tal que $(w,[w])\in Z$ para cada $w\in\W$.
-    \end{teorema}
-  \end{small}
-\end{frame}
+%   \begin{small}
+%     \begin{teorema}
+%     Sea $\model$ un \ults y sea $\model_{\bml}$ su contracción por \KHilogic-bisimulación, entonces existe $Z$ una \KHilogic-bisimulación 
+%     tal que $(w,[w])\in Z$ para cada $w\in\W$.
+%     \end{teorema}
+%   \end{small}
+% \end{frame}
 
 %=============================================================
 \begin{frame}
   \frametitle{Contracción por \KHilogic-bisimulación}
-\begin{footnotesize}
-  
-  \begin{figure}[h]
-    \begin{center}
-        \begin{tabular}{ll}
-          % \hspace{1.2cm}
-          \begin{minipage}{0.25\textwidth}
-            \begin{tikzpicture}
-                    \node[state] (p) {$p$};
+
+  \begin{figure}
+  \centering
+
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  % --- FIRST GRAPH ---
+  \begin{tikzpicture}
+    \node[state] (u1) {p};
+                     \node[state] (p) {$p$};
         \node[state, below of=p, yshift=-1cm] (p2) {$p$};
         \node[state, right of=p, xshift=1.5cm] (q) {$q$};
         \node[state, below of=q, yshift=-1cm] (q2) {$q$};
@@ -1251,15 +1377,23 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
         \path (q2) edge node [above] {$c$} (r)
         (q2) edge [bend left=50] node [below] {$c$} (p2)
         (q2) edge node [above] {$b$} (r2);
-      \end{tikzpicture}
-    \end{minipage}
-    % &
-    \hspace{2cm}
-    \begin{minipage}{0.5\textwidth}
-      \begin{tabular}{c}
-        \vspace{-0.2cm}
-        \begin{tikzpicture}
-          \node[state, yshift=-1cm] (p) {$p$};
+            
+  \end{tikzpicture}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  \vspace{-1cm}
+  % --- SECOND GRAPH ---
+  \begin{tikzpicture}
+      % \node[state, right of=u1, yshift=-1cm] (u2) {\textsf{Arg}};
+      % \node[state, below of=u2, yshift=-1cm] (u3) {\textsf{Arg}};
+      % \node[state, below of=u4, yshift=-1cm] (u5) {\textsf{Chi}};
+      % \node[state, below of=u5, yshift=-1cm] (u6) {\textsf{Chi}};
+
+      
+
+      \node[state, yshift=-1cm] (p) {$p$};
           \node[state, right of=p, xshift=1.5cm] (q) {$q$};
           \node[state, right of=p, xshift=3.5cm] (r) {$r$};
           
@@ -1268,68 +1402,71 @@ Los grafos son utilizados para modelar numerosos escenarios:\pause
             \node at ($(r)+(0,-0.5)$) {$[w_5]$};
             
             \path (p) edge [bend left=40] node [above] {$a_{ab}$} (r);
-          \end{tikzpicture} \\
-        \phantom{text} \\
-        \begin{tikzpicture}
-          \node[state, yshift=-1cm] (p) {$p$};
-          \node[state, right of=p, yshift = 0.7cm, xshift=1.5cm] (q) {$q$};
-          \node[state, below of=q, yshift = -0.7cm] (q2) {$q$};
-          \node[state, right of=p, xshift=3.5cm] (r) {$r$};
-          
-          \node at ($(p)+(0,0.5)$) {$[w_1]$};
-          \node at ($(q)+(0,0.5)$) {$[w_3]$};
-          \node at ($(q2)+(0,-0.5)$) {$[w_4]$};
-          \node at ($(r)+(0,0.5)$) {$[w_5]$};
-          
-          \path (p) edge node [above] {$a$} (q)
-          (p) edge node [above] {$a$} (q2);
-            \path (q) edge node [above] {$b$} (r)
-            (q2) edge node [above] {$b$} (r)
-            (q2) edge [bend right= 45] node [below] {$c$} (r)
-            (q2) edge [bend left=45] node [below] {$c$} (p);
-          \end{tikzpicture}
-        \end{tabular}
-      \end{minipage}
-      %    \begin{minipage}{0.45\textwidth}
-      %        $\S_i = \left\{
-    %            \begin{array}{c}
-    %                \{ab\}, \{ac\}
-    %            \end{array}
-    %        \right\}$
-    %    \end{minipage}
-  \end{tabular}
-% \caption{$\model$ (izquierda), $\fcont{\model}$ (derecha arriba) y $\model_\bml$ (derecha abajo).}
-% \label{fig:1st-ex-cont}
-\end{center}
-\end{figure}
-\vspace{-0.7cm}
-\begin{center}
- $\S_i = \left\{ \{ab\}, \{ac\}  \right\}$, $\S_i' = \left\{ \{a_{ab}\}, \{a_{ac}\} \right\}$ \\[0.3cm]
- $\model$ (izquierda), $\fcont{\model}$ (derecha arriba) y $\model_\bml$ (derecha abajo).
-\end{center}
-\end{footnotesize}
+  \end{tikzpicture}
+  \end{minipage}
+  \end{figure}
+  \hspace{0.5cm}
+  $\S_{i} = \left\{
+                    \begin{array}{c}
+                        \{ab\},\{ac\}
+                    \end{array}
+                \right\}$
+                \hspace{2.4cm}
+                $\S'_{i} = \left\{
+                    \begin{array}{c}
+                        \{a_{ab}\}, \{a_{ac}\}
+                    \end{array}
+                \right\}$
 
+\end{frame}
+
+% =========================================================================================================== %
+
+\begin{frame}
+  \frametitle{Contracción por \KHilogic-bisimulación}
+  Demostramos que esta contracción garantiza equivalencia lógica y es computable eficientemente.\pause
+
+  \begin{small}
+    \begin{teorema}
+      Sea $\model$ un \ults y sea $\fcont{\model}$ su contracción por bisimulación, entonces existe $Z$ una bisimulación 
+      tal que $(w,[w])\in Z$ para cada $w\in\W$. Más aún, si $\model$ es finito entonces $\fcont{\model}$ es computable 
+      en tiempo polinomial.
+    \end{teorema}
+  \end{small}
 
 \end{frame}
 
 %=============================================================
 
 \begin{frame}
-  \frametitle{Conclusiones}
+  \frametitle{Conclusiones}\pause
   \begin{itemize}
     \item Introdujimos una nueva definición para \KHilogic-bisimulación, la cual solo considera características estructurales 
     de los \ultss involucrados.\pause
-    \item Establecimos que tanto verificar como decidir existencia de una bisimulación entre dos \ultss es $\coNPComplete$. A su vez, 
-    extendimos este resultado al caso punteado de este problema.\pause
-    \item Abordamos el problema de la minimización de modelos, para el cual propusimos dos contracciones por \KHilogic-bisimulación las 
-    cuales son computables eficientemente.
+    \item Establecimos que tanto verificar como decidir existencia de una bisimulación entre dos \ultss es $\coNPComplete$.\pause
+    \item Abordamos el problema de la minimización de modelos, para el cual propusimos una contracción por \KHilogic-bisimulación que 
+    puede ser computada en tiempo polinomial. 
   \end{itemize}
 \end{frame}
 
 %=============================================================
 
 \begin{frame}
-  \frametitle{Trabajo futuro}
+  \frametitle{Detrás de escena}\pause
+  \begin{itemize}
+    \item Determinamos que el problema de definibilidad para \KHilogic está en $\Poly$.\pause
+    \item Presentamos un contraejemplo para demostrar que las definiciones de bisimulación no son equivalentes en el caso infinito.\pause
+    \item En el contexto de $\KHiBisim$, mencionamos cómo modificar el algoritmo presentado para que compute una fórmula de tamaño polinomial que 
+    distingue a los \ultss.\pause
+    \item Introducimos una segunda propuesta de contracción por \KHilogic-bisimulación, la cual está basada en la contracción clásica de 
+    la Lógica Modal Básica.
+  \end{itemize}
+\end{frame}
+
+%=============================================================
+
+\begin{frame}
+  \frametitle{Trabajo futuro}\pause
   \begin{itemize}
     \item Adaptar el estudio realizado en esta tesis a la lógica de Knowing How presentada por Wang en 2018:\pause
     \begin{itemize}
