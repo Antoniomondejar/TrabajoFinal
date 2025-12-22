@@ -91,7 +91,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model,\model',Z,U$}\label{line:not-simulates-exec}
                 \Else
-                    \State If there exists $s \in \rho_{\model'}$ such that $s \not\subseteq U$ and $s \cap U \neq \emptyset$\label{line:khi-zag-check}
+                    \State If there exists $s' \in \rho_{\model'}$ such that $s' \not\subseteq U$ and $s' \cap U \neq \emptyset$\label{line:khi-zag-check}
                     \Return 0
                     \State \Return \Call{NotSimulates}{$\model',\model,Z^{-1},U$} \Comment{Notice the parameters.}
                 \EndIf

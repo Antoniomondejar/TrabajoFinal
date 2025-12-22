@@ -309,7 +309,7 @@ componentes mencionadas.
 
 \begin{definicion}\label{def:1st-contraction}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults. Se define su contracción por \KHilogic-bisimulación, 
-    $\fcont{\model}=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT'},\V',\ACT'}$ donde 
+    $\fcont{\model}=\tup{\W',\R',\cset{\S_i'}_{i \in \AGT},\V',\ACT'}$ donde 
     \begin{center}
         \begin{itemize}
             \item $\W' \eqdef \rho_\model$
@@ -333,7 +333,7 @@ siguiente teorema.
 
 \begin{teorema}\label{thm:adequacy-1st-cont}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\fcont{\model}$ su contracción por bisimulación entonces 
-    $\tup{\model,w}$ y $\tup{\fcont{\model},[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
+    $(\model,w)$ y $(\fcont{\model},[w])$ son $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{teorema}
 
 \begin{demostracion}
@@ -343,7 +343,7 @@ siguiente teorema.
 
     Dado que $\W$ es no vacío entonces es claro que $Z$ es no vacío también.
     Por otro lado, notemos que por la definición de $\V'$, $Z$ satisface (Atom).
-    A su vez, por cómo definimos $Z$, es fácil ver que (A-zig) y (A-zag) son satisfechos.
+    A su vez, por como definimos $Z$, es fácil ver que (A-zig) y (A-zag) son satisfechos.
     Demostremos entonces que se satisfacen ($\khi$-zig) y ($\khi$-zag).
 
     \begin{itemize}
@@ -424,7 +424,7 @@ siguiente teorema.
 
         Finalmente, $Z$ satisface $\khi$-zag.
     \end{itemize}
-    Luego, $Z$ es una \KHilogic-bisimulación. Esto nos dice que $\tup{\model,w}$ y $\tup{\fcont{\model},[w]}$ son 
+    Luego, $Z$ es una \KHilogic-bisimulación. Esto nos dice que $(\model,w)$ y $(\fcont{\model},[w])$ son 
     $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{demostracion}
 
@@ -521,7 +521,7 @@ adecuada.
 \begin{teorema}\label{thm:adequacy-2nd-cont}
     Sea $\model=\tup{\W,\R,\cset{\S_i}_{i \in \AGT},\V,\ACT}$ un \ults y sea $\model_\bml$ 
     su contracción por \KHilogic-bisimulación, 
-    entonces $\tup{\model,w}$ y $\tup{\model_\bml,[w]}$ son $\KHilogic$-bisimilares para cada $w \in \W$.
+    entonces $(\model,w)$ y $(\model_\bml,[w])$ son $\KHilogic$-bisimilares para cada $w \in \W$.
 \end{teorema}
 
 \begin{demostracion}
@@ -603,7 +603,7 @@ adecuada.
         Demostramos que $Z^{-1}(U')\subseteq\sexec^{\model}(\pi)$ y que $\R'_\pi(Z^{-1}(U')) \subseteq T$. 
         Juntando ambos resultados, concluimos que $Z^{-1}(U') \ultsExecAgi T$, lo cual demuestra ($\khi$-zag).
     \end{itemize}
-    Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego, $\tup{\model,w}$ y $\tup{\model_\bml,[w]}$ son $\KHilogic$-bisimilares 
+    Demostramos entonces que $Z$ es una \KHilogic-bisimulación. Luego, $(\model,w)$ y $(\model_\bml,[w])$ son $\KHilogic$-bisimilares 
     para cada $w \in \W$.
 \end{demostracion}
 
