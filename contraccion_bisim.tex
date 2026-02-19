@@ -385,8 +385,8 @@ siguiente teorema.
 
         Queda demostrado entonces que $Z$ satisface $\khi$-zig.
 
-        \item ($\khi$-zag) Sean $U', T' \in \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s \in \rho_{\fcont{\model}}$ se cumple que 
-        $s \subseteq U'$ o $s \cap U' = \emptyset$, queremos encontrar $T \subseteq \W$ tal que:
+        \item ($\khi$-zag) Sean $U', T' \in \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s' \in \rho_{\fcont{\model}}$ se cumple que 
+        $s' \subseteq U'$ o $s' \cap U' = \emptyset$, queremos encontrar $T \subseteq \W$ tal que:
         \begin{multicols}{2}
             \begin{itemize}
                 \item $Z^{-1}(U') \ultsExecAgi T$, 
@@ -568,8 +568,8 @@ adecuada.
         Luego, demostramos que $Z(U)\subseteq\sexec^{\model_\bml}(\pi)$ y que $\R'_\pi(Z(U)) \subseteq T'$. 
         Juntando ambos resultados, concluimos que $Z(U) \ultsExecAgi T'$, lo cual demuestra ($\khi$-zig).
 
-       \item ($\khi$-zag) Sean $U', T' \subseteq \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s \in \rho_{\model_\bml}$ se cumple 
-       $s \subseteq U'$ o $s \cap U' = \emptyset$. Queremos ver que existe $T \subseteq \W$ tal que
+       \item ($\khi$-zag) Sean $U', T' \subseteq \W'$ tales que $U' \ultsExecAgi T'$ y para cada $s' \in \rho_{\model_\bml}$ se cumple 
+       $s' \subseteq U'$ o $s' \cap U' = \emptyset$. Queremos ver que existe $T \subseteq \W$ tal que
 
        \begin{multicols}{2}
             \begin{itemize}
@@ -643,7 +643,7 @@ Teniendo esto en consideración, podemos concluir que esta segunda propuesta de 
 
 Hemos presentado dos propuestas de contracción por bisimulación para \KHilogic para las cuales demostramos su resultado esperado de correctitud y 
 establecimos que son computables en tiempo polinomial. Para finalizar con este capítulo mencionaremos las principales características de 
-cada propuesta y las diferencias que presentan entre sí junto con un análisis de su comportamiento respecto a ciertos tipos de modelos. Por 
+cada propuesta y las diferencias que presentan entre sí, junto con un análisis de su comportamiento respecto a ciertos tipos de modelos. Por 
 último, presentaremos dos ejemplos que permitirán obtener un mejor entendimiento de los puntos principales de cada propuesta.
 
 En cuanto a la primera propuesta de contracción presentada en la \Cref{def:1st-contraction} existen varios aspectos a analizar. En primer 
@@ -670,7 +670,7 @@ Continuando con la segunda propuesta de contracción, el primer detalle a consid
 con respecto a la cardinalidad. Esto puede verse armando un modelo de Kripke en el cual existan dos estados etiquetados con el mismo conjunto 
 de variables proposicionales para los cuales existe una \bml-fórmula que los distingue, luego $Z^{\bml}_\model$ no relacionaría a dichos 
 nodos y, por lo tanto, colapsaría una menor cantidad de estados que $Z_\model$. Sin embargo, esta propuesta no deja de tener varios
-puntos dignos de interes: en primer lugar, la cantidad de aristas de $\model_\bml$ es siempre menor o igual que las de $\model$, lo cual no está
+puntos dignos de interés: en primer lugar, la cantidad de aristas de $\model_\bml$ es siempre menor o igual que las de $\model$, lo cual no está
 garantizado en nuestra primera propuesta; por otro lado, existen algoritmos sumamente eficientes con excelentes 
 implementaciones que computan $\model_\bml$ \cite{Fernandez}, lo que resulta de gran utilidad ya que permite obtener a partir de pocos 
 recursos computacionales un modelo lógicamente equivalente y de menor tamaño.
@@ -681,7 +681,7 @@ no produce un modelo lógicamente equivalente en todos los casos. Por lo que el 
 que refleja una interesante característica sobre el poder expresivo de \KHilogic.
 
 Presentaremos dos \ults junto con sus respectivas contracciones según cada propuesta con el objetivo de fortalecer los argumentos 
-introducidos en esta sección. En primera instancia, consideremos a $\model$ como el modelo a la izquierda en la 
+recién introducidos. En primera instancia, consideremos a $\model$ como el modelo a la izquierda en la 
 \Cref{fig:1st-ex-cont}, en el que $\S_i = \{\{ab\}, \{ac\}\}$. Su contracción por bisimulación a partir de la primera propuesta $\fcont{\model}$ 
 es el modelo de la \Cref{fig:1st-ex-cont} que se encuentra arriba a la derecha en el cual $\S'_i = \{\{a_{ab}\}, \{a_{ac}\} \}$, mientras 
 que su contracción a partir de la segunda propuesta $\model_\bml$ se encuentra abajo a la derecha en la misma figura. Es fácil notar 
