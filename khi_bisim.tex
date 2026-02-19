@@ -1,8 +1,8 @@
 \chapter{Estudio computacional de \KHilogic-bisimulación}\label{ch:khi-bisim}
 
 Como mencionamos en el anterior capítulo, a la hora de definir una noción de bisimulación para una lógica modal, 
-es deseable que la misma tenga una naturaleza puramente estructural, lo cual resulta de gran importancia a la hora de 
-definir, de una manera más natural, un procedimiento que dados dos modelos y una relación binaria entre sus dominios pueda decidir 
+es deseable que la misma tenga una naturaleza puramente estructural, lo cual resulta de gran utilidad a la hora de 
+definir un procedimiento que dados dos modelos y una relación binaria entre sus dominios pueda decidir 
 si dicha relación es una bisimulación.
 
 Esta naturaleza estructural que facilita verificar si una relación entre los dominios de dos modelos es una bisimulación,
@@ -23,7 +23,7 @@ En esta sección analizaremos la complejidad del problema de decidir si una rela
     \end{center}
 \end{definicion}
 
-Una vez definido matemáticamente el problema en cuestión, nos interesaría determinar cuántos recursos computacionales son necesarios 
+Una vez definido matemáticamente el problema en cuestión, nos interesaría determinar los recursos computacionales necesarios 
 para resolverlo.
 
 En primera instancia, si consideramos las distintas condiciones que se requieren sobre una relación binaria para ser considerada una 
@@ -51,7 +51,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
     Dados que los contraejemplos que nos interesan son subconjuntos de los dominios de ambos modelos, es claro 
     que tienen largo polinomial en el tamaño del input.
 
-    La función \textsc{CounterexampleChecker} en el \Cref{alg:counter-example-checker} cumple con lo requerido.
+    Veamos que la función \textsc{CounterexampleChecker} en el \Cref{alg:counter-example-checker} cumple con lo requerido.
 
     \begin{algorithm}[t]
         \begin{footnotesize}
@@ -204,7 +204,7 @@ Este análisis nos permite establecer una cota superior sobre la complejidad com
 \end{demostracion}
 
 Como mencionamos, este lema nos permite establecer una cota superior sobre la complejidad computacional de $\CBisim$. 
-Sin embargo, a la hora de determinar que un problema se encuentra en una clase de complejidad tal como $\coNP$, también es deseable 
+Sin embargo, a la hora de determinar que un problema se encuentra en una clase de complejidad como $\coNP$, también es deseable 
 determinar si se da el caso de que el problema sea difícil para dicha clase (\coNPHard). De esta forma, obtendríamos una 
 perspectiva más precisa de su dificultad intrínseca.
 
@@ -250,7 +250,7 @@ Una vez presentado este problema, enunciamos el siguiente resultado (ver \cite{A
 Entonces, queremos ver que $\DNFTAUT \leq_p \CBisim$. Para ello, debemos encontrar una reducción de Karp de $\DNFTAUT$ a $\CBisim$.
 
 \begin{definicion}\label{def:karp-reduction}
-    Definimos $f : \DNFTAUT \rightarrow \CBisim$ como el siguiente mapeo de instancias de $\DNFTAUT$ a instancias de $\CBisim$.
+    Definimos $f : \DNFTAUT \to \CBisim$ como el siguiente mapeo de instancias de $\DNFTAUT$ a instancias de $\CBisim$.
     % \begin{center}
 
     Sea $\varphi = \varphi_1 \vee ... \vee \varphi_m$ una fórmula proposicional en forma disyuntiva normal en la cual aparecen las variables 
@@ -396,7 +396,7 @@ problemas en cuestión.
     mencionado y el hecho de que $U = Z(U)$, es posible ver que Z satisface ($\khi$-zag).
     Luego, sólo basta ver que $Z$ satisface ($\khi$-zig).
 
-    Sea $U, T \subseteq \W$ tal que $U$ satisface que  y $U \ultsExecAgagt T$, queremos ver que existe 
+    Sea $U, T \subseteq \W$ tal que $U$ satisface que para cada $s\in\rho_\model$ se cumple que $s \cap U = \emptyset$ o $s\subseteq U$ y $U \ultsExecAgagt T$, queremos ver que existe 
     $T' \subseteq \W$ tal que:
 
     \begin{multicols}{2}
@@ -474,12 +474,12 @@ problemas en cuestión.
     Luego, $\R_{in_{\varphi_j}out_{\varphi_j}}(U) \not \subseteq U \cup \{e\} = Z(U \cup \{e\})$, por lo que dicho plan tampoco 
     permite encontrar un $T'$ adecuado.
     
-    Hemos analizado entonces todos los planes disponibles para el agente $agt$ en $\model'$ y ninguno permite encontrar un 
+    Analizamos entonces todos los planes disponibles para el agente $agt$ en $\model'$ y ninguno permite encontrar un 
     $T'$ que cumpla con lo requerido, luego $Z$ no satisface ($\khi$-zig).
-    Hemos demostrado entonces que $Z$ no es una \KHilogic-bisimulación.
-    Lo cual demuestra que $\tup{\modults,\modults',Z} \not \in \CBisim$, con lo que concluímos la demostración de \bm{$\Leftarrow)$} 
+    Hemos demostrado que $Z$ no es una \KHilogic-bisimulación,
+    lo cual demuestra que $\tup{\modults,\modults',Z} \not \in \CBisim$, con lo que concluímos la demostración de \bm{$\Leftarrow)$} 
     
-    Finalmente, demostramos que $f$ es una reducción de Karp de $\DNFTAUT$ a $\KHiBisim$. Luego, $\DNFTAUT \leq_p \CBisim$.
+    Finalmente, demostramos que $f$ es una reducción de Karp de $\DNFTAUT$ a $\CBisim$. Luego, $\DNFTAUT \leq_p \CBisim$.
 \end{demostracion}
 
 A partir de este lema obtenemos de forma directa el resultado deseado.
@@ -573,7 +573,7 @@ entre dos modelos $\modults$ y $\modults'$ basta con verificar que $\universalbi
 
     Notar que la dirección \bm{$\Leftarrow)$} es directa. Demostraremos entonces \bm{$\Rightarrow)$}.
     Queremos ver que $\universalbis$ es una \KHilogic-bisimulación entre $\modults$ y $\modults'$
-    dado que existe $Z \subseteq \W \times \W'$, \KHilogic-bisimulación entre ellos.
+    dado que existe $Z \subseteq \W \times \W'$, una \KHilogic-bisimulación entre ellos.
     Notemos que como $Z$ es una bisimulación, entonces cumple (Atom). Luego, notemos que
     por la definición de $\universalbis$, $Z \subseteq \universalbis$, pues $\universalbis$ contiene todos los pares de
     $\W \times \W'$ que satisfacen (Atom). Esto nos dice que $\universalbis$ satisface (A-zig) y (A-zag).
@@ -653,8 +653,8 @@ Por otro lado, veamos como el mapeo presentado en la \Cref{def:karp-reduction}, 
 
     Esto se debe al hecho de que los modelos construidos en la \Cref{def:karp-reduction} sólo cuentan con una única posible bisimulación, 
     que es la relación binaria presentada en esa misma definición. Luego, la demostración del \Cref{lema:dnf-leqp-cbisim} aplica también 
-    a este caso debido a que la existencia de una \KHilogic-bisimulación entre los modelos construídos por la reducción está exactamente 
-    caracterizada por el hecho de que la relación binaria $Z$, construída por la misma reducción, sea efectivamente una bisimulación.
+    a este caso debido a que la existencia de una \KHilogic-bisimulación entre los modelos construídos por la reducción está sujeta 
+    al hecho de que la relación binaria $Z$, construída por la misma reducción, sea efectivamente una bisimulación.
 
     Finalmente, como $\DNFTAUT \leq_p \KHiBisim$, por el \Cref{thm:dnftaut-conp-complete} obtenemos que $\KHiBisim$ es \coNPHard.
 \end{demostracion}
