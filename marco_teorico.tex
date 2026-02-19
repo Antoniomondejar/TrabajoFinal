@@ -5,7 +5,7 @@ representado en Sistemas de Transición Etiquetada (\lts por sus siglas en ingl�
 que produce cada acción que el agente puede realizar. A su vez, las habilidades de un agente están dadas no solo por las acciones básicas que tiene a 
 su disposición en un determinado estado, sino que también por las posibles composiciones de las mismas. A las secuencias de acciones las 
 llamaremos planes. Se considera que un plan es \textit{adecuado} para lograr un objetivo en cierto estado, cuando cada ejecución parcial del plan 
-a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en dicho estado.
+a partir de dicho estado se puede completar. En tal caso, diremos que el plan es \textit{fuertemente ejecutable} en tal estado.
 
 La Lógica de \textit{Knowing How} Basada en Incertidumbre (\KHilogic) toma este enfoque como punto de partida. La principal motivación por la que 
 surge esta nueva propuesta es que la representación del conocimiento mencionada anteriormente supone que el agente cuenta con cierto nivel de omnisciencia, 
@@ -66,7 +66,7 @@ Presentamos a continuación un ejemplo ilustrativo de las nociones mencionadas.
 \begin{ejemplo}
     Consideremos un robot moviendose en una grilla, el cual tiene a su disposición la opción de moverse a cualquiera de sus 4 casilleros vecinos; es decir,
     puede moverse a la izquierda (`$L$'), a la derecha (`$R$'), hacia arriba (`$U$') o hacia abajo (`$D$'). En este contexto, el conjunto de acciones básicas 
-    $\ACT$ estaría definido como $\ACT = \{L,R,U,D\}$, y $\ACT^*$ sería el conjunto de secuencias finitas sobre $\ACT$, el cual está computesto por 
+    $\ACT$ estaría definido como $\ACT = \{L,R,U,D\}$, y $\ACT^*$ sería el conjunto de secuencias finitas sobre $\ACT$, el cual está compuesto por 
     los distintos caminos que el robot podría tomar en la grilla. Por ejemplo, `$LLLDRR$' y `$UURRU$' están en $\ACT^*$. 
 
     Luego, a partir de la definición dada, tenemos:
@@ -79,7 +79,7 @@ Presentamos a continuación un ejemplo ilustrativo de las nociones mencionadas.
     \end{itemize}
 \end{ejemplo}
 
-Procederemos a introducir los modelos que representarán las acciones que los agentes tienen a su disposición: 
+Procederemos a introducir los modelos que representarán el entorno en el que se encuentran los agentes y las acciones que tienen a su disposición: 
 los sistemas de transición etiquetada.
 
 \begin{definicion}[Sistema de Transición Etiquetada]
